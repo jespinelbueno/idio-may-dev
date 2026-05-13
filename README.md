@@ -1,6 +1,5 @@
 # idio-may-dev
 
-Static landing page for EMESTUDIOS / idio.
 
 ## Deploy
 
