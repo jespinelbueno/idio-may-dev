@@ -1,0 +1,93 @@
+:root {
+  --paper: #f7f2e9;
+  --brand-tan: #e3b86d;
+  --brand-green: #00470c;
+  --brand-olive: #adb363;
+  --brand-red: #d80411;
+  --brand-yellow: #ffd569;
+  --brand-blue: #99bbd3;
+  --brand-navy: #16233d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.loader__field {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgb(247 242 233 / 0.94), rgb(247 242 233 / 0.94)),
+    repeating-linear-gradient(90deg, transparent 0 3.2rem, rgb(21 18 14 / 0.035) 3.2rem 3.25rem),
+    repeating-linear-gradient(0deg, transparent 0 3.2rem, rgb(21 18 14 / 0.03) 3.2rem 3.25rem);
+  opacity: 0.88;
+}
+
+.loader__icon {
+  position: relative;
+  z-index: 2;
+  width: clamp(7.5rem, 17vw, 15rem);
+  aspect-ratio: 47 / 33;
+  background:
+    linear-gradient(
+      90deg,
+      var(--brand-green) 0 14%,
+      var(--brand-blue) 14% 28%,
+      var(--brand-yellow) 28% 42%,
+      var(--brand-red) 42% 56%,
+      var(--brand-tan) 56% 70%,
+      var(--brand-olive) 70% 84%,
+      var(--brand-navy) 84% 100%
+    ),
+    linear-gradient(135deg, rgb(247 242 233 / 0.52), transparent 54%);
+  background-size:
+    225% 100%,
+    100% 100%;
+  background-position:
+    0% 50%,
+    0 0;
+  filter: drop-shadow(0 1.5rem 2.5rem rgb(21 18 14 / 0.28));
+  mask: url("../../assets/img/icon.svg") center / contain no-repeat;
+  -webkit-mask: url("../../assets/img/icon.svg") center / contain no-repeat;
+  animation: loader-icon-colors 1800ms cubic-bezier(0.83, 0, 0.17, 1) infinite;
+}
+
+.loader__icon::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at 28% 30%, rgb(247 242 233 / 0.5), transparent 22%),
+    linear-gradient(180deg, rgb(247 242 233 / 0.22), transparent 62%);
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+}
+
+@keyframes loader-icon-colors {
+  0% {
+    background-position:
+      0% 50%,
+      0 0;
+  }
+
+  100% {
+    background-position:
+      100% 50%,
+      0 0;
+  }
+}

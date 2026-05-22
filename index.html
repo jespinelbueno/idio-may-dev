@@ -7,13 +7,24 @@
     <title>Idio</title>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/img/photos/bgemestudios.jpg" as="image">
-    <link rel="preload" href="assets/img/icon.svg" as="image">
+    <link rel="preload" href="assets/img/photos/bgwhatweoffer.jpg" as="image">
+    <link rel="preload" href="assets/img/idiologomonochrome.svg" as="image">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="is-loading">
     <div class="loader" role="status" aria-live="polite" aria-label="Loading">
       <div class="loader__field" aria-hidden="true"></div>
-      <div class="loader__icon" aria-hidden="true"></div>
+      <div class="loader__home" aria-hidden="true">
+        <div class="loader__phrase">
+          <span class="loader__fixed">
+            make it
+            <span class="loader__idio-logo" data-loader-logo hidden></span>
+          </span>
+          <span class="loader__words">
+            <span class="loader__word loader__word--one" data-loader-word>word1</span>
+          </span>
+        </div>
+      </div>
     </div>
 
     <main class="site-shell">
@@ -27,6 +38,138 @@
           <img class="hero__logo" src="assets/img/idiologomonochrome.svg" alt="">
         </h1>
       </section>
+
+      <section class="offer" aria-labelledby="offer-title">
+        <div class="offer__copy">
+          <h2 id="offer-title">something</h2>
+          <span class="offer__title-scribble" aria-hidden="true"></span>
+          <p>
+            me! i go here. in fact, i love it here. here is wondrous. btw, there
+            will be a button or something like that below this blurb.. right?
+          </p>
+          <a class="offer__button" href="#offer-title">Learn more!</a>
+        </div>
+
+        <div class="offer__collage" aria-label="Editorial image collage">
+          <div class="offer__placeholder offer__placeholder--portrait-main">
+            <img src="assets/img/photos/imgportrait.png" alt="Portrait of a woman standing behind a candlelit table.">
+          </div>
+          <div class="offer__placeholder offer__placeholder--look">
+            <img src="assets/img/photos/imglook.png" alt="Model wearing a dark dress while posing on a stool.">
+          </div>
+          <div class="offer__placeholder offer__placeholder--still-life">
+            <img src="assets/img/photos/imgstilllive.png" alt="Styled table setting with candles, fruit, flowers, and plates.">
+          </div>
+          <div class="offer__placeholder offer__placeholder--detail">
+            <img src="assets/img/photos/imgdetail.png" alt="Seated portrait detail with layered denim styling.">
+          </div>
+          <div class="offer__placeholder offer__placeholder--motion">
+            <img src="assets/img/photos/imgmotion.png" alt="Blurred group of models in motion.">
+          </div>
+        </div>
+      </section>
+
+      <section class="what-offer" aria-labelledby="what-offer-title">
+        <img class="what-offer__bg" src="assets/img/photos/bgwhatweoffer.jpg" alt="">
+        <div class="what-offer__shade" aria-hidden="true"></div>
+
+        <div class="what-offer__inner">
+          <header class="what-offer__header">
+            <h2 id="what-offer-title">what we offer.</h2>
+            <span class="what-offer__underline" aria-hidden="true"></span>
+          </header>
+
+          <div class="what-offer__items" aria-label="Service placeholders">
+            <article class="what-offer__item what-offer__item--one">
+              <p class="what-offer__label what-offer__label--top">Branding</p>
+              <div class="what-offer__circle" aria-hidden="true"></div>
+            </article>
+
+            <article class="what-offer__item what-offer__item--two">
+              <div class="what-offer__circle" aria-hidden="true"></div>
+              <p class="what-offer__label what-offer__label--bottom">Branding</p>
+            </article>
+
+            <article class="what-offer__item what-offer__item--three">
+              <p class="what-offer__label what-offer__label--top">Branding</p>
+              <div class="what-offer__circle" aria-hidden="true"></div>
+            </article>
+
+            <article class="what-offer__item what-offer__item--four">
+              <div class="what-offer__circle" aria-hidden="true"></div>
+              <p class="what-offer__label what-offer__label--bottom">Branding</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="case-team">
+        <section class="case-study" aria-labelledby="case-study-title">
+          <div class="case-study__media" aria-hidden="true">
+            <div class="case-study__back-card"></div>
+            <div class="case-study__middle-card"></div>
+            <figure class="case-study__polaroid">
+              <img src="assets/img/photos/imgportrait.png" alt="">
+            </figure>
+          </div>
+
+          <div class="case-study__copy">
+            <div class="case-study__dots" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div>
+              <h2 id="case-study-title">case study</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur. Nulla fringilla vulputate
+                venenatis nam suspendisse enim egestas pellentesque mauris.
+              </p>
+              <a class="case-study__button" href="#case-study-title">Learn more!</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="team" aria-labelledby="team-title">
+          <h2 id="team-title">our team</h2>
+
+          <div class="team__grid">
+            <article class="team__member team__member--anna">
+              <div class="team__photo">
+                <img src="assets/img/photos/imglook.png" alt="">
+              </div>
+              <h3>anna</h3>
+            </article>
+
+            <article class="team__member team__member--raquel">
+              <div class="team__photo">
+                <img src="assets/img/photos/imgdetail.png" alt="">
+              </div>
+              <h3>raquel</h3>
+              <p>
+                Title: Graphic Designer<br>
+                Team: Creative Team
+              </p>
+            </article>
+
+            <article class="team__member team__member--nom">
+              <div class="team__photo">
+                <img src="assets/img/photos/imglook.png" alt="">
+              </div>
+              <h3>nom nom</h3>
+            </article>
+
+            <article class="team__member team__member--jaden">
+              <div class="team__photo">
+                <img src="assets/img/photos/imgmotion.png" alt="">
+              </div>
+              <h3>jaden</h3>
+            </article>
+          </div>
+        </section>
+      </div>
 
     </main>
 
