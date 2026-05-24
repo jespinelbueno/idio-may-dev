@@ -242,29 +242,45 @@ body.is-ready .hero__image {
 }
 
 .hero__headline {
+  --hero-logo-gap: clamp(0.95rem, 1.65vw, 1.85rem);
+
   position: absolute;
-  left: clamp(0.45rem, 1.2vw, 1.2rem);
-  bottom: clamp(2rem, 5.4vh, 3.8rem);
+  top: 50%;
+  left: 50%;
   display: flex;
-  align-items: flex-end;
-  gap: clamp(0.95rem, 1.65vw, 1.85rem);
-  width: min(96vw, 94rem);
+  align-items: baseline;
+  gap: var(--hero-logo-gap);
+  width: fit-content;
   margin: 0;
   color: var(--paper);
-  font-size: clamp(5rem, 13.6vw, 16rem);
+  font-size: clamp(3.8rem, 9.6vw, 10.5rem);
   font-weight: 950;
-  line-height: 0.56;
+  line-height: 0.82;
   letter-spacing: 0;
   text-transform: lowercase;
   white-space: nowrap;
   text-shadow: 0 0.08em 0.2em rgb(0 0 0 / 0.05);
+  transform: translate(-50%, -50%);
+}
+
+.hero__fixed {
+  position: relative;
+  display: inline-block;
+}
+
+.hero__logo-slot {
+  display: inline-block;
+  width: 3.1em;
+  visibility: hidden;
 }
 
 .hero__logo {
-  width: 2.5em;
+  position: absolute;
+  left: calc(100% + var(--hero-logo-gap));
+  bottom: -0.16em;
+  width: 3em;
   height: auto;
-  margin-bottom: 0;
-  transform: translateY(0.085em);
+  transform: translateY(-0.16em);
   filter: drop-shadow(0 0.12rem 0.3rem rgb(0 0 0 / 0.04));
 }
 
@@ -791,8 +807,7 @@ body.is-ready .hero__image {
   }
 
   .hero__headline {
-    font-size: clamp(4rem, 13.5vw, 8rem);
-    bottom: clamp(1.9rem, 5.8vh, 3.5rem);
+    font-size: clamp(3.8rem, 9.6vw, 8rem);
   }
 
   .offer {
@@ -951,12 +966,9 @@ body.is-ready .hero__image {
   }
 
   .hero__headline {
-    left: var(--edge);
-    bottom: clamp(2rem, 6.2vh, 3.4rem);
     gap: clamp(0.45rem, 2.2vw, 0.9rem);
-    width: calc(100vw - (var(--edge) * 2));
     font-size: clamp(2.85rem, 12.5vw, 4.95rem);
-    line-height: 0.56;
+    line-height: 0.82;
   }
 
   .offer {
@@ -1106,19 +1118,13 @@ body.is-ready .hero__image {
 
 @media (max-width: 430px) {
   .hero__headline {
-    flex-wrap: wrap;
-    gap: 0.2rem 0.45rem;
-    font-size: clamp(4.6rem, 24vw, 6.4rem);
-    line-height: 0.62;
-    white-space: normal;
-  }
-
-  .hero__headline span {
-    flex: 0 0 100%;
+    gap: 0.45rem;
+    font-size: clamp(2.55rem, 11vw, 3.7rem);
+    line-height: 0.82;
   }
 
   .hero__logo {
-    width: min(2.95em, 100%);
+    width: 3em;
   }
 }
 
