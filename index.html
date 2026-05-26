@@ -117,23 +117,25 @@
       <div class="case-team">
         <section class="case-study" aria-labelledby="case-study-title">
           <div class="case-study__media" aria-hidden="true">
+            <img class="case-study__stroke case-study__stroke--green" src="assets/strokes/casestudy/strokegreen.png" alt="">
+            <img class="case-study__stroke case-study__stroke--yellow" src="assets/strokes/casestudy/strokeyellow.png" alt="">
             <div class="case-study__back-card"></div>
             <div class="case-study__middle-card"></div>
             <figure class="case-study__polaroid">
-              <img src="assets/img/photos/casestudymain.jpg" alt="">
+              <img src="assets/img/photos/casestudymain_cropped.jpg" alt="">
             </figure>
           </div>
 
           <div class="case-study__copy">
-            <div class="case-study__dots" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div class="case-study__dots" role="group" aria-label="Select a case study">
+              <button class="case-study__dot is-active" type="button" data-case-index="0" aria-label="Show case study 1" aria-pressed="true"></button>
+              <button class="case-study__dot" type="button" data-case-index="1" aria-label="Show case study 2" aria-pressed="false"></button>
+              <button class="case-study__dot" type="button" data-case-index="2" aria-label="Show case study 3" aria-pressed="false"></button>
+              <button class="case-study__dot" type="button" data-case-index="3" aria-label="Show case study 4" aria-pressed="false"></button>
             </div>
 
-            <div>
-              <h2 id="case-study-title">case study</h2>
+            <div class="case-study__details" data-case-details>
+              <h2 id="case-study-title">case study 1</h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur. Nulla fringilla vulputate
                 venenatis nam suspendisse enim egestas pellentesque mauris.
@@ -149,32 +151,34 @@
           <div class="team__grid">
             <article class="team__member team__member--anna">
               <div class="team__photo">
-                <img src="assets/img/photos/imglook.png" alt="">
+                <img src="assets/img/photos/anna.png"  alt="">
               </div>
               <h3>anna</h3>
             </article>
 
             <article class="team__member team__member--raquel">
               <div class="team__photo">
-                <img src="assets/img/photos/imgdetail.png" alt="">
+                <img src="assets/img/photos/raquel.png" alt="Raquel">
               </div>
               <h3>raquel</h3>
               <p>
                 Title: Graphic Designer<br>
                 Team: Creative Team
               </p>
+              <img class="team__stroke team__stroke--blue" src="assets/strokes/ourteam/strokeblue.png" alt="" aria-hidden="true">
             </article>
 
             <article class="team__member team__member--nom">
               <div class="team__photo">
-                <img src="assets/img/photos/imglook.png" alt="">
+                <img src="assets/img/photos/nomnom.png" alt="Nom Nom">
               </div>
               <h3>nom nom</h3>
             </article>
 
             <article class="team__member team__member--jaden">
+              <img class="team__stroke team__stroke--red" src="assets/strokes/ourteam/strokered.png" alt="" aria-hidden="true">
               <div class="team__photo">
-                <img src="assets/img/photos/imgmotion.png" alt="">
+                <img src="assets/img/photos/jaden.png" alt="Jaden">
               </div>
               <h3>jaden</h3>
             </article>
@@ -184,6 +188,6 @@
 
     </main>
 
-    <script src="script.js" defer></script>
+    <script src="script.js?v=case-carousel-front-white" defer></script>
   </body>
 </html>
