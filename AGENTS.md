@@ -49,8 +49,8 @@ Final loader logo constraints:
 
 Offer section constraints:
 
-- Do not add brush strokes/scribbles until explicitly asked.
 - Image panels use `assets/img/photos/imgportrait.png`, `imglook.png`, `imgstilllive.png`, `imgdetail.png`, and `imgmotion.png`.
+- Decorative paint strokes use the SVG files in `assets/strokes/`; the green vertical stroke is repeated in the offer section.
 
 What We Offer section constraints:
 
