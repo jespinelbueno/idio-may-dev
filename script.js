@@ -8,7 +8,6 @@ window.addEventListener("resize", setViewportHeight, { passive: true });
 const DEBUG_LOADER = false;
 const WORD_INTERVAL_MS = 900;
 const WORD_SWAP_MS = 220;
-const FINAL_STATE_AT_MS = 2800;
 const FINAL_HOLD_MS = 1000;
 
 const loaderWord = document.querySelector("[data-loader-word]");
@@ -22,6 +21,7 @@ const loaderWords = [
   { text: "word4", className: "loader__word--four" },
   { logo: true },
 ];
+const FINAL_STATE_AT_MS = WORD_INTERVAL_MS * (loaderWords.length - 1) + WORD_SWAP_MS;
 let loaderWordIndex = 0;
 let loaderWordTimer;
 
