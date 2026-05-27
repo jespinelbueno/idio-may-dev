@@ -1149,7 +1149,7 @@ body.is-ready .hero__image {
   position: relative;
   width: min(52rem, 66vw);
   aspect-ratio: 1;
-  margin: 0 auto 0 max(-5rem, -4vw);
+  margin: 0 auto;
 }
 
 .values-wheel-graphic {
@@ -1291,6 +1291,7 @@ body.is-ready .hero__image {
 }
 
 .value-tooltip-arrow {
+  display: none;
   position: relative;
   flex: 0 0 auto;
   width: clamp(4.5rem, 7.5vw, 7.8rem);
