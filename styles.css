@@ -679,8 +679,8 @@ body.is-ready .hero__image {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 59%, rgb(255 213 105 / 0.96) 0 10rem, rgb(255 213 105 / 0.74) 16rem, rgb(247 242 233 / 0) 31rem),
-    linear-gradient(180deg, var(--paper) 0 31%, #f9e19a 57%, #ffd569 74%, var(--paper) 100%);
+    radial-gradient(ellipse at 50% 42%, rgb(255 213 105 / 0.9) 0 13rem, rgb(255 213 105 / 0.46) 25rem, rgb(247 242 233 / 0) 36rem),
+    linear-gradient(180deg, var(--paper) 0 27%, #fff0bd 35%, #ffd569 44%, #ffe18a 49%, #fff0bd 52%, var(--paper) 57%, var(--paper) 100%);
   color: var(--brand-green);
   isolation: isolate;
 }
@@ -1090,7 +1090,9 @@ body.is-ready .hero__image {
   z-index: -1;
   content: "";
   background:
-    radial-gradient(ellipse at 50% 38%, rgb(247 242 233 / 0.98) 0 35%, rgb(247 242 233 / 0.9) 48%, rgb(255 213 105 / 0.34) 77%, rgb(255 213 105 / 0.14) 100%);
+    radial-gradient(ellipse at 50% 30%, rgb(247 242 233 / 0.84) 0 33%, rgb(247 242 233 / 0.66) 48%, rgb(247 242 233 / 0) 72%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 clamp(5rem, 8vw, 7rem), #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 clamp(5rem, 8vw, 7rem), #000 100%);
   pointer-events: none;
 }
 
@@ -1965,8 +1967,8 @@ body.is-ready .hero__image {
 
   .case-team {
     background:
-      radial-gradient(circle at 50% 48%, rgb(255 213 105 / 0.86) 0 9rem, rgb(255 213 105 / 0.52) 16rem, rgb(247 242 233 / 0) 25rem),
-      linear-gradient(180deg, var(--paper) 0 38%, #f9e19a 62%, #ffd569 82%, var(--paper) 100%);
+      radial-gradient(ellipse at 50% 43%, rgb(255 213 105 / 0.88) 0 8rem, rgb(255 213 105 / 0.46) 15rem, rgb(247 242 233 / 0) 22rem),
+      linear-gradient(180deg, var(--paper) 0 31%, #fff0bd 38%, #ffd569 46%, #ffe18a 50%, #fff0bd 54%, var(--paper) 60%, var(--paper) 100%);
   }
 
   .case-study,
