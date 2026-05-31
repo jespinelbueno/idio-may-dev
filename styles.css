@@ -678,9 +678,18 @@ body.is-ready .hero__image {
 .case-team {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse at 50% 42%, rgb(255 213 105 / 0.9) 0 13rem, rgb(255 213 105 / 0.46) 25rem, rgb(247 242 233 / 0) 36rem),
-    linear-gradient(180deg, var(--paper) 0 27%, #fff0bd 35%, #ffd569 44%, #ffe18a 49%, #fff0bd 52%, var(--paper) 57%, var(--paper) 100%);
+  background-color: var(--paper);
+  background-image:
+    url("assets/gradients/trisection/cream.jpg"),
+    url("assets/gradients/trisection/yellow.jpg");
+  background-repeat: no-repeat;
+  background-position:
+    center 30rem,
+    center 30rem;
+  background-size:
+    100% auto,
+    100% auto;
+  background-blend-mode: multiply;
   color: var(--brand-green);
   isolation: isolate;
 }
@@ -2214,9 +2223,12 @@ body.is-ready .hero__image {
   }
 
   .case-team {
-    background:
-      radial-gradient(ellipse at 50% 43%, rgb(255 213 105 / 0.88) 0 8rem, rgb(255 213 105 / 0.46) 15rem, rgb(247 242 233 / 0) 22rem),
-      linear-gradient(180deg, var(--paper) 0 31%, #fff0bd 38%, #ffd569 46%, #ffe18a 50%, #fff0bd 54%, var(--paper) 60%, var(--paper) 100%);
+    background-position:
+      center 10 rem
+      center 42 rem;
+    background-size:
+      auto 100%,
+      auto 52%;
   }
 
   .case-study,
