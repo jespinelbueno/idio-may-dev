@@ -12,6 +12,31 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="is-loading">
+    <svg class="stroke-frame-filters" aria-hidden="true">
+      <defs>
+        <filter id="stroke-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+        <filter id="stroke-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="B" yChannelSelector="R"></feDisplacementMap>
+        </filter>
+        <filter id="stroke-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="7.5" xChannelSelector="G" yChannelSelector="B"></feDisplacementMap>
+        </filter>
+        <filter id="stroke-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="B"></feDisplacementMap>
+        </filter>
+        <filter id="stroke-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+
     <div class="loader" role="status" aria-live="polite" aria-label="Loading">
       <div class="loader__field" aria-hidden="true"></div>
       <div class="loader__home" aria-hidden="true">
@@ -122,7 +147,7 @@
             <div class="case-study__back-card"></div>
             <div class="case-study__middle-card"></div>
             <figure class="case-study__polaroid">
-              <img src="assets/img/photos/casestudymain_cropped.jpg" alt="">
+              <img class="case-study__image is-active" src="assets/img/photos/casestudymain_cropped.jpg" alt="">
             </figure>
           </div>
 
@@ -287,7 +312,7 @@
       </div>
     </footer>
 
-    <script src="script.js?v=case-carousel-front-white" defer></script>
-    <script src="values-wheel.js?v=our-values-3" defer></script>
+    <script src="script.js?v=case-carousel-smooth-fade-stroke-shape-frames-footer" defer></script>
+    <script src="values-wheel.js?v=our-values-reference-wheel" defer></script>
   </body>
 </html>

@@ -5,6 +5,54 @@ const setViewportHeight = () => {
 setViewportHeight();
 window.addEventListener("resize", setViewportHeight, { passive: true });
 
+const animatedStrokes = Array.from(
+  document.querySelectorAll(
+    ".offer__stroke, .case-study__stroke, .team__stroke, .site-footer__stroke",
+  ),
+);
+const reduceStrokeMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const revealStroke = (stroke) => stroke.classList.add("is-stroke-drawn");
+const revealVisibleStrokes = () => {
+  const triggerLine = window.innerHeight * 0.9;
+
+  animatedStrokes.forEach((stroke) => {
+    if (stroke.classList.contains("is-stroke-drawn")) return;
+
+    const bounds = stroke.getBoundingClientRect();
+
+    if (bounds.top < triggerLine && bounds.bottom > 0) {
+      revealStroke(stroke);
+    }
+  });
+};
+
+if (!reduceStrokeMotion && animatedStrokes.length && "IntersectionObserver" in window) {
+  const strokeObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        revealStroke(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -10% 0px",
+      threshold: 0.2,
+    },
+  );
+
+  animatedStrokes.forEach((stroke) => strokeObserver.observe(stroke));
+}
+
+if (reduceStrokeMotion) {
+  animatedStrokes.forEach(revealStroke);
+} else {
+  revealVisibleStrokes();
+  window.addEventListener("scroll", revealVisibleStrokes, { passive: true });
+  window.addEventListener("resize", revealVisibleStrokes, { passive: true });
+}
+
 const DEBUG_LOADER = false;
 const WORD_INTERVAL_MS = 900;
 const WORD_SWAP_MS = 220;
@@ -146,7 +194,8 @@ const caseStudies = [
 ];
 
 const caseStudyMedia = document.querySelector(".case-study__media");
-const caseStudyImage = document.querySelector(".case-study__polaroid img");
+const caseStudyPolaroid = document.querySelector(".case-study__polaroid");
+let caseStudyImage = caseStudyPolaroid?.querySelector("img");
 const caseStudyDetails = document.querySelector("[data-case-details]");
 const caseStudyTitle = document.querySelector("#case-study-title");
 const caseStudyDescription = caseStudyDetails?.querySelector("p");
@@ -154,6 +203,8 @@ const caseStudyDots = Array.from(document.querySelectorAll(".case-study__dot[dat
 let activeCaseStudyIndex = 0;
 let caseStudyShuffleTimer;
 let caseStudyContentTimer;
+let caseStudyImageTimer;
+let caseStudyImageRequest = 0;
 
 caseStudies.forEach(({ image }) => {
   const preload = new Image();
@@ -188,7 +239,72 @@ const runCaseStudyShuffle = () => {
 
   caseStudyShuffleTimer = window.setTimeout(() => {
     caseStudyMedia.classList.remove("is-shuffling");
-  }, 760);
+  }, 900);
+};
+
+const transitionCaseStudyImage = (nextImage) => {
+  if (!caseStudyPolaroid || !caseStudyImage || caseStudyImage.getAttribute("src") === nextImage) return;
+
+  const requestId = ++caseStudyImageRequest;
+  const previousImage = caseStudyImage;
+  const incomingImage = new Image();
+
+  window.clearTimeout(caseStudyImageTimer);
+  caseStudyPolaroid.querySelectorAll("img:not(.is-active)").forEach((image) => {
+    image.remove();
+  });
+
+  incomingImage.className = "case-study__image";
+  incomingImage.alt = previousImage.alt;
+  incomingImage.style.opacity = "0";
+  incomingImage.style.transform = "scale(1.018)";
+  incomingImage.src = nextImage;
+  caseStudyPolaroid.append(incomingImage);
+
+  const revealIncomingImage = () => {
+    if (requestId !== caseStudyImageRequest) {
+      incomingImage.remove();
+      return;
+    }
+
+    void caseStudyPolaroid.offsetWidth;
+    incomingImage.classList.add("is-active");
+    previousImage.classList.remove("is-active");
+    previousImage.classList.add("is-exiting");
+    incomingImage.style.opacity = "1";
+    incomingImage.style.transform = "scale(1)";
+    previousImage.style.opacity = "0";
+    previousImage.style.transform = "scale(0.996)";
+
+    caseStudyImage = incomingImage;
+    const removePreviousImage = () => {
+      incomingImage.removeEventListener("transitionend", handleImageTransitionEnd);
+      incomingImage.style.opacity = "1";
+      incomingImage.style.transform = "scale(1)";
+      previousImage.remove();
+    };
+    const handleImageTransitionEnd = (event) => {
+      if (event.target === incomingImage && event.propertyName === "opacity") {
+        removePreviousImage();
+      }
+    };
+
+    incomingImage.addEventListener("transitionend", handleImageTransitionEnd);
+    caseStudyImageTimer = window.setTimeout(removePreviousImage, 1600);
+  };
+
+  if (incomingImage.decode) {
+    incomingImage.decode().then(revealIncomingImage).catch(revealIncomingImage);
+    return;
+  }
+
+  if (incomingImage.complete) {
+    revealIncomingImage();
+    return;
+  }
+
+  incomingImage.addEventListener("load", revealIncomingImage, { once: true });
+  incomingImage.addEventListener("error", revealIncomingImage, { once: true });
 };
 
 const updateCaseStudyContent = (nextIndex) => {
@@ -202,9 +318,9 @@ const updateCaseStudyContent = (nextIndex) => {
   caseStudyContentTimer = window.setTimeout(() => {
     caseStudyTitle.textContent = nextCaseStudy.title;
     caseStudyDescription.textContent = nextCaseStudy.description;
-    caseStudyImage.src = nextCaseStudy.image;
+    transitionCaseStudyImage(nextCaseStudy.image);
     caseStudyDetails?.classList.remove("is-changing");
-  }, 190);
+  }, 160);
 };
 
 const selectCaseStudy = (nextIndex) => {

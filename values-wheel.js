@@ -14,14 +14,14 @@ const valuesWheelConfig = [
     startAngle: 332.5,
     endAngle: 387.5,
     circleOuterRadius: 266,
-    outerRadius: 245,
+    outerRadius: 292,
     innerRadius: 0,
     circleApexRadius: 0,
     apexRadius: 15,
     popX: 0,
     popY: -22,
     circleLabelRadius: 156,
-    labelRadius: 146,
+    labelRadius: 158,
     labelClass: "",
   },
   {
@@ -37,14 +37,14 @@ const valuesWheelConfig = [
     startAngle: 32.5,
     endAngle: 87.5,
     circleOuterRadius: 266,
-    outerRadius: 272,
+    outerRadius: 338,
     innerRadius: 0,
     circleApexRadius: 0,
     apexRadius: 15,
     popX: 21,
     popY: -9,
     circleLabelRadius: 156,
-    labelRadius: 158,
+    labelRadius: 176,
     labelClass: "",
   },
   {
@@ -60,14 +60,14 @@ const valuesWheelConfig = [
     startAngle: 92.5,
     endAngle: 147.5,
     circleOuterRadius: 266,
-    outerRadius: 342,
+    outerRadius: 442,
     innerRadius: 0,
     circleApexRadius: 0,
     apexRadius: 15,
     popX: 22,
     popY: 14,
     circleLabelRadius: 156,
-    labelRadius: 180,
+    labelRadius: 226,
     labelClass: "is-large",
   },
   {
@@ -83,14 +83,14 @@ const valuesWheelConfig = [
     startAngle: 152.5,
     endAngle: 207.5,
     circleOuterRadius: 266,
-    outerRadius: 290,
+    outerRadius: 326,
     innerRadius: 0,
     circleApexRadius: 0,
     apexRadius: 15,
     popX: 0,
     popY: 24,
     circleLabelRadius: 156,
-    labelRadius: 160,
+    labelRadius: 178,
     labelClass: "is-small",
   },
   {
@@ -106,14 +106,14 @@ const valuesWheelConfig = [
     startAngle: 212.5,
     endAngle: 267.5,
     circleOuterRadius: 266,
-    outerRadius: 238,
+    outerRadius: 318,
     innerRadius: 0,
     circleApexRadius: 0,
     apexRadius: 15,
     popX: -20,
     popY: 12,
     circleLabelRadius: 156,
-    labelRadius: 150,
+    labelRadius: 174,
     labelClass: "is-small",
   },
   {
@@ -129,14 +129,14 @@ const valuesWheelConfig = [
     startAngle: 272.5,
     endAngle: 327.5,
     circleOuterRadius: 266,
-    outerRadius: 225,
+    outerRadius: 292,
     innerRadius: 0,
     circleApexRadius: 0,
     apexRadius: 15,
     popX: -20,
     popY: -10,
     circleLabelRadius: 156,
-    labelRadius: 148,
+    labelRadius: 166,
     labelClass: "",
   },
 ];
@@ -408,7 +408,7 @@ const valuesWheelFrames = [
       1: {
         centerAngle: 72,
         width: 72,
-        outerRadius: 304,
+        outerRadius: 292,
         translateX: 30,
         translateY: -12,
         scale: 1.08,
@@ -431,39 +431,57 @@ const valuesWheelFrames = [
     rotation: 0,
     scale: 1.04,
     slices: {
-      0: { centerAngle: 360, width: 60, outerRadius: 286, apexRadius: 6 },
+      0: { centerAngle: 360, width: 60, outerRadius: 302, apexRadius: 6 },
       1: {
         centerAngle: 60,
         width: 60,
-        outerRadius: 326,
+        outerRadius: 342,
         apexRadius: 8,
-        translateX: 36,
+        translateX: 28,
         translateY: -15,
-        scale: 1.08,
-        lift: 0.44,
+        scale: 1.06,
+        lift: 0.42,
       },
       2: {
         centerAngle: 120,
         width: 60,
-        outerRadius: 348,
+        outerRadius: 420,
         apexRadius: 8,
-        translateX: 56,
-        translateY: 28,
+        translateX: 52,
+        translateY: 58,
         scale: 1.12,
-        lift: 0.62,
+        lift: 0.68,
       },
       3: {
         centerAngle: 180,
         width: 60,
-        outerRadius: 318,
+        outerRadius: 334,
         apexRadius: 8,
         translateX: 0,
-        translateY: 50,
-        scale: 1.08,
-        lift: 0.5,
+        translateY: 42,
+        scale: 1.06,
+        lift: 0.46,
       },
-      4: { centerAngle: 240, width: 60, outerRadius: 282, apexRadius: 6 },
-      5: { centerAngle: 300, width: 60, outerRadius: 284, apexRadius: 6 },
+      4: {
+        centerAngle: 240,
+        width: 60,
+        outerRadius: 324,
+        apexRadius: 7,
+        translateX: -20,
+        translateY: 10,
+        scale: 1.04,
+        lift: 0.28,
+      },
+      5: {
+        centerAngle: 300,
+        width: 60,
+        outerRadius: 298,
+        apexRadius: 7,
+        translateX: -18,
+        translateY: -8,
+        scale: 1.03,
+        lift: 0.22,
+      },
     },
   }),
   createFinalFrame(),
@@ -523,7 +541,6 @@ const buildSlicePath = ({
 
 const initValuesWheel = () => {
   const valuesSection = document.querySelector(".values-section");
-  const valuesHeading = document.querySelector(".values-intro h2");
   const valuesWheel = document.querySelector(".values-wheel");
   const valuesWheelGraphic = document.querySelector(".values-wheel-graphic");
   const valueTooltip = document.querySelector(".value-tooltip");
@@ -632,29 +649,6 @@ const initValuesWheel = () => {
     return { rotor, slices };
   };
 
-  const prepareValuesHeading = () => {
-    if (!valuesHeading) {
-      return;
-    }
-
-    const words = valuesHeading.textContent.trim().split(/\s+/);
-    valuesHeading.textContent = "";
-
-    words.forEach((word, index) => {
-      const wordElement = document.createElement("span");
-      wordElement.className = "values-heading-word";
-      wordElement.textContent = word;
-      wordElement.style.setProperty("--word-index", String(index));
-      valuesHeading.appendChild(wordElement);
-
-      if (index < words.length - 1) {
-        valuesHeading.appendChild(document.createTextNode(" "));
-      }
-    });
-  };
-
-  prepareValuesHeading();
-
   const { rotor: valuesWheelRotor, slices: wheelSlices } = buildValuesWheel();
   let activeSmoothness = valuesWheelSmoothnessOptions[1];
   let targetWheelProgress = 0;
@@ -749,6 +743,7 @@ const initValuesWheel = () => {
 
   let hoverDebounceTimeout = null;
   let tooltipDelayTimeout = null;
+  let hoveredSliceIndex = null;
 
   const clearHoverTimers = () => {
     window.clearTimeout(hoverDebounceTimeout);
@@ -778,6 +773,28 @@ const initValuesWheel = () => {
 
     clearActiveSliceState();
     clearValueTooltip();
+  };
+
+  const activateSliceFromPointer = (event) => {
+    const group = event.target.closest?.(".wheel-slice-group");
+
+    if (!group) {
+      return;
+    }
+
+    const index = Number(group.dataset.sliceIndex);
+
+    if (index === hoveredSliceIndex || Number.isNaN(index)) {
+      return;
+    }
+
+    hoveredSliceIndex = index;
+    activateSliceHover(group, index, 0);
+  };
+
+  const clearPointerSliceHover = () => {
+    hoveredSliceIndex = null;
+    clearSliceHover();
   };
 
   const scrollValuesWheelToProgress = (progress) => {
@@ -879,18 +896,6 @@ const initValuesWheel = () => {
       .join("");
   }
 
-  const updateValuesHeading = (scrollProgress = 0) => {
-    if (!valuesHeading) {
-      return;
-    }
-
-    const headingProgress = easeSliceArrival(clamp(scrollProgress / 0.34));
-    valuesHeading.style.setProperty(
-      "--values-heading-progress",
-      headingProgress.toFixed(3)
-    );
-  };
-
   const updateValuesWheelShape = (scrollProgress = 0) => {
     const clampedProgress = clamp(scrollProgress);
     let lowerFrameIndex = valuesWheelFrames.length - 2;
@@ -919,7 +924,6 @@ const initValuesWheel = () => {
     const upperFrame = valuesWheelFrames[upperFrameIndex];
     const isSettled = clampedProgress >= 0.999;
 
-    updateValuesHeading(clampedProgress);
     valuesWheel.classList.toggle("is-scroll-settled", isSettled);
     if (!isSettled) {
       clearHoverTimers();
@@ -1013,7 +1017,7 @@ const initValuesWheel = () => {
   const setValuesWheelTargetProgress = (progress, immediate = false) => {
     targetWheelProgress = clamp(progress);
 
-    if (immediate || activeSmoothness.catchup >= 1) {
+    if (targetWheelProgress >= 1 || immediate || activeSmoothness.catchup >= 1) {
       renderedWheelProgress = targetWheelProgress;
       updateValuesWheelShape(renderedWheelProgress);
       return;
@@ -1044,17 +1048,17 @@ const initValuesWheel = () => {
     setValuesWheelTargetProgress(rawProgress);
   };
 
+  valuesWheelGraphic.addEventListener("pointerover", activateSliceFromPointer);
+  valuesWheelGraphic.addEventListener("pointermove", activateSliceFromPointer);
+  valuesWheelGraphic.addEventListener("pointerleave", clearPointerSliceHover);
+
   wheelSlices.forEach(({ group }, index) => {
-    group.addEventListener("mouseenter", () => {
-      activateSliceHover(group, index);
-    });
     group.addEventListener("focus", () => {
+      hoveredSliceIndex = index;
       activateSliceHover(group, index, 0);
     });
-    group.addEventListener("mouseleave", () => {
-      clearSliceHover();
-    });
     group.addEventListener("blur", () => {
+      hoveredSliceIndex = null;
       clearSliceHover();
     });
   });
