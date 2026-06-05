@@ -5,54 +5,6 @@ const setViewportHeight = () => {
 setViewportHeight();
 window.addEventListener("resize", setViewportHeight, { passive: true });
 
-const animatedStrokes = Array.from(
-  document.querySelectorAll(
-    ".offer__stroke, .case-study__stroke, .team__stroke, .site-footer__stroke",
-  ),
-);
-const reduceStrokeMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const revealStroke = (stroke) => stroke.classList.add("is-stroke-drawn");
-const revealVisibleStrokes = () => {
-  const triggerLine = window.innerHeight * 0.9;
-
-  animatedStrokes.forEach((stroke) => {
-    if (stroke.classList.contains("is-stroke-drawn")) return;
-
-    const bounds = stroke.getBoundingClientRect();
-
-    if (bounds.top < triggerLine && bounds.bottom > 0) {
-      revealStroke(stroke);
-    }
-  });
-};
-
-if (!reduceStrokeMotion && animatedStrokes.length && "IntersectionObserver" in window) {
-  const strokeObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        revealStroke(entry.target);
-        observer.unobserve(entry.target);
-      });
-    },
-    {
-      rootMargin: "0px 0px -10% 0px",
-      threshold: 0.2,
-    },
-  );
-
-  animatedStrokes.forEach((stroke) => strokeObserver.observe(stroke));
-}
-
-if (reduceStrokeMotion) {
-  animatedStrokes.forEach(revealStroke);
-} else {
-  revealVisibleStrokes();
-  window.addEventListener("scroll", revealVisibleStrokes, { passive: true });
-  window.addEventListener("resize", revealVisibleStrokes, { passive: true });
-}
-
 const DEBUG_LOADER = false;
 const WORD_INTERVAL_MS = 900;
 const WORD_SWAP_MS = 220;

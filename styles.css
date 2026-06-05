@@ -453,21 +453,11 @@ body.is-ready .hero__image {
   position: absolute;
   display: block;
   max-width: none;
-  opacity: 0;
-  animation: none;
+  opacity: var(--stroke-opacity, 1);
+  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
   pointer-events: none;
   transform: var(--stroke-transform, none);
   transform-origin: center;
-  will-change: filter, opacity, transform;
-}
-
-.offer__stroke.is-stroke-drawn,
-.case-study__stroke.is-stroke-drawn,
-.team__stroke.is-stroke-drawn,
-.site-footer__stroke.is-stroke-drawn {
-  animation:
-    stroke-pop-in 1ms steps(1, end) var(--stroke-reveal-delay, 0ms) forwards,
-    stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
 }
 
 .offer__stroke--red-one {
@@ -767,12 +757,11 @@ body.is-ready .hero__image {
   position: absolute;
   display: block;
   max-width: none;
-  opacity: 0;
+  opacity: var(--stroke-opacity, 1);
   pointer-events: none;
   transform: var(--stroke-transform, none);
   transform-origin: center;
-  animation: none;
-  will-change: filter, opacity, transform;
+  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
 }
 
 .case-study__stroke--green {
@@ -1031,12 +1020,11 @@ body.is-ready .hero__image {
   position: absolute;
   display: block;
   max-width: none;
-  opacity: 0;
+  opacity: var(--stroke-opacity, 1);
   pointer-events: none;
   transform: var(--stroke-transform, none);
   transform-origin: center;
-  animation: none;
-  will-change: filter, opacity, transform;
+  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
 }
 
 .team__stroke--red {
@@ -1055,76 +1043,191 @@ body.is-ready .hero__image {
   --stroke-y: -0.34rem;
 }
 
-.team__stroke--blue {
-  top: calc(100% + clamp(1.4rem, 1.9vw, 1.75rem));
-  left: clamp(4.2rem, 7vw, 5.8rem);
-  z-index: 1;
-  width: clamp(8.5rem, 11.5vw, 10.7rem);
-  --stroke-transform: rotate(-1.5deg);
-  --stroke-duration: 3.15s;
-  --stroke-delay: -1.85s;
-  --stroke-reveal-delay: 160ms;
-  --stroke-frame-duration: 1040ms;
-  --stroke-frame-delay: -360ms;
-  --stroke-tilt: 3.7deg;
-  --stroke-x: -0.4rem;
-  --stroke-y: 0.22rem;
-}
-
 .team__grid {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 0.92fr 1.16fr 0.92fr 0.92fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(2rem, 4vw, 4rem);
   align-items: start;
   margin-top: clamp(4.2rem, 6vw, 5.8rem);
 }
 
 .team__member {
+  --team-photo-offset: 1.8rem;
+
   position: relative;
+  container-type: inline-size;
   color: var(--brand-green);
+  outline: none;
   isolation: isolate;
 }
 
-.team__member--anna {
-  padding-top: 1.8rem;
+.team__member::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--team-photo-offset) + 95cqw);
+  right: -1cqw;
+  z-index: 4;
+  width: 45cqw;
+  aspect-ratio: 131 / 266;
+  background: url("assets/ourteamassets/arrow.svg") center / contain no-repeat;
+  opacity: 0;
+  transform: translateY(0.8rem) rotate(-1deg);
+  transition:
+    opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
-.team__member--raquel {
-  margin-top: -0.75rem;
+.team__member:hover,
+.team__member:focus,
+.team__member:focus-within {
+  z-index: 5;
 }
 
-.team__member--nom {
-  padding-top: 1.8rem;
+.team__member:focus-visible {
+  outline: 0.12rem solid rgb(0 71 12 / 0.46);
+  outline-offset: 0.7rem;
 }
 
+.team__member--anna,
+.team__member--raquel,
+.team__member--nom,
 .team__member--jaden {
-  padding-top: 1.8rem;
+  padding-top: var(--team-photo-offset);
 }
 
 .team__photo {
   position: relative;
   z-index: 2;
   overflow: hidden;
+  aspect-ratio: 0.72;
   background: rgb(247 242 233 / 0.56);
   box-shadow: 0 1rem 2.2rem rgb(21 18 14 / 0.07);
+  transform-origin: center bottom;
+  transition:
+    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.team__photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgb(247 242 233 / 0.64), rgb(247 242 233 / 0.28) 42%, rgb(247 242 233 / 0.08)),
+    rgb(0 71 12 / 0.1);
+  opacity: 0;
+  transition: opacity 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
 .team__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition:
+    filter 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.team__member--anna .team__photo,
-.team__member--nom .team__photo,
-.team__member--jaden .team__photo {
-  aspect-ratio: 0.72;
+.team__photo-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  color: var(--brand-green);
+  opacity: 0;
+  transform: translateY(0.8rem) rotate(-0.4deg);
+  transition:
+    opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
-.team__member--raquel .team__photo {
-  aspect-ratio: 0.8;
+.team__photo-copy p {
+  width: 72%;
+  margin: clamp(1.25rem, 2.4vw, 2rem) 0 0 clamp(1rem, 1.8vw, 1.45rem);
+  color: rgb(21 35 18 / 0.92);
+  font-family: "Vollkorn", Georgia, serif;
+  font-size: clamp(1.22rem, 1.52vw, 1.55rem);
+  font-weight: 850;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.team__photo-scribble {
+  position: absolute;
+  display: block;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.team__photo-scribble--red {
+  top: 24%;
+  right: 4%;
+  width: 61%;
+  aspect-ratio: 325 / 120;
+  background: var(--brand-red);
+  mask: url("assets/ourteamassets/stroke.svg") center / 104% 104% no-repeat;
+  -webkit-mask: url("assets/ourteamassets/stroke.svg") center / 104% 104% no-repeat;
+  transform: rotate(1deg);
+}
+
+.team__photo-scribble--green {
+  display: none;
+}
+
+.team__member--anna .team__photo-copy p {
+  width: 72%;
+}
+
+.team__member--nom .team__photo-copy p,
+.team__member--jaden .team__photo-copy p {
+  width: 68%;
+}
+
+.team__member--nom .team__photo-scribble--red {
+  right: 8%;
+}
+
+.team__member:hover .team__photo,
+.team__member:focus .team__photo,
+.team__member:focus-within .team__photo {
+  box-shadow: 0 1.45rem 3rem rgb(21 18 14 / 0.12);
+  transform: scale(1.16);
+}
+
+.team__member:hover .team__photo::before,
+.team__member:focus .team__photo::before,
+.team__member:focus-within .team__photo::before,
+.team__member:hover .team__photo-copy,
+.team__member:focus .team__photo-copy,
+.team__member:focus-within .team__photo-copy {
+  opacity: 1;
+}
+
+.team__member:hover .team__photo img,
+.team__member:focus .team__photo img,
+.team__member:focus-within .team__photo img {
+  filter: saturate(0.76) contrast(0.92);
+  transform: scale(1.02);
+}
+
+.team__member:hover .team__photo-copy,
+.team__member:focus .team__photo-copy,
+.team__member:focus-within .team__photo-copy {
+  transform: translateY(0) rotate(-0.4deg);
+}
+
+.team__member:hover::after,
+.team__member:focus::after,
+.team__member:focus-within::after {
+  opacity: 1;
+  transform: translateY(0) rotate(-1deg);
 }
 
 .team__member h3 {
@@ -1139,15 +1242,36 @@ body.is-ready .hero__image {
   text-transform: lowercase;
 }
 
-.team__member p {
+.team__bio {
   position: relative;
   z-index: 2;
-  width: min(12rem, 100%);
-  margin: 1.45rem 0 0;
-  color: var(--ink);
-  font-size: 0.52rem;
-  font-weight: 680;
-  line-height: 1.25;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--brand-green);
+  font-size: clamp(0.72rem, 0.95vw, 0.88rem);
+  font-weight: 420;
+  line-height: 1.14;
+  opacity: 0;
+  transform: translateY(-0.18rem);
+  transition:
+    max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    margin-top 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team__bio strong {
+  font-weight: 900;
+}
+
+.team__member:hover .team__bio,
+.team__member:focus .team__bio,
+.team__member:focus-within .team__bio {
+  max-height: 6.8rem;
+  margin-top: 0.72rem;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .values-section {
@@ -1497,11 +1621,10 @@ body.is-ready .hero__image {
   position: absolute;
   z-index: 3;
   max-width: none;
-  opacity: 0;
-  animation: none;
+  opacity: var(--stroke-opacity, 1);
+  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
   pointer-events: none;
   user-select: none;
-  will-change: filter, opacity;
 }
 
 .site-footer__stroke--left {
@@ -1968,26 +2091,17 @@ body.is-ready .hero__image {
   .team__member--raquel,
   .team__member--nom,
   .team__member--jaden {
+    --team-photo-offset: 0rem;
+
     width: min(21rem, 76vw);
     margin: 0 auto;
     padding-top: 0;
-  }
-
-  .team__member--raquel {
-    margin-bottom: 3.4rem;
   }
 
   .team__stroke--red {
     top: -3.15rem;
     right: clamp(0.4rem, 4vw, 1.4rem);
     width: clamp(3.6rem, 15vw, 4.8rem);
-  }
-
-  .team__stroke--blue {
-    top: calc(100% + 0.9rem);
-    left: 50%;
-    width: clamp(8.2rem, 38vw, 10.2rem);
-    --stroke-transform: translateX(-50%) rotate(-1.5deg);
   }
 
   .values-section {
@@ -2362,29 +2476,17 @@ body.is-ready .hero__image {
   .team__member--raquel,
   .team__member--nom,
   .team__member--jaden {
+    --team-photo-offset: 0rem;
+
     width: min(19rem, 76vw);
     margin: 0 auto;
     padding-top: 0;
-  }
-
-  .team__member--raquel {
-    margin-bottom: 3.4rem;
   }
 
   .team__stroke--red {
     top: -2.9rem;
     right: clamp(0.15rem, 2vw, 0.7rem);
     width: clamp(3.2rem, 17vw, 4.2rem);
-  }
-
-  .team__stroke--blue {
-    top: calc(100% + 0.85rem);
-    width: clamp(7.2rem, 42vw, 8.8rem);
-  }
-
-  .team__member p {
-    margin-right: auto;
-    margin-left: auto;
   }
 
   .site-footer {
@@ -2591,12 +2693,6 @@ body.is-ready .hero__image {
       var(--case-card-transform)
       translate3d(-0.2rem, -0.14rem, 0)
       rotate(-0.58deg);
-  }
-}
-
-@keyframes stroke-pop-in {
-  to {
-    opacity: var(--stroke-opacity, 1);
   }
 }
 
