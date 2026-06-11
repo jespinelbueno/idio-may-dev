@@ -1069,7 +1069,7 @@ body.is-ready .hero__image {
   top: calc(var(--team-photo-offset) + 95cqw);
   right: -1cqw;
   z-index: 4;
-  width: 45cqw;
+  width: 34cqw;
   aspect-ratio: 131 / 266;
   background: url("assets/ourteamassets/arrow.svg") center / contain no-repeat;
   opacity: 0;
@@ -1243,8 +1243,11 @@ body.is-ready .hero__image {
 }
 
 .team__bio {
-  position: relative;
+  position: absolute;
+  top: calc(var(--team-photo-offset) + 139cqw + 3.25rem);
+  left: 0;
   z-index: 2;
+  width: 100%;
   max-height: 0;
   margin: 0;
   overflow: hidden;
@@ -1256,7 +1259,6 @@ body.is-ready .hero__image {
   transform: translateY(-0.18rem);
   transition:
     max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
-    margin-top 240ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 180ms ease,
     transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1269,7 +1271,6 @@ body.is-ready .hero__image {
 .team__member:focus .team__bio,
 .team__member:focus-within .team__bio {
   max-height: 6.8rem;
-  margin-top: 0.72rem;
   opacity: 1;
   transform: translateY(0);
 }
@@ -2096,6 +2097,7 @@ body.is-ready .hero__image {
     width: min(21rem, 76vw);
     margin: 0 auto;
     padding-top: 0;
+    padding-bottom: 6.4rem;
   }
 
   .team__stroke--red {
@@ -2481,6 +2483,7 @@ body.is-ready .hero__image {
     width: min(19rem, 76vw);
     margin: 0 auto;
     padding-top: 0;
+    padding-bottom: 6.4rem;
   }
 
   .team__stroke--red {
