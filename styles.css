@@ -25,6 +25,7 @@
   --brand-yellow: #ffd569;
   --brand-blue: #99bbd3;
   --brand-navy: #16233d;
+  --brand-pink: #facbd0;
   --hero-vh: 100svh;
   --offer-stage-h: clamp(64rem, 78vw, 72rem);
   --offer-stage-w: min(79rem, calc(100vw - clamp(10rem, 18vw, 18rem)));
@@ -74,14 +75,17 @@ a {
 }
 
 .loader {
+  --loader-background: var(--brand-red);
+  --loader-foreground: var(--paper);
+
   position: fixed;
   inset: 0;
   z-index: 20;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--paper);
-  color: var(--brand-green);
+  background-color: var(--loader-background);
+  color: var(--loader-foreground);
   transition:
     opacity 680ms cubic-bezier(0.76, 0, 0.24, 1),
     visibility 680ms cubic-bezier(0.76, 0, 0.24, 1);
@@ -90,12 +94,7 @@ a {
 .loader__field {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 50% 48%, rgb(255 213 105 / 0.16), transparent 25rem),
-    linear-gradient(rgb(247 242 233 / 0.96), rgb(247 242 233 / 0.96)),
-    repeating-linear-gradient(90deg, transparent 0 3.2rem, rgb(21 18 14 / 0.028) 3.2rem 3.25rem),
-    repeating-linear-gradient(0deg, transparent 0 3.2rem, rgb(21 18 14 / 0.024) 3.2rem 3.25rem);
-  opacity: 0.88;
+  background-color: var(--loader-background);
 }
 
 .loader__home {
@@ -105,7 +104,6 @@ a {
   place-items: center;
   width: min(100%, 92rem);
   padding: 2rem;
-  transform: translateY(-0.2rem);
 }
 
 .loader__phrase {
@@ -117,7 +115,7 @@ a {
   gap: var(--loader-logo-gap);
   width: fit-content;
   margin: 0 auto;
-  color: var(--brand-green);
+  color: inherit;
   font-size: clamp(3.8rem, 9.6vw, 10.5rem);
   font-weight: 950;
   line-height: 0.82;
@@ -135,7 +133,7 @@ a {
 
 .loader__words {
   display: inline-block;
-  width: 3.1em;
+  width: max-content;
   overflow: visible;
   text-align: left;
   vertical-align: baseline;
@@ -143,9 +141,7 @@ a {
 
 .loader__phrase.is-logo-state .loader__words,
 .loader__words.is-logo-state {
-  display: inline-block;
-  visibility: hidden;
-  width: 3.1em;
+  display: none;
 }
 
 .loader__word {
@@ -158,23 +154,51 @@ a {
 
 .loader__word.is-changing {
   opacity: 0;
-  transform: translateY(0.14em);
 }
 
-.loader__word--one {
-  color: var(--brand-tan);
+.loader--creative {
+  --loader-background: var(--brand-red);
+  --loader-foreground: var(--paper);
 }
 
-.loader__word--two {
-  color: var(--brand-navy);
+.loader--interesting {
+  --loader-background: var(--brand-olive);
+  --loader-foreground: var(--brand-green);
 }
 
-.loader__word--three {
-  color: var(--brand-olive);
+.loader--original {
+  --loader-background: #f5f0e8;
+  --loader-foreground: var(--brand-olive);
 }
 
-.loader__word--four {
-  color: var(--brand-red);
+.loader--striking {
+  --loader-background: var(--brand-tan);
+  --loader-foreground: var(--paper);
+}
+
+.loader--unique {
+  --loader-background: var(--brand-green);
+  --loader-foreground: var(--brand-olive);
+}
+
+.loader--distinct {
+  --loader-background: var(--brand-navy);
+  --loader-foreground: var(--brand-blue);
+}
+
+.loader--novel {
+  --loader-background: var(--brand-yellow);
+  --loader-foreground: var(--brand-green);
+}
+
+.loader--yours {
+  --loader-background: var(--brand-blue);
+  --loader-foreground: var(--brand-navy);
+}
+
+.loader--idio {
+  --loader-background: var(--brand-pink);
+  --loader-foreground: var(--brand-red);
 }
 
 .loader__idio-logo {
@@ -203,6 +227,23 @@ a {
 
 .loader__idio-logo[hidden] {
   display: none;
+}
+
+.loader__phrase.is-logo-state {
+  align-items: center;
+}
+
+.loader__phrase.is-logo-state .loader__fixed {
+  display: flex;
+  align-items: center;
+  gap: var(--loader-logo-gap);
+}
+
+.loader__phrase.is-logo-state .loader__idio-logo,
+.loader__phrase.is-logo-state .loader__idio-logo.is-visible {
+  position: static;
+  flex: 0 0 auto;
+  transform: none;
 }
 
 body.is-ready .loader {
@@ -2362,11 +2403,6 @@ body.is-ready .hero__image {
     width: max-content;
   }
 
-  .loader__phrase.is-logo-state .loader__words,
-  .loader__words.is-logo-state {
-    width: 2.75em;
-  }
-
   .loader__idio-logo {
     width: 2.65em;
   }
@@ -2587,11 +2623,6 @@ body.is-ready .hero__image {
 
   .loader__words {
     width: max-content;
-  }
-
-  .loader__phrase.is-logo-state .loader__words,
-  .loader__words.is-logo-state {
-    width: 2.45em;
   }
 
   .loader__idio-logo {

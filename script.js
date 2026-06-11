@@ -6,54 +6,39 @@ setViewportHeight();
 window.addEventListener("resize", setViewportHeight, { passive: true });
 
 const DEBUG_LOADER = false;
-const WORD_INTERVAL_MS = 900;
-const WORD_SWAP_MS = 220;
-const FINAL_HOLD_MS = 1000;
+const LOADER_SCREEN_MS = 650;
+const LOADER_SWAP_MS = 120;
+const FINAL_HOLD_MS = 950;
 
+const loader = document.querySelector(".loader");
 const loaderWord = document.querySelector("[data-loader-word]");
 const loaderLogo = document.querySelector("[data-loader-logo]");
 const loaderPhrase = document.querySelector(".loader__phrase");
 const loaderWordSlot = document.querySelector(".loader__words");
-const loaderWords = [
-  { text: "word1", className: "loader__word--one" },
-  { text: "word2", className: "loader__word--two" },
-  { text: "word3", className: "loader__word--three" },
-  { text: "word4", className: "loader__word--four" },
-  { logo: true },
+const loaderScreens = [
+  { text: "creative", className: "loader--creative" },
+  { text: "interesting", className: "loader--interesting" },
+  { text: "original", className: "loader--original" },
+  { text: "striking", className: "loader--striking" },
+  { text: "unique", className: "loader--unique" },
+  { text: "distinct", className: "loader--distinct" },
+  { text: "novel", className: "loader--novel" },
+  { text: "yours", className: "loader--yours" },
+  { logo: true, className: "loader--idio" },
 ];
-const FINAL_STATE_AT_MS = WORD_INTERVAL_MS * (loaderWords.length - 1) + WORD_SWAP_MS;
-let loaderWordIndex = 0;
-let loaderWordTimer;
+const loaderScreenClasses = loaderScreens.map(({ className }) => className);
+let loaderSequenceComplete = false;
+let loaderPageLoaded = document.readyState === "complete";
 
-const cycleLoaderWord = () => {
-  if (!loaderWord) return;
+const applyLoaderTheme = (className) => {
+  if (!loader) return;
 
-  loaderWord.classList.add("is-changing");
-
-  window.setTimeout(() => {
-    loaderWordIndex = (loaderWordIndex + 1) % loaderWords.length;
-    const nextWord = loaderWords[loaderWordIndex];
-
-    if (nextWord.logo && loaderLogo) {
-      showFinalLoaderState();
-      return;
-    }
-
-    loaderWord.textContent = nextWord.text;
-    loaderWord.className = `loader__word ${nextWord.className}`;
-  }, WORD_SWAP_MS);
+  loader.classList.remove(...loaderScreenClasses);
+  loader.classList.add(className);
 };
-
-if (loaderWord) {
-  loaderWordTimer = window.setInterval(cycleLoaderWord, WORD_INTERVAL_MS);
-}
 
 const showFinalLoaderState = () => {
   if (!loaderLogo) return;
-
-  if (loaderWordTimer) {
-    window.clearInterval(loaderWordTimer);
-  }
 
   if (loaderWordSlot) {
     loaderWordSlot.classList.add("is-logo-state");
@@ -62,11 +47,33 @@ const showFinalLoaderState = () => {
   loaderLogo.hidden = false;
   loaderPhrase?.classList.add("is-logo-state");
 
-  window.requestAnimationFrame(() => {
-    window.requestAnimationFrame(() => {
-      loaderLogo.classList.add("is-visible");
-    });
-  });
+  void loaderLogo.offsetWidth;
+  loaderLogo.classList.add("is-visible");
+};
+
+const setLoaderScreen = (screen) => {
+  applyLoaderTheme(screen.className);
+
+  if (screen.logo) {
+    showFinalLoaderState();
+    return;
+  }
+
+  if (loaderLogo) {
+    loaderLogo.classList.remove("is-visible");
+    loaderLogo.hidden = true;
+  }
+
+  if (loaderWordSlot) {
+    loaderWordSlot.classList.remove("is-logo-state");
+  }
+
+  loaderPhrase?.classList.remove("is-logo-state");
+
+  if (loaderWord) {
+    loaderWord.textContent = screen.text;
+    loaderWord.className = "loader__word";
+  }
 };
 
 const revealHomePage = () => {
@@ -74,20 +81,56 @@ const revealHomePage = () => {
   document.body.classList.add("is-ready");
 };
 
-const finishLoading = () => {
-  window.setTimeout(() => {
-    showFinalLoaderState();
-
-    if (!DEBUG_LOADER) {
-      window.setTimeout(revealHomePage, FINAL_HOLD_MS);
-    }
-  }, FINAL_STATE_AT_MS);
+const maybeRevealHomePage = () => {
+  if (!DEBUG_LOADER && loaderSequenceComplete && loaderPageLoaded) {
+    revealHomePage();
+  }
 };
 
-if (document.readyState === "complete") {
-  finishLoading();
+const advanceLoaderScreen = (screenIndex) => {
+  if (!loaderWord) return;
+
+  loaderWord.classList.add("is-changing");
+
+  window.setTimeout(() => {
+    setLoaderScreen(loaderScreens[screenIndex]);
+  }, LOADER_SWAP_MS);
+};
+
+const runLoaderSequence = () => {
+  if (!loader || !loaderWord) {
+    loaderSequenceComplete = true;
+    maybeRevealHomePage();
+    return;
+  }
+
+  setLoaderScreen(loaderScreens[0]);
+
+  loaderScreens.slice(1).forEach((_, index) => {
+    window.setTimeout(() => {
+      advanceLoaderScreen(index + 1);
+    }, LOADER_SCREEN_MS * (index + 1));
+  });
+
+  window.setTimeout(() => {
+    loaderSequenceComplete = true;
+    maybeRevealHomePage();
+  }, LOADER_SCREEN_MS * (loaderScreens.length - 1) + FINAL_HOLD_MS);
+};
+
+runLoaderSequence();
+
+if (loaderPageLoaded) {
+  maybeRevealHomePage();
 } else {
-  window.addEventListener("load", finishLoading, { once: true });
+  window.addEventListener(
+    "load",
+    () => {
+      loaderPageLoaded = true;
+      maybeRevealHomePage();
+    },
+    { once: true },
+  );
 }
 
 const caseStudies = [
