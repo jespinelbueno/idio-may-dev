@@ -144,6 +144,13 @@ a {
   display: none;
 }
 
+.loader__phrase.is-logo-state::after {
+  display: inline-block;
+  width: 3.1em;
+  visibility: hidden;
+  content: "";
+}
+
 .loader__word {
   display: inline-block;
   line-height: 0.92;
@@ -229,21 +236,15 @@ a {
   display: none;
 }
 
-.loader__phrase.is-logo-state {
-  align-items: center;
-}
-
 .loader__phrase.is-logo-state .loader__fixed {
-  display: flex;
-  align-items: center;
-  gap: var(--loader-logo-gap);
+  animation: none;
+  transform: none;
 }
 
-.loader__phrase.is-logo-state .loader__idio-logo,
 .loader__phrase.is-logo-state .loader__idio-logo.is-visible {
-  position: static;
-  flex: 0 0 auto;
-  transform: none;
+  opacity: 1;
+  transform: translateY(var(--loader-logo-y));
+  transition: none;
 }
 
 body.is-ready .loader {
@@ -2403,6 +2404,10 @@ body.is-ready .hero__image {
     width: max-content;
   }
 
+  .loader__phrase.is-logo-state::after {
+    width: 2.75em;
+  }
+
   .loader__idio-logo {
     width: 2.65em;
   }
@@ -2623,6 +2628,10 @@ body.is-ready .hero__image {
 
   .loader__words {
     width: max-content;
+  }
+
+  .loader__phrase.is-logo-state::after {
+    width: 2.45em;
   }
 
   .loader__idio-logo {
