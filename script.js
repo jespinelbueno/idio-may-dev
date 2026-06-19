@@ -6,15 +6,29 @@ setViewportHeight();
 window.addEventListener("resize", setViewportHeight, { passive: true });
 
 const DEBUG_LOADER = false;
+const DEBUG_LOADER_WORD = ""; // Set to "distinct", "novel", "yours", etc. to pause there.
 const LOADER_SCREEN_MS = 650;
 const LOADER_SWAP_MS = 120;
 const FINAL_HOLD_MS = 950;
+const LOADER_WORD_Y_OFFSETS = {
+  creative: "0.04em",
+  interesting: "0.05em",
+  original: "0.04em",
+  striking: "0.04em",
+  unique: "0em",
+  distinct: "0.04em",
+  novel: "-0.09em",
+  yours: "-0.09em",
+};
 
 const loader = document.querySelector(".loader");
 const loaderWord = document.querySelector("[data-loader-word]");
 const loaderLogo = document.querySelector("[data-loader-logo]");
 const loaderPhrase = document.querySelector(".loader__phrase");
+const loaderFixed = document.querySelector(".loader__fixed");
 const loaderWordSlot = document.querySelector(".loader__words");
+const heroHeadline = document.querySelector(".hero__headline");
+const heroLogo = document.querySelector(".hero__logo");
 const loaderScreens = [
   { text: "creative", className: "loader--creative" },
   { text: "interesting", className: "loader--interesting" },
@@ -27,8 +41,13 @@ const loaderScreens = [
   { logo: true, className: "loader--idio" },
 ];
 const loaderScreenClasses = loaderScreens.map(({ className }) => className);
+const loaderTextScreens = loaderScreens.filter(({ text }) => text);
+const loaderWordWidths = new Map();
 let loaderSequenceComplete = false;
 let loaderPageLoaded = document.readyState === "complete";
+let activeLoaderText = loaderTextScreens[0]?.text ?? "";
+let loaderWordTargetWidth = 0;
+let loaderMeasureFrame;
 
 const applyLoaderTheme = (className) => {
   if (!loader) return;
@@ -51,6 +70,81 @@ const showFinalLoaderState = () => {
   loaderLogo.classList.add("is-visible");
 };
 
+const setLoaderWordFit = (text) => {
+  if (!loaderWord || !loaderWordTargetWidth) return;
+
+  const wordWidth = loaderWordWidths.get(text);
+  const scale = wordWidth ? loaderWordTargetWidth / wordWidth : 1;
+  loaderWord.style.fontSize = `${scale.toFixed(4)}em`;
+  loaderWordSlot?.style.setProperty("--loader-word-axis-offset", LOADER_WORD_Y_OFFSETS[text] ?? "0em");
+};
+
+const measureLoaderWords = () => {
+  if (!loaderPhrase || !loaderTextScreens.length) return;
+
+  loaderWordWidths.clear();
+  loaderWordTargetWidth = 0;
+
+  loaderTextScreens.forEach(({ text }) => {
+    const measureWord = document.createElement("span");
+    measureWord.className = "loader__word loader__word--measure";
+    measureWord.textContent = text;
+    loaderPhrase.appendChild(measureWord);
+
+    const wordWidth = measureWord.getBoundingClientRect().width;
+    loaderWordWidths.set(text, wordWidth);
+    loaderWordTargetWidth = Math.max(loaderWordTargetWidth, wordWidth);
+
+    measureWord.remove();
+  });
+
+  const fixedRect = loaderFixed?.getBoundingClientRect();
+  const fixedWidth = fixedRect?.width ?? 0;
+  const heroPhraseRect = heroHeadline?.getBoundingClientRect();
+  const heroLogoRect = heroLogo?.getBoundingClientRect();
+
+  if (fixedRect) {
+    loaderPhrase.style.setProperty("--loader-phrase-height", `${fixedRect.height}px`);
+  }
+
+  if (heroPhraseRect && heroLogoRect) {
+    const logoOffset = heroLogoRect.left - heroPhraseRect.left;
+    const contentGap = logoOffset - fixedWidth;
+
+    loaderWordTargetWidth = heroPhraseRect.right - heroLogoRect.left;
+    loaderPhrase.style.setProperty("--loader-phrase-width", `${heroPhraseRect.width}px`);
+    loaderPhrase.style.setProperty("--loader-content-gap", `${contentGap}px`);
+    loaderPhrase.style.setProperty("--loader-logo-offset", `${logoOffset}px`);
+  } else {
+    const phraseStyles = window.getComputedStyle(loaderPhrase);
+    const phraseGap = Number.parseFloat(phraseStyles.columnGap || phraseStyles.gap) || 0;
+    const phraseFontSize = Number.parseFloat(phraseStyles.fontSize) || 0;
+    const logoSlotWidth = phraseStyles.getPropertyValue("--loader-logo-slot-width").trim();
+    const logoSlotWidthEm = Number.parseFloat(logoSlotWidth) || 0;
+
+    loaderWordTargetWidth = logoSlotWidthEm * phraseFontSize;
+    loaderPhrase.style.setProperty(
+      "--loader-phrase-width",
+      `${fixedWidth + phraseGap + loaderWordTargetWidth}px`,
+    );
+    loaderPhrase.style.removeProperty("--loader-content-gap");
+    loaderPhrase.style.removeProperty("--loader-logo-offset");
+  }
+
+  setLoaderWordFit(activeLoaderText);
+};
+
+const scheduleLoaderWordMeasure = () => {
+  if (loaderMeasureFrame) {
+    window.cancelAnimationFrame(loaderMeasureFrame);
+  }
+
+  loaderMeasureFrame = window.requestAnimationFrame(() => {
+    loaderMeasureFrame = undefined;
+    measureLoaderWords();
+  });
+};
+
 const setLoaderScreen = (screen) => {
   applyLoaderTheme(screen.className);
 
@@ -71,8 +165,11 @@ const setLoaderScreen = (screen) => {
   loaderPhrase?.classList.remove("is-logo-state");
 
   if (loaderWord) {
+    activeLoaderText = screen.text;
     loaderWord.textContent = screen.text;
+    loaderWord.dataset.word = screen.text;
     loaderWord.className = "loader__word";
+    setLoaderWordFit(screen.text);
   }
 };
 
@@ -106,6 +203,16 @@ const runLoaderSequence = () => {
 
   setLoaderScreen(loaderScreens[0]);
 
+  if (DEBUG_LOADER_WORD) {
+    const debugScreen = loaderTextScreens.find(({ text }) => text === DEBUG_LOADER_WORD);
+
+    if (debugScreen) {
+      setLoaderScreen(debugScreen);
+    }
+
+    return;
+  }
+
   loaderScreens.slice(1).forEach((_, index) => {
     window.setTimeout(() => {
       advanceLoaderScreen(index + 1);
@@ -117,6 +224,10 @@ const runLoaderSequence = () => {
     maybeRevealHomePage();
   }, LOADER_SCREEN_MS * (loaderScreens.length - 1) + FINAL_HOLD_MS);
 };
+
+measureLoaderWords();
+document.fonts?.ready.then(measureLoaderWords);
+window.addEventListener("resize", scheduleLoaderWordMeasure, { passive: true });
 
 runLoaderSequence();
 

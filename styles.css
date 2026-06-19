@@ -108,12 +108,12 @@ a {
 
 .loader__phrase {
   --loader-logo-gap: clamp(0.95rem, 1.65vw, 1.85rem);
+  --loader-logo-slot-width: 3.1em;
 
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: var(--loader-logo-gap);
-  width: fit-content;
+  position: relative;
+  display: block;
+  width: var(--loader-phrase-width, fit-content);
+  height: var(--loader-phrase-height, 0.82em);
   margin: 0 auto;
   color: inherit;
   font-size: clamp(3.8rem, 9.6vw, 10.5rem);
@@ -127,16 +127,22 @@ a {
 
 .loader__fixed {
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   animation: loader-fixed-in 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .loader__words {
-  display: inline-block;
+  position: absolute;
+  top: var(--loader-word-axis-y, 50%);
+  left: var(--loader-logo-offset, calc(100% + var(--loader-logo-gap)));
+  display: block;
   width: max-content;
   overflow: visible;
   text-align: left;
-  vertical-align: baseline;
+  /* Tune per-word vertical alignment in LOADER_WORD_Y_OFFSETS in script.js. */
+  transform: translateY(calc(-50% + var(--loader-word-axis-offset, 0px)));
 }
 
 .loader__phrase.is-logo-state .loader__words,
@@ -146,17 +152,24 @@ a {
 
 .loader__phrase.is-logo-state::after {
   display: inline-block;
-  width: 3.1em;
+  width: var(--loader-logo-slot-width);
   visibility: hidden;
   content: "";
 }
 
 .loader__word {
-  display: inline-block;
+  display: block;
   line-height: 0.92;
-  transition:
-    opacity 220ms cubic-bezier(0.76, 0, 0.24, 1),
-    transform 220ms cubic-bezier(0.76, 0, 0.24, 1);
+  transition: opacity 220ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.loader__word--measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  transform: none;
+  transition: none;
+  white-space: nowrap;
 }
 
 .loader__word.is-changing {
@@ -212,7 +225,7 @@ a {
   --loader-logo-y: -0.16em;
 
   position: absolute;
-  left: calc(100% + var(--loader-logo-gap));
+  left: var(--loader-logo-offset, calc(100% + var(--loader-logo-gap)));
   bottom: -0.16em;
   display: block;
   width: 3em;
@@ -2383,8 +2396,8 @@ body.is-ready .hero__image {
 
   .loader__phrase {
     --loader-logo-gap: clamp(0.45rem, 2.2vw, 0.9rem);
+    --loader-logo-slot-width: 2.75em;
 
-    gap: var(--loader-logo-gap);
     font-size: clamp(2.4rem, 10.8vw, 4.2rem);
     line-height: 0.82;
     white-space: nowrap;
@@ -2405,7 +2418,7 @@ body.is-ready .hero__image {
   }
 
   .loader__phrase.is-logo-state::after {
-    width: 2.75em;
+    width: var(--loader-logo-slot-width);
   }
 
   .loader__idio-logo {
@@ -2620,8 +2633,8 @@ body.is-ready .hero__image {
 
   .loader__phrase {
     --loader-logo-gap: 0.45rem;
+    --loader-logo-slot-width: 2.45em;
 
-    gap: var(--loader-logo-gap);
     font-size: clamp(2rem, 9.4vw, 3rem);
     line-height: 0.82;
   }
@@ -2631,7 +2644,7 @@ body.is-ready .hero__image {
   }
 
   .loader__phrase.is-logo-state::after {
-    width: 2.45em;
+    width: var(--loader-logo-slot-width);
   }
 
   .loader__idio-logo {
@@ -2650,12 +2663,12 @@ body.is-ready .hero__image {
 @keyframes loader-fixed-in {
   0% {
     opacity: 0;
-    transform: translateY(0.18em);
+    transform: none;
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
