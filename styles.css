@@ -1219,9 +1219,16 @@ body.is-ready .hero__image {
   display: block;
   opacity: 0.9;
   pointer-events: none;
+  transform-origin: center;
+  animation:
+    stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite,
+    team-scribble-shift var(--scribble-motion-duration, 720ms) steps(1, end) var(--scribble-motion-delay, 0ms) infinite;
+  animation-play-state: paused, paused;
 }
 
 .team__photo-scribble--red {
+  --scribble-rotate: 1deg;
+
   top: 24%;
   right: 4%;
   width: 61%;
@@ -1229,7 +1236,7 @@ body.is-ready .hero__image {
   background: var(--brand-red);
   mask: url("assets/ourteamassets/stroke.svg") center / 104% 104% no-repeat;
   -webkit-mask: url("assets/ourteamassets/stroke.svg") center / 104% 104% no-repeat;
-  transform: rotate(1deg);
+  transform: rotate(var(--scribble-rotate));
 }
 
 .team__photo-scribble--green {
@@ -1247,6 +1254,34 @@ body.is-ready .hero__image {
 
 .team__member--nom .team__photo-scribble--red {
   right: 8%;
+}
+
+.team__member--anna .team__photo-scribble--red {
+  --stroke-frame-duration: 880ms;
+  --stroke-frame-delay: -140ms;
+  --scribble-motion-duration: 580ms;
+  --scribble-motion-delay: -80ms;
+}
+
+.team__member--raquel .team__photo-scribble--red {
+  --stroke-frame-duration: 1040ms;
+  --stroke-frame-delay: -520ms;
+  --scribble-motion-duration: 650ms;
+  --scribble-motion-delay: -360ms;
+}
+
+.team__member--nom .team__photo-scribble--red {
+  --stroke-frame-duration: 940ms;
+  --stroke-frame-delay: -760ms;
+  --scribble-motion-duration: 610ms;
+  --scribble-motion-delay: -540ms;
+}
+
+.team__member--jaden .team__photo-scribble--red {
+  --stroke-frame-duration: 1120ms;
+  --stroke-frame-delay: -320ms;
+  --scribble-motion-duration: 690ms;
+  --scribble-motion-delay: -220ms;
 }
 
 .team__member:hover .team__photo,
@@ -1283,6 +1318,12 @@ body.is-ready .hero__image {
 .team__member:focus-within::after {
   opacity: 1;
   transform: translateY(0) rotate(-1deg);
+}
+
+.team__member:hover .team__photo-scribble,
+.team__member:focus .team__photo-scribble,
+.team__member:focus-within .team__photo-scribble {
+  animation-play-state: running, running;
 }
 
 .team__member h3 {
@@ -2779,6 +2820,33 @@ body.is-ready .hero__image {
   }
 }
 
+@keyframes team-scribble-shift {
+  0%,
+  19.99% {
+    transform: translate3d(0, 0, 0) rotate(var(--scribble-rotate, 1deg)) scale(1);
+  }
+
+  20%,
+  39.99% {
+    transform: translate3d(-0.34rem, 0.16rem, 0) rotate(calc(var(--scribble-rotate, 1deg) - 2.8deg)) scaleX(1.045);
+  }
+
+  40%,
+  59.99% {
+    transform: translate3d(0.28rem, -0.2rem, 0) rotate(calc(var(--scribble-rotate, 1deg) + 2.4deg)) scaleY(1.035);
+  }
+
+  60%,
+  79.99% {
+    transform: translate3d(-0.22rem, -0.14rem, 0) rotate(calc(var(--scribble-rotate, 1deg) - 1.7deg)) scale(1.035);
+  }
+
+  80%,
+  100% {
+    transform: translate3d(0.24rem, 0.2rem, 0) rotate(calc(var(--scribble-rotate, 1deg) + 2.8deg)) scaleX(0.972);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -2792,6 +2860,7 @@ body.is-ready .hero__image {
   .offer__stroke,
   .case-study__stroke,
   .team__stroke,
+  .team__photo-scribble,
   .site-footer__stroke {
     opacity: var(--stroke-opacity, 1);
     filter: none;
