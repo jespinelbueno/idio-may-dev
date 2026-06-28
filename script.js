@@ -5,21 +5,50 @@ const setViewportHeight = () => {
 setViewportHeight();
 window.addEventListener("resize", setViewportHeight, { passive: true });
 
-const DEBUG_LOADER = false;
-const DEBUG_LOADER_WORD = ""; // Set to "distinct", "novel", "yours", etc. to pause there.
+const loaderDebugParams = new URLSearchParams(window.location.search);
+const loaderDebugQuery = loaderDebugParams.get("loaderDebug");
+const DEBUG_LOADER =
+  false || (loaderDebugQuery !== null && !["0", "false", "off"].includes(loaderDebugQuery.toLowerCase()));
+const DEBUG_LOADER_WORD = loaderDebugParams.get("loaderWord") || ""; // Set to "distinct", "novel", "yours", etc. to pause there.
+const SHOW_LOADER_DEBUGGER = DEBUG_LOADER || Boolean(DEBUG_LOADER_WORD);
 const LOADER_SCREEN_MS = 650;
 const LOADER_SWAP_MS = 120;
 const FINAL_HOLD_MS = 950;
+const LOADER_DEBUG_STORAGE_KEY = "idio-loader-word-y-offsets";
 const LOADER_WORD_Y_OFFSETS = {
-  creative: "0.04em",
-  interesting: "0.05em",
-  original: "0.04em",
-  striking: "0.04em",
-  unique: "0em",
-  distinct: "0.04em",
-  novel: "-0.09em",
-  yours: "-0.09em",
+  creative: "0.1em",
+  interesting: "0.03em",
+  original: "0.12em",
+  striking: "0.12em",
+  unique: "0.16em",
+  distinct: "0.1em",
+  novel: "0.2em",
+  yours: "0.21em",
 };
+
+const loadSavedLoaderOffsets = () => {
+  if (!SHOW_LOADER_DEBUGGER) return;
+
+  try {
+    const savedOffsets = JSON.parse(window.localStorage.getItem(LOADER_DEBUG_STORAGE_KEY) || "{}");
+
+    Object.entries(savedOffsets).forEach(([text, offset]) => {
+      if (text in LOADER_WORD_Y_OFFSETS && typeof offset === "string") {
+        LOADER_WORD_Y_OFFSETS[text] = offset;
+      }
+    });
+  } catch {
+    window.localStorage?.removeItem(LOADER_DEBUG_STORAGE_KEY);
+  }
+};
+
+const saveLoaderOffsets = () => {
+  if (!SHOW_LOADER_DEBUGGER) return;
+
+  window.localStorage?.setItem(LOADER_DEBUG_STORAGE_KEY, JSON.stringify(LOADER_WORD_Y_OFFSETS));
+};
+
+loadSavedLoaderOffsets();
 
 const loader = document.querySelector(".loader");
 const loaderWord = document.querySelector("[data-loader-word]");
@@ -48,12 +77,47 @@ let loaderPageLoaded = document.readyState === "complete";
 let activeLoaderText = loaderTextScreens[0]?.text ?? "";
 let loaderWordTargetWidth = 0;
 let loaderMeasureFrame;
+let loaderDebugger;
 
 const applyLoaderTheme = (className) => {
   if (!loader) return;
 
   loader.classList.remove(...loaderScreenClasses);
   loader.classList.add(className);
+};
+
+const parseLoaderOffset = (value) => Number.parseFloat(String(value).replace("em", "")) || 0;
+
+const formatLoaderOffset = (value) => {
+  const rounded = Math.round(value * 100) / 100;
+
+  return `${Object.is(rounded, -0) ? 0 : rounded}em`;
+};
+
+const getLoaderTextRect = (element) => {
+  if (!element) return undefined;
+
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      return node.textContent.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    },
+  });
+  const textNode = walker.nextNode();
+
+  if (!textNode) return element.getBoundingClientRect();
+
+  const text = textNode.textContent;
+  const firstVisibleCharacter = text.search(/\S/);
+  const lastVisibleCharacter = text.length - (text.match(/\s*$/)?.[0].length ?? 0);
+  const range = document.createRange();
+
+  range.setStart(textNode, firstVisibleCharacter);
+  range.setEnd(textNode, lastVisibleCharacter);
+
+  const rect = range.getBoundingClientRect();
+  range.detach?.();
+
+  return rect.width || rect.height ? rect : element.getBoundingClientRect();
 };
 
 const showFinalLoaderState = () => {
@@ -77,6 +141,7 @@ const setLoaderWordFit = (text) => {
   const scale = wordWidth ? loaderWordTargetWidth / wordWidth : 1;
   loaderWord.style.fontSize = `${scale.toFixed(4)}em`;
   loaderWordSlot?.style.setProperty("--loader-word-axis-offset", LOADER_WORD_Y_OFFSETS[text] ?? "0em");
+  updateLoaderDebugger();
 };
 
 const measureLoaderWords = () => {
@@ -173,6 +238,172 @@ const setLoaderScreen = (screen) => {
   }
 };
 
+const getLoaderDebugMeasurements = () => {
+  if (!loaderFixed || !loaderWord) return undefined;
+
+  const fixedRect = getLoaderTextRect(loaderFixed);
+  const wordRect = getLoaderTextRect(loaderWord);
+
+  if (!fixedRect || !wordRect) return undefined;
+
+  const fixedCenter = fixedRect.top + fixedRect.height / 2;
+  const wordCenter = wordRect.top + wordRect.height / 2;
+
+  return {
+    centerDelta: fixedCenter - wordCenter,
+    bottomDelta: fixedRect.bottom - wordRect.bottom,
+    fixedWidth: fixedRect.width,
+    wordWidth: wordRect.width,
+  };
+};
+
+const getLoaderOffsetsForCopy = () => {
+  const rows = loaderTextScreens.map(({ text }) => `  ${text}: "${LOADER_WORD_Y_OFFSETS[text] ?? "0em"}",`);
+
+  return `const LOADER_WORD_Y_OFFSETS = {\n${rows.join("\n")}\n};`;
+};
+
+const updateLoaderDebugger = () => {
+  if (!loaderDebugger || !loaderWord) return;
+
+  const offset = parseLoaderOffset(LOADER_WORD_Y_OFFSETS[activeLoaderText] ?? "0em");
+  const measurements = getLoaderDebugMeasurements();
+
+  loaderDebugger.word.value = activeLoaderText;
+  loaderDebugger.range.value = String(offset);
+  loaderDebugger.number.value = offset.toFixed(2);
+  loaderDebugger.output.value = getLoaderOffsetsForCopy();
+
+  if (measurements) {
+    loaderDebugger.metrics.innerHTML = [
+      `<span>center ${measurements.centerDelta.toFixed(1)}px</span>`,
+      `<span>bottom ${measurements.bottomDelta.toFixed(1)}px</span>`,
+      `<span>word ${measurements.wordWidth.toFixed(1)}px</span>`,
+      `<span>fixed ${measurements.fixedWidth.toFixed(1)}px</span>`,
+    ].join("");
+  }
+};
+
+const setLoaderDebugOffset = (value) => {
+  const offset = Math.max(-0.5, Math.min(0.5, Number.parseFloat(value) || 0));
+
+  LOADER_WORD_Y_OFFSETS[activeLoaderText] = formatLoaderOffset(offset);
+  saveLoaderOffsets();
+  setLoaderWordFit(activeLoaderText);
+};
+
+const copyLoaderDebugOffsets = async () => {
+  if (!loaderDebugger) return;
+
+  const offsets = getLoaderOffsetsForCopy();
+  loaderDebugger.output.hidden = false;
+  loaderDebugger.output.value = offsets;
+  loaderDebugger.output.select();
+
+  try {
+    await navigator.clipboard?.writeText(offsets);
+    loaderDebugger.copy.textContent = "copied";
+  } catch {
+    document.execCommand?.("copy");
+    loaderDebugger.copy.textContent = "selected";
+  }
+
+  window.setTimeout(() => {
+    if (loaderDebugger) {
+      loaderDebugger.copy.textContent = "copy offsets";
+    }
+  }, 1200);
+};
+
+const createLoaderDebugger = () => {
+  if (!SHOW_LOADER_DEBUGGER || loaderDebugger || !loader) return;
+
+  const panel = document.createElement("aside");
+  panel.className = "loader-debugger";
+  panel.innerHTML = `
+    <div class="loader-debugger__header">
+      <strong>loader debugger</strong>
+      <span>?loaderDebug=1</span>
+    </div>
+    <label class="loader-debugger__field">
+      word
+      <select data-loader-debug-word></select>
+    </label>
+    <label class="loader-debugger__field">
+      y offset em
+      <input data-loader-debug-range type="range" min="-0.5" max="0.5" step="0.01">
+    </label>
+    <div class="loader-debugger__row">
+      <button type="button" data-loader-debug-nudge="-0.01">up</button>
+      <input data-loader-debug-number type="number" min="-0.5" max="0.5" step="0.01">
+      <button type="button" data-loader-debug-nudge="0.01">down</button>
+    </div>
+    <div class="loader-debugger__metrics" data-loader-debug-metrics></div>
+    <div class="loader-debugger__row">
+      <button class="loader-debugger__copy" type="button" data-loader-debug-copy>copy offsets</button>
+      <button type="button" data-loader-debug-reset>clear saved</button>
+    </div>
+    <textarea class="loader-debugger__output" data-loader-debug-output readonly hidden></textarea>
+  `;
+
+  const wordSelect = panel.querySelector("[data-loader-debug-word]");
+
+  loaderTextScreens.forEach(({ text }) => {
+    const option = document.createElement("option");
+    option.value = text;
+    option.textContent = text;
+    wordSelect.appendChild(option);
+  });
+
+  loader.appendChild(panel);
+
+  loaderDebugger = {
+    panel,
+    word: wordSelect,
+    range: panel.querySelector("[data-loader-debug-range]"),
+    number: panel.querySelector("[data-loader-debug-number]"),
+    metrics: panel.querySelector("[data-loader-debug-metrics]"),
+    copy: panel.querySelector("[data-loader-debug-copy]"),
+    output: panel.querySelector("[data-loader-debug-output]"),
+  };
+
+  loaderDebugger.word.addEventListener("change", () => {
+    const screen = loaderTextScreens.find(({ text }) => text === loaderDebugger.word.value);
+
+    if (screen) {
+      setLoaderScreen(screen);
+    }
+  });
+
+  loaderDebugger.range.addEventListener("input", () => {
+    setLoaderDebugOffset(loaderDebugger.range.value);
+  });
+
+  loaderDebugger.number.addEventListener("input", () => {
+    setLoaderDebugOffset(loaderDebugger.number.value);
+  });
+
+  panel.querySelectorAll("[data-loader-debug-nudge]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextOffset = parseLoaderOffset(LOADER_WORD_Y_OFFSETS[activeLoaderText]) + Number(button.dataset.loaderDebugNudge);
+      setLoaderDebugOffset(nextOffset);
+    });
+  });
+
+  loaderDebugger.copy.addEventListener("click", copyLoaderDebugOffsets);
+  panel.querySelector("[data-loader-debug-reset]").addEventListener("click", () => {
+    window.localStorage?.removeItem(LOADER_DEBUG_STORAGE_KEY);
+    loaderDebugger.copy.textContent = "cleared";
+    window.setTimeout(() => {
+      if (loaderDebugger) {
+        loaderDebugger.copy.textContent = "copy offsets";
+      }
+    }, 1200);
+  });
+
+  updateLoaderDebugger();
+};
+
 const revealHomePage = () => {
   document.body.classList.remove("is-loading");
   document.body.classList.add("is-ready");
@@ -202,6 +433,18 @@ const runLoaderSequence = () => {
   }
 
   setLoaderScreen(loaderScreens[0]);
+  createLoaderDebugger();
+
+  if (DEBUG_LOADER) {
+    const debugScreen =
+      loaderTextScreens.find(({ text }) => text === DEBUG_LOADER_WORD) ?? loaderTextScreens[0];
+
+    if (debugScreen) {
+      setLoaderScreen(debugScreen);
+    }
+
+    return;
+  }
 
   if (DEBUG_LOADER_WORD) {
     const debugScreen = loaderTextScreens.find(({ text }) => text === DEBUG_LOADER_WORD);

@@ -14,6 +14,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Teva";
+  src: url("assets/fonts/Teva/Teva-Regular.otf") format("opentype"),
+    url("assets/fonts/Teva/Teva-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --paper: #f7f2e9;
   --ink: #15120e;
@@ -108,7 +117,10 @@ a {
 
 .loader__phrase {
   --loader-logo-gap: clamp(0.95rem, 1.65vw, 1.85rem);
-  --loader-logo-slot-width: 3.1em;
+  --idio-lockup-logo-width: 2.55em;
+  --idio-lockup-logo-slot-width: 2.65em;
+  --idio-lockup-logo-y: -0.16em;
+  --loader-logo-slot-width: var(--idio-lockup-logo-slot-width);
 
   position: relative;
   display: block;
@@ -135,14 +147,14 @@ a {
 
 .loader__words {
   position: absolute;
-  top: var(--loader-word-axis-y, 50%);
+  bottom: 0;
   left: var(--loader-logo-offset, calc(100% + var(--loader-logo-gap)));
   display: block;
   width: max-content;
   overflow: visible;
   text-align: left;
-  /* Tune per-word vertical alignment in LOADER_WORD_Y_OFFSETS in script.js. */
-  transform: translateY(calc(-50% + var(--loader-word-axis-offset, 0px)));
+  /* Use LOADER_WORD_Y_OFFSETS only for small optical nudges. */
+  transform: translateY(var(--loader-word-axis-offset, 0px));
 }
 
 .loader__phrase.is-logo-state .loader__words,
@@ -159,6 +171,8 @@ a {
 
 .loader__word {
   display: block;
+  font-family: "Teva", "DM Sans", system-ui, sans-serif;
+  font-weight: 400;
   line-height: 0.92;
   transition: opacity 220ms cubic-bezier(0.76, 0, 0.24, 1);
 }
@@ -174,6 +188,85 @@ a {
 
 .loader__word.is-changing {
   opacity: 0;
+}
+
+.loader-debugger {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  display: grid;
+  gap: 0.65rem;
+  width: min(22rem, calc(100vw - 2rem));
+  padding: 0.85rem;
+  border: 1px solid rgba(247, 242, 233, 0.35);
+  background: rgba(21, 18, 14, 0.82);
+  color: var(--paper);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  text-transform: none;
+  box-shadow: 0 1rem 2.8rem rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px);
+}
+
+.loader-debugger__header,
+.loader-debugger__row,
+.loader-debugger__metrics {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loader-debugger__header {
+  justify-content: space-between;
+}
+
+.loader-debugger__header span {
+  opacity: 0.7;
+}
+
+.loader-debugger__field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.loader-debugger select,
+.loader-debugger input,
+.loader-debugger button,
+.loader-debugger textarea {
+  width: 100%;
+  border: 1px solid rgba(247, 242, 233, 0.24);
+  border-radius: 0;
+  background: rgba(247, 242, 233, 0.1);
+  color: inherit;
+  font: inherit;
+}
+
+.loader-debugger select,
+.loader-debugger input,
+.loader-debugger button {
+  min-height: 2rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.loader-debugger input[type="range"] {
+  padding-inline: 0;
+}
+
+.loader-debugger button {
+  cursor: pointer;
+}
+
+.loader-debugger__metrics {
+  flex-wrap: wrap;
+  opacity: 0.82;
+}
+
+.loader-debugger__output {
+  min-height: 7rem;
+  padding: 0.5rem;
+  resize: vertical;
 }
 
 .loader--creative {
@@ -222,17 +315,15 @@ a {
 }
 
 .loader__idio-logo {
-  --loader-logo-y: -0.16em;
-
   position: absolute;
   left: var(--loader-logo-offset, calc(100% + var(--loader-logo-gap)));
-  bottom: -0.16em;
+  bottom: var(--idio-lockup-logo-y);
   display: block;
-  width: 3em;
+  width: var(--idio-lockup-logo-width);
   aspect-ratio: 531 / 230;
   background: currentColor;
   opacity: 0;
-  transform: translateY(calc(var(--loader-logo-y) + 0.14em));
+  transform: translateY(calc(var(--idio-lockup-logo-y) + 0.14em));
   mask: url("assets/img/idiologomonochrome.svg") center / contain no-repeat;
   -webkit-mask: url("assets/img/idiologomonochrome.svg") center / contain no-repeat;
   transition:
@@ -242,7 +333,7 @@ a {
 
 .loader__idio-logo.is-visible {
   opacity: 1;
-  transform: translateY(var(--loader-logo-y));
+  transform: translateY(var(--idio-lockup-logo-y));
 }
 
 .loader__idio-logo[hidden] {
@@ -256,7 +347,7 @@ a {
 
 .loader__phrase.is-logo-state .loader__idio-logo.is-visible {
   opacity: 1;
-  transform: translateY(var(--loader-logo-y));
+  transform: translateY(var(--idio-lockup-logo-y));
   transition: none;
 }
 
@@ -306,6 +397,9 @@ body.is-ready .hero__image {
 
 .hero__headline {
   --hero-logo-gap: clamp(0.95rem, 1.65vw, 1.85rem);
+  --idio-lockup-logo-width: 2.55em;
+  --idio-lockup-logo-slot-width: 2.65em;
+  --idio-lockup-logo-y: -0.16em;
 
   position: absolute;
   top: 50%;
@@ -333,17 +427,17 @@ body.is-ready .hero__image {
 
 .hero__logo-slot {
   display: inline-block;
-  width: 3.1em;
+  width: var(--idio-lockup-logo-slot-width);
   visibility: hidden;
 }
 
 .hero__logo {
   position: absolute;
   left: calc(100% + var(--hero-logo-gap));
-  bottom: -0.16em;
-  width: 3em;
+  bottom: var(--idio-lockup-logo-y);
+  width: var(--idio-lockup-logo-width);
   height: auto;
-  transform: translateY(-0.16em);
+  transform: translateY(var(--idio-lockup-logo-y));
   filter: drop-shadow(0 0.12rem 0.3rem rgb(0 0 0 / 0.04));
 }
 
@@ -1517,11 +1611,11 @@ body.is-ready .hero__image {
 .value-tooltip {
   position: absolute;
   top: 36%;
-  right: clamp(-17rem, -19vw, -13rem);
+  right: clamp(-11rem, -11.5vw, -8rem);
   z-index: 4;
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
+  gap: 0.2rem;
   width: clamp(15rem, 22vw, 20rem);
   color: var(--brand-green);
   opacity: 0;
@@ -1537,44 +1631,67 @@ body.is-ready .hero__image {
 
 .value-tooltip.is-left {
   right: auto;
-  left: clamp(-16rem, -18vw, -12rem);
+  left: clamp(-11rem, -11.5vw, -8rem);
   flex-direction: row-reverse;
 }
 
-.value-tooltip.is-upper-left {
-  top: 12%;
+.value-tooltip.is-top {
+  top: clamp(-4.8rem, -5vw, -3.6rem);
   right: auto;
-  left: clamp(-13rem, -14vw, -9rem);
+  left: 50%;
+  align-items: center;
+  flex-direction: column-reverse;
+  width: min(16rem, 42vw);
+  text-align: center;
+  transform: translate(-50%, 0.6rem);
+}
+
+.value-tooltip.is-upper-left {
+  top: 18%;
+  right: auto;
+  left: clamp(-10rem, -10vw, -7rem);
   flex-direction: row-reverse;
 }
 
 .value-tooltip.is-upper-right {
-  top: 10%;
-  right: clamp(-14rem, -15vw, -10rem);
+  top: 18%;
+  right: clamp(-10rem, -10vw, -7rem);
 }
 
 .value-tooltip.is-lower-left {
   top: auto;
   right: auto;
-  bottom: 14%;
-  left: clamp(-13rem, -14vw, -9rem);
+  bottom: 19%;
+  left: clamp(-10rem, -10vw, -7rem);
   align-items: flex-end;
   flex-direction: row-reverse;
 }
 
 .value-tooltip.is-lower-right {
   top: auto;
-  right: clamp(-14rem, -15vw, -10rem);
-  bottom: 13%;
+  right: clamp(-10rem, -10vw, -7rem);
+  bottom: 12%;
   align-items: flex-end;
 }
 
+.value-tooltip.is-bottom {
+  top: auto;
+  right: auto;
+  bottom: clamp(-5.4rem, -5.6vw, -4rem);
+  left: 50%;
+  align-items: center;
+  flex-direction: column;
+  width: min(16rem, 42vw);
+  text-align: center;
+  transform: translate(-50%, 0.6rem);
+}
+
 .value-tooltip-arrow {
-  display: none;
+  display: block;
   position: relative;
   flex: 0 0 auto;
-  width: clamp(4.5rem, 7.5vw, 7.8rem);
-  margin-top: 0.1rem;
+  width: clamp(3.35rem, 4.8vw, 4.9rem);
+  margin-top: -0.95rem;
   overflow: visible;
 }
 
@@ -1591,31 +1708,49 @@ body.is-ready .hero__image {
 }
 
 .value-tooltip.is-left .value-tooltip-arrow {
-  transform: rotate(0deg);
-}
-
-.value-tooltip.is-right .value-tooltip-arrow {
-  transform: scaleX(-1);
-}
-
-.value-tooltip.is-upper-left .value-tooltip-arrow {
-  margin-left: -0.35rem;
+  margin-top: -1rem;
   transform: rotate(-18deg);
 }
 
-.value-tooltip.is-upper-right .value-tooltip-arrow {
-  margin-right: -0.35rem;
+.value-tooltip.is-right .value-tooltip-arrow {
+  margin-top: -1rem;
   transform: scaleX(-1) rotate(-18deg);
 }
 
+.value-tooltip.is-top .value-tooltip-arrow {
+  width: clamp(3rem, 4vw, 4.15rem);
+  margin: -0.35rem 0 0;
+  transform: rotate(4deg);
+}
+
+.value-tooltip.is-upper-left .value-tooltip-arrow {
+  margin-top: -1.35rem;
+  margin-left: -0.55rem;
+  transform: rotate(-32deg);
+}
+
+.value-tooltip.is-upper-right .value-tooltip-arrow {
+  margin-top: -1.35rem;
+  margin-right: -0.55rem;
+  transform: scaleX(-1) rotate(-32deg);
+}
+
 .value-tooltip.is-lower-left .value-tooltip-arrow {
-  margin-left: -0.35rem;
-  transform: rotate(34deg);
+  margin-bottom: -1.1rem;
+  margin-left: -0.5rem;
+  transform: rotate(24deg);
 }
 
 .value-tooltip.is-lower-right .value-tooltip-arrow {
-  margin-right: -0.35rem;
-  transform: scaleX(-1) rotate(34deg);
+  margin-right: -0.5rem;
+  margin-bottom: -1.1rem;
+  transform: scaleX(-1) rotate(24deg);
+}
+
+.value-tooltip.is-bottom .value-tooltip-arrow {
+  width: clamp(3rem, 4vw, 4.15rem);
+  margin: 0 0 -0.5rem;
+  transform: rotate(180deg);
 }
 
 .value-tooltip-content {
@@ -2217,6 +2352,8 @@ body.is-ready .hero__image {
   .value-tooltip,
   .value-tooltip.is-left,
   .value-tooltip.is-right,
+  .value-tooltip.is-top,
+  .value-tooltip.is-bottom,
   .value-tooltip.is-upper-left,
   .value-tooltip.is-upper-right,
   .value-tooltip.is-lower-left,
@@ -2235,6 +2372,8 @@ body.is-ready .hero__image {
   .values-wheel.has-active-tooltip .value-tooltip,
   .values-wheel.has-active-tooltip .value-tooltip.is-left,
   .values-wheel.has-active-tooltip .value-tooltip.is-right,
+  .values-wheel.has-active-tooltip .value-tooltip.is-top,
+  .values-wheel.has-active-tooltip .value-tooltip.is-bottom,
   .values-wheel.has-active-tooltip .value-tooltip.is-upper-left,
   .values-wheel.has-active-tooltip .value-tooltip.is-upper-right,
   .values-wheel.has-active-tooltip .value-tooltip.is-lower-left,
@@ -2245,6 +2384,8 @@ body.is-ready .hero__image {
   .value-tooltip-arrow,
   .value-tooltip.is-left .value-tooltip-arrow,
   .value-tooltip.is-right .value-tooltip-arrow,
+  .value-tooltip.is-top .value-tooltip-arrow,
+  .value-tooltip.is-bottom .value-tooltip-arrow,
   .value-tooltip.is-upper-left .value-tooltip-arrow,
   .value-tooltip.is-upper-right .value-tooltip-arrow,
   .value-tooltip.is-lower-left .value-tooltip-arrow,
@@ -2299,17 +2440,12 @@ body.is-ready .hero__image {
   }
 
   .hero__headline {
+    --idio-lockup-logo-width: 2.35em;
+    --idio-lockup-logo-slot-width: 2.45em;
+
     gap: clamp(0.45rem, 2.2vw, 0.9rem);
     font-size: clamp(2.4rem, 10.8vw, 4.2rem);
     line-height: 0.82;
-  }
-
-  .hero__logo-slot {
-    width: 2.75em;
-  }
-
-  .hero__logo {
-    width: 2.65em;
   }
 
   .values-section {
@@ -2437,7 +2573,8 @@ body.is-ready .hero__image {
 
   .loader__phrase {
     --loader-logo-gap: clamp(0.45rem, 2.2vw, 0.9rem);
-    --loader-logo-slot-width: 2.75em;
+    --idio-lockup-logo-width: 2.35em;
+    --idio-lockup-logo-slot-width: 2.45em;
 
     font-size: clamp(2.4rem, 10.8vw, 4.2rem);
     line-height: 0.82;
@@ -2460,10 +2597,6 @@ body.is-ready .hero__image {
 
   .loader__phrase.is-logo-state::after {
     width: var(--loader-logo-slot-width);
-  }
-
-  .loader__idio-logo {
-    width: 2.65em;
   }
 
   .what-offer {
@@ -2659,22 +2792,18 @@ body.is-ready .hero__image {
 
 @media (max-width: 430px) {
   .hero__headline {
+    --idio-lockup-logo-width: 2.1em;
+    --idio-lockup-logo-slot-width: 2.2em;
+
     gap: 0.45rem;
     font-size: clamp(2rem, 9.4vw, 3rem);
     line-height: 0.82;
   }
 
-  .hero__logo-slot {
-    width: 2.45em;
-  }
-
-  .hero__logo {
-    width: 2.35em;
-  }
-
   .loader__phrase {
     --loader-logo-gap: 0.45rem;
-    --loader-logo-slot-width: 2.45em;
+    --idio-lockup-logo-width: 2.1em;
+    --idio-lockup-logo-slot-width: 2.2em;
 
     font-size: clamp(2rem, 9.4vw, 3rem);
     line-height: 0.82;
@@ -2686,10 +2815,6 @@ body.is-ready .hero__image {
 
   .loader__phrase.is-logo-state::after {
     width: var(--loader-logo-slot-width);
-  }
-
-  .loader__idio-logo {
-    width: 2.35em;
   }
 
   .offer__title-scribble {

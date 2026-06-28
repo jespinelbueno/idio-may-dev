@@ -5,10 +5,10 @@ const valuesWheelConfig = [
     label: "Listening",
     title: "listening",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.",
-    position: "upper-right",
+      "We start with what people actually need, then shape the work around real context.",
+    position: "top",
     fill: "#ADB363",
-    textColor: "#F7F2E9",
+    textColor: "#16233D",
     circleStartAngle: 329.6,
     circleEndAngle: 390.4,
     startAngle: 332.5,
@@ -28,7 +28,7 @@ const valuesWheelConfig = [
     label: "Excellence",
     title: "excellence",
     description:
-      "Lorem ipsum dolor sit amet consectetur ut labore et dolore magna aliqua.",
+      "We sweat the details that make the difference between finished and memorable.",
     position: "upper-right",
     fill: "#D80411",
     textColor: "#F7F2E9",
@@ -51,10 +51,10 @@ const valuesWheelConfig = [
     label: "Creativity",
     title: "creativity",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.",
-    position: "right",
+      "We turn constraints into ideas people can feel, use, share, and remember.",
+    position: "lower-right",
     fill: "#99BBD3",
-    textColor: "#F7F2E9",
+    textColor: "#16233D",
     circleStartAngle: 89.6,
     circleEndAngle: 150.4,
     startAngle: 92.5,
@@ -74,8 +74,8 @@ const valuesWheelConfig = [
     label: "Idiosyncrasy",
     title: "idiosyncrasy",
     description:
-      "Lorem ipsum dolor sit amet consectetur praesent commodo cursus magna.",
-    position: "lower-left",
+      "We protect the specific details that make a brand impossible to confuse.",
+    position: "bottom",
     fill: "#00470C",
     textColor: "#F7F2E9",
     circleStartAngle: 149.6,
@@ -97,7 +97,7 @@ const valuesWheelConfig = [
     label: "Responsibility",
     title: "responsibility",
     description:
-      "Lorem ipsum dolor sit amet consectetur nulla fringilla vulputate venenatis.",
+      "We make choices with care for the client, the audience, and the wider impact.",
     position: "lower-left",
     fill: "#16233D",
     textColor: "#F7F2E9",
@@ -120,10 +120,10 @@ const valuesWheelConfig = [
     label: "Collaboration",
     title: "collaboration",
     description:
-      "Lorem ipsum dolor sit amet consectetur pellentesque mauris suspendisse enim.",
+      "We build with clients, not around them, so the best ideas can surface early.",
     position: "upper-left",
     fill: "#FFD569",
-    textColor: "#F7F2E9",
+    textColor: "#00470C",
     circleStartAngle: 269.6,
     circleEndAngle: 330.4,
     startAngle: 272.5,
@@ -305,11 +305,12 @@ const createHiddenFrameSlice = (index, rotation = 0, scale = 1) =>
     width: 0.01,
     outerRadius: 12,
     labelRadius: 0,
-      apexRadius: 0,
-      rotation,
-      scale,
-      lift: 0,
-    });
+    apexRadius: 0,
+    opacity: 0,
+    rotation,
+    scale,
+    lift: 0,
+  });
 
 const createStoryboardFrame = ({ rotation = 0, scale = 1, slices }) => ({
   labelOpacity: 1,
@@ -609,6 +610,8 @@ const initValuesWheel = () => {
 
       const group = document.createElementNS(svgNamespace, "g");
       group.setAttribute("class", "wheel-slice-group");
+      group.setAttribute("role", "button");
+      group.setAttribute("aria-label", `${slice.title}: ${slice.description}`);
       group.setAttribute("tabindex", "0");
       group.dataset.valueTitle = slice.title;
       group.dataset.valueDescription = slice.description;
@@ -950,11 +953,6 @@ const initValuesWheel = () => {
       );
       const scale = lerp(from.scale ?? 1, to.scale ?? 1, sliceMix);
       const sliceOpacity = lerp(from.opacity ?? 1, to.opacity ?? 1, sliceMix);
-      const labelOpacity = lerp(
-        lowerFrame.labelOpacity ?? 0,
-        upperFrame.labelOpacity ?? 0,
-        sliceMix
-      );
       const slicePath = buildSlicePath({
         centerX: 350,
         centerY: 350,
@@ -976,7 +974,6 @@ const initValuesWheel = () => {
 
       path.setAttribute("d", slicePath);
       hitPath.setAttribute("d", slicePath);
-
     });
 
     if (isSettled && !valuesWheel.classList.contains("has-active-tooltip")) {
