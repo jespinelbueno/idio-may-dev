@@ -34,6 +34,11 @@
           <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
         </filter>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo" result="mix"></feBlend>
+        </filter>
       </defs>
     </svg>
 
@@ -75,7 +80,17 @@
             me! i go here. in fact, i love it here. here is wondrous. btw, there
             will be a button or something like that below this blurb.. right?
           </p>
-          <a class="offer__button" href="#offer-title">Learn more!</a>
+          <a class="offer__button" href="#offer-title">
+            <span class="button-fill__label">Learn more!</span>
+            <span class="button-fill__inner" aria-hidden="true">
+              <span class="button-fill__blobs">
+                <span class="button-fill__blob"></span>
+                <span class="button-fill__blob"></span>
+                <span class="button-fill__blob"></span>
+                <span class="button-fill__blob"></span>
+              </span>
+            </span>
+          </a>
         </div>
 
         <div class="offer__collage" aria-label="Editorial image collage">
@@ -165,7 +180,17 @@
                 Lorem ipsum dolor sit amet consectetur. Nulla fringilla vulputate
                 venenatis nam suspendisse enim egestas pellentesque mauris.
               </p>
-              <a class="case-study__button" href="#case-study-title">Learn more!</a>
+              <a class="case-study__button" href="#case-study-title">
+                <span class="button-fill__label">Learn more!</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
         </section>
