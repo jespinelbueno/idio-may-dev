@@ -855,11 +855,17 @@ const caseStudyDetails = document.querySelector("[data-case-details]");
 const caseStudyTitle = document.querySelector("#case-study-title");
 const caseStudyDescription = caseStudyDetails?.querySelector("p");
 const caseStudyDots = Array.from(document.querySelectorAll(".case-study__dot[data-case-index]"));
+const caseStudyScrollArea = document.querySelector(".case-study");
 let activeCaseStudyIndex = 0;
 let caseStudyShuffleTimer;
 let caseStudyContentTimer;
 let caseStudyImageTimer;
 let caseStudyImageRequest = 0;
+let caseStudyScrollAccumulator = 0;
+let caseStudyScrollLockTimer;
+let caseStudyTouchStartX = 0;
+let caseStudyTouchStartY = 0;
+let isCaseStudyScrollLocked = false;
 
 caseStudies.forEach(({ image }) => {
   const preload = new Image();
@@ -990,8 +996,94 @@ const selectCaseStudy = (nextIndex) => {
   updateCaseStudyContent(nextIndex);
 };
 
+const scrollCaseStudy = (direction) => {
+  const nextIndex = Math.max(0, Math.min(caseStudies.length - 1, activeCaseStudyIndex + direction));
+
+  if (nextIndex === activeCaseStudyIndex) return false;
+
+  selectCaseStudy(nextIndex);
+  return true;
+};
+
+const unlockCaseStudyScroll = () => {
+  window.clearTimeout(caseStudyScrollLockTimer);
+  isCaseStudyScrollLocked = false;
+  caseStudyScrollAccumulator = 0;
+};
+
+const lockCaseStudyScroll = () => {
+  isCaseStudyScrollLocked = true;
+  window.clearTimeout(caseStudyScrollLockTimer);
+  caseStudyScrollLockTimer = window.setTimeout(unlockCaseStudyScroll, 620);
+};
+
 caseStudyDots.forEach((dot) => {
   dot.addEventListener("click", () => {
     selectCaseStudy(Number(dot.dataset.caseIndex));
   });
 });
+
+caseStudyScrollArea?.addEventListener(
+  "wheel",
+  (event) => {
+    if (caseStudies.length < 2) return;
+
+    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    const direction = Math.sign(delta);
+
+    if (!direction) return;
+
+    const canMove =
+      (direction > 0 && activeCaseStudyIndex < caseStudies.length - 1) ||
+      (direction < 0 && activeCaseStudyIndex > 0);
+
+    if (!canMove) {
+      caseStudyScrollAccumulator = 0;
+      return;
+    }
+
+    event.preventDefault();
+
+    if (isCaseStudyScrollLocked) return;
+
+    caseStudyScrollAccumulator += delta;
+
+    if (Math.abs(caseStudyScrollAccumulator) >= 42 && scrollCaseStudy(direction)) {
+      lockCaseStudyScroll();
+    }
+  },
+  { passive: false },
+);
+
+caseStudyScrollArea?.addEventListener(
+  "touchstart",
+  (event) => {
+    const touch = event.touches[0];
+
+    if (!touch) return;
+
+    caseStudyTouchStartX = touch.clientX;
+    caseStudyTouchStartY = touch.clientY;
+  },
+  { passive: true },
+);
+
+caseStudyScrollArea?.addEventListener(
+  "touchend",
+  (event) => {
+    const touch = event.changedTouches[0];
+
+    if (!touch || isCaseStudyScrollLocked) return;
+
+    const deltaX = caseStudyTouchStartX - touch.clientX;
+    const deltaY = caseStudyTouchStartY - touch.clientY;
+    const delta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+
+    if (Math.abs(delta) < 44) return;
+
+    if (scrollCaseStudy(Math.sign(delta))) {
+      lockCaseStudyScroll();
+    }
+  },
+  { passive: true },
+);

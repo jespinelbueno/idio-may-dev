@@ -34,6 +34,36 @@
           <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
         </filter>
+        <filter id="team-stroke-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
+          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
+          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+        </filter>
+        <filter id="team-stroke-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="B" yChannelSelector="R" result="displaced"></feDisplacementMap>
+          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
+          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+        </filter>
+        <filter id="team-stroke-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="9.5" xChannelSelector="G" yChannelSelector="B" result="displaced"></feDisplacementMap>
+          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
+          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+        </filter>
+        <filter id="team-stroke-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="12.5" xChannelSelector="R" yChannelSelector="B" result="displaced"></feDisplacementMap>
+          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
+          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+        </filter>
+        <filter id="team-stroke-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="10.5" xChannelSelector="B" yChannelSelector="G" result="displaced"></feDisplacementMap>
+          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
+          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+        </filter>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
           <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
