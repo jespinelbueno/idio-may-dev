@@ -6,7 +6,7 @@ setViewportHeight();
 window.addEventListener("resize", setViewportHeight, { passive: true });
 
 const loaderDebugParams = new URLSearchParams(window.location.search);
-const loaderDebugQuery = loaderDebugParams.get("loaderDebug");
+const loaderDebugQuery = loaderDebugParams.get("loaderDebug") ?? loaderDebugParams.get("debug");
 const DEBUG_LOADER =
   false || (loaderDebugQuery !== null && !["0", "false", "off"].includes(loaderDebugQuery.toLowerCase()));
 const DEBUG_LOADER_WORD = loaderDebugParams.get("loaderWord") || ""; // Set to "distinct", "novel", "yours", etc. to pause there.
@@ -15,40 +15,132 @@ const LOADER_SCREEN_MS = 650;
 const LOADER_SWAP_MS = 120;
 const FINAL_HOLD_MS = 950;
 const LOADER_DEBUG_STORAGE_KEY = "idio-loader-word-y-offsets";
-const LOADER_WORD_Y_OFFSETS = {
-  creative: "0.1em",
-  interesting: "0.03em",
-  original: "0.12em",
-  striking: "0.12em",
-  unique: "0.16em",
-  distinct: "0.1em",
-  novel: "0.2em",
-  yours: "0.21em",
+const LOADER_WORD_FONTS = {
+  teva: {
+    label: "Teva",
+    cssValue: '"Teva", "DM Sans", system-ui, sans-serif',
+    weight: "400",
+    offsets: {},
+  },
+  previous: {
+    label: "Previous DM Sans Bold",
+    cssValue: '"DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    weight: "950",
+    offsets: {
+      creative: "0.04em",
+      interesting: "0.05em",
+      original: "0.04em",
+      striking: "0.04em",
+      unique: "0em",
+      distinct: "0.04em",
+      novel: "-0.09em",
+      yours: "-0.09em",
+    },
+  },
 };
+const LOADER_WORD_Y_OFFSETS = {};
+let activeLoaderFont = LOADER_WORD_FONTS[loaderDebugParams.get("loaderFont")] ? loaderDebugParams.get("loaderFont") : "teva";
 
 const loadSavedLoaderOffsets = () => {
-  if (!SHOW_LOADER_DEBUGGER) return;
-
   try {
-    const savedOffsets = JSON.parse(window.localStorage.getItem(LOADER_DEBUG_STORAGE_KEY) || "{}");
+    const savedState = JSON.parse(window.localStorage.getItem(LOADER_DEBUG_STORAGE_KEY) || "{}");
+    const savedOffsetsByFont = savedState.offsetsByFont ?? savedState;
 
-    Object.entries(savedOffsets).forEach(([text, offset]) => {
-      if (text in LOADER_WORD_Y_OFFSETS && typeof offset === "string") {
-        LOADER_WORD_Y_OFFSETS[text] = offset;
-      }
+    Object.entries(savedOffsetsByFont).forEach(([fontKey, savedOffsets]) => {
+      const font = LOADER_WORD_FONTS[fontKey];
+
+      if (fontKey === "teva" || !font || !savedOffsets || typeof savedOffsets !== "object") return;
+
+      Object.entries(savedOffsets).forEach(([text, offset]) => {
+        if (text in font.offsets && typeof offset === "string") {
+          font.offsets[text] = offset;
+        }
+      });
     });
+
+    if (LOADER_WORD_FONTS[savedState.activeFont] && !loaderDebugParams.get("loaderFont")) {
+      activeLoaderFont = savedState.activeFont;
+    }
   } catch {
     window.localStorage?.removeItem(LOADER_DEBUG_STORAGE_KEY);
   }
 };
 
-const saveLoaderOffsets = () => {
-  if (!SHOW_LOADER_DEBUGGER) return;
+const getLoaderOffsetsByFont = () =>
+  Object.fromEntries(
+    Object.entries(LOADER_WORD_FONTS).map(([fontKey, font]) => [
+      fontKey,
+      { ...font.offsets },
+    ]),
+  );
 
-  window.localStorage?.setItem(LOADER_DEBUG_STORAGE_KEY, JSON.stringify(LOADER_WORD_Y_OFFSETS));
+const getActiveLoaderOffsets = () => LOADER_WORD_FONTS[activeLoaderFont].offsets;
+
+const syncLegacyLoaderOffsets = () => {
+  Object.keys(LOADER_WORD_Y_OFFSETS).forEach((text) => {
+    delete LOADER_WORD_Y_OFFSETS[text];
+  });
+
+  Object.assign(LOADER_WORD_Y_OFFSETS, getActiveLoaderOffsets());
+};
+
+const applyLoaderWordFont = () => {
+  syncLegacyLoaderOffsets();
+
+  const font = LOADER_WORD_FONTS[activeLoaderFont];
+
+  loaderPhrase?.style.setProperty("--loader-word-font-family", font.cssValue);
+  loaderPhrase?.style.setProperty("--loader-word-font-weight", font.weight);
+
+  if (loaderDebugger?.font) {
+    loaderDebugger.font.value = activeLoaderFont;
+    loaderDebugger.toggleFont.textContent = activeLoaderFont === "teva" ? "try previous font" : "try Teva";
+  }
+};
+
+const setLoaderWordFont = (fontKey) => {
+  if (!LOADER_WORD_FONTS[fontKey]) return;
+
+  activeLoaderFont = fontKey;
+  applyLoaderWordFont();
+
+  if (SHOW_LOADER_DEBUGGER) {
+    saveLoaderOffsets();
+  }
+
+  measureLoaderWords();
+};
+
+const saveLoaderOffsets = () => {
+  try {
+    if (!window.localStorage) return false;
+
+    window.localStorage.setItem(
+      LOADER_DEBUG_STORAGE_KEY,
+      JSON.stringify({
+        activeFont: activeLoaderFont,
+        offsetsByFont: getLoaderOffsetsByFont(),
+      }),
+    );
+
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const showLoaderDebugStatus = (message) => {
+  if (!loaderDebugger?.status) return;
+
+  loaderDebugger.status.textContent = message;
+};
+
+const saveLoaderDebugState = () => {
+  showLoaderDebugStatus(saveLoaderOffsets() ? "saved locally" : "save failed");
 };
 
 loadSavedLoaderOffsets();
+syncLegacyLoaderOffsets();
 
 const loader = document.querySelector(".loader");
 const loaderWord = document.querySelector("[data-loader-word]");
@@ -56,28 +148,26 @@ const loaderLogo = document.querySelector("[data-loader-logo]");
 const loaderPhrase = document.querySelector(".loader__phrase");
 const loaderFixed = document.querySelector(".loader__fixed");
 const loaderWordSlot = document.querySelector(".loader__words");
-const heroHeadline = document.querySelector(".hero__headline");
-const heroLogo = document.querySelector(".hero__logo");
 const loaderScreens = [
-  { text: "creative", className: "loader--creative" },
-  { text: "interesting", className: "loader--interesting" },
+  { text: "interesting", className: "loader--creative" },
+  { text: "creative", className: "loader--interesting" },
   { text: "original", className: "loader--original" },
   { text: "striking", className: "loader--striking" },
-  { text: "unique", className: "loader--unique" },
-  { text: "distinct", className: "loader--distinct" },
+  { text: "distinct", className: "loader--unique" },
+  { text: "unique", className: "loader--distinct" },
   { text: "novel", className: "loader--novel" },
   { text: "yours", className: "loader--yours" },
   { logo: true, className: "loader--idio" },
 ];
 const loaderScreenClasses = loaderScreens.map(({ className }) => className);
 const loaderTextScreens = loaderScreens.filter(({ text }) => text);
-const loaderWordWidths = new Map();
 let loaderSequenceComplete = false;
 let loaderPageLoaded = document.readyState === "complete";
 let activeLoaderText = loaderTextScreens[0]?.text ?? "";
-let loaderWordTargetWidth = 0;
 let loaderMeasureFrame;
 let loaderDebugger;
+
+applyLoaderWordFont();
 
 const applyLoaderTheme = (className) => {
   if (!loader) return;
@@ -135,65 +225,20 @@ const showFinalLoaderState = () => {
 };
 
 const setLoaderWordFit = (text) => {
-  if (!loaderWord || !loaderWordTargetWidth) return;
+  if (!loaderWord) return;
 
-  const wordWidth = loaderWordWidths.get(text);
-  const scale = wordWidth ? loaderWordTargetWidth / wordWidth : 1;
-  loaderWord.style.fontSize = `${scale.toFixed(4)}em`;
-  loaderWordSlot?.style.setProperty("--loader-word-axis-offset", LOADER_WORD_Y_OFFSETS[text] ?? "0em");
+  loaderWord.style.fontSize = "";
+  loaderWordSlot?.style.setProperty("--loader-word-axis-offset", "0em");
   updateLoaderDebugger();
 };
 
 const measureLoaderWords = () => {
-  if (!loaderPhrase || !loaderTextScreens.length) return;
-
-  loaderWordWidths.clear();
-  loaderWordTargetWidth = 0;
-
-  loaderTextScreens.forEach(({ text }) => {
-    const measureWord = document.createElement("span");
-    measureWord.className = "loader__word loader__word--measure";
-    measureWord.textContent = text;
-    loaderPhrase.appendChild(measureWord);
-
-    const wordWidth = measureWord.getBoundingClientRect().width;
-    loaderWordWidths.set(text, wordWidth);
-    loaderWordTargetWidth = Math.max(loaderWordTargetWidth, wordWidth);
-
-    measureWord.remove();
-  });
+  if (!loaderPhrase) return;
 
   const fixedRect = loaderFixed?.getBoundingClientRect();
-  const fixedWidth = fixedRect?.width ?? 0;
-  const heroPhraseRect = heroHeadline?.getBoundingClientRect();
-  const heroLogoRect = heroLogo?.getBoundingClientRect();
 
   if (fixedRect) {
     loaderPhrase.style.setProperty("--loader-phrase-height", `${fixedRect.height}px`);
-  }
-
-  if (heroPhraseRect && heroLogoRect) {
-    const logoOffset = heroLogoRect.left - heroPhraseRect.left;
-    const contentGap = logoOffset - fixedWidth;
-
-    loaderWordTargetWidth = heroPhraseRect.right - heroLogoRect.left;
-    loaderPhrase.style.setProperty("--loader-phrase-width", `${heroPhraseRect.width}px`);
-    loaderPhrase.style.setProperty("--loader-content-gap", `${contentGap}px`);
-    loaderPhrase.style.setProperty("--loader-logo-offset", `${logoOffset}px`);
-  } else {
-    const phraseStyles = window.getComputedStyle(loaderPhrase);
-    const phraseGap = Number.parseFloat(phraseStyles.columnGap || phraseStyles.gap) || 0;
-    const phraseFontSize = Number.parseFloat(phraseStyles.fontSize) || 0;
-    const logoSlotWidth = phraseStyles.getPropertyValue("--loader-logo-slot-width").trim();
-    const logoSlotWidthEm = Number.parseFloat(logoSlotWidth) || 0;
-
-    loaderWordTargetWidth = logoSlotWidthEm * phraseFontSize;
-    loaderPhrase.style.setProperty(
-      "--loader-phrase-width",
-      `${fixedWidth + phraseGap + loaderWordTargetWidth}px`,
-    );
-    loaderPhrase.style.removeProperty("--loader-content-gap");
-    loaderPhrase.style.removeProperty("--loader-logo-offset");
   }
 
   setLoaderWordFit(activeLoaderText);
@@ -258,9 +303,13 @@ const getLoaderDebugMeasurements = () => {
 };
 
 const getLoaderOffsetsForCopy = () => {
-  const rows = loaderTextScreens.map(({ text }) => `  ${text}: "${LOADER_WORD_Y_OFFSETS[text] ?? "0em"}",`);
+  const fontRows = Object.entries(LOADER_WORD_FONTS).map(([fontKey, font]) => {
+    const offsetRows = loaderTextScreens.map(({ text }) => `    ${text}: "${font.offsets[text] ?? "0em"}",`);
 
-  return `const LOADER_WORD_Y_OFFSETS = {\n${rows.join("\n")}\n};`;
+    return `  ${fontKey}: {\n${offsetRows.join("\n")}\n  },`;
+  });
+
+  return `const LOADER_WORD_Y_OFFSETS_BY_FONT = {\n${fontRows.join("\n")}\n};`;
 };
 
 const updateLoaderDebugger = () => {
@@ -270,6 +319,8 @@ const updateLoaderDebugger = () => {
   const measurements = getLoaderDebugMeasurements();
 
   loaderDebugger.word.value = activeLoaderText;
+  loaderDebugger.font.value = activeLoaderFont;
+  loaderDebugger.toggleFont.textContent = activeLoaderFont === "teva" ? "try previous font" : "try Teva";
   loaderDebugger.range.value = String(offset);
   loaderDebugger.number.value = offset.toFixed(2);
   loaderDebugger.output.value = getLoaderOffsetsForCopy();
@@ -285,9 +336,12 @@ const updateLoaderDebugger = () => {
 };
 
 const setLoaderDebugOffset = (value) => {
+  if (activeLoaderFont === "teva") return;
+
   const offset = Math.max(-0.5, Math.min(0.5, Number.parseFloat(value) || 0));
 
-  LOADER_WORD_Y_OFFSETS[activeLoaderText] = formatLoaderOffset(offset);
+  getActiveLoaderOffsets()[activeLoaderText] = formatLoaderOffset(offset);
+  syncLegacyLoaderOffsets();
   saveLoaderOffsets();
   setLoaderWordFit(activeLoaderText);
 };
@@ -323,12 +377,17 @@ const createLoaderDebugger = () => {
   panel.innerHTML = `
     <div class="loader-debugger__header">
       <strong>loader debugger</strong>
-      <span>?loaderDebug=1</span>
+      <span>/loader-debug/</span>
     </div>
     <label class="loader-debugger__field">
       word
       <select data-loader-debug-word></select>
     </label>
+    <label class="loader-debugger__field">
+      font
+      <select data-loader-debug-font></select>
+    </label>
+    <button type="button" data-loader-debug-toggle-font>try previous font</button>
     <label class="loader-debugger__field">
       y offset em
       <input data-loader-debug-range type="range" min="-0.5" max="0.5" step="0.01">
@@ -340,6 +399,10 @@ const createLoaderDebugger = () => {
     </div>
     <div class="loader-debugger__metrics" data-loader-debug-metrics></div>
     <div class="loader-debugger__row">
+      <button type="button" data-loader-debug-save>save</button>
+      <span data-loader-debug-status></span>
+    </div>
+    <div class="loader-debugger__row">
       <button class="loader-debugger__copy" type="button" data-loader-debug-copy>copy offsets</button>
       <button type="button" data-loader-debug-reset>clear saved</button>
     </div>
@@ -347,6 +410,7 @@ const createLoaderDebugger = () => {
   `;
 
   const wordSelect = panel.querySelector("[data-loader-debug-word]");
+  const fontSelect = panel.querySelector("[data-loader-debug-font]");
 
   loaderTextScreens.forEach(({ text }) => {
     const option = document.createElement("option");
@@ -355,14 +419,25 @@ const createLoaderDebugger = () => {
     wordSelect.appendChild(option);
   });
 
+  Object.entries(LOADER_WORD_FONTS).forEach(([fontKey, font]) => {
+    const option = document.createElement("option");
+    option.value = fontKey;
+    option.textContent = font.label;
+    fontSelect.appendChild(option);
+  });
+
   loader.appendChild(panel);
 
   loaderDebugger = {
     panel,
     word: wordSelect,
+    font: fontSelect,
+    toggleFont: panel.querySelector("[data-loader-debug-toggle-font]"),
     range: panel.querySelector("[data-loader-debug-range]"),
     number: panel.querySelector("[data-loader-debug-number]"),
     metrics: panel.querySelector("[data-loader-debug-metrics]"),
+    save: panel.querySelector("[data-loader-debug-save]"),
+    status: panel.querySelector("[data-loader-debug-status]"),
     copy: panel.querySelector("[data-loader-debug-copy]"),
     output: panel.querySelector("[data-loader-debug-output]"),
   };
@@ -373,6 +448,14 @@ const createLoaderDebugger = () => {
     if (screen) {
       setLoaderScreen(screen);
     }
+  });
+
+  loaderDebugger.font.addEventListener("change", () => {
+    setLoaderWordFont(loaderDebugger.font.value);
+  });
+
+  loaderDebugger.toggleFont.addEventListener("click", () => {
+    setLoaderWordFont(activeLoaderFont === "teva" ? "previous" : "teva");
   });
 
   loaderDebugger.range.addEventListener("input", () => {
@@ -390,9 +473,11 @@ const createLoaderDebugger = () => {
     });
   });
 
+  loaderDebugger.save.addEventListener("click", saveLoaderDebugState);
   loaderDebugger.copy.addEventListener("click", copyLoaderDebugOffsets);
   panel.querySelector("[data-loader-debug-reset]").addEventListener("click", () => {
     window.localStorage?.removeItem(LOADER_DEBUG_STORAGE_KEY);
+    showLoaderDebugStatus("cleared");
     loaderDebugger.copy.textContent = "cleared";
     window.setTimeout(() => {
       if (loaderDebugger) {
