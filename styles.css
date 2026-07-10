@@ -939,8 +939,8 @@ body.is-ready .hero__image {
     url("assets/gradients/trisection/yellow.jpg");
   background-repeat: no-repeat;
   background-position:
-    center 30rem,
-    center 30rem;
+    center top,
+    center bottom;
   background-size:
     100% auto,
     100% auto;
@@ -962,6 +962,7 @@ body.is-ready .hero__image {
 
 .case-study {
   position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(21rem, 0.95fr);
   column-gap: clamp(4rem, 8vw, 8.8rem);
@@ -973,6 +974,7 @@ body.is-ready .hero__image {
 
 .case-study__media {
   position: relative;
+  z-index: 2;
   min-height: clamp(25rem, 34vw, 32rem);
   --case-front-color: var(--paper);
   --case-back-color: var(--brand-olive);
@@ -1024,78 +1026,35 @@ body.is-ready .hero__image {
   --stroke-y: 0.24rem;
 }
 
-.case-study__back-card {
-  position: absolute;
-  left: 2.5%;
-  top: 10%;
-  width: clamp(17rem, 24.5vw, 23.5rem);
-  aspect-ratio: 0.76;
-  background: var(--case-back-color);
-  box-shadow: 0 1rem 1.8rem rgb(21 18 14 / 0.15);
-  --case-card-transform: rotate(-7deg);
-
-  transform: var(--case-card-transform);
-  transform-origin: center;
-  transition: background-color 260ms ease;
-  will-change: transform;
-}
-
-.case-study__back-card::before {
-  position: absolute;
-  inset: clamp(1.15rem, 1.45vw, 1.45rem) clamp(1rem, 1.3vw, 1.25rem) clamp(5rem, 6vw, 5.7rem);
-  background: var(--case-back-window-color);
-  content: "";
-  transition: background-color 260ms ease;
-}
-
-.case-study__middle-card {
-  position: absolute;
-  left: 12.5%;
-  top: 15.5%;
-  width: clamp(17rem, 24.5vw, 23.5rem);
-  aspect-ratio: 0.76;
-  background: var(--case-middle-color);
-  box-shadow: 0 1rem 1.8rem rgb(21 18 14 / 0.14);
-  --case-card-transform: rotate(0deg);
-
-  transform: var(--case-card-transform);
-  transform-origin: center;
-  transition: background-color 260ms ease;
-  will-change: transform;
-}
-
-.case-study__middle-card::before {
-  position: absolute;
-  inset: clamp(1.15rem, 1.45vw, 1.45rem) clamp(1rem, 1.3vw, 1.25rem) clamp(5rem, 6vw, 5.7rem);
-  background: var(--case-middle-window-color);
-  content: "";
-  transition: background-color 260ms ease;
-}
-
-.case-study__polaroid {
+.case-study__stack {
   position: absolute;
   left: 19%;
   top: 0;
-  box-sizing: border-box;
   width: clamp(18.5rem, 28vw, 26rem);
+  aspect-ratio: 0.78;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.case-study__stack-card {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
   aspect-ratio: 0.78;
   margin: 0;
   --case-frame-pad-x: clamp(1rem, 1.5vw, 1.35rem);
   --case-frame-pad-top: clamp(1rem, 1.5vw, 1.35rem);
   --case-frame-pad-bottom: clamp(5.4rem, 7.2vw, 6.45rem);
   padding: var(--case-frame-pad-top) var(--case-frame-pad-x) var(--case-frame-pad-bottom);
-  background: var(--case-front-color);
+  background: var(--case-card-color, var(--paper));
   box-shadow: 0 0.85rem 1.7rem rgb(21 18 14 / 0.16);
-  --case-card-transform: rotate(6.5deg);
-
-  transform: var(--case-card-transform);
   transform-origin: center;
   overflow: hidden;
-  transition: background-color 260ms ease;
-  will-change: transform;
+  backface-visibility: hidden;
+  will-change: transform, filter, box-shadow;
 }
 
-.case-study__polaroid img {
+.case-study__stack-card img {
   display: block;
   position: absolute;
   top: var(--case-frame-pad-top);
@@ -1103,37 +1062,11 @@ body.is-ready .hero__image {
   width: calc(100% - (var(--case-frame-pad-x) * 2));
   height: calc(100% - var(--case-frame-pad-top) - var(--case-frame-pad-bottom));
   object-fit: cover;
-  opacity: 0;
-  transform: scale(1.018);
-  transition:
-    opacity 980ms ease-in-out,
-    transform 1180ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.case-study__polaroid img.is-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.case-study__polaroid img.is-exiting {
-  opacity: 0;
-  transform: scale(0.996);
-}
-
-.case-study__media.is-shuffling .case-study__back-card {
-  animation: case-back-shuffle 860ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.case-study__media.is-shuffling .case-study__middle-card {
-  animation: case-middle-shuffle 860ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.case-study__media.is-shuffling .case-study__polaroid {
-  animation: case-front-shuffle 860ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .case-study__copy {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: clamp(2.2rem, 3vw, 3.4rem);
@@ -2343,22 +2276,10 @@ body.is-ready .hero__image {
     width: clamp(7.6rem, 24vw, 10rem);
   }
 
-  .case-study__back-card {
-    left: calc(50% - var(--case-card-w) / 2 - 1.6rem);
-    width: var(--case-card-w);
-  }
-
-  .case-study__middle-card {
-    left: calc(50% - var(--case-card-w) / 2 + 0.35rem);
-    width: var(--case-card-w);
-  }
-
-  .case-study__polaroid {
+  .case-study__stack {
     left: 50%;
     width: var(--case-front-w);
-    --case-card-transform: translateX(-50%) rotate(6.5deg);
-
-    transform: var(--case-card-transform);
+    transform: translateX(-50%);
   }
 
   .case-study__copy {
@@ -2709,8 +2630,8 @@ body.is-ready .hero__image {
 
   .case-team {
     background-position:
-      center 10 rem
-      center 42 rem;
+      center top,
+      center bottom;
     background-size:
       auto 100%,
       auto 52%;
@@ -2740,17 +2661,7 @@ body.is-ready .hero__image {
     width: clamp(6.6rem, 28vw, 8rem);
   }
 
-  .case-study__back-card {
-    left: calc(50% - var(--case-card-w) / 2 - 1.4rem);
-    width: var(--case-card-w);
-  }
-
-  .case-study__middle-card {
-    left: calc(50% - var(--case-card-w) / 2 + 0.2rem);
-    width: var(--case-card-w);
-  }
-
-  .case-study__polaroid {
+  .case-study__stack {
     width: var(--case-front-w);
   }
 
@@ -2927,76 +2838,6 @@ body.is-ready .hero__image {
 
   to {
     transform: scale(1.01);
-  }
-}
-
-@keyframes case-front-shuffle {
-  0%,
-  100% {
-    transform: var(--case-card-transform);
-  }
-
-  30% {
-    transform:
-      var(--case-card-transform)
-      translate3d(1.35rem, -0.45rem, 0)
-      rotate(2.4deg);
-  }
-
-  64% {
-    transform:
-      var(--case-card-transform)
-      translate3d(-0.45rem, 0.26rem, 0)
-      rotate(-1deg);
-  }
-
-  84% {
-    transform:
-      var(--case-card-transform)
-      translate3d(0.18rem, -0.08rem, 0)
-      rotate(0.42deg);
-  }
-}
-
-@keyframes case-middle-shuffle {
-  0%,
-  100% {
-    transform: var(--case-card-transform);
-  }
-
-  34% {
-    transform:
-      var(--case-card-transform)
-      translate3d(-0.72rem, -0.3rem, 0)
-      rotate(-1.8deg);
-  }
-
-  70% {
-    transform:
-      var(--case-card-transform)
-      translate3d(0.32rem, 0.22rem, 0)
-      rotate(0.9deg);
-  }
-}
-
-@keyframes case-back-shuffle {
-  0%,
-  100% {
-    transform: var(--case-card-transform);
-  }
-
-  38% {
-    transform:
-      var(--case-card-transform)
-      translate3d(0.62rem, 0.38rem, 0)
-      rotate(1.45deg);
-  }
-
-  72% {
-    transform:
-      var(--case-card-transform)
-      translate3d(-0.2rem, -0.14rem, 0)
-      rotate(-0.58deg);
   }
 }
 

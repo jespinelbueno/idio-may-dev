@@ -849,23 +849,20 @@ const caseStudies = [
 ];
 
 const caseStudyMedia = document.querySelector(".case-study__media");
-const caseStudyPolaroid = document.querySelector(".case-study__polaroid");
-let caseStudyImage = caseStudyPolaroid?.querySelector("img");
+const caseStudyStack = document.querySelector("[data-case-stack]");
 const caseStudyDetails = document.querySelector("[data-case-details]");
 const caseStudyTitle = document.querySelector("#case-study-title");
 const caseStudyDescription = caseStudyDetails?.querySelector("p");
 const caseStudyDots = Array.from(document.querySelectorAll(".case-study__dot[data-case-index]"));
 const caseStudyScrollArea = document.querySelector(".case-study");
 let activeCaseStudyIndex = 0;
-let caseStudyShuffleTimer;
-let caseStudyContentTimer;
-let caseStudyImageTimer;
-let caseStudyImageRequest = 0;
-let caseStudyScrollAccumulator = 0;
 let caseStudyScrollLockTimer;
 let caseStudyTouchStartX = 0;
 let caseStudyTouchStartY = 0;
 let isCaseStudyScrollLocked = false;
+let isCaseStudyCardAnimating = false;
+let caseStudyScrollAccumulator = 0;
+let caseStudyLastWheelAt = 0;
 
 caseStudies.forEach(({ image }) => {
   const preload = new Image();
@@ -880,120 +877,221 @@ const setActiveCaseStudyDot = (nextIndex) => {
   });
 };
 
-const setCaseStudyCardColors = (nextCaseStudy) => {
-  if (!caseStudyMedia || !nextCaseStudy?.cards) return;
-
-  caseStudyMedia.style.setProperty("--case-front-color", nextCaseStudy.cards.front);
-  caseStudyMedia.style.setProperty("--case-back-color", nextCaseStudy.cards.back);
-  caseStudyMedia.style.setProperty("--case-middle-color", nextCaseStudy.cards.middle);
-  caseStudyMedia.style.setProperty("--case-back-window-color", nextCaseStudy.cards.backWindow);
-  caseStudyMedia.style.setProperty("--case-middle-window-color", nextCaseStudy.cards.middleWindow);
-};
-
-const runCaseStudyShuffle = () => {
-  if (!caseStudyMedia) return;
-
-  window.clearTimeout(caseStudyShuffleTimer);
-  caseStudyMedia.classList.remove("is-shuffling");
-  void caseStudyMedia.offsetWidth;
-  caseStudyMedia.classList.add("is-shuffling");
-
-  caseStudyShuffleTimer = window.setTimeout(() => {
-    caseStudyMedia.classList.remove("is-shuffling");
-  }, 900);
-};
-
-const transitionCaseStudyImage = (nextImage) => {
-  if (!caseStudyPolaroid || !caseStudyImage || caseStudyImage.getAttribute("src") === nextImage) return;
-
-  const requestId = ++caseStudyImageRequest;
-  const previousImage = caseStudyImage;
-  const incomingImage = new Image();
-
-  window.clearTimeout(caseStudyImageTimer);
-  caseStudyPolaroid.querySelectorAll("img:not(.is-active)").forEach((image) => {
-    image.remove();
-  });
-
-  incomingImage.className = "case-study__image";
-  incomingImage.alt = previousImage.alt;
-  incomingImage.style.opacity = "0";
-  incomingImage.style.transform = "scale(1.018)";
-  incomingImage.src = nextImage;
-  caseStudyPolaroid.append(incomingImage);
-
-  const revealIncomingImage = () => {
-    if (requestId !== caseStudyImageRequest) {
-      incomingImage.remove();
-      return;
-    }
-
-    void caseStudyPolaroid.offsetWidth;
-    incomingImage.classList.add("is-active");
-    previousImage.classList.remove("is-active");
-    previousImage.classList.add("is-exiting");
-    incomingImage.style.opacity = "1";
-    incomingImage.style.transform = "scale(1)";
-    previousImage.style.opacity = "0";
-    previousImage.style.transform = "scale(0.996)";
-
-    caseStudyImage = incomingImage;
-    const removePreviousImage = () => {
-      incomingImage.removeEventListener("transitionend", handleImageTransitionEnd);
-      incomingImage.style.opacity = "1";
-      incomingImage.style.transform = "scale(1)";
-      previousImage.remove();
-    };
-    const handleImageTransitionEnd = (event) => {
-      if (event.target === incomingImage && event.propertyName === "opacity") {
-        removePreviousImage();
-      }
-    };
-
-    incomingImage.addEventListener("transitionend", handleImageTransitionEnd);
-    caseStudyImageTimer = window.setTimeout(removePreviousImage, 1600);
-  };
-
-  if (incomingImage.decode) {
-    incomingImage.decode().then(revealIncomingImage).catch(revealIncomingImage);
-    return;
-  }
-
-  if (incomingImage.complete) {
-    revealIncomingImage();
-    return;
-  }
-
-  incomingImage.addEventListener("load", revealIncomingImage, { once: true });
-  incomingImage.addEventListener("error", revealIncomingImage, { once: true });
-};
-
 const updateCaseStudyContent = (nextIndex) => {
   const nextCaseStudy = caseStudies[nextIndex];
 
-  if (!nextCaseStudy || !caseStudyTitle || !caseStudyDescription || !caseStudyImage) return;
+  if (!nextCaseStudy || !caseStudyTitle || !caseStudyDescription) return;
 
-  window.clearTimeout(caseStudyContentTimer);
-  caseStudyDetails?.classList.add("is-changing");
+  caseStudyTitle.textContent = nextCaseStudy.title;
+  caseStudyDescription.textContent = nextCaseStudy.description;
+  caseStudyDetails?.classList.remove("is-changing");
+};
 
-  caseStudyContentTimer = window.setTimeout(() => {
-    caseStudyTitle.textContent = nextCaseStudy.title;
-    caseStudyDescription.textContent = nextCaseStudy.description;
-    transitionCaseStudyImage(nextCaseStudy.image);
-    caseStudyDetails?.classList.remove("is-changing");
-  }, 160);
+const getCaseStudyCards = () => Array.from(caseStudyStack?.querySelectorAll("[data-case-card]") ?? []);
+
+const getCaseStudyCardMetrics = () => {
+  const firstCard = getCaseStudyCards()[0];
+  const width = firstCard?.getBoundingClientRect().width || 360;
+  const isCompact = window.matchMedia("(max-width: 700px)").matches;
+
+  return {
+    offsetX: width * (isCompact ? -0.075 : -0.092),
+    offsetY: width * (isCompact ? 0.07 : 0.062),
+    travelX: width * (isCompact ? 0.58 : 0.68),
+    liftY: width * (isCompact ? -0.2 : -0.24),
+  };
+};
+
+const getCaseStudyCardTransform = (index) => {
+  const { offsetX, offsetY } = getCaseStudyCardMetrics();
+  const rotation = 6.5 - index * 5.3;
+  const scale = 1 - index * 0.038;
+
+  return `translate3d(${index * offsetX}px, ${index * offsetY}px, ${-index}px) rotate(${rotation}deg) scale(${scale})`;
+};
+
+const positionCaseStudyCards = ({ immediate = false } = {}) => {
+  const cards = getCaseStudyCards();
+
+  cards.forEach((card, index) => {
+    const caseStudy = caseStudies[Number(card.dataset.caseCard)];
+
+    card.style.zIndex = String(cards.length - index);
+    card.style.setProperty("--case-card-color", caseStudy?.cards?.front ?? "var(--paper)");
+    card.style.transition = immediate ? "none" : "transform 620ms cubic-bezier(0.22, 1, 0.36, 1)";
+    card.style.transform = getCaseStudyCardTransform(index);
+  });
+
+  if (immediate) {
+    void caseStudyStack?.offsetHeight;
+    cards.forEach((card) => {
+      card.style.transition = "";
+    });
+  }
+};
+
+const captureCaseStudyCardPositions = (cards) =>
+  new Map(cards.map((card) => [card, card.getBoundingClientRect()]));
+
+const animateReorderedCaseStudyCards = (previousPositions, excludedCard) =>
+  getCaseStudyCards().map((card) => {
+    if (card === excludedCard) return;
+
+    const previous = previousPositions.get(card);
+    const current = card.getBoundingClientRect();
+
+    if (!previous) return;
+
+    const deltaX = previous.left - current.left;
+    const deltaY = previous.top - current.top;
+
+    return card.animate(
+      [
+        { transform: `translate(${deltaX}px, ${deltaY}px) ${card.style.transform}` },
+        { transform: card.style.transform },
+      ],
+      {
+        duration: 620,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "both",
+      },
+    );
+  }).filter(Boolean);
+
+const reorderCaseStudyCards = (orderedCards) => {
+  orderedCards.forEach((card) => {
+    caseStudyStack?.appendChild(card);
+  });
+};
+
+const moveCaseStudyFrontCardToBack = async (nextIndex) => {
+  if (!caseStudyStack || isCaseStudyCardAnimating) return;
+
+  let cards = getCaseStudyCards();
+  let frontCard = cards[0];
+  const targetCard = cards.find((card) => Number(card.dataset.caseCard) === nextIndex);
+
+  if (!frontCard || !targetCard || frontCard === targetCard) return;
+
+  isCaseStudyCardAnimating = true;
+  caseStudyMedia?.classList.add("is-shuffling");
+  const previousPositions = captureCaseStudyCardPositions(cards);
+  const originalTransform = frontCard.style.transform || getCaseStudyCardTransform(0);
+  const { travelX, liftY } = getCaseStudyCardMetrics();
+
+  try {
+    const finalOrder = [
+      targetCard,
+      ...cards.filter((card) => card !== targetCard && card !== frontCard),
+      frontCard,
+    ];
+
+    if (!frontCard.animate) {
+      reorderCaseStudyCards(finalOrder);
+      return;
+    }
+
+    frontCard.style.zIndex = "100";
+
+    const outboundAnimation = frontCard.animate(
+      [
+        {
+          offset: 0,
+          transform: originalTransform,
+          filter: "brightness(1)",
+          boxShadow: "0 0.85rem 1.7rem rgb(21 18 14 / 0.16)",
+        },
+        {
+          offset: 0.42,
+          transform: `translate3d(${travelX * 0.56}px, ${liftY}px, 32px) rotate(6deg) scale(1.028)`,
+          filter: "brightness(1.04)",
+          boxShadow: "0 1.2rem 2rem rgb(21 18 14 / 0.22)",
+        },
+        {
+          offset: 1,
+          transform: `translate3d(${travelX}px, -0.55rem, 18px) rotate(11deg) scale(1.012)`,
+          filter: "brightness(1.03)",
+          boxShadow: "0 1.05rem 1.75rem rgb(21 18 14 / 0.2)",
+        },
+      ],
+      {
+        duration: 430,
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        fill: "forwards",
+      },
+    );
+
+    await outboundAnimation.finished;
+
+    reorderCaseStudyCards(finalOrder);
+    positionCaseStudyCards({ immediate: true });
+    const reorderAnimations = animateReorderedCaseStudyCards(previousPositions, frontCard);
+
+    cards = getCaseStudyCards();
+    const backIndex = cards.length - 1;
+    const finalTransform = getCaseStudyCardTransform(backIndex);
+    const { offsetX, offsetY } = getCaseStudyCardMetrics();
+
+    const inboundAnimation = frontCard.animate(
+      [
+        {
+          offset: 0,
+          transform: `translate3d(${travelX}px, -0.55rem, 18px) rotate(11deg) scale(1.012)`,
+          opacity: 1,
+        },
+        {
+          offset: 0.45,
+          transform: `translate3d(${travelX * 0.38}px, 2.2rem, -18px) rotate(4deg) scale(0.972)`,
+          opacity: 0.98,
+        },
+        {
+          offset: 0.78,
+          transform: `translate3d(${backIndex * offsetX - 8}px, ${backIndex * offsetY + 4}px, -${backIndex}px) rotate(${6.5 - backIndex * 5.3 - 1.2}deg) scale(${1 - backIndex * 0.038 - 0.008})`,
+          opacity: 1,
+        },
+        {
+          offset: 1,
+          transform: finalTransform,
+          opacity: 1,
+        },
+      ],
+      {
+        duration: 560,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards",
+      },
+    );
+
+    window.setTimeout(() => {
+      frontCard.style.zIndex = "1";
+    }, 190);
+
+    await Promise.all([
+      inboundAnimation.finished,
+      ...reorderAnimations.map((animation) => animation.finished.catch(() => {})),
+    ]);
+    outboundAnimation.cancel();
+    inboundAnimation.cancel();
+    reorderAnimations.forEach((animation) => {
+      animation.cancel();
+    });
+  } finally {
+    positionCaseStudyCards({ immediate: true });
+    caseStudyMedia?.classList.remove("is-shuffling");
+    isCaseStudyCardAnimating = false;
+  }
 };
 
 const selectCaseStudy = (nextIndex) => {
   const nextCaseStudy = caseStudies[nextIndex];
 
-  if (nextIndex === activeCaseStudyIndex || !nextCaseStudy) return;
+  if (nextIndex === activeCaseStudyIndex || !nextCaseStudy || isCaseStudyCardAnimating) return false;
 
   activeCaseStudyIndex = nextIndex;
   setActiveCaseStudyDot(nextIndex);
-  setCaseStudyCardColors(nextCaseStudy);
-  runCaseStudyShuffle();
   updateCaseStudyContent(nextIndex);
+  moveCaseStudyFrontCardToBack(nextIndex);
+  return true;
 };
 
 const scrollCaseStudy = (direction) => {
@@ -1001,8 +1099,7 @@ const scrollCaseStudy = (direction) => {
 
   if (nextIndex === activeCaseStudyIndex) return false;
 
-  selectCaseStudy(nextIndex);
-  return true;
+  return selectCaseStudy(nextIndex);
 };
 
 const unlockCaseStudyScroll = () => {
@@ -1013,8 +1110,9 @@ const unlockCaseStudyScroll = () => {
 
 const lockCaseStudyScroll = () => {
   isCaseStudyScrollLocked = true;
+  caseStudyScrollAccumulator = 0;
   window.clearTimeout(caseStudyScrollLockTimer);
-  caseStudyScrollLockTimer = window.setTimeout(unlockCaseStudyScroll, 620);
+  caseStudyScrollLockTimer = window.setTimeout(unlockCaseStudyScroll, 1040);
 };
 
 caseStudyDots.forEach((dot) => {
@@ -1023,15 +1121,48 @@ caseStudyDots.forEach((dot) => {
   });
 });
 
+const normalizeCaseStudyWheelDelta = (event) => {
+  if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
+  if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) return event.deltaY * window.innerHeight;
+
+  return event.deltaY;
+};
+
+const isCaseStudyScrollZoneActive = () => {
+  if (!caseStudyScrollArea) return false;
+
+  const rect = caseStudyScrollArea.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const focusTop = viewportHeight * 0.16;
+  const focusBottom = viewportHeight * 0.82;
+
+  return rect.top <= focusTop && rect.bottom >= focusBottom;
+};
+
+const getCaseStudyWheelThreshold = () => {
+  const isCompact = window.matchMedia("(max-width: 700px)").matches;
+
+  return isCompact ? 62 : 84;
+};
+
 caseStudyScrollArea?.addEventListener(
   "wheel",
   (event) => {
     if (caseStudies.length < 2) return;
 
-    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    if (!isCaseStudyScrollZoneActive()) {
+      caseStudyScrollAccumulator = 0;
+      return;
+    }
+
+    const delta = normalizeCaseStudyWheelDelta(event);
     const direction = Math.sign(delta);
 
     if (!direction) return;
+
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) * 1.25) {
+      return;
+    }
 
     const canMove =
       (direction > 0 && activeCaseStudyIndex < caseStudies.length - 1) ||
@@ -1046,9 +1177,16 @@ caseStudyScrollArea?.addEventListener(
 
     if (isCaseStudyScrollLocked) return;
 
+    const now = performance.now();
+
+    if (now - caseStudyLastWheelAt > 180 || Math.sign(caseStudyScrollAccumulator) !== direction) {
+      caseStudyScrollAccumulator = 0;
+    }
+
+    caseStudyLastWheelAt = now;
     caseStudyScrollAccumulator += delta;
 
-    if (Math.abs(caseStudyScrollAccumulator) >= 42 && scrollCaseStudy(direction)) {
+    if (Math.abs(caseStudyScrollAccumulator) >= getCaseStudyWheelThreshold() && scrollCaseStudy(direction)) {
       lockCaseStudyScroll();
     }
   },
@@ -1068,6 +1206,14 @@ caseStudyScrollArea?.addEventListener(
   { passive: true },
 );
 
+window.addEventListener("resize", () => {
+  if (!isCaseStudyCardAnimating) {
+    positionCaseStudyCards({ immediate: true });
+  }
+});
+
+positionCaseStudyCards({ immediate: true });
+
 caseStudyScrollArea?.addEventListener(
   "touchend",
   (event) => {
@@ -1078,6 +1224,8 @@ caseStudyScrollArea?.addEventListener(
     const deltaX = caseStudyTouchStartX - touch.clientX;
     const deltaY = caseStudyTouchStartY - touch.clientY;
     const delta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+
+    if (!isCaseStudyScrollZoneActive()) return;
 
     if (Math.abs(delta) < 44) return;
 
