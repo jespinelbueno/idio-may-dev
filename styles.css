@@ -175,6 +175,28 @@ a {
   transition: opacity 220ms cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+.loader__phrase.is-underlined-word .loader__word {
+  position: relative;
+  font-family: "Teva", "DM Sans", system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transform: translateY(-0.02em);
+}
+
+.loader__phrase.is-underlined-word .loader__word::after {
+  position: absolute;
+  left: 0.02em;
+  top: 0.82em;
+  width: 100%;
+  height: 0.12em;
+  content: "";
+  background: currentColor;
+  mask: url("assets/strokes/loader/line.svg") center / 100% 100% no-repeat;
+  -webkit-mask: url("assets/strokes/loader/line.svg") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
 .loader__word--measure {
   position: absolute;
   visibility: hidden;
@@ -310,6 +332,10 @@ a {
 .loader--idio {
   --loader-background: var(--brand-pink);
   --loader-foreground: var(--brand-red);
+}
+
+.loader__phrase.is-underlined-word {
+  --loader-logo-gap: clamp(1rem, 2.6vw, 2.1rem);
 }
 
 .loader__idio-logo {

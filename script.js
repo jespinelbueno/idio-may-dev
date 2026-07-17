@@ -9,7 +9,7 @@ const loaderDebugParams = new URLSearchParams(window.location.search);
 const loaderDebugQuery = loaderDebugParams.get("loaderDebug") ?? loaderDebugParams.get("debug");
 const DEBUG_LOADER =
   false || (loaderDebugQuery !== null && !["0", "false", "off"].includes(loaderDebugQuery.toLowerCase()));
-const DEBUG_LOADER_WORD = loaderDebugParams.get("loaderWord") || ""; // Set to "distinct", "novel", "yours", etc. to pause there.
+const DEBUG_LOADER_WORD = loaderDebugParams.get("loaderWord") || ""; // Set to "distinct", "novel", "original", etc. to pause there.
 const SHOW_LOADER_DEBUGGER = DEBUG_LOADER || Boolean(DEBUG_LOADER_WORD);
 const LOADER_SCREEN_MS = 650;
 const LOADER_SWAP_MS = 120;
@@ -20,6 +20,12 @@ const LOADER_WORD_FONTS = {
     label: "Teva",
     cssValue: '"Teva", "DM Sans", system-ui, sans-serif',
     weight: "400",
+  },
+  tevaLine: {
+    label: "Teva + line",
+    cssValue: '"Teva", "DM Sans", system-ui, sans-serif',
+    weight: "400",
+    underlined: true,
   },
   previous: {
     label: "Previous DM Sans Bold",
@@ -119,6 +125,7 @@ const LOADER_DEFAULT_PRESET_BANK = "tevaNatural";
 const LOADER_PRESET_BANKS = createLoaderPresetBanks();
 const requestedLoaderBank = loaderDebugParams.get("loaderBank") ?? loaderDebugParams.get("loaderPreset");
 const requestedLoaderFont = loaderDebugParams.get("loaderFont");
+const requestedLoaderFinal = loaderDebugParams.get("loaderFinal") ?? loaderDebugParams.get("loaderEnd") ?? "";
 let activeLoaderBank = LOADER_PRESET_BANKS[requestedLoaderBank] ? requestedLoaderBank : LOADER_DEFAULT_PRESET_BANK;
 let activeLoaderFont = LOADER_PRESET_BANKS[activeLoaderBank].font;
 
@@ -213,6 +220,7 @@ const loadSavedLoaderOffsets = () => {
       Object.entries(savedOffsetsByFont).forEach(([fontKey, savedOffsets]) => {
         const bankKey = {
           teva: "tevaNatural",
+          tevaLine: "tevaNatural",
           previous: "dmSansHero",
           dmSansMedium: "dmSansTight",
           vollkorn: "vollkornEditorial",
@@ -235,6 +243,7 @@ const loadSavedLoaderOffsets = () => {
       activeLoaderBank =
         {
           teva: "tevaNatural",
+          tevaLine: "tevaNatural",
           previous: "dmSansHero",
           dmSansMedium: "dmSansTight",
           vollkorn: "vollkornEditorial",
@@ -264,6 +273,7 @@ const applyLoaderWordFont = () => {
 
   loaderPhrase?.style.setProperty("--loader-word-font-family", font.cssValue);
   loaderPhrase?.style.setProperty("--loader-word-font-weight", font.weight);
+  loaderPhrase?.classList.toggle("is-underlined-word", Boolean(font.underlined));
 
   if (loaderDebugger?.font) {
     loaderDebugger.bank.value = activeLoaderBank;
@@ -286,14 +296,14 @@ const setLoaderPresetBank = (bankKey) => {
   measureLoaderWords();
 };
 
-const setLoaderWordFont = (fontKey) => {
+const setLoaderWordFont = (fontKey, { save = SHOW_LOADER_DEBUGGER } = {}) => {
   if (!LOADER_WORD_FONTS[fontKey]) return;
 
   getActiveLoaderBank().font = fontKey;
   activeLoaderFont = fontKey;
   applyLoaderWordFont();
 
-  if (SHOW_LOADER_DEBUGGER) {
+  if (save) {
     saveLoaderOffsets();
   }
 
@@ -347,7 +357,7 @@ const loaderLogo = document.querySelector("[data-loader-logo]");
 const loaderPhrase = document.querySelector(".loader__phrase");
 const loaderFixed = document.querySelector(".loader__fixed");
 const loaderWordSlot = document.querySelector(".loader__words");
-const loaderScreens = [
+const loaderTextScreens = [
   { text: "interesting", className: "loader--creative" },
   { text: "creative", className: "loader--interesting" },
   { text: "original", className: "loader--original" },
@@ -356,10 +366,13 @@ const loaderScreens = [
   { text: "unique", className: "loader--distinct" },
   { text: "novel", className: "loader--novel" },
   { text: "yours", className: "loader--yours" },
-  { logo: true, className: "loader--idio" },
 ];
-const loaderScreenClasses = loaderScreens.map(({ className }) => className);
-const loaderTextScreens = loaderScreens.filter(({ text }) => text);
+const loaderFinalScreen =
+  ["line", "original-line", "originalLine", "teva-line", "tevaLine"].includes(requestedLoaderFinal)
+    ? { text: "original", className: "loader--original", font: "tevaLine" }
+    : { key: "idio", logo: true, className: "loader--idio" };
+const loaderScreens = [...loaderTextScreens, loaderFinalScreen];
+const loaderScreenClasses = Array.from(new Set(loaderScreens.map(({ className }) => className)));
 let loaderSequenceComplete = false;
 let loaderPageLoaded = document.readyState === "complete";
 let activeLoaderText = loaderTextScreens[0]?.text ?? "";
@@ -460,6 +473,10 @@ const setLoaderScreen = (screen) => {
   if (screen.logo) {
     showFinalLoaderState();
     return;
+  }
+
+  if (screen.font) {
+    setLoaderWordFont(screen.font, { save: false });
   }
 
   if (loaderLogo) {
@@ -864,6 +881,11 @@ let isCaseStudyCardAnimating = false;
 let caseStudyScrollAccumulator = 0;
 let caseStudyLastWheelAt = 0;
 
+const CASE_STUDY_CARD_TRANSITION_MS = 260;
+const CASE_STUDY_CARD_OUTBOUND_MS = 170;
+const CASE_STUDY_CARD_INBOUND_MS = 220;
+const CASE_STUDY_SCROLL_LOCK_MS = 430;
+
 caseStudies.forEach(({ image }) => {
   const preload = new Image();
   preload.src = image;
@@ -918,7 +940,7 @@ const positionCaseStudyCards = ({ immediate = false } = {}) => {
 
     card.style.zIndex = String(cards.length - index);
     card.style.setProperty("--case-card-color", caseStudy?.cards?.front ?? "var(--paper)");
-    card.style.transition = immediate ? "none" : "transform 620ms cubic-bezier(0.22, 1, 0.36, 1)";
+    card.style.transition = immediate ? "none" : `transform ${CASE_STUDY_CARD_TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`;
     card.style.transform = getCaseStudyCardTransform(index);
   });
 
@@ -951,7 +973,7 @@ const animateReorderedCaseStudyCards = (previousPositions, excludedCard) =>
         { transform: card.style.transform },
       ],
       {
-        duration: 620,
+        duration: CASE_STUDY_CARD_TRANSITION_MS,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         fill: "both",
       },
@@ -1015,8 +1037,8 @@ const moveCaseStudyFrontCardToBack = async (nextIndex) => {
         },
       ],
       {
-        duration: 430,
-        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        duration: CASE_STUDY_CARD_OUTBOUND_MS,
+        easing: "cubic-bezier(0.3, 0, 0.2, 1)",
         fill: "forwards",
       },
     );
@@ -1056,7 +1078,7 @@ const moveCaseStudyFrontCardToBack = async (nextIndex) => {
         },
       ],
       {
-        duration: 560,
+        duration: CASE_STUDY_CARD_INBOUND_MS,
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         fill: "forwards",
       },
@@ -1064,7 +1086,7 @@ const moveCaseStudyFrontCardToBack = async (nextIndex) => {
 
     window.setTimeout(() => {
       frontCard.style.zIndex = "1";
-    }, 190);
+    }, 85);
 
     await Promise.all([
       inboundAnimation.finished,
@@ -1102,6 +1124,10 @@ const scrollCaseStudy = (direction) => {
   return selectCaseStudy(nextIndex);
 };
 
+const canScrollCaseStudy = (direction) =>
+  (direction > 0 && activeCaseStudyIndex < caseStudies.length - 1) ||
+  (direction < 0 && activeCaseStudyIndex > 0);
+
 const unlockCaseStudyScroll = () => {
   window.clearTimeout(caseStudyScrollLockTimer);
   isCaseStudyScrollLocked = false;
@@ -1112,7 +1138,7 @@ const lockCaseStudyScroll = () => {
   isCaseStudyScrollLocked = true;
   caseStudyScrollAccumulator = 0;
   window.clearTimeout(caseStudyScrollLockTimer);
-  caseStudyScrollLockTimer = window.setTimeout(unlockCaseStudyScroll, 1040);
+  caseStudyScrollLockTimer = window.setTimeout(unlockCaseStudyScroll, CASE_STUDY_SCROLL_LOCK_MS);
 };
 
 caseStudyDots.forEach((dot) => {
@@ -1142,7 +1168,7 @@ const isCaseStudyScrollZoneActive = () => {
 const getCaseStudyWheelThreshold = () => {
   const isCompact = window.matchMedia("(max-width: 700px)").matches;
 
-  return isCompact ? 62 : 84;
+  return isCompact ? 34 : 44;
 };
 
 caseStudyScrollArea?.addEventListener(
@@ -1164,11 +1190,7 @@ caseStudyScrollArea?.addEventListener(
       return;
     }
 
-    const canMove =
-      (direction > 0 && activeCaseStudyIndex < caseStudies.length - 1) ||
-      (direction < 0 && activeCaseStudyIndex > 0);
-
-    if (!canMove) {
+    if (!canScrollCaseStudy(direction)) {
       caseStudyScrollAccumulator = 0;
       return;
     }
@@ -1204,6 +1226,27 @@ caseStudyScrollArea?.addEventListener(
     caseStudyTouchStartY = touch.clientY;
   },
   { passive: true },
+);
+
+caseStudyScrollArea?.addEventListener(
+  "touchmove",
+  (event) => {
+    const touch = event.touches[0];
+
+    if (!touch || !isCaseStudyScrollZoneActive()) return;
+
+    const deltaX = caseStudyTouchStartX - touch.clientX;
+    const deltaY = caseStudyTouchStartY - touch.clientY;
+
+    if (Math.abs(deltaY) < 8 || Math.abs(deltaX) > Math.abs(deltaY) * 1.25) return;
+
+    const direction = Math.sign(deltaY);
+
+    if (direction && canScrollCaseStudy(direction)) {
+      event.preventDefault();
+    }
+  },
+  { passive: false },
 );
 
 window.addEventListener("resize", () => {
