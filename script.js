@@ -8,7 +8,7 @@ window.addEventListener("resize", setViewportHeight, { passive: true });
 const loaderDebugParams = new URLSearchParams(window.location.search);
 const loaderDebugQuery = loaderDebugParams.get("loaderDebug") ?? loaderDebugParams.get("debug");
 const DEBUG_LOADER =
-  false || (loaderDebugQuery !== null && !["0", "false", "off"].includes(loaderDebugQuery.toLowerCase()));
+  loaderDebugQuery !== null && !["0", "false", "off"].includes(loaderDebugQuery.toLowerCase());
 const DEBUG_LOADER_WORD = loaderDebugParams.get("loaderWord") || ""; // Set to "distinct", "novel", "original", etc. to pause there.
 const SHOW_LOADER_DEBUGGER = DEBUG_LOADER || Boolean(DEBUG_LOADER_WORD);
 const LOADER_SCREEN_MS = 650;
@@ -27,25 +27,25 @@ const LOADER_WORD_FONTS = {
     weight: "400",
     underlined: true,
   },
-  previous: {
-    label: "Previous DM Sans Bold",
+  dmSansHeavy: {
+    label: "DM Sans / heavy",
     cssValue: '"DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     weight: "950",
   },
   dmSansMedium: {
-    label: "DM Sans Medium",
+    label: "DM Sans / medium",
     cssValue: '"DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     weight: "650",
   },
   vollkorn: {
-    label: "Vollkorn Editorial",
+    label: "Vollkorn / editorial",
     cssValue: '"Vollkorn", Georgia, serif',
     weight: "850",
   },
 };
-const createLoaderPresetBanks = () => ({
-  tevaNatural: {
-    label: "1 Teva natural",
+const createLoaderAlignmentPresets = () => ({
+  tevaBaseline: {
+    label: "Teva / baseline",
     savedAt: "",
     font: "teva",
     offsets: {
@@ -59,8 +59,8 @@ const createLoaderPresetBanks = () => ({
       yours: "0em",
     },
   },
-  tevaLifted: {
-    label: "2 Teva lifted",
+  tevaRaised: {
+    label: "Teva / raised",
     savedAt: "",
     font: "teva",
     offsets: {
@@ -75,22 +75,22 @@ const createLoaderPresetBanks = () => ({
     },
   },
   dmSansHero: {
-    label: "3 DM Sans hero",
+    label: "DM Sans / hero",
     savedAt: "",
-    font: "previous",
+    font: "dmSansHeavy",
     offsets: {
-      creative: "0.04em",
-      interesting: "0.05em",
-      original: "0.04em",
-      striking: "0.04em",
+      creative: "0em",
+      interesting: "0em",
+      original: "0em",
+      striking: "0em",
       unique: "0em",
-      distinct: "0.04em",
-      novel: "-0.09em",
-      yours: "-0.09em",
+      distinct: "0em",
+      novel: "0em",
+      yours: "0em",
     },
   },
-  dmSansTight: {
-    label: "4 DM Sans tight",
+  dmSansCompact: {
+    label: "DM Sans / compact",
     savedAt: "",
     font: "dmSansMedium",
     offsets: {
@@ -105,7 +105,7 @@ const createLoaderPresetBanks = () => ({
     },
   },
   vollkornEditorial: {
-    label: "5 Vollkorn editorial",
+    label: "Vollkorn / editorial",
     savedAt: "",
     font: "vollkorn",
     offsets: {
@@ -121,12 +121,31 @@ const createLoaderPresetBanks = () => ({
   },
 });
 const LOADER_WORD_Y_OFFSETS = {};
-const LOADER_DEFAULT_PRESET_BANK = "tevaNatural";
-const LOADER_PRESET_BANKS = createLoaderPresetBanks();
+const LOADER_DEFAULT_PRESET_BANK = "dmSansHero";
+const LOADER_PRESET_BANKS = createLoaderAlignmentPresets();
 const requestedLoaderBank = loaderDebugParams.get("loaderBank") ?? loaderDebugParams.get("loaderPreset");
 const requestedLoaderFont = loaderDebugParams.get("loaderFont");
 const requestedLoaderFinal = loaderDebugParams.get("loaderFinal") ?? loaderDebugParams.get("loaderEnd") ?? "";
-let activeLoaderBank = LOADER_PRESET_BANKS[requestedLoaderBank] ? requestedLoaderBank : LOADER_DEFAULT_PRESET_BANK;
+const LOADER_LEGACY_PRESET_KEYS = {
+  tevaNatural: "tevaBaseline",
+  tevaLifted: "tevaRaised",
+  dmSansTight: "dmSansCompact",
+};
+const LOADER_LEGACY_FONT_KEYS = {
+  previous: "dmSansHeavy",
+};
+const LOADER_FONT_DEFAULT_PRESETS = {
+  teva: "tevaBaseline",
+  tevaLine: "tevaBaseline",
+  dmSansHeavy: "dmSansHero",
+  dmSansMedium: "dmSansCompact",
+  vollkorn: "vollkornEditorial",
+};
+const normalizeLoaderPresetKey = (presetKey) =>
+  LOADER_PRESET_BANKS[presetKey] ? presetKey : LOADER_LEGACY_PRESET_KEYS[presetKey];
+const normalizeLoaderFontKey = (fontKey) =>
+  LOADER_WORD_FONTS[fontKey] ? fontKey : LOADER_LEGACY_FONT_KEYS[fontKey];
+let activeLoaderBank = normalizeLoaderPresetKey(requestedLoaderBank) ?? LOADER_DEFAULT_PRESET_BANK;
 let activeLoaderFont = LOADER_PRESET_BANKS[activeLoaderBank].font;
 
 const cloneLoaderPresetBanks = (banks) =>
@@ -141,7 +160,7 @@ const cloneLoaderPresetBanks = (banks) =>
   );
 
 const resetLoaderPresetBanks = () => {
-  const defaults = createLoaderPresetBanks();
+  const defaults = createLoaderAlignmentPresets();
 
   Object.keys(LOADER_PRESET_BANKS).forEach((bankKey) => {
     delete LOADER_PRESET_BANKS[bankKey];
@@ -174,7 +193,7 @@ const formatLoaderSavedAt = (savedAt) => {
 const getLoaderBankOptionLabel = (bank) => {
   const savedLabel = formatLoaderSavedAt(bank.savedAt);
 
-  return savedLabel ? `saved ${savedLabel}` : bank.label;
+  return savedLabel ? `${bank.label} • saved ${savedLabel}` : bank.label;
 };
 
 const updateLoaderBankOptionLabels = () => {
@@ -195,13 +214,16 @@ const loadSavedLoaderOffsets = () => {
     const savedBanks = savedState.banks;
 
     if (savedBanks && typeof savedBanks === "object") {
-      Object.entries(savedBanks).forEach(([bankKey, savedBank]) => {
+      Object.entries(savedBanks).forEach(([savedBankKey, savedBank]) => {
+        const bankKey = normalizeLoaderPresetKey(savedBankKey);
         const bank = LOADER_PRESET_BANKS[bankKey];
 
         if (!bank || !savedBank || typeof savedBank !== "object") return;
 
-        if (LOADER_WORD_FONTS[savedBank.font]) {
-          bank.font = savedBank.font;
+        const savedFont = normalizeLoaderFontKey(savedBank.font);
+
+        if (savedFont) {
+          bank.font = savedFont;
         }
 
         if (typeof savedBank.savedAt === "string") {
@@ -217,14 +239,9 @@ const loadSavedLoaderOffsets = () => {
     } else {
       const savedOffsetsByFont = savedState.offsetsByFont ?? savedState;
 
-      Object.entries(savedOffsetsByFont).forEach(([fontKey, savedOffsets]) => {
-        const bankKey = {
-          teva: "tevaNatural",
-          tevaLine: "tevaNatural",
-          previous: "dmSansHero",
-          dmSansMedium: "dmSansTight",
-          vollkorn: "vollkornEditorial",
-        }[fontKey];
+      Object.entries(savedOffsetsByFont).forEach(([savedFontKey, savedOffsets]) => {
+        const fontKey = normalizeLoaderFontKey(savedFontKey);
+        const bankKey = LOADER_FONT_DEFAULT_PRESETS[fontKey];
         const bank = LOADER_PRESET_BANKS[bankKey];
 
         if (!bank || !savedOffsets || typeof savedOffsets !== "object") return;
@@ -237,17 +254,13 @@ const loadSavedLoaderOffsets = () => {
       });
     }
 
-    if (LOADER_PRESET_BANKS[savedState.activeBank] && !requestedLoaderBank) {
-      activeLoaderBank = savedState.activeBank;
-    } else if (LOADER_WORD_FONTS[savedState.activeFont] && !requestedLoaderBank) {
-      activeLoaderBank =
-        {
-          teva: "tevaNatural",
-          tevaLine: "tevaNatural",
-          previous: "dmSansHero",
-          dmSansMedium: "dmSansTight",
-          vollkorn: "vollkornEditorial",
-        }[savedState.activeFont] ?? activeLoaderBank;
+    const savedActiveBank = normalizeLoaderPresetKey(savedState.activeBank);
+    const savedActiveFont = normalizeLoaderFontKey(savedState.activeFont);
+
+    if (savedActiveBank && !requestedLoaderBank) {
+      activeLoaderBank = savedActiveBank;
+    } else if (savedActiveFont && !requestedLoaderBank) {
+      activeLoaderBank = LOADER_FONT_DEFAULT_PRESETS[savedActiveFont] ?? activeLoaderBank;
     }
   } catch {
     window.localStorage?.removeItem(LOADER_DEBUG_STORAGE_KEY);
@@ -278,7 +291,6 @@ const applyLoaderWordFont = () => {
   if (loaderDebugger?.font) {
     loaderDebugger.bank.value = activeLoaderBank;
     loaderDebugger.font.value = activeLoaderFont;
-    loaderDebugger.toggleFont.textContent = activeLoaderFont === "teva" ? "try previous font" : "try Teva";
   }
 };
 
@@ -344,9 +356,14 @@ const saveLoaderDebugState = () => {
   showLoaderDebugStatus(saveLoaderOffsets() ? `saved ${formatLoaderSavedAt(savedAt)}` : "save failed");
 };
 
-loadSavedLoaderOffsets();
-if (LOADER_WORD_FONTS[requestedLoaderFont]) {
-  getActiveLoaderBank().font = requestedLoaderFont;
+if (SHOW_LOADER_DEBUGGER || requestedLoaderBank || requestedLoaderFont) {
+  loadSavedLoaderOffsets();
+}
+
+const requestedFont = normalizeLoaderFontKey(requestedLoaderFont);
+
+if (requestedFont) {
+  getActiveLoaderBank().font = requestedFont;
 }
 syncActiveLoaderFontFromBank();
 syncLegacyLoaderOffsets();
@@ -358,12 +375,12 @@ const loaderPhrase = document.querySelector(".loader__phrase");
 const loaderFixed = document.querySelector(".loader__fixed");
 const loaderWordSlot = document.querySelector(".loader__words");
 const loaderTextScreens = [
-  { text: "interesting", className: "loader--creative" },
-  { text: "creative", className: "loader--interesting" },
+  { text: "interesting", className: "loader--interesting" },
+  { text: "creative", className: "loader--creative" },
   { text: "original", className: "loader--original" },
   { text: "striking", className: "loader--striking" },
-  { text: "distinct", className: "loader--unique" },
-  { text: "unique", className: "loader--distinct" },
+  { text: "distinct", className: "loader--distinct" },
+  { text: "unique", className: "loader--unique" },
   { text: "novel", className: "loader--novel" },
   { text: "yours", className: "loader--yours" },
 ];
@@ -518,14 +535,20 @@ const getLoaderDebugMeasurements = () => {
   };
 };
 
-const getLoaderOffsetsForCopy = () => {
-  const bankRows = Object.entries(LOADER_PRESET_BANKS).map(([bankKey, bank]) => {
-    const offsetRows = loaderTextScreens.map(({ text }) => `      ${text}: "${bank.offsets[text] ?? "0em"}",`);
+const formatLoaderSourceString = (value) => JSON.stringify(value ?? "");
 
-    return `  ${bankKey}: {\n    label: "${bank.label}",\n    savedAt: "${bank.savedAt ?? ""}",\n    font: "${bank.font}",\n    offsets: {\n${offsetRows.join("\n")}\n    }\n  },`;
+const getLoaderSourceBlockForCopy = () => {
+  const presetRows = Object.entries(LOADER_PRESET_BANKS).map(([presetKey, preset]) => {
+    const offsetRows = loaderTextScreens.map(
+      ({ text }) => `      ${text}: ${formatLoaderSourceString(preset.offsets[text] ?? "0em")},`,
+    );
+
+    return `  ${presetKey}: {\n    label: ${formatLoaderSourceString(
+      preset.label,
+    )},\n    savedAt: "",\n    font: ${formatLoaderSourceString(preset.font)},\n    offsets: {\n${offsetRows.join("\n")}\n    },\n  },`;
   });
 
-  return `const LOADER_PRESET_BANKS = {\n${bankRows.join("\n")}\n};`;
+  return `const createLoaderAlignmentPresets = () => ({\n${presetRows.join("\n")}\n});`;
 };
 
 const updateLoaderDebugger = () => {
@@ -537,10 +560,9 @@ const updateLoaderDebugger = () => {
   loaderDebugger.word.value = activeLoaderText;
   loaderDebugger.bank.value = activeLoaderBank;
   loaderDebugger.font.value = activeLoaderFont;
-  loaderDebugger.toggleFont.textContent = activeLoaderFont === "teva" ? "try previous font" : "try Teva";
   loaderDebugger.range.value = String(offset);
   loaderDebugger.number.value = offset.toFixed(2);
-  loaderDebugger.output.value = getLoaderOffsetsForCopy();
+  loaderDebugger.output.value = getLoaderSourceBlockForCopy();
 
   if (measurements) {
     loaderDebugger.metrics.innerHTML = [
@@ -561,25 +583,25 @@ const setLoaderDebugOffset = (value) => {
   setLoaderWordFit(activeLoaderText);
 };
 
-const copyLoaderDebugOffsets = async () => {
+const copyLoaderSourceBlock = async (button = loaderDebugger?.copy) => {
   if (!loaderDebugger) return;
 
-  const offsets = getLoaderOffsetsForCopy();
+  const offsets = getLoaderSourceBlockForCopy();
   loaderDebugger.output.hidden = false;
   loaderDebugger.output.value = offsets;
   loaderDebugger.output.select();
 
   try {
     await navigator.clipboard?.writeText(offsets);
-    loaderDebugger.copy.textContent = "copied";
+    button.textContent = "copied";
   } catch {
     document.execCommand?.("copy");
-    loaderDebugger.copy.textContent = "selected";
+    button.textContent = "selected";
   }
 
   window.setTimeout(() => {
-    if (loaderDebugger) {
-      loaderDebugger.copy.textContent = "copy offsets";
+    if (loaderDebugger && button) {
+      button.textContent = button.dataset.defaultLabel || "copy source block";
     }
   }, 1200);
 };
@@ -591,11 +613,11 @@ const createLoaderDebugger = () => {
   panel.className = "loader-debugger";
   panel.innerHTML = `
     <div class="loader-debugger__header">
-      <strong>loader debugger</strong>
-      <span>/loader-debug/</span>
+      <strong>loader controls</strong>
+      <span>?loaderDebug=1</span>
     </div>
     <label class="loader-debugger__field">
-      preset bank
+      alignment preset
       <select data-loader-debug-bank></select>
     </label>
     <label class="loader-debugger__field">
@@ -606,15 +628,14 @@ const createLoaderDebugger = () => {
       font
       <select data-loader-debug-font></select>
     </label>
-    <button type="button" data-loader-debug-toggle-font>try previous font</button>
     <label class="loader-debugger__field">
-      y offset em
+      vertical offset
       <input data-loader-debug-range type="range" min="-0.5" max="0.5" step="0.01">
     </label>
     <div class="loader-debugger__row">
-      <button type="button" data-loader-debug-nudge="-0.01">up</button>
+      <button type="button" data-loader-debug-nudge="-0.01">nudge up</button>
       <input data-loader-debug-number type="number" min="-0.5" max="0.5" step="0.01">
-      <button type="button" data-loader-debug-nudge="0.01">down</button>
+      <button type="button" data-loader-debug-nudge="0.01">nudge down</button>
     </div>
     <div class="loader-debugger__metrics" data-loader-debug-metrics></div>
     <div class="loader-debugger__row">
@@ -622,8 +643,8 @@ const createLoaderDebugger = () => {
       <span data-loader-debug-status></span>
     </div>
     <div class="loader-debugger__row">
-      <button class="loader-debugger__copy" type="button" data-loader-debug-copy>copy offsets</button>
-      <button type="button" data-loader-debug-reset>clear saved</button>
+      <button class="loader-debugger__copy" type="button" data-loader-debug-copy data-default-label="copy presets">copy presets</button>
+      <button type="button" data-loader-debug-reset>reset local</button>
     </div>
     <textarea class="loader-debugger__output" data-loader-debug-output readonly hidden></textarea>
   `;
@@ -660,7 +681,6 @@ const createLoaderDebugger = () => {
     bank: bankSelect,
     word: wordSelect,
     font: fontSelect,
-    toggleFont: panel.querySelector("[data-loader-debug-toggle-font]"),
     range: panel.querySelector("[data-loader-debug-range]"),
     number: panel.querySelector("[data-loader-debug-number]"),
     metrics: panel.querySelector("[data-loader-debug-metrics]"),
@@ -686,10 +706,6 @@ const createLoaderDebugger = () => {
     setLoaderWordFont(loaderDebugger.font.value);
   });
 
-  loaderDebugger.toggleFont.addEventListener("click", () => {
-    setLoaderWordFont(activeLoaderFont === "teva" ? "previous" : "teva");
-  });
-
   loaderDebugger.range.addEventListener("input", () => {
     setLoaderDebugOffset(loaderDebugger.range.value);
   });
@@ -706,7 +722,7 @@ const createLoaderDebugger = () => {
   });
 
   loaderDebugger.save.addEventListener("click", saveLoaderDebugState);
-  loaderDebugger.copy.addEventListener("click", copyLoaderDebugOffsets);
+  loaderDebugger.copy.addEventListener("click", copyLoaderSourceBlock);
   panel.querySelector("[data-loader-debug-reset]").addEventListener("click", () => {
     window.localStorage?.removeItem(LOADER_DEBUG_STORAGE_KEY);
     resetLoaderPresetBanks();
@@ -719,7 +735,7 @@ const createLoaderDebugger = () => {
     loaderDebugger.copy.textContent = "cleared";
     window.setTimeout(() => {
       if (loaderDebugger) {
-        loaderDebugger.copy.textContent = "copy offsets";
+        loaderDebugger.copy.textContent = loaderDebugger.copy.dataset.defaultLabel || "copy source block";
       }
     }, 1200);
   });
