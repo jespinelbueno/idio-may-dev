@@ -5,7 +5,7 @@ const valuesWheelConfig = [
     label: "Listening",
     title: "listening",
     description:
-      "We start with what people actually need, then shape the work around real context.",
+      "Collaboration cannot happen without a listening culture. We make an intentional effort to understand the heartbeat of a brand and add our expertise to fill in the gaps.",
     position: "top",
     fill: "#ADB363",
     textColor: "#16233D",
@@ -28,7 +28,7 @@ const valuesWheelConfig = [
     label: "Excellence",
     title: "excellence",
     description:
-      "We sweat the details that make the difference between finished and memorable.",
+      "Excellent results derive from an exceptional work ethic. Idio strives to cultivate a servant culture, delivering exemplary service to both clients and our team.",
     position: "upper-right",
     fill: "#D80411",
     textColor: "#F7F2E9",
@@ -51,7 +51,7 @@ const valuesWheelConfig = [
     label: "Creativity",
     title: "creativity",
     description:
-      "We turn constraints into ideas people can feel, use, share, and remember.",
+      "Creativity is the pillar of unforgettable art. Idio believes in artists, creators, and the power of imagination. Without creatives, the world could not function.",
     position: "lower-right",
     fill: "#99BBD3",
     textColor: "#16233D",
@@ -74,7 +74,7 @@ const valuesWheelConfig = [
     label: "Idiosyncrasy",
     title: "idiosyncrasy",
     description:
-      "We protect the specific details that make a brand impossible to confuse.",
+      "We believe good branding never sacrifices personality. The unique traits (idiosyncrasies) of a brand are what take it from great to legendary and unforgettable.",
     position: "bottom",
     fill: "#00470C",
     textColor: "#F7F2E9",
@@ -97,7 +97,7 @@ const valuesWheelConfig = [
     label: "Responsibility",
     title: "responsibility",
     description:
-      "We make choices with care for the client, the audience, and the wider impact.",
+      "Here at Idio, we believe we have a responsibility to be thorough in service and ethical in behavior, from research all the way to client relationships.",
     position: "lower-left",
     fill: "#16233D",
     textColor: "#F7F2E9",
@@ -120,7 +120,7 @@ const valuesWheelConfig = [
     label: "Collaboration",
     title: "collaboration",
     description:
-      "We build with clients, not around them, so the best ideas can surface early.",
+      "Idio fosters open dialogue and teamwork, celebrating new ideas and creative directions that communicate who our clients are to the proper audience.",
     position: "upper-left",
     fill: "#FFD569",
     textColor: "#00470C",

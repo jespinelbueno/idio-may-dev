@@ -828,9 +828,10 @@ if (loaderPageLoaded) {
 
 const caseStudies = [
   {
-    title: "case study 1",
+    title: "featured case study",
+    client: "Leisure Events",
     description:
-      "Lorem ipsum dolor sit amet consectetur. Nulla fringilla vulputate venenatis nam suspendisse enim egestas pellentesque mauris.",
+      "Leisure Events is a rental company in Lynchburg, VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a more inexpensive rental option (through renting rather than buying). Idio Creative provided a full brand kit, including the brand foundation, ideology, and personality, a full research report, a brand photoshoot, and visual branding such as the brand logo, colors and elements, and mockups.",
     image: "assets/img/photos/casestudymain_cropped.jpg",
     cards: {
       front: "var(--paper)",
@@ -841,7 +842,8 @@ const caseStudies = [
     },
   },
   {
-    title: "case study 2",
+    title: "featured case study",
+    client: "",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh at arcu pretium gravida sed a sem.",
     image: "assets/img/photos/imgportrait.png",
@@ -854,7 +856,8 @@ const caseStudies = [
     },
   },
   {
-    title: "case study 3",
+    title: "featured case study",
+    client: "",
     description:
       "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua vivamus.",
     image: "assets/img/photos/imgstilllive.png",
@@ -867,7 +870,8 @@ const caseStudies = [
     },
   },
   {
-    title: "case study 4",
+    title: "featured case study",
+    client: "",
     description:
       "Lorem ipsum dolor sit amet consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
     image: "assets/img/photos/imgmotion.png",
@@ -885,6 +889,7 @@ const caseStudyMedia = document.querySelector(".case-study__media");
 const caseStudyStack = document.querySelector("[data-case-stack]");
 const caseStudyDetails = document.querySelector("[data-case-details]");
 const caseStudyTitle = document.querySelector("#case-study-title");
+const caseStudyClient = caseStudyDetails?.querySelector("h3");
 const caseStudyDescription = caseStudyDetails?.querySelector("p");
 const caseStudyDots = Array.from(document.querySelectorAll(".case-study__dot[data-case-index]"));
 const caseStudyScrollArea = document.querySelector(".case-study");
@@ -921,6 +926,10 @@ const updateCaseStudyContent = (nextIndex) => {
   if (!nextCaseStudy || !caseStudyTitle || !caseStudyDescription) return;
 
   caseStudyTitle.textContent = nextCaseStudy.title;
+  if (caseStudyClient) {
+    caseStudyClient.textContent = nextCaseStudy.client;
+    caseStudyClient.hidden = !nextCaseStudy.client;
+  }
   caseStudyDescription.textContent = nextCaseStudy.description;
   caseStudyDetails?.classList.remove("is-changing");
 };
