@@ -525,6 +525,7 @@ body.is-ready .hero__image {
   width: 22rem;
   aspect-ratio: 66 / 5;
   margin: 0.35rem 0 0 0.7rem;
+  transform: translateY(1rem);
   background: var(--brand-green);
   mask: url("assets/img/scribbles/scribble1.svg") center / contain no-repeat;
   -webkit-mask: url("assets/img/scribbles/scribble1.svg") center / contain no-repeat;
@@ -699,7 +700,9 @@ body.is-ready .hero__image {
   align-self: start;
   width: 100%;
   aspect-ratio: 1.24;
+  transform: translateY(6.8rem);
 }
+
 
 .offer__placeholder--detail {
   grid-column: 5 / 8;
