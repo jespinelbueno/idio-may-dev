@@ -1608,6 +1608,136 @@ body.is-ready .hero__image {
   overflow: visible;
 }
 
+.values-callouts {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  color: var(--brand-green);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.values-callout {
+  position: absolute;
+  width: clamp(13.5rem, 17vw, 16rem);
+}
+
+.values-callout-content {
+  position: relative;
+  z-index: 2;
+}
+
+.values-callout-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.82rem;
+  margin-bottom: 0.55rem;
+}
+
+.values-callout-swatch {
+  width: 0.82rem;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--value-color, var(--brand-green));
+  box-shadow: 0 0.12rem 0.24rem rgb(21 18 14 / 0.1);
+}
+
+.values-callout h3 {
+  margin: 0;
+  color: var(--brand-green);
+  font-size: clamp(1.65rem, 2.45vw, 2.35rem);
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+.values-callout p {
+  max-width: 14rem;
+  margin: 0 0 0 1.65rem;
+  color: var(--brand-green);
+  font-size: clamp(0.7rem, 0.82vw, 0.82rem);
+  font-weight: 650;
+  line-height: 1.32;
+}
+
+.values-callout-arrow {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: clamp(5.8rem, 7.4vw, 7rem);
+  height: auto;
+  transform-origin: 50% 50%;
+}
+
+.values-callout.is-top {
+  top: clamp(-8rem, -8vw, -6.1rem);
+  left: 7.5%;
+}
+
+.values-callout.is-top .values-callout-arrow {
+  top: 1.35rem;
+  left: -6.8rem;
+  transform: scaleX(-1) rotate(-4deg);
+}
+
+.values-callout.is-upper-left {
+  top: 17%;
+  left: clamp(-12.8rem, -15vw, -10rem);
+}
+
+.values-callout.is-upper-left .values-callout-arrow {
+  top: -2.25rem;
+  right: -5.6rem;
+  transform: scaleX(-1) rotate(18deg);
+}
+
+.values-callout.is-upper-right {
+  top: 20%;
+  right: clamp(-10rem, -11vw, -8rem);
+}
+
+.values-callout.is-upper-right .values-callout-arrow {
+  top: -6.2rem;
+  left: -10.5rem;
+  transform: rotate(-28deg);
+}
+
+.values-callout.is-lower-right {
+  right: clamp(-11rem, -12vw, -9rem);
+  bottom: 14%;
+}
+
+.values-callout.is-lower-right .values-callout-arrow {
+  top: -7.6rem;
+  left: -5.5rem;
+  transform: rotate(-18deg);
+}
+
+.values-callout.is-lower-left {
+  bottom: 14%;
+  left: clamp(-12rem, -14vw, -9rem);
+}
+
+.values-callout.is-lower-left .values-callout-arrow {
+  top: -5.8rem;
+  right: auto;
+  left: 2.4rem;
+  transform: rotate(-12deg);
+}
+
+.values-callout.is-bottom {
+  bottom: clamp(-8rem, -7vw, -6rem);
+  left: 50%;
+}
+
+.values-callout.is-bottom .values-callout-arrow {
+  top: -6.9rem;
+  left: -4.85rem;
+  transform: rotate(-106deg);
+}
+
 .values-wheel-rotor {
   transform: rotate(var(--wheel-rotate, 0deg));
   transform-origin: 350px 350px;
@@ -2369,10 +2499,20 @@ body.is-ready .hero__image {
   }
 }
 
+@media (min-width: 901px) {
+  .value-tooltip {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   html,
   body {
     overflow-x: hidden;
+  }
+
+  .values-callouts {
+    display: none;
   }
 
   .services-nav {

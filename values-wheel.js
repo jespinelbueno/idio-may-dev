@@ -71,10 +71,10 @@ const valuesWheelConfig = [
     labelClass: "is-large",
   },
   {
-    label: "Idiosyncrasy",
-    title: "idiosyncrasy",
+    label: "Responsibility",
+    title: "responsibility",
     description:
-      "We believe good branding never sacrifices personality. The unique traits (idiosyncrasies) of a brand are what take it from great to legendary and unforgettable.",
+      "Here at Idio, we believe we have a responsibility to be thorough in service and ethical in behavior, from research all the way to client relationships.",
     position: "bottom",
     fill: "#00470C",
     textColor: "#F7F2E9",
@@ -94,10 +94,10 @@ const valuesWheelConfig = [
     labelClass: "is-small",
   },
   {
-    label: "Responsibility",
-    title: "responsibility",
+    label: "Idiosyncrasy",
+    title: "idiosyncrasy",
     description:
-      "Here at Idio, we believe we have a responsibility to be thorough in service and ethical in behavior, from research all the way to client relationships.",
+      "We believe good branding never sacrifices personality. The unique traits (idiosyncrasies) of a brand are what take it from great to legendary and unforgettable.",
     position: "lower-left",
     fill: "#16233D",
     textColor: "#F7F2E9",
@@ -548,6 +548,7 @@ const initValuesWheel = () => {
   const valueTooltipSwatch = document.querySelector(".value-tooltip-swatch");
   const valueTooltipTitle = document.querySelector(".value-tooltip-title");
   const valueTooltipCopy = document.querySelector(".value-tooltip-copy");
+  const valuesCallouts = document.querySelector(".values-callouts");
   const valuesMobileList = document.querySelector(".values-mobile-list");
 
   if (!valuesWheel || !valuesWheelGraphic || !valueTooltip) {
@@ -891,6 +892,29 @@ const initValuesWheel = () => {
             <div class="values-mobile-swatch" style="background:${fill};" aria-hidden="true"></div>
             <div class="values-mobile-copy">
               <h3>${title}</h3>
+              <p>${description}</p>
+            </div>
+          </article>
+        `
+      )
+      .join("");
+  }
+
+  if (valuesCallouts) {
+    valuesCallouts.innerHTML = valuesWheelConfig
+      .map(
+        ({ title, description, position, fill }) => `
+          <article class="values-callout is-${position}" style="--value-color:${fill};">
+            <img
+              class="values-callout-arrow"
+              src="assets/img/values-arrow.svg"
+              alt=""
+            >
+            <div class="values-callout-content">
+              <div class="values-callout-heading">
+                <span class="values-callout-swatch"></span>
+                <h3>${title}</h3>
+              </div>
               <p>${description}</p>
             </div>
           </article>
