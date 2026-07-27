@@ -1596,7 +1596,7 @@ body.is-ready .hero__image {
 
 .values-wheel {
   position: relative;
-  width: min(52rem, 66vw);
+  width: min(40rem, 50vw);
   aspect-ratio: 1;
   margin: 0 auto;
 }
@@ -1620,6 +1620,14 @@ body.is-ready .hero__image {
 .values-callout {
   position: absolute;
   width: clamp(13.5rem, 17vw, 16rem);
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 220ms ease, transform 260ms ease;
+}
+
+.values-callout.is-active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .values-callout-content {
@@ -1695,7 +1703,7 @@ body.is-ready .hero__image {
 
 .values-callout.is-upper-right {
   top: 20%;
-  right: clamp(-10rem, -11vw, -8rem);
+  right: clamp(-16rem, -16vw, -13rem);
 }
 
 .values-callout.is-upper-right .values-callout-arrow {
@@ -1705,8 +1713,9 @@ body.is-ready .hero__image {
 }
 
 .values-callout.is-lower-right {
-  right: clamp(-11rem, -12vw, -9rem);
+  right: auto;
   bottom: 14%;
+  left: calc(100% + clamp(4.7rem, 6vw, 5.9rem));
 }
 
 .values-callout.is-lower-right .values-callout-arrow {

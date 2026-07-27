@@ -558,6 +558,9 @@ const initValuesWheel = () => {
   const clearValueTooltip = () => {
     valuesWheel.classList.remove("has-active-tooltip");
     valuesWheel.classList.remove("has-hover-focus");
+    valuesCallouts
+      ?.querySelectorAll(".values-callout.is-active")
+      .forEach((callout) => callout.classList.remove("is-active"));
     valueTooltip.classList.remove(
       "is-left",
       "is-right",
@@ -579,6 +582,14 @@ const initValuesWheel = () => {
     valueTooltipTitle.textContent = valueTitle || "";
     valueTooltipCopy.textContent = valueDescription || "";
     valueTooltipSwatch?.style.setProperty("background", valueColor || "");
+    valuesCallouts
+      ?.querySelectorAll(".values-callout")
+      .forEach((callout) => {
+        callout.classList.toggle(
+          "is-active",
+          callout.dataset.valueTitle === valueTitle
+        );
+      });
 
     valueTooltip.classList.remove(
       "is-left",
@@ -713,10 +724,6 @@ const initValuesWheel = () => {
     });
   };
 
-  const defaultActiveSliceIndex = valuesWheelConfig.findIndex(
-    ({ title }) => title === "creativity"
-  );
-
   const showSliceValue = (group, index, tooltipDelay = 0) => {
     setActiveSliceState(index);
     valuesWheelRotor.appendChild(group);
@@ -737,12 +744,8 @@ const initValuesWheel = () => {
       return;
     }
 
-    const fallbackIndex = defaultActiveSliceIndex >= 0 ? defaultActiveSliceIndex : 0;
-    const fallbackSlice = wheelSlices[fallbackIndex];
-
-    if (fallbackSlice) {
-      showSliceValue(fallbackSlice.group, fallbackIndex);
-    }
+    clearActiveSliceState();
+    clearValueTooltip();
   };
 
   let hoverDebounceTimeout = null;
@@ -904,7 +907,7 @@ const initValuesWheel = () => {
     valuesCallouts.innerHTML = valuesWheelConfig
       .map(
         ({ title, description, position, fill }) => `
-          <article class="values-callout is-${position}" style="--value-color:${fill};">
+          <article class="values-callout is-${position}" data-value-title="${title}" style="--value-color:${fill};">
             <img
               class="values-callout-arrow"
               src="assets/img/values-arrow.svg"
