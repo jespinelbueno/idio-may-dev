@@ -978,7 +978,7 @@ body.is-ready .hero__image {
 
 .case-team {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   background-color: var(--paper);
   background-image:
     url("assets/gradients/trisection/cream.jpg"),
@@ -1006,16 +1006,43 @@ body.is-ready .hero__image {
   pointer-events: none;
 }
 
-.case-study {
+.case-study__scroll-track {
   position: relative;
+  height: calc(100svh + (var(--case-study-count, 4) * 42svh));
+}
+
+.case-study {
+  position: sticky;
+  top: 0;
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(21rem, 0.95fr);
   column-gap: clamp(4rem, 8vw, 8.8rem);
   width: min(76rem, calc(100vw - clamp(4rem, 12vw, 12rem)));
+  height: 100svh;
   min-height: clamp(35rem, 46vw, 42rem);
   margin: 0 auto;
   padding: clamp(6rem, 9vw, 8.4rem) 0 clamp(4.2rem, 6vw, 5.8rem);
+}
+
+.case-study::before {
+  position: absolute;
+  inset: 0 auto -28svh 50%;
+  z-index: -1;
+  width: 100vw;
+  content: "";
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(rgb(21 18 14 / 0.022) 0.55px, transparent 0.55px),
+    url("assets/gradients/trisection/cream.jpg");
+  background-repeat: repeat, no-repeat;
+  background-position: left top, center top;
+  background-size: 0.42rem 0.42rem, 100% auto;
+  background-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 28svh), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 28svh), transparent 100%);
+  pointer-events: none;
+  transform: translateX(-50%);
 }
 
 .case-study__media {
@@ -2734,8 +2761,13 @@ body.is-ready .hero__image {
   .case-study {
     grid-template-columns: 1fr;
     gap: 2rem;
-    min-height: auto;
+    height: auto;
+    min-height: 100svh;
     padding: clamp(5rem, 12vw, 7rem) 0 clamp(3rem, 8vw, 5rem);
+  }
+
+  .case-study__scroll-track {
+    height: calc(100svh + (var(--case-study-count, 4) * 48svh));
   }
 
   .case-study__media {
@@ -3213,6 +3245,61 @@ body.is-ready .hero__image {
     order: 1;
   }
 
+  .case-study {
+    gap: 0.75rem;
+    height: 100svh;
+    min-height: 0;
+    padding: 1.75rem 0;
+  }
+
+  .case-study__media {
+    --case-card-w: min(12rem, 48vw);
+    --case-front-w: min(13.25rem, 54vw);
+
+    min-height: 17rem;
+  }
+
+  .case-study__stroke--green {
+    top: -1.35rem;
+    left: calc(50% - var(--case-front-w) / 2 - 1.8rem);
+    width: 4.9rem;
+  }
+
+  .case-study__stroke--yellow {
+    top: 12.7rem;
+    left: calc(50% + var(--case-front-w) / 2 - 4rem);
+    width: 5.8rem;
+  }
+
+  .case-study__copy {
+    gap: 1rem;
+  }
+
+  .case-study__copy h2 {
+    font-size: clamp(2.35rem, 11vw, 3rem);
+  }
+
+  .case-study__copy h3 {
+    margin-top: 1rem;
+    font-size: 1.45rem;
+  }
+
+  .case-study__copy h3[hidden] + p,
+  .case-study__copy p {
+    margin-top: 0.65rem;
+  }
+
+  .case-study__copy p {
+    max-width: 22rem;
+    font-size: 0.8rem;
+    line-height: 1.22;
+  }
+
+  .case-study__button {
+    min-height: 2.55rem;
+    margin-top: 0.8rem;
+  }
+
   .team h2 {
     font-size: clamp(3rem, 14vw, 4.8rem);
   }
@@ -3420,6 +3507,22 @@ body.is-ready .hero__image {
   80%,
   100% {
     filter: url("#team-stroke-shape-frame-5");
+  }
+}
+
+@media (max-height: 720px) and (max-width: 900px) {
+  .case-study__scroll-track {
+    height: auto;
+  }
+
+  .case-study {
+    position: relative;
+    height: auto;
+    min-height: auto;
+  }
+
+  .case-study::before {
+    content: none;
   }
 }
 

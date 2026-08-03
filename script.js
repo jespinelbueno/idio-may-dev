@@ -892,20 +892,17 @@ const caseStudyTitle = document.querySelector("#case-study-title");
 const caseStudyClient = caseStudyDetails?.querySelector("h3");
 const caseStudyDescription = caseStudyDetails?.querySelector("p");
 const caseStudyDots = Array.from(document.querySelectorAll(".case-study__dot[data-case-index]"));
-const caseStudyScrollArea = document.querySelector(".case-study");
+const caseStudyScrollTrack = document.querySelector(".case-study__scroll-track");
 let activeCaseStudyIndex = 0;
-let caseStudyScrollLockTimer;
-let caseStudyTouchStartX = 0;
-let caseStudyTouchStartY = 0;
-let isCaseStudyScrollLocked = false;
 let isCaseStudyCardAnimating = false;
-let caseStudyScrollAccumulator = 0;
-let caseStudyLastWheelAt = 0;
+let pendingCaseStudyIndex = null;
+let caseStudyScrollFrame = 0;
 
 const CASE_STUDY_CARD_TRANSITION_MS = 260;
 const CASE_STUDY_CARD_OUTBOUND_MS = 170;
 const CASE_STUDY_CARD_INBOUND_MS = 220;
-const CASE_STUDY_SCROLL_LOCK_MS = 430;
+
+caseStudyScrollTrack?.style.setProperty("--case-study-count", String(Math.max(caseStudies.length, 1)));
 
 caseStudies.forEach(({ image }) => {
   const preload = new Image();
@@ -1126,13 +1123,26 @@ const moveCaseStudyFrontCardToBack = async (nextIndex) => {
     positionCaseStudyCards({ immediate: true });
     caseStudyMedia?.classList.remove("is-shuffling");
     isCaseStudyCardAnimating = false;
+
+    if (pendingCaseStudyIndex !== null && pendingCaseStudyIndex !== activeCaseStudyIndex) {
+      const nextIndex = pendingCaseStudyIndex;
+      pendingCaseStudyIndex = null;
+      selectCaseStudy(nextIndex);
+    } else {
+      pendingCaseStudyIndex = null;
+    }
   }
 };
 
 const selectCaseStudy = (nextIndex) => {
   const nextCaseStudy = caseStudies[nextIndex];
 
-  if (nextIndex === activeCaseStudyIndex || !nextCaseStudy || isCaseStudyCardAnimating) return false;
+  if (nextIndex === activeCaseStudyIndex || !nextCaseStudy) return false;
+
+  if (isCaseStudyCardAnimating) {
+    pendingCaseStudyIndex = nextIndex;
+    return false;
+  }
 
   activeCaseStudyIndex = nextIndex;
   setActiveCaseStudyDot(nextIndex);
@@ -1141,165 +1151,63 @@ const selectCaseStudy = (nextIndex) => {
   return true;
 };
 
-const scrollCaseStudy = (direction) => {
-  const nextIndex = Math.max(0, Math.min(caseStudies.length - 1, activeCaseStudyIndex + direction));
+const getCaseStudyScrollMetrics = () => {
+  if (!caseStudyScrollTrack) return null;
 
-  if (nextIndex === activeCaseStudyIndex) return false;
+  const pinnedSection = caseStudyScrollTrack.querySelector(".case-study");
 
-  return selectCaseStudy(nextIndex);
+  if (!pinnedSection || window.getComputedStyle(pinnedSection).position !== "sticky") return null;
+
+  const trackTop = window.scrollY + caseStudyScrollTrack.getBoundingClientRect().top;
+  const scrollDistance = Math.max(caseStudyScrollTrack.offsetHeight - window.innerHeight, 1);
+
+  return { trackTop, scrollDistance };
 };
 
-const canScrollCaseStudy = (direction) =>
-  (direction > 0 && activeCaseStudyIndex < caseStudies.length - 1) ||
-  (direction < 0 && activeCaseStudyIndex > 0);
+const getCaseStudyIndexFromScroll = () => {
+  const metrics = getCaseStudyScrollMetrics();
 
-const unlockCaseStudyScroll = () => {
-  window.clearTimeout(caseStudyScrollLockTimer);
-  isCaseStudyScrollLocked = false;
-  caseStudyScrollAccumulator = 0;
+  if (!metrics || caseStudies.length < 2) return 0;
+
+  const progress = Math.max(0, Math.min(1, (window.scrollY - metrics.trackTop) / metrics.scrollDistance));
+  return Math.min(caseStudies.length - 1, Math.floor(progress * caseStudies.length));
 };
 
-const lockCaseStudyScroll = () => {
-  isCaseStudyScrollLocked = true;
-  caseStudyScrollAccumulator = 0;
-  window.clearTimeout(caseStudyScrollLockTimer);
-  caseStudyScrollLockTimer = window.setTimeout(unlockCaseStudyScroll, CASE_STUDY_SCROLL_LOCK_MS);
+const syncCaseStudyToScroll = () => {
+  caseStudyScrollFrame = 0;
+  selectCaseStudy(getCaseStudyIndexFromScroll());
+};
+
+const scheduleCaseStudyScrollSync = () => {
+  if (caseStudyScrollFrame) return;
+  caseStudyScrollFrame = window.requestAnimationFrame(syncCaseStudyToScroll);
 };
 
 caseStudyDots.forEach((dot) => {
   dot.addEventListener("click", () => {
-    selectCaseStudy(Number(dot.dataset.caseIndex));
+    const nextIndex = Number(dot.dataset.caseIndex);
+    const metrics = getCaseStudyScrollMetrics();
+
+    if (!metrics || caseStudies.length < 2) {
+      selectCaseStudy(nextIndex);
+      return;
+    }
+
+    const segmentCenter = (nextIndex + 0.5) / caseStudies.length;
+    window.scrollTo({
+      top: metrics.trackTop + metrics.scrollDistance * Math.min(segmentCenter, 1),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
   });
 });
-
-const normalizeCaseStudyWheelDelta = (event) => {
-  if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return event.deltaY * 16;
-  if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) return event.deltaY * window.innerHeight;
-
-  return event.deltaY;
-};
-
-const isCaseStudyScrollZoneActive = () => {
-  if (!caseStudyScrollArea) return false;
-
-  const rect = caseStudyScrollArea.getBoundingClientRect();
-  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-  const focusTop = viewportHeight * 0.16;
-  const focusBottom = viewportHeight * 0.82;
-
-  return rect.top <= focusTop && rect.bottom >= focusBottom;
-};
-
-const getCaseStudyWheelThreshold = () => {
-  const isCompact = window.matchMedia("(max-width: 700px)").matches;
-
-  return isCompact ? 34 : 44;
-};
-
-caseStudyScrollArea?.addEventListener(
-  "wheel",
-  (event) => {
-    if (caseStudies.length < 2) return;
-
-    if (!isCaseStudyScrollZoneActive()) {
-      caseStudyScrollAccumulator = 0;
-      return;
-    }
-
-    const delta = normalizeCaseStudyWheelDelta(event);
-    const direction = Math.sign(delta);
-
-    if (!direction) return;
-
-    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) * 1.25) {
-      return;
-    }
-
-    if (!canScrollCaseStudy(direction)) {
-      caseStudyScrollAccumulator = 0;
-      return;
-    }
-
-    event.preventDefault();
-
-    if (isCaseStudyScrollLocked) return;
-
-    const now = performance.now();
-
-    if (now - caseStudyLastWheelAt > 180 || Math.sign(caseStudyScrollAccumulator) !== direction) {
-      caseStudyScrollAccumulator = 0;
-    }
-
-    caseStudyLastWheelAt = now;
-    caseStudyScrollAccumulator += delta;
-
-    if (Math.abs(caseStudyScrollAccumulator) >= getCaseStudyWheelThreshold() && scrollCaseStudy(direction)) {
-      lockCaseStudyScroll();
-    }
-  },
-  { passive: false },
-);
-
-caseStudyScrollArea?.addEventListener(
-  "touchstart",
-  (event) => {
-    const touch = event.touches[0];
-
-    if (!touch) return;
-
-    caseStudyTouchStartX = touch.clientX;
-    caseStudyTouchStartY = touch.clientY;
-  },
-  { passive: true },
-);
-
-caseStudyScrollArea?.addEventListener(
-  "touchmove",
-  (event) => {
-    const touch = event.touches[0];
-
-    if (!touch || !isCaseStudyScrollZoneActive()) return;
-
-    const deltaX = caseStudyTouchStartX - touch.clientX;
-    const deltaY = caseStudyTouchStartY - touch.clientY;
-
-    if (Math.abs(deltaY) < 8 || Math.abs(deltaX) > Math.abs(deltaY) * 1.25) return;
-
-    const direction = Math.sign(deltaY);
-
-    if (direction && canScrollCaseStudy(direction)) {
-      event.preventDefault();
-    }
-  },
-  { passive: false },
-);
 
 window.addEventListener("resize", () => {
   if (!isCaseStudyCardAnimating) {
     positionCaseStudyCards({ immediate: true });
   }
+  scheduleCaseStudyScrollSync();
 });
 
 positionCaseStudyCards({ immediate: true });
-
-caseStudyScrollArea?.addEventListener(
-  "touchend",
-  (event) => {
-    const touch = event.changedTouches[0];
-
-    if (!touch || isCaseStudyScrollLocked) return;
-
-    const deltaX = caseStudyTouchStartX - touch.clientX;
-    const deltaY = caseStudyTouchStartY - touch.clientY;
-    const delta = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
-
-    if (!isCaseStudyScrollZoneActive()) return;
-
-    if (Math.abs(delta) < 44) return;
-
-    if (scrollCaseStudy(Math.sign(delta))) {
-      lockCaseStudyScroll();
-    }
-  },
-  { passive: true },
-);
+window.addEventListener("scroll", scheduleCaseStudyScrollSync, { passive: true });
+syncCaseStudyToScroll();
