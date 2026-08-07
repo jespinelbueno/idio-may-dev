@@ -939,8 +939,8 @@ const getCaseStudyCardMetrics = () => {
   const isCompact = window.matchMedia("(max-width: 700px)").matches;
 
   return {
-    offsetX: width * (isCompact ? -0.075 : -0.095),
-    offsetY: width * (isCompact ? 0.07 : 0.055),
+    offsetX: width * (isCompact ? -0.075 : -0.125),
+    offsetY: width * (isCompact ? 0.07 : 0.02),
     travelX: width * (isCompact ? 0.58 : 0.68),
     liftY: width * (isCompact ? -0.2 : -0.24),
   };
@@ -948,10 +948,11 @@ const getCaseStudyCardMetrics = () => {
 
 const getCaseStudyCardTransform = (index) => {
   const { offsetX, offsetY } = getCaseStudyCardMetrics();
-  const rotation = 6.5 - index * 5.3;
-  const scale = 1 - index * 0.038;
+  const visualIndex = Math.min(index, 2);
+  const rotation = 6.5 - visualIndex * 5.3;
+  const scale = 1 - visualIndex * 0.038;
 
-  return `translate3d(${index * offsetX}px, ${index * offsetY}px, ${-index}px) rotate(${rotation}deg) scale(${scale})`;
+  return `translate3d(${visualIndex * offsetX}px, ${visualIndex * offsetY}px, ${-index}px) rotate(${rotation}deg) scale(${scale})`;
 };
 
 const positionCaseStudyCards = ({ immediate = false } = {}) => {

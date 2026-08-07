@@ -3714,8 +3714,8 @@ body.is-ready .hero__image {
 
 .team {
   min-height: clamp(40rem, 58vw, 52rem);
-  padding-top: clamp(4.5rem, 7vw, 6.5rem);
-  padding-bottom: clamp(7rem, 10vw, 9rem);
+  padding-top: clamp(2.7rem, 4.4vw, 4rem);
+  padding-bottom: clamp(5rem, 8vw, 7rem);
 }
 
 .team::before {
@@ -3754,15 +3754,15 @@ body.is-ready .hero__image {
 .team__grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(1.6rem, 3.1vw, 3rem);
-  margin-top: clamp(2.8rem, 4.5vw, 4rem);
+  margin-top: clamp(2.8rem, 4.2vw, 3.6rem);
 }
 
 .team__member {
-  --team-photo-offset: 1.6rem;
+  --team-photo-offset: 0rem;
 }
 
 .team__member--raquel {
-  --team-photo-offset: 1.6rem;
+  --team-photo-offset: 0rem;
 }
 
 .team__photo {
@@ -3771,7 +3771,7 @@ body.is-ready .hero__image {
 }
 
 .team__member--raquel .team__photo {
-  aspect-ratio: 0.71;
+  aspect-ratio: 0.7;
 }
 
 .team__member h3 {
@@ -3806,9 +3806,9 @@ body.is-ready .hero__image {
   }
 
   .case-study__stack {
-    top: 2.2rem;
-    left: 5.9rem;
-    width: 17.8rem;
+    top: 3.45rem;
+    left: 6.2rem;
+    width: 16.2rem;
     aspect-ratio: 0.85;
     transform: none;
   }
@@ -3842,7 +3842,7 @@ body.is-ready .hero__image {
   }
 
   .case-study__stroke--yellow {
-    top: 22.6rem;
+    top: 24.7rem;
     left: 16.2rem;
     width: 7rem;
   }
@@ -3860,8 +3860,9 @@ body.is-ready .hero__image {
   .case-study__dots {
     display: grid;
     order: initial;
-    gap: 1.75rem;
-    padding-top: 11.1rem;
+    align-content: start;
+    gap: 2.125rem;
+    padding-top: 11.8rem;
   }
 
   .case-study__dot,
@@ -3887,16 +3888,16 @@ body.is-ready .hero__image {
   }
 
   .case-study__copy h3 {
-    margin-top: 2.9rem;
+    margin-top: 3.4rem;
     font-size: 1.22rem;
   }
 
   .case-study__copy p {
-    max-width: 14.8rem;
+    max-width: 14.5rem;
     margin-top: 0.55rem;
     margin-left: 0;
-    font-size: 0.63rem;
-    font-weight: 560;
+    font-size: 0.55rem;
+    font-weight: 540;
     line-height: 1.22;
   }
 
@@ -3910,14 +3911,15 @@ body.is-ready .hero__image {
   }
 
   .team {
-    width: calc(100vw - 5rem);
+    width: calc(100vw - 7.5rem);
+    min-height: 32.6rem;
     text-align: left;
   }
 
   .team__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     justify-items: stretch;
-    gap: 1.6rem;
+    gap: 2rem;
   }
 
   .team__member--anna,
