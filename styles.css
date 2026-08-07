@@ -481,8 +481,27 @@ body.is-ready .hero__image {
   min-height: clamp(64rem, calc(123vw - 5.625rem), 108rem);
   overflow: hidden;
   background:
-    radial-gradient(circle at 7% 94%, rgb(255 213 105 / 0.88), transparent 20rem),
-    radial-gradient(circle at 65% 78%, rgb(153 187 211 / 0.08), transparent 24rem),
+    radial-gradient(
+      ellipse 43% 22% at 48% 29%,
+      rgb(255 213 105 / 0.94) 0%,
+      rgb(255 213 105 / 0.62) 30%,
+      rgb(255 213 105 / 0.2) 60%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 31% 23% at 102% 52%,
+      rgb(255 213 105 / 0.92) 0%,
+      rgb(255 213 105 / 0.55) 36%,
+      rgb(255 213 105 / 0.16) 65%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 36% 26% at -2% 94%,
+      rgb(255 213 105 / 0.96) 0%,
+      rgb(255 213 105 / 0.62) 34%,
+      rgb(255 213 105 / 0.18) 66%,
+      transparent 100%
+    ),
     var(--paper);
   color: var(--brand-green);
   isolation: isolate;
