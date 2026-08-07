@@ -828,10 +828,10 @@ if (loaderPageLoaded) {
 
 const caseStudies = [
   {
-    title: "featured case study",
+    title: "previous collaborations",
     client: "Leisure Events",
     description:
-      "Leisure Events is a rental company in Lynchburg, VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a more inexpensive rental option (through renting rather than buying). Idio Creative provided a full brand kit, including the brand foundation, ideology, and personality, a full research report, a brand photoshoot, and visual branding such as the brand logo, colors and elements, and mockups.",
+      "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
     image: "assets/img/photos/casestudymain_cropped.jpg",
     cards: {
       front: "var(--paper)",
@@ -842,10 +842,10 @@ const caseStudies = [
     },
   },
   {
-    title: "featured case study",
-    client: "",
+    title: "previous collaborations",
+    client: "Leisure Events",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh at arcu pretium gravida sed a sem.",
+      "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
     image: "assets/img/photos/imgportrait.png",
     cards: {
       front: "var(--brand-green)",
@@ -856,10 +856,10 @@ const caseStudies = [
     },
   },
   {
-    title: "featured case study",
-    client: "",
+    title: "previous collaborations",
+    client: "Leisure Events",
     description:
-      "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua vivamus.",
+      "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
     image: "assets/img/photos/imgstilllive.png",
     cards: {
       front: "var(--brand-olive)",
@@ -870,13 +870,13 @@ const caseStudies = [
     },
   },
   {
-    title: "featured case study",
-    client: "",
+    title: "previous collaborations",
+    client: "Leisure Events",
     description:
-      "Lorem ipsum dolor sit amet consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
+      "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
     image: "assets/img/photos/imgmotion.png",
     cards: {
-      front: "var(--brand-blue)",
+      front: "var(--brand-olive)",
       middle: "var(--brand-tan)",
       back: "var(--brand-green)",
       backWindow: "#eaf0dc",
@@ -939,8 +939,8 @@ const getCaseStudyCardMetrics = () => {
   const isCompact = window.matchMedia("(max-width: 700px)").matches;
 
   return {
-    offsetX: width * (isCompact ? -0.075 : -0.092),
-    offsetY: width * (isCompact ? 0.07 : 0.062),
+    offsetX: width * (isCompact ? -0.075 : -0.095),
+    offsetY: width * (isCompact ? 0.07 : 0.055),
     travelX: width * (isCompact ? 0.58 : 0.68),
     liftY: width * (isCompact ? -0.2 : -0.24),
   };
