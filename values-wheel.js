@@ -726,6 +726,7 @@ const initValuesWheel = () => {
 
   const showSliceValue = (group, index, tooltipDelay = 0) => {
     setActiveSliceState(index);
+    valuesWheel.classList.add("has-hover-focus");
     valuesWheelRotor.appendChild(group);
 
     const showTooltip = () => {
@@ -750,6 +751,7 @@ const initValuesWheel = () => {
 
   let hoverDebounceTimeout = null;
   let tooltipDelayTimeout = null;
+  let hoverExitTimeout = null;
   let hoveredSliceIndex = null;
 
   const clearHoverTimers = () => {
@@ -759,14 +761,21 @@ const initValuesWheel = () => {
     tooltipDelayTimeout = null;
   };
 
-  const activateSliceHover = (group, index, delay = 28) => {
+  const cancelHoverExit = () => {
+    window.clearTimeout(hoverExitTimeout);
+    hoverExitTimeout = null;
+    valuesWheel.classList.remove("is-hover-exiting");
+  };
+
+  const activateSliceHover = (group, index, delay = 72) => {
     if (!valuesWheel.classList.contains("is-scroll-settled")) {
       return;
     }
 
+    cancelHoverExit();
     clearHoverTimers();
     hoverDebounceTimeout = window.setTimeout(() => {
-      showSliceValue(group, index, 130);
+      showSliceValue(group, index, 240);
     }, delay);
   };
 
@@ -774,10 +783,17 @@ const initValuesWheel = () => {
     clearHoverTimers();
 
     if (valuesWheel.classList.contains("is-scroll-settled")) {
+      cancelHoverExit();
+      valuesWheel.classList.add("is-hover-exiting");
       showDefaultValueTooltip();
+      hoverExitTimeout = window.setTimeout(() => {
+        valuesWheel.classList.remove("is-hover-exiting");
+        hoverExitTimeout = null;
+      }, 1200);
       return;
     }
 
+    cancelHoverExit();
     clearActiveSliceState();
     clearValueTooltip();
   };
@@ -802,6 +818,27 @@ const initValuesWheel = () => {
   const clearPointerSliceHover = () => {
     hoveredSliceIndex = null;
     clearSliceHover();
+  };
+
+  const clearPointerSliceOnExit = (event) => {
+    const nextTarget = event.relatedTarget;
+
+    if (nextTarget && valuesWheelGraphic.contains(nextTarget)) {
+      return;
+    }
+
+    clearPointerSliceHover();
+  };
+
+  const clearPointerSliceOutsideWheel = (event) => {
+    if (
+      hoveredSliceIndex === null ||
+      valuesWheelGraphic.contains(event.target)
+    ) {
+      return;
+    }
+
+    clearPointerSliceHover();
   };
 
   const scrollValuesWheelToProgress = (progress) => {
@@ -908,11 +945,14 @@ const initValuesWheel = () => {
       .map(
         ({ title, description, position, fill }) => `
           <article class="values-callout is-${position}" data-value-title="${title}" style="--value-color:${fill};">
-            <img
-              class="values-callout-arrow"
-              src="assets/img/values-arrow.svg"
-              alt=""
-            >
+            ${position === "bottom" ? `
+              <img
+                class="values-wheel-arrow"
+                src="assets/arrows/wheelarrow.png"
+                alt=""
+                aria-hidden="true"
+              >
+            ` : ""}
             <div class="values-callout-content">
               <div class="values-callout-heading">
                 <span class="values-callout-swatch"></span>
@@ -1003,7 +1043,11 @@ const initValuesWheel = () => {
       hitPath.setAttribute("d", slicePath);
     });
 
-    if (isSettled && !valuesWheel.classList.contains("has-active-tooltip")) {
+    if (
+      isSettled &&
+      !valuesWheel.classList.contains("has-active-tooltip") &&
+      !valuesWheel.classList.contains("has-hover-focus")
+    ) {
       showDefaultValueTooltip();
     }
   };
@@ -1074,7 +1118,11 @@ const initValuesWheel = () => {
 
   valuesWheelGraphic.addEventListener("pointerover", activateSliceFromPointer);
   valuesWheelGraphic.addEventListener("pointermove", activateSliceFromPointer);
-  valuesWheelGraphic.addEventListener("pointerleave", clearPointerSliceHover);
+  valuesWheelGraphic.addEventListener("pointerout", clearPointerSliceOnExit);
+  valuesWheelGraphic.addEventListener("pointerleave", clearPointerSliceOnExit);
+  document.addEventListener("pointermove", clearPointerSliceOutsideWheel, {
+    passive: true,
+  });
 
   wheelSlices.forEach(({ group }, index) => {
     group.addEventListener("focus", () => {

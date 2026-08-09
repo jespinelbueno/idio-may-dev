@@ -887,10 +887,9 @@ const caseStudies = [
 
 const caseStudyMedia = document.querySelector(".case-study__media");
 const caseStudyStack = document.querySelector("[data-case-stack]");
-const caseStudyDetails = document.querySelector("[data-case-details]");
-const caseStudyTitle = document.querySelector("#case-study-title");
-const caseStudyClient = caseStudyDetails?.querySelector("h3");
-const caseStudyDescription = caseStudyDetails?.querySelector("p");
+const caseStudyProject = document.querySelector("[data-case-project]");
+const caseStudyClient = caseStudyProject?.querySelector("h3");
+const caseStudyDescription = caseStudyProject?.querySelector(".case-study__description");
 const caseStudyDots = Array.from(document.querySelectorAll(".case-study__dot[data-case-index]"));
 const caseStudyScrollTrack = document.querySelector(".case-study__scroll-track");
 let activeCaseStudyIndex = 0;
@@ -920,15 +919,14 @@ const setActiveCaseStudyDot = (nextIndex) => {
 const updateCaseStudyContent = (nextIndex) => {
   const nextCaseStudy = caseStudies[nextIndex];
 
-  if (!nextCaseStudy || !caseStudyTitle || !caseStudyDescription) return;
+  if (!nextCaseStudy || !caseStudyDescription) return;
 
-  caseStudyTitle.textContent = nextCaseStudy.title;
   if (caseStudyClient) {
     caseStudyClient.textContent = nextCaseStudy.client;
     caseStudyClient.hidden = !nextCaseStudy.client;
   }
   caseStudyDescription.textContent = nextCaseStudy.description;
-  caseStudyDetails?.classList.remove("is-changing");
+  caseStudyProject?.classList.remove("is-changing");
 };
 
 const getCaseStudyCards = () => Array.from(caseStudyStack?.querySelectorAll("[data-case-card]") ?? []);
