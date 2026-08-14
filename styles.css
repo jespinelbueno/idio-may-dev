@@ -23,6 +23,12 @@
   font-display: swap;
 }
 
+@property --toolkit-sweep {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 302deg;
+}
+
 :root {
   --paper: #f7f2e9;
   --ink: #15120e;
@@ -1009,15 +1015,75 @@ body.is-ready .hero__image {
 }
 
 .what-offer__circle {
+  --toolkit-color: #edcf77;
+  --toolkit-accent: #f6f2ea;
+  --toolkit-resting-rotation: -20deg;
+
+  position: relative;
   width: clamp(11.8rem, 14.4vw, 14.4rem);
   aspect-ratio: 1;
+}
+
+.what-offer__circle-shape {
+  --toolkit-sweep: 302deg;
+
+  position: absolute;
+  inset: 0;
+  display: block;
   border-radius: 50%;
+  filter: drop-shadow(0 1.2rem 1.4rem rgb(21 18 14 / 0.08));
+  transform: rotate(var(--toolkit-resting-rotation));
+  transform-origin: center;
+  will-change: transform;
+}
+
+.what-offer__circle-shape::before,
+.what-offer__circle-shape::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+}
+
+.what-offer__circle-shape::before {
   background:
-    radial-gradient(circle at 38% 30%, rgb(255 255 255 / 0.38), transparent 36%),
-    var(--paper);
-  box-shadow:
-    inset 0 0 0 1px rgb(247 242 233 / 0.18),
-    0 1.2rem 2.8rem rgb(21 18 14 / 0.08);
+    radial-gradient(circle at 38% 30%, rgb(255 255 255 / 0.2), transparent 38%),
+    var(--toolkit-color);
+  mask: conic-gradient(from -90deg, #000 0deg var(--toolkit-sweep), transparent var(--toolkit-sweep) 360deg);
+  -webkit-mask: conic-gradient(from -90deg, #000 0deg var(--toolkit-sweep), transparent var(--toolkit-sweep) 360deg);
+}
+
+.what-offer__circle-shape::after {
+  background: conic-gradient(
+    from -90deg,
+    transparent 0deg var(--toolkit-sweep),
+    var(--toolkit-accent) var(--toolkit-sweep) 360deg
+  );
+  box-shadow: inset 0 0 0 1px rgb(247 242 233 / 0.1);
+}
+
+.what-offer__item--one .what-offer__circle {
+  --toolkit-color: #edcf77;
+  --toolkit-accent: #f6f2ea;
+  --toolkit-resting-rotation: -20deg;
+}
+
+.what-offer__item--two .what-offer__circle {
+  --toolkit-color: #a4a867;
+  --toolkit-accent: #183b11;
+  --toolkit-resting-rotation: 32deg;
+}
+
+.what-offer__item--three .what-offer__circle {
+  --toolkit-color: #af261e;
+  --toolkit-accent: #f4d3d2;
+  --toolkit-resting-rotation: -20deg;
+}
+
+.what-offer__item--four .what-offer__circle {
+  --toolkit-color: #324064;
+  --toolkit-accent: #9cb5cc;
+  --toolkit-resting-rotation: 20deg;
 }
 
 .what-offer__copy {
