@@ -62,8 +62,8 @@ body {
     0% 50%,
     0 0;
   filter: drop-shadow(0 1.5rem 2.5rem rgb(21 18 14 / 0.28));
-  mask: url("../../assets/img/icon.svg") center / contain no-repeat;
-  -webkit-mask: url("../../assets/img/icon.svg") center / contain no-repeat;
+  mask: url("../../assets/media/brand/idio-icon.svg") center / contain no-repeat;
+  -webkit-mask: url("../../assets/media/brand/idio-icon.svg") center / contain no-repeat;
   animation: loader-icon-colors 1800ms cubic-bezier(0.83, 0, 0.17, 1) infinite;
 }
 

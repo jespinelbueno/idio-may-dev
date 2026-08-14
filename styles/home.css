@@ -1,0 +1,14 @@
+@layer foundation, components, pages, effects, responsive;
+
+@import url("./foundation.css") layer(foundation);
+@import url("./loader.css") layer(components);
+@import url("./buttons.css") layer(components);
+@import url("./footer.css") layer(components);
+@import url("./hero.css") layer(pages);
+@import url("./offer.css") layer(pages);
+@import url("./toolkit.css") layer(pages);
+@import url("./case-study.css") layer(pages);
+@import url("./team.css") layer(pages);
+@import url("./values.css") layer(pages);
+@import url("./animations.css") layer(effects);
+@import url("./responsive.css") layer(responsive);

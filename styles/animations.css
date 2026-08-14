@@ -1,0 +1,76 @@
+@keyframes loader-fixed-in {
+  0% {
+    opacity: 0;
+    transform: none;
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-arrive {
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes stroke-shape-cycle {
+  0%,
+  19.99% {
+    filter: url("#stroke-shape-frame-1");
+  }
+
+  20%,
+  39.99% {
+    filter: url("#stroke-shape-frame-2");
+  }
+
+  40%,
+  59.99% {
+    filter: url("#stroke-shape-frame-3");
+  }
+
+  60%,
+  79.99% {
+    filter: url("#stroke-shape-frame-4");
+  }
+
+  80%,
+  100% {
+    filter: url("#stroke-shape-frame-5");
+  }
+}
+
+@keyframes team-stroke-shape-cycle {
+  0%,
+  19.99% {
+    filter: url("#team-stroke-shape-frame-1");
+  }
+
+  20%,
+  39.99% {
+    filter: url("#team-stroke-shape-frame-2");
+  }
+
+  40%,
+  59.99% {
+    filter: url("#team-stroke-shape-frame-3");
+  }
+
+  60%,
+  79.99% {
+    filter: url("#team-stroke-shape-frame-4");
+  }
+
+  80%,
+  100% {
+    filter: url("#team-stroke-shape-frame-5");
+  }
+}
+

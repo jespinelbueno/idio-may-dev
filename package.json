@@ -1,0 +1,11 @@
+{
+  "name": "idio-may-dev",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node tools/check-site.mjs"
+  }
+}

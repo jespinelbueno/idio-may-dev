@@ -1,0 +1,375 @@
+.team {
+  position: relative;
+  width: min(78rem, calc(100vw - clamp(4rem, 9vw, 9rem)));
+  min-height: clamp(40rem, 54vw, 50rem);
+  margin: 0 auto;
+  padding: clamp(1.8rem, 3vw, 3rem) 0 clamp(8rem, 11vw, 10rem);
+  isolation: isolate;
+}
+
+.team h2 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(3.3rem, 5.6vw, 5.3rem);
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.team__stroke {
+  position: absolute;
+  display: block;
+  max-width: none;
+  opacity: var(--stroke-opacity, 1);
+  pointer-events: none;
+  transform: var(--stroke-transform, none);
+  transform-origin: center;
+  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
+}
+
+.team__stroke--red {
+  top: clamp(-3.6rem, -4vw, -2.75rem);
+  right: clamp(-0.95rem, -1.2vw, -0.45rem);
+  z-index: 1;
+  width: clamp(4.1rem, 5.9vw, 5.75rem);
+  --stroke-transform: rotate(7deg);
+  --stroke-duration: 2.65s;
+  --stroke-delay: -1.1s;
+  --stroke-reveal-delay: 0ms;
+  --stroke-frame-duration: 880ms;
+  --stroke-frame-delay: -690ms;
+  --stroke-tilt: -5.2deg;
+  --stroke-x: 0.22rem;
+  --stroke-y: -0.34rem;
+}
+
+.team__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  margin-top: clamp(4.2rem, 6vw, 5.8rem);
+}
+
+.team__member {
+  --team-photo-offset: 1.8rem;
+
+  position: relative;
+  container-type: inline-size;
+  color: var(--brand-green);
+  outline: none;
+  isolation: isolate;
+}
+
+.team__member::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--team-photo-offset) + 95cqw);
+  right: -1cqw;
+  z-index: 4;
+  width: 34cqw;
+  aspect-ratio: 131 / 266;
+  background: var(--brand-yellow);
+  mask: url("../assets/media/decorations/arrows/team.svg") center / contain no-repeat;
+  -webkit-mask: url("../assets/media/decorations/arrows/team.svg") center / contain no-repeat;
+  opacity: 0;
+  transform: translateY(0.8rem) rotate(-1deg);
+  transition:
+    opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.team__member:hover,
+.team__member:focus,
+.team__member:focus-within {
+  z-index: 5;
+}
+
+.team__member:focus-visible {
+  outline: 0.12rem solid rgb(0 71 12 / 0.46);
+  outline-offset: 0.7rem;
+}
+
+.team__member--anna,
+.team__member--raquel,
+.team__member--naomi,
+.team__member--jaden {
+  padding-top: var(--team-photo-offset);
+}
+
+.team__photo {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  aspect-ratio: 0.72;
+  background: rgb(247 242 233 / 0.56);
+  box-shadow: 0 1rem 2.2rem rgb(21 18 14 / 0.07);
+  transform-origin: center bottom;
+  transition:
+    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.team__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    filter 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team__photo-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  color: var(--brand-green);
+  opacity: 0;
+  transform: translateY(0.8rem);
+  transition:
+    opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.team__photo-copy p {
+  width: 88%;
+  margin: clamp(2.05rem, 3.15vw, 2.85rem) auto 0;
+  color: rgb(21 18 14 / 0.94);
+  font-family: "Teva", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(1.75rem, 2.25vw, 2.45rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.team__photo-scribble {
+  position: absolute;
+  display: block;
+  opacity: 0.9;
+  pointer-events: none;
+  transform-origin: center;
+  animation: team-stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
+  animation-play-state: paused;
+}
+
+.team__photo-scribble--red {
+  --scribble-rotate: -1deg;
+
+  top: 22%;
+  left: 24%;
+  width: 58%;
+  aspect-ratio: 225 / 83;
+  background: url("../assets/media/decorations/strokes/team/blue.png") center / contain no-repeat;
+  transform: rotate(var(--scribble-rotate));
+}
+
+.team__photo-scribble--green {
+  display: none;
+}
+
+.team__member--anna .team__photo-copy p {
+  width: 88%;
+}
+
+.team__member--naomi .team__photo-copy p,
+.team__member--jaden .team__photo-copy p {
+  width: 88%;
+}
+
+.team__member--naomi .team__photo-scribble--red {
+  left: 24%;
+}
+
+.team__member--anna .team__photo-scribble--red {
+  --stroke-frame-duration: 880ms;
+  --stroke-frame-delay: -140ms;
+}
+
+.team__member--raquel .team__photo-scribble--red {
+  --stroke-frame-duration: 1040ms;
+  --stroke-frame-delay: -520ms;
+}
+
+.team__member--naomi .team__photo-scribble--red {
+  --stroke-frame-duration: 940ms;
+  --stroke-frame-delay: -760ms;
+}
+
+.team__member--jaden .team__photo-scribble--red {
+  --stroke-frame-duration: 1120ms;
+  --stroke-frame-delay: -320ms;
+}
+
+.team__member:hover .team__photo,
+.team__member:focus .team__photo,
+.team__member:focus-within .team__photo {
+  box-shadow: 0 1.45rem 3rem rgb(21 18 14 / 0.12);
+  transform: scale(1.16);
+}
+
+.team__member:hover .team__photo-copy,
+.team__member:focus .team__photo-copy,
+.team__member:focus-within .team__photo-copy {
+  opacity: 1;
+}
+
+.team__member:hover .team__photo img,
+.team__member:focus .team__photo img,
+.team__member:focus-within .team__photo img {
+  filter: saturate(0.76) contrast(0.92);
+  transform: scale(1.02);
+}
+
+.team__member:hover .team__photo-copy,
+.team__member:focus .team__photo-copy,
+.team__member:focus-within .team__photo-copy {
+  transform: translateY(0);
+}
+
+.team__member:hover::after,
+.team__member:focus::after,
+.team__member:focus-within::after {
+  opacity: 1;
+  transform: translateY(0) rotate(-1deg);
+}
+
+.team__member:hover .team__photo-scribble,
+.team__member:focus .team__photo-scribble,
+.team__member:focus-within .team__photo-scribble {
+  animation-play-state: running;
+}
+
+.team__member h3 {
+  position: relative;
+  z-index: 2;
+  margin: 0.72rem 0 0;
+  color: var(--brand-green);
+  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+.team__bio {
+  position: absolute;
+  top: calc(var(--team-photo-offset) + 139cqw + 3.25rem);
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--brand-green);
+  font-size: clamp(0.72rem, 0.95vw, 0.88rem);
+  font-weight: 420;
+  line-height: 1.14;
+  opacity: 0;
+  transform: translateY(-0.18rem);
+  transition:
+    max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 180ms ease,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team__bio strong {
+  font-weight: 900;
+}
+
+.team__member:hover .team__bio,
+.team__member:focus .team__bio,
+.team__member:focus-within .team__bio {
+  max-height: 6.8rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team {
+  min-height: clamp(40rem, 58vw, 52rem);
+  padding-top: clamp(2.7rem, 4.4vw, 4rem);
+  padding-bottom: clamp(5rem, 8vw, 7rem);
+}
+
+.team::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  content: "";
+  background:
+    radial-gradient(rgb(21 18 14 / 0.07) 0.55px, transparent 0.55px),
+    #adb45f;
+  background-size: 0.42rem 0.42rem, auto;
+  transform: translateX(-50%);
+}
+
+.team h2 {
+  color: var(--brand-green);
+  font-size: clamp(3.25rem, 5vw, 4.8rem);
+}
+
+.team__tagline {
+  position: relative;
+  z-index: 2;
+  margin: 0.45rem 0 0;
+  color: var(--brand-green);
+  font-family: "Teva", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(0.78rem, 1.1vw, 1rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.team__grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.6rem, 3.1vw, 3rem);
+  margin-top: clamp(2.8rem, 4.2vw, 3.6rem);
+}
+
+.team__member {
+  --team-photo-offset: 0rem;
+}
+
+.team__member--raquel {
+  --team-photo-offset: 0rem;
+}
+
+.team__photo {
+  aspect-ratio: 0.7;
+  box-shadow: none;
+}
+
+.team__member--raquel .team__photo {
+  aspect-ratio: 0.7;
+}
+
+.team__member h3 {
+  margin-top: 0.72rem;
+  font-size: clamp(1.55rem, 2.1vw, 2rem);
+}
+
+.team__bio {
+  position: relative;
+  inset: auto;
+  max-height: none;
+  margin-top: 0.62rem;
+  overflow: visible;
+  font-size: clamp(0.58rem, 0.72vw, 0.72rem);
+  line-height: 1.18;
+  opacity: 1;
+  transform: none;
+}

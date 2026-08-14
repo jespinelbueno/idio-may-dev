@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "DM Sans";
+  src: url("../assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vollkorn";
+  src: url("../assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Teva";
+  src: url("../assets/fonts/Teva/Teva-Regular.otf") format("opentype"),
+    url("../assets/fonts/Teva/Teva-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@property --toolkit-sweep {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 302deg;
+}
+
+:root {
+  --paper: #f7f2e9;
+  --ink: #15120e;
+  --muted: #625b50;
+  --brand-tan: #e3b86d;
+  --brand-green: #00470c;
+  --brand-olive: #adb363;
+  --brand-red: #d80411;
+  --brand-yellow: #ffd569;
+  --brand-blue: #99bbd3;
+  --brand-navy: #16233d;
+  --brand-pink: #facbd0;
+  --hero-vh: 100svh;
+  --offer-stage-h: clamp(64rem, 78vw, 72rem);
+  --offer-stage-w: min(79rem, calc(100vw - clamp(10rem, 18vw, 18rem)));
+  --edge: clamp(1rem, 3vw, 3.2rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.is-loading {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.stroke-frame-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-shell {
+  min-height: 100vh;
+}
+

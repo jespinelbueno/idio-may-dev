@@ -1,0 +1,199 @@
+.what-offer {
+  position: relative;
+  min-height: clamp(44rem, 58.5vw, 58rem);
+  overflow: hidden;
+  background: #31480f;
+  color: var(--paper);
+  isolation: isolate;
+}
+
+.what-offer__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.what-offer__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 53% 19%, rgb(247 242 233 / 0.06), transparent 18rem),
+    linear-gradient(180deg, rgb(0 71 12 / 0.02), rgb(0 0 0 / 0.08));
+  pointer-events: none;
+}
+
+.what-offer__inner {
+  position: relative;
+  width: min(82rem, calc(100vw - clamp(2rem, 5vw, 6rem)));
+  min-height: inherit;
+  margin: 0 auto;
+}
+
+.what-offer__header {
+  position: absolute;
+  top: clamp(4.6rem, 7.4vw, 7rem);
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  transform: translateX(-50%);
+}
+
+.what-offer__header h2 {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(3rem, 4.9vw, 5rem);
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  text-shadow: 0 0.1rem 0.9rem rgb(21 18 14 / 0.14);
+  white-space: nowrap;
+}
+
+.what-offer__underline {
+  display: block;
+  width: clamp(14rem, 22vw, 19rem);
+  aspect-ratio: 84 / 10;
+  margin-top: clamp(0.55rem, 0.9vw, 0.55rem);
+  background: var(--paper);
+  mask: url("../assets/media/decorations/scribbles/toolkit.svg") center / contain no-repeat;
+  -webkit-mask: url("../assets/media/decorations/scribbles/toolkit.svg") center / contain no-repeat;
+}
+
+.what-offer__items {
+  position: absolute;
+  inset: 0;
+}
+
+.what-offer__item {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.7rem, 2.8vw, 2.8rem);
+}
+
+.what-offer__circle {
+  --toolkit-color: #edcf77;
+  --toolkit-accent: #f6f2ea;
+  --toolkit-resting-rotation: -20deg;
+
+  position: relative;
+  width: clamp(11.8rem, 14.4vw, 14.4rem);
+  aspect-ratio: 1;
+}
+
+.what-offer__circle-shape {
+  --toolkit-sweep: 302deg;
+
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  filter: drop-shadow(0 1.2rem 1.4rem rgb(21 18 14 / 0.08));
+  transform: rotate(var(--toolkit-resting-rotation));
+  transform-origin: center;
+  will-change: transform;
+}
+
+.what-offer__circle-shape::before,
+.what-offer__circle-shape::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+}
+
+.what-offer__circle-shape::before {
+  background: var(--toolkit-color);
+  mask: conic-gradient(from -90deg, #000 0deg var(--toolkit-sweep), transparent var(--toolkit-sweep) 360deg);
+  -webkit-mask: conic-gradient(from -90deg, #000 0deg var(--toolkit-sweep), transparent var(--toolkit-sweep) 360deg);
+}
+
+.what-offer__circle-shape::after {
+  background: conic-gradient(
+    from -90deg,
+    transparent 0deg var(--toolkit-sweep),
+    var(--toolkit-accent) var(--toolkit-sweep) 360deg
+  );
+  box-shadow: inset 0 0 0 1px rgb(247 242 233 / 0.1);
+}
+
+.what-offer__item--one .what-offer__circle {
+  --toolkit-color: #edcf77;
+  --toolkit-accent: #f6f2ea;
+  --toolkit-resting-rotation: -20deg;
+}
+
+.what-offer__item--two .what-offer__circle {
+  --toolkit-color: #a4a867;
+  --toolkit-accent: #183b11;
+  --toolkit-resting-rotation: 32deg;
+}
+
+.what-offer__item--three .what-offer__circle {
+  --toolkit-color: #af261e;
+  --toolkit-accent: #f4d3d2;
+  --toolkit-resting-rotation: -20deg;
+}
+
+.what-offer__item--four .what-offer__circle {
+  --toolkit-color: #324064;
+  --toolkit-accent: #9cb5cc;
+  --toolkit-resting-rotation: 20deg;
+}
+
+.what-offer__copy {
+  width: max-content;
+  max-width: 20rem;
+  text-align: center;
+  text-shadow: 0 0.1rem 0.42rem rgb(21 18 14 / 0.24);
+}
+
+.what-offer__copy h3 {
+  margin: 0;
+  color: rgb(247 242 233 / 0.94);
+  font-size: clamp(1.55rem, 2.65vw, 2.65rem);
+  font-weight: 850;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-transform: lowercase;
+}
+
+.what-offer__copy p {
+  margin: 0.65rem 0 0;
+  color: rgb(247 242 233 / 0.94);
+  font-family: "Teva", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(1rem, 1.45vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.what-offer__item--one {
+  top: 29.5%;
+  left: 8.1%;
+}
+
+.what-offer__item--two {
+  top: 35.8%;
+  left: 30.6%;
+}
+
+.what-offer__item--three {
+  top: 32.2%;
+  left: 51.2%;
+  gap: clamp(3.5rem, 4.8vw, 4.8rem);
+}
+
+.what-offer__item--four {
+  top: 40.2%;
+  right: 7.3%;
+}
+
