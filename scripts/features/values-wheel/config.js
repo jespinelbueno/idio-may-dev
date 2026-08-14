@@ -264,7 +264,7 @@ const createBlendedFrame = ({
   }),
 });
 
-const radialOffset = (radius, angleDegrees) => {
+export const radialOffset = (radius, angleDegrees) => {
   const angleRadians = ((angleDegrees - 90) * Math.PI) / 180;
 
   return {

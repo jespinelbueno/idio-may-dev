@@ -5,6 +5,7 @@ import {
   valuesWheelFrameStops,
   valuesWheelFrames,
   valuesWheelRenderOrder,
+  radialOffset,
   valuesWheelScrollEnd,
   valuesWheelScrollStart,
   valuesWheelSmoothingFactor,
