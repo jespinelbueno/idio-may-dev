@@ -7,7 +7,7 @@ This is a static HTML/CSS/JavaScript site with no build step. Keep index.html an
 - styles.css is the stable homepage CSS entry; styles/home.css defines its ordered imports.
 - styles/services.css is the services-page CSS entry. Put a rule in its owning foundation, component, section, animation, or responsive file—never add a late catch-all override file.
 - scripts/home.js is the only homepage script entry. Feature modules export an init function, self-guard when their markup is absent, and keep their own event listeners/state.
-- scripts/features/values-wheel/ separates configuration, geometry helpers, and DOM interaction. Keep the default smoothing factor at 0.18 unless the requested wheel behavior changes.
+- scripts/features/values-wheel/ separates configuration, geometry helpers, and DOM interaction. Keep the default smoothing factor at 0.075 unless the requested wheel behavior changes.
 - assets/media/ holds canonical active media. tools/asset-aliases.json maps public legacy paths to canonical copies. Update both the map and the source references whenever active media is renamed.
 
 ## Homepage behavior
