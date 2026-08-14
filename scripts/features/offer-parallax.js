@@ -1,4 +1,7 @@
 export const initOfferParallax = () => {
+  const OFFER_GRADIENT_MOTION_INTENSITY = 1.65;
+  const OFFER_GRADIENT_CATCH_UP = 0.12;
+  const REDUCED_MOTION_INTENSITY = 0.35;
   const offerSection = document.querySelector(".offer");
   
   if (!offerSection) return;
@@ -21,7 +24,9 @@ export const initOfferParallax = () => {
   const paintOfferParallax = (progress) => {
     const orbit = progress * Math.PI * 2;
     const travelProgress = progress - 0.5;
-    const motionIntensity = offerParallaxMotionQuery.matches ? 0.35 : 1;
+    const motionIntensity = offerParallaxMotionQuery.matches
+      ? REDUCED_MOTION_INTENSITY
+      : OFFER_GRADIENT_MOTION_INTENSITY;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const sectionHeight = offerSection.offsetHeight || viewportHeight;
@@ -105,7 +110,7 @@ export const initOfferParallax = () => {
     offerParallaxFrame = 0;
   
     offerParallaxTarget = getOfferParallaxProgress();
-    offerParallaxCurrent += (offerParallaxTarget - offerParallaxCurrent) * 0.2;
+    offerParallaxCurrent += (offerParallaxTarget - offerParallaxCurrent) * OFFER_GRADIENT_CATCH_UP;
     paintOfferParallax(offerParallaxCurrent);
   
     if (Math.abs(offerParallaxTarget - offerParallaxCurrent) > 0.0005) {

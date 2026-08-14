@@ -36,6 +36,9 @@ export const initValuesWheel = () => {
     valuesCallouts
       ?.querySelectorAll(".values-callout.is-active")
       .forEach((callout) => callout.classList.remove("is-active"));
+    valuesCallouts
+      ?.querySelectorAll(".values-wheel-arrow.is-active")
+      .forEach((arrow) => arrow.classList.remove("is-active"));
     valueTooltip.classList.remove(
       "is-left",
       "is-right",
@@ -63,6 +66,14 @@ export const initValuesWheel = () => {
         callout.classList.toggle(
           "is-active",
           callout.dataset.valueTitle === valueTitle
+        );
+      });
+    valuesCallouts
+      ?.querySelectorAll(".values-wheel-arrow")
+      .forEach((arrow) => {
+        arrow.classList.toggle(
+          "is-active",
+          arrow.dataset.valueTitle === valueTitle
         );
       });
 
@@ -323,18 +334,23 @@ export const initValuesWheel = () => {
   }
 
   if (valuesCallouts) {
-    valuesCallouts.innerHTML = valuesWheelConfig
+    const arrows = valuesWheelConfig
+      .map(
+        ({ title, position }) => `
+          <img
+            class="values-wheel-arrow is-${position}"
+            src="assets/arrows/wheelarrowsvg.svg"
+            data-value-title="${title}"
+            alt=""
+            aria-hidden="true"
+          >
+        `
+      )
+      .join("");
+    const callouts = valuesWheelConfig
       .map(
         ({ title, description, position, fill }) => `
           <article class="values-callout is-${position}" data-value-title="${title}" style="--value-color:${fill};">
-            ${position === "bottom" ? `
-              <img
-                class="values-wheel-arrow"
-                src="assets/media/decorations/arrows/values-wheel-arrow.png"
-                alt=""
-                aria-hidden="true"
-              >
-            ` : ""}
             <div class="values-callout-content">
               <div class="values-callout-heading">
                 <span class="values-callout-swatch"></span>
@@ -346,6 +362,7 @@ export const initValuesWheel = () => {
         `
       )
       .join("");
+    valuesCallouts.innerHTML = `${arrows}${callouts}`;
   }
 
   const updateValuesWheelShape = (scrollProgress = 0) => {

@@ -90,7 +90,7 @@
 
 .offer__gradient--top {
   top: 4%;
-  left: -10%;
+  left: -20%;
   width: 120%;
   height: 52%;
   --gradient-core: rgb(255 213 105 / 0.9);
@@ -418,4 +418,3 @@
   --stroke-x: 0.36rem;
   --stroke-y: 0.42rem;
 }
-
