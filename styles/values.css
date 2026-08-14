@@ -67,6 +67,8 @@
 }
 
 .values-callouts {
+  --values-callout-gap: clamp(1.25rem, 4vw, 3.5rem);
+
   position: absolute;
   inset: 0;
   z-index: 4;
@@ -131,33 +133,33 @@
 }
 
 .values-callout.is-top {
-  top: 20%;
-  right: calc(100% - 0.5rem);
+  top: 8%;
+  right: calc(100% + var(--values-callout-gap));
 }
 
 .values-callout.is-upper-left {
-  top: 60%;
-  right: calc(100% + 1.75rem);
+  top: 52%;
+  right: calc(100% + var(--values-callout-gap));
 }
 
 .values-callout.is-upper-right {
-  top: 17%;
-  left: calc(100% + 0.9rem);
+  top: 8%;
+  left: calc(100% + var(--values-callout-gap));
 }
 
 .values-callout.is-lower-right {
-  top: 71%;
-  left: calc(100% + 5.8rem);
+  top: 52%;
+  left: calc(100% + var(--values-callout-gap) + clamp(1rem, 2vw, 2.25rem));
 }
 
 .values-callout.is-lower-left {
-  top: 100%;
-  right: calc(100% - 0.35rem);
+  top: 96%;
+  right: calc(100% + var(--values-callout-gap));
 }
 
 .values-callout.is-bottom {
-  top: 110%;
-  left: calc(100% - 1.1rem);
+  top: 96%;
+  left: calc(100% + var(--values-callout-gap));
 }
 
 .values-wheel-arrow {
@@ -450,4 +452,3 @@
 .values-mobile-list {
   display: none;
 }
-
