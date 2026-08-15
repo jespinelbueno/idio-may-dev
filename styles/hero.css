@@ -28,6 +28,82 @@
   pointer-events: none;
 }
 
+.home-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem clamp(1.6rem, 3vw, 3rem);
+  color: var(--paper);
+  pointer-events: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.home-nav.is-sticky {
+  position: fixed;
+  z-index: 10;
+  background: var(--paper);
+  color: var(--brand-green);
+}
+
+.home-nav__brand,
+.home-nav__links a {
+  pointer-events: auto;
+}
+
+.home-nav__brand {
+  display: grid;
+  place-items: center;
+  width: clamp(2.1rem, 3.3vw, 3rem);
+  aspect-ratio: 47 / 33;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.home-nav__brand-mark {
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat;
+  -webkit-mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat;
+}
+
+.home-nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.8rem, 4.6vw, 4.8rem);
+  font-size: clamp(0.65rem, 0.76vw, 0.78rem);
+  font-weight: 650;
+  line-height: 1;
+}
+
+.home-nav__links a {
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.home-nav__links a:hover,
+.home-nav__links a:focus-visible,
+.home-nav__brand:hover,
+.home-nav__brand:focus-visible {
+  opacity: 0.72;
+  transform: translateY(-0.06rem);
+}
+
+.home-nav__links a:focus-visible,
+.home-nav__brand:focus-visible {
+  outline: 0.12rem solid currentColor;
+  outline-offset: 0.3rem;
+}
+
 .hero__headline {
   --hero-logo-gap: clamp(0.38rem, 0.75vw, 0.7rem);
   --idio-lockup-logo-width: 2.55em;
@@ -73,4 +149,3 @@
   transform: translateY(var(--idio-lockup-logo-y));
   filter: drop-shadow(0 0.12rem 0.3rem rgb(0 0 0 / 0.04));
 }
-

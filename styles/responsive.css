@@ -112,6 +112,15 @@
     display: none;
   }
 
+  .home-nav {
+    padding: 0.75rem var(--edge);
+  }
+
+  .home-nav__links {
+    gap: clamp(1rem, 4vw, 2rem);
+    font-size: 0.72rem;
+  }
+
   .services-nav {
     padding: 1.2rem var(--edge);
   }
@@ -521,6 +530,21 @@
 }
 
 @media (max-width: 640px) {
+  .home-nav {
+    align-items: flex-start;
+  }
+
+  .home-nav__brand {
+    width: 2.2rem;
+  }
+
+  .home-nav__links {
+    display: grid;
+    justify-items: end;
+    gap: 0.62rem;
+    font-size: 0.72rem;
+  }
+
   .services-nav {
     align-items: flex-start;
   }
