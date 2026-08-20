@@ -164,26 +164,26 @@
 .offer__intro p {
   margin: 1.2rem 0 0;
   color: var(--brand-green);
-  font-size: 2.7vw;
-  font-weight: 540;
+  font-size: 2vw;
+  font-weight: 600;
   line-height: 1.2;
 }
 
 .offer__copy {
   position: absolute;
   top: 49.5vw;
-  left: max(calc(5rem + var(--offer-curve-bleed)), calc(50% - 40rem));
+  left: 9rem;
   z-index: 4;
-  width: 30.9vw;
+  width: 40vw;
 }
 
 .offer__copy h3 {
   margin: 0;
   color: var(--brand-green);
-  font-size: 4.5vw;
-  font-weight: 700;
-  line-height: 0.91;
-  letter-spacing: -0.025em;
+  font-size: 3.5vw;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08rem;
   text-transform: lowercase;
 }
 
@@ -191,8 +191,9 @@
   max-width: 24rem;
   margin: 3.6vw 0 0;
   color: var(--brand-green);
-  font-size: 1.2vw;
-  font-weight: 520;
+  width: 90%;
+  font-size: 0.9vw;
+  font-weight: 400;
   line-height: 1.3;
 }
 
@@ -225,7 +226,7 @@
 .offer__placeholder--portrait-main {
   position: absolute;
   top: 0;
-  left: 40.5%;
+  left: 38%;
   width: 38.5%;
   aspect-ratio: 0.935;
   z-index: 4;

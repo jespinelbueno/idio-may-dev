@@ -1,7 +1,7 @@
 /* Preserve the reference collage proportions on Retina-width laptop windows. */
 @media (min-width: 1101px) and (max-width: 1500px) {
   .offer__copy {
-    left: 8rem;
+    left: 14rem;
   }
 
   .offer__collage {
