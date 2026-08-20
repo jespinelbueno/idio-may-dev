@@ -1,10 +1,15 @@
 .offer {
   --offer-collage-top: 48vw;
+  --offer-curve-offset: clamp(2rem, 3.6vw, 3rem);
+  --offer-curve-bleed: 6vw;
 
   position: relative;
+  width: calc(100% + (var(--offer-curve-bleed) * 2));
   min-height: calc(123vw - 5.625rem);
-  overflow: hidden;
-  background: var(--paper);
+  margin-top: calc(var(--offer-curve-offset) * -1);
+  margin-left: calc(var(--offer-curve-bleed) * -1);
+  overflow: visible;
+  background: transparent;
   color: var(--brand-green);
   isolation: isolate;
 }
@@ -20,11 +25,22 @@
   pointer-events: none;
 }
 
+.offer::after {
+  position: absolute;
+  inset: calc(var(--offer-curve-offset) * -1) 0 0;
+  z-index: -1;
+  content: "";
+  background: var(--paper);
+  clip-path: ellipse(200vw 100% at 50% 100%);
+  pointer-events: none;
+}
+
 .offer__gradients {
   position: absolute;
-  inset: 0;
+  inset: calc(var(--offer-curve-offset) * -1) 0 0;
   z-index: 0;
   overflow: hidden;
+  clip-path: ellipse(200vw 100% at 50% 100%);
   pointer-events: none;
 }
 
@@ -156,7 +172,7 @@
 .offer__copy {
   position: absolute;
   top: 49.5vw;
-  left: max(5rem, calc(50% - 40rem));
+  left: max(calc(5rem + var(--offer-curve-bleed)), calc(50% - 40rem));
   z-index: 4;
   width: 30.9vw;
 }
