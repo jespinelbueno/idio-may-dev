@@ -23,17 +23,12 @@
   font-display: swap;
 }
 
-@property --toolkit-sweep {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 302deg;
-}
-
 :root {
   --paper: #f7f2e9;
   --ink: #15120e;
   --muted: #625b50;
   --brand-tan: #e3b86d;
+  --butter: #efd178;
   --brand-green: #00470c;
   --brand-olive: #adb363;
   --brand-red: #d80411;

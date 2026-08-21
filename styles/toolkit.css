@@ -79,73 +79,83 @@
 }
 
 .what-offer__circle {
-  --toolkit-color: #edcf77;
-  --toolkit-accent: #f6f2ea;
-  --toolkit-resting-rotation: -20deg;
-
   position: relative;
   width: clamp(11.8rem, 14.4vw, 14.4rem);
   aspect-ratio: 1;
+  cursor: pointer;
+  transition: transform 180ms ease;
+}
+
+.what-offer__circle::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: var(--butter);
+  content: "(CLICK ME)";
+  font-family: "Teva", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(1.15rem, 1.7vw, 1.65rem);
+  font-weight: 400;
+  letter-spacing: 0.045em;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.25rem);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
 .what-offer__circle-shape {
-  --toolkit-sweep: 302deg;
-
   position: absolute;
   inset: 0;
   display: block;
+  overflow: hidden;
   border-radius: 50%;
+  background: url("../assets/media/circles/Ellipse 34.png") center / 100% 100% no-repeat;
   filter: drop-shadow(0 1.2rem 1.4rem rgb(21 18 14 / 0.08));
-  transform: rotate(var(--toolkit-resting-rotation));
-  transform-origin: center;
-  will-change: transform;
 }
 
-.what-offer__circle-shape::before,
 .what-offer__circle-shape::after {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  aspect-ratio: 1;
+  background: url("../assets/media/circles/Ellipse 98.png") center / 100% 100% no-repeat;
   content: "";
+  opacity: 0;
+  transition: opacity 180ms ease;
 }
 
 .what-offer__circle-shape::before {
-  background: var(--toolkit-color);
-  mask: conic-gradient(from -90deg, #000 0deg var(--toolkit-sweep), transparent var(--toolkit-sweep) 360deg);
-  -webkit-mask: conic-gradient(from -90deg, #000 0deg var(--toolkit-sweep), transparent var(--toolkit-sweep) 360deg);
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  aspect-ratio: 1;
+  background: url("../assets/media/circles/Ellipse 100.png") center / 100% 100% no-repeat;
+  content: "";
+  opacity: 1;
+  transition: opacity 180ms ease;
 }
 
-.what-offer__circle-shape::after {
-  background: conic-gradient(
-    from -90deg,
-    transparent 0deg var(--toolkit-sweep),
-    var(--toolkit-accent) var(--toolkit-sweep) 360deg
-  );
-  box-shadow: inset 0 0 0 1px rgb(247 242 233 / 0.1);
+.what-offer__item:has(.what-offer__circle:hover) .what-offer__circle {
+  transform: translateY(-0.4rem) scale(1.06);
 }
 
-.what-offer__item--one .what-offer__circle {
-  --toolkit-color: #edcf77;
-  --toolkit-accent: #f6f2ea;
-  --toolkit-resting-rotation: -20deg;
+.what-offer__item:has(.what-offer__circle:hover) .what-offer__circle::after {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.what-offer__item--two .what-offer__circle {
-  --toolkit-color: #a4a867;
-  --toolkit-accent: #183b11;
-  --toolkit-resting-rotation: 32deg;
+.what-offer__item:has(.what-offer__circle:hover) .what-offer__circle-shape::after {
+  opacity: 1;
 }
 
-.what-offer__item--three .what-offer__circle {
-  --toolkit-color: #af261e;
-  --toolkit-accent: #f4d3d2;
-  --toolkit-resting-rotation: -20deg;
-}
-
-.what-offer__item--four .what-offer__circle {
-  --toolkit-color: #324064;
-  --toolkit-accent: #9cb5cc;
-  --toolkit-resting-rotation: 20deg;
+.what-offer__item:has(.what-offer__circle:hover) .what-offer__circle-shape::before {
+  opacity: 0;
 }
 
 .what-offer__copy {
@@ -153,6 +163,22 @@
   max-width: 20rem;
   text-align: center;
   text-shadow: 0 0.1rem 0.42rem rgb(21 18 14 / 0.24);
+  transition: transform 180ms ease;
+}
+
+.what-offer__item:has(.what-offer__circle:hover) .what-offer__copy {
+  transform: translateY(-0.4rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .what-offer__circle,
+  .what-offer__circle::after,
+  .what-offer__circle-shape,
+  .what-offer__circle-shape::before,
+  .what-offer__circle-shape::after,
+  .what-offer__copy {
+    transition: none;
+  }
 }
 
 .what-offer__copy h3 {
@@ -196,4 +222,3 @@
   top: 40.2%;
   right: 7.3%;
 }
-
