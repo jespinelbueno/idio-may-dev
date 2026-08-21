@@ -34,36 +34,6 @@
           <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
         </filter>
-        <filter id="team-scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
-          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
-        </filter>
-        <filter id="team-scribble-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="B" yChannelSelector="R" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
-          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
-        </filter>
-        <filter id="team-scribble-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="9.5" xChannelSelector="G" yChannelSelector="B" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
-          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
-        </filter>
-        <filter id="team-scribble-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="12.5" xChannelSelector="R" yChannelSelector="B" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
-          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
-        </filter>
-        <filter id="team-scribble-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="10.5" xChannelSelector="B" yChannelSelector="G" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
-          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
-        </filter>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
           <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
@@ -274,7 +244,9 @@
                     as a comparatively inexpensive rental option.
                   </p>
                   <a class="case-study__button" href="#case-study-title">
-                    <span class="button-fill__label">Learn more!</span>
+                    <span class="button-fill__label">
+                      Learn more <span class="case-study__button-arrow" aria-hidden="true">→</span>
+                    </span>
                     <span class="button-fill__inner" aria-hidden="true">
                       <span class="button-fill__blobs">
                         <span class="button-fill__blob"></span>
@@ -290,79 +262,68 @@
           </section>
         </div>
 
-        <section class="team" aria-labelledby="team-title">
-          <h2 id="team-title">our team</h2>
-          <p class="team__tagline">(just a couple of unhinged creatives)</p>
+        <section class="team-stage" aria-labelledby="team-title">
+          <div class="team-preview-stage">
+            <header class="team-ceiling">
+              <h2 id="team-title">our team</h2>
+              <p class="team__tagline">(just a couple of unhinged creatives)</p>
+            </header>
+          </div>
 
-          <div class="team__grid">
-            <article class="team__member team__member--anna" tabindex="0">
-              <div class="team__photo">
-                <img src="assets/media/team/anna.png" alt="Anna">
-                <div class="team__photo-copy">
-                  <p>busy hands<br>better listener</p>
-                  <span class="team__photo-scribble team__photo-scribble--red" aria-hidden="true"></span>
-                  <span class="team__photo-scribble team__photo-scribble--green" aria-hidden="true"></span>
+          <div class="team">
+            <div class="team__grid">
+              <article class="team__member team__member--anna" tabindex="0">
+                <div class="team__photo">
+                  <img class="team__photo-image team__photo-image--primary" src="assets/media/team/anna.png" alt="Anna">
+                  <img class="team__photo-image team__photo-image--alternate" src="assets/media/team/anna2.jpg" alt="" aria-hidden="true">
                 </div>
-              </div>
-              <h3>anna</h3>
-              <p class="team__bio">
-                <strong>Title:</strong> Founder and Creative Director<br>
-                <strong>Team:</strong> Production Team<br>
-                <strong>Idiosyncrasy:</strong> Listens better when her hands are busy.
-              </p>
-            </article>
+                <h3>anna</h3>
+                <p class="team__bio">
+                  <strong>Title:</strong> Founder and Creative Director<br>
+                  <strong>Team:</strong> Production Team<br>
+                  <strong>Idiosyncrasy:</strong> Listens better when her hands are busy.
+                </p>
+              </article>
 
-            <article class="team__member team__member--raquel" tabindex="0">
-              <div class="team__photo">
-                <img src="assets/media/team/raquel.png" alt="Raquel">
-                <div class="team__photo-copy">
-                  <p>sweet treat<br>connoisseur</p>
-                  <span class="team__photo-scribble team__photo-scribble--red" aria-hidden="true"></span>
-                  <span class="team__photo-scribble team__photo-scribble--green" aria-hidden="true"></span>
+              <article class="team__member team__member--raquel" tabindex="0">
+                <div class="team__photo">
+                  <img class="team__photo-image team__photo-image--primary" src="assets/media/team/raquel.jpg" alt="Raquel">
+                  <img class="team__photo-image team__photo-image--alternate" src="assets/media/team/raquel2.jpg" alt="" aria-hidden="true">
                 </div>
-              </div>
-              <h3>raquel</h3>
-              <p class="team__bio">
-                <strong>Title:</strong> Graphic Designer<br>
-                <strong>Team:</strong> Creative Team<br>
-                <strong>Idiosyncrasy:</strong> Always has a sweet drink that she's been sipping on for the last 6 hours
-              </p>
-            </article>
+                <h3>raquel</h3>
+                <p class="team__bio">
+                  <strong>Title:</strong> Graphic Designer<br>
+                  <strong>Team:</strong> Creative Team<br>
+                  <strong>Idiosyncrasy:</strong> Always has a sweet drink that she's been sipping on for the last 6 hours
+                </p>
+              </article>
 
-            <article class="team__member team__member--naomi" tabindex="0">
-              <div class="team__photo">
-                <img src="assets/media/team/naomi.png" alt="Naomi">
-                <div class="team__photo-copy">
-                  <p>six hour sip<br>strategist</p>
-                  <span class="team__photo-scribble team__photo-scribble--red" aria-hidden="true"></span>
-                  <span class="team__photo-scribble team__photo-scribble--green" aria-hidden="true"></span>
+              <article class="team__member team__member--naomi" tabindex="0">
+                <div class="team__photo">
+                  <img class="team__photo-image team__photo-image--primary" src="assets/media/team/naomi.png" alt="Naomi">
+                  <img class="team__photo-image team__photo-image--alternate" src="assets/media/team/naomi2.jpg" alt="" aria-hidden="true">
                 </div>
-              </div>
-              <h3>naomi</h3>
-              <p class="team__bio">
-                <strong>Title:</strong> Copywriter<br>
-                <strong>Team:</strong> Strategy Team<br>
-                <strong>Idiosyncrasy:</strong> Always has a sweet drink that she's been sipping on for the last 6 hours
-              </p>
-            </article>
+                <h3>naomi</h3>
+                <p class="team__bio">
+                  <strong>Title:</strong> Copywriter<br>
+                  <strong>Team:</strong> Strategy Team<br>
+                  <strong>Idiosyncrasy:</strong> Always has a sweet drink that she's been sipping on for the last 6 hours
+                </p>
+              </article>
 
-            <article class="team__member team__member--jaden" tabindex="0">
-              <img class="team__scribble team__scribble--red" src="assets/media/decorations/scribbles/team/red.png" alt="" aria-hidden="true">
-              <div class="team__photo">
-                <img src="assets/media/team/jaden.png" alt="Jaden">
-                <div class="team__photo-copy">
-                  <p>food thought<br>forecaster</p>
-                  <span class="team__photo-scribble team__photo-scribble--red" aria-hidden="true"></span>
-                  <span class="team__photo-scribble team__photo-scribble--green" aria-hidden="true"></span>
+              <article class="team__member team__member--jaden" tabindex="0">
+                <div class="team__photo">
+                  <img class="team__photo-image team__photo-image--primary" src="assets/media/team/jaden.png" alt="Jaden">
+                  <img class="team__photo-image team__photo-image--alternate" src="assets/media/team/jaden2.jpg" alt="" aria-hidden="true">
                 </div>
-              </div>
-              <h3>jaden</h3>
-              <p class="team__bio">
-                <strong>Title:</strong> Market Researcher<br>
-                <strong>Team:</strong> Operations Team<br>
-                <strong>Idiosyncrasy:</strong> Always thinking about food
-              </p>
-            </article>
+                <h3>jaden</h3>
+                <p class="team__bio">
+                  <strong>Title:</strong> Market Researcher<br>
+                  <strong>Team:</strong> Operations Team<br>
+                  <strong>Idiosyncrasy:</strong> Always thinking about food
+                </p>
+              </article>
+            </div>
           </div>
         </section>
 

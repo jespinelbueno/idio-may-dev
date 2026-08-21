@@ -1,3 +1,38 @@
+.team-stage {
+  position: relative;
+}
+
+.team-preview-stage {
+  position: relative;
+  height: var(--team-preview-depth, 8rem);
+}
+
+.team-ceiling {
+  position: relative;
+  z-index: 2;
+  width: min(78rem, calc(100vw - clamp(4rem, 9vw, 9rem)));
+  height: var(--team-preview-depth, 8rem);
+  margin: 0 auto;
+  padding-top: clamp(1.4rem, 2.5vw, 2.2rem);
+  isolation: isolate;
+}
+
+.team-ceiling::before {
+  position: absolute;
+  top: calc(var(--team-curve-offset, 3rem) * -1);
+  right: 50%;
+  bottom: 0;
+  z-index: -1;
+  width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
+  content: "";
+  background:
+    radial-gradient(rgb(21 18 14 / 0.07) 0.55px, transparent 0.55px),
+    #adb45f;
+  background-size: 0.42rem 0.42rem, auto;
+  clip-path: ellipse(200vw var(--team-ellipse-depth) at 50% var(--team-ellipse-depth));
+  transform: translateX(50%);
+}
+
 .team {
   position: relative;
   width: min(78rem, calc(100vw - clamp(4rem, 9vw, 9rem)));
@@ -7,7 +42,7 @@
   isolation: isolate;
 }
 
-.team h2 {
+.team-ceiling h2 {
   position: relative;
   z-index: 2;
   margin: 0;
@@ -18,33 +53,6 @@
   letter-spacing: 0;
   text-align: center;
   text-transform: lowercase;
-}
-
-.team__scribble {
-  position: absolute;
-  display: block;
-  max-width: none;
-  opacity: var(--scribble-opacity, 1);
-  pointer-events: none;
-  transform: var(--scribble-transform, none);
-  transform-origin: center;
-  animation: scribble-shape-cycle var(--scribble-frame-duration, 960ms) steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
-}
-
-.team__scribble--red {
-  top: clamp(-3.6rem, -4vw, -2.75rem);
-  right: clamp(-0.95rem, -1.2vw, -0.45rem);
-  z-index: 1;
-  width: clamp(4.1rem, 5.9vw, 5.75rem);
-  --scribble-transform: rotate(7deg);
-  --scribble-duration: 2.65s;
-  --scribble-delay: -1.1s;
-  --scribble-reveal-delay: 0ms;
-  --scribble-frame-duration: 880ms;
-  --scribble-frame-delay: -690ms;
-  --scribble-tilt: -5.2deg;
-  --scribble-x: 0.22rem;
-  --scribble-y: -0.34rem;
 }
 
 .team__grid {
@@ -123,92 +131,14 @@
   height: 100%;
   object-fit: cover;
   transition:
-    filter 260ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.team__photo-copy {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  color: var(--brand-green);
-  opacity: 0;
-  transform: translateY(0.8rem);
-  transition:
     opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
     transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
 }
 
-.team__photo-copy p {
-  width: 88%;
-  margin: clamp(2.05rem, 3.15vw, 2.85rem) auto 0;
-  color: rgb(21 18 14 / 0.94);
-  font-family: "Teva", "DM Sans", system-ui, sans-serif;
-  font-size: clamp(1.75rem, 2.25vw, 2.45rem);
-  font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: 0;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.team__photo-scribble {
+.team__photo-image--alternate {
   position: absolute;
-  display: block;
-  opacity: 0.9;
-  pointer-events: none;
-  transform-origin: center;
-  animation: team-scribble-shape-cycle var(--scribble-frame-duration, 960ms) steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
-  animation-play-state: paused;
-}
-
-.team__photo-scribble--red {
-  --scribble-rotate: -1deg;
-
-  top: 22%;
-  left: 24%;
-  width: 58%;
-  aspect-ratio: 225 / 83;
-  background: url("../assets/media/decorations/scribbles/team/blue.png") center / contain no-repeat;
-  transform: rotate(var(--scribble-rotate));
-}
-
-.team__photo-scribble--green {
-  display: none;
-}
-
-.team__member--anna .team__photo-copy p {
-  width: 88%;
-}
-
-.team__member--naomi .team__photo-copy p,
-.team__member--jaden .team__photo-copy p {
-  width: 88%;
-}
-
-.team__member--naomi .team__photo-scribble--red {
-  left: 24%;
-}
-
-.team__member--anna .team__photo-scribble--red {
-  --scribble-frame-duration: 880ms;
-  --scribble-frame-delay: -140ms;
-}
-
-.team__member--raquel .team__photo-scribble--red {
-  --scribble-frame-duration: 1040ms;
-  --scribble-frame-delay: -520ms;
-}
-
-.team__member--naomi .team__photo-scribble--red {
-  --scribble-frame-duration: 940ms;
-  --scribble-frame-delay: -760ms;
-}
-
-.team__member--jaden .team__photo-scribble--red {
-  --scribble-frame-duration: 1120ms;
-  --scribble-frame-delay: -320ms;
+  inset: 0;
+  opacity: 0;
 }
 
 .team__member:hover .team__photo,
@@ -218,23 +148,16 @@
   transform: scale(1.16);
 }
 
-.team__member:hover .team__photo-copy,
-.team__member:focus .team__photo-copy,
-.team__member:focus-within .team__photo-copy {
-  opacity: 1;
-}
-
 .team__member:hover .team__photo img,
 .team__member:focus .team__photo img,
 .team__member:focus-within .team__photo img {
-  filter: saturate(0.76) contrast(0.92);
   transform: scale(1.02);
 }
 
-.team__member:hover .team__photo-copy,
-.team__member:focus .team__photo-copy,
-.team__member:focus-within .team__photo-copy {
-  transform: translateY(0);
+.team__member:hover .team__photo-image--alternate,
+.team__member:focus .team__photo-image--alternate,
+.team__member:focus-within .team__photo-image--alternate {
+  opacity: 1;
 }
 
 .team__member:hover::after,
@@ -242,12 +165,6 @@
 .team__member:focus-within::after {
   opacity: 1;
   transform: translateY(0) rotate(-1deg);
-}
-
-.team__member:hover .team__photo-scribble,
-.team__member:focus .team__photo-scribble,
-.team__member:focus-within .team__photo-scribble {
-  animation-play-state: running;
 }
 
 .team__member h3 {
@@ -296,8 +213,9 @@
 }
 
 .team {
+  z-index: 1;
   min-height: clamp(40rem, 58vw, 52rem);
-  padding-top: clamp(2.7rem, 4.4vw, 4rem);
+  padding-top: clamp(1.4rem, 2.5vw, 2.2rem);
   padding-bottom: clamp(5rem, 8vw, 7rem);
 }
 
@@ -307,7 +225,7 @@
   bottom: 0;
   left: 50%;
   z-index: -1;
-  width: 100vw;
+  width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
   background:
     radial-gradient(rgb(21 18 14 / 0.07) 0.55px, transparent 0.55px),
@@ -316,7 +234,7 @@
   transform: translateX(-50%);
 }
 
-.team h2 {
+.team-ceiling h2 {
   color: var(--brand-green);
   font-size: clamp(3.25rem, 5vw, 4.8rem);
 }
