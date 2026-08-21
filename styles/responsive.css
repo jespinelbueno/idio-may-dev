@@ -28,7 +28,7 @@
 }
 
 @media (max-width: 900px) {
-  .offer__stroke {
+  .offer__scribble {
     display: none;
   }
 
@@ -359,13 +359,13 @@
     overflow: visible;
   }
 
-  .case-study__stroke--green {
+  .case-study__scribble--green {
     top: -2.6rem;
     left: calc(50% - var(--case-front-w) / 2 - 3.6rem);
     width: clamp(6.5rem, 20vw, 8.3rem);
   }
 
-  .case-study__stroke--yellow {
+  .case-study__scribble--yellow {
     top: clamp(19.8rem, 58vw, 26rem);
     left: calc(50% + var(--case-front-w) / 2 - clamp(5rem, 16vw, 7rem));
     width: clamp(7.6rem, 24vw, 10rem);
@@ -429,7 +429,7 @@
     padding-bottom: 6.4rem;
   }
 
-  .team__stroke--red {
+  .team__scribble--red {
     top: -3.15rem;
     right: clamp(0.4rem, 4vw, 1.4rem);
     width: clamp(3.6rem, 15vw, 4.8rem);
@@ -819,13 +819,13 @@
     min-height: 24rem;
   }
 
-  .case-study__stroke--green {
+  .case-study__scribble--green {
     top: -2.2rem;
     left: calc(50% - var(--case-front-w) / 2 - 2.5rem);
     width: clamp(5.4rem, 22vw, 6.8rem);
   }
 
-  .case-study__stroke--yellow {
+  .case-study__scribble--yellow {
     top: 18rem;
     left: calc(50% + var(--case-front-w) / 2 - 5.4rem);
     width: clamp(6.6rem, 28vw, 8rem);
@@ -869,13 +869,13 @@
     min-height: 17rem;
   }
 
-  .case-study__stroke--green {
+  .case-study__scribble--green {
     top: -1.35rem;
     left: calc(50% - var(--case-front-w) / 2 - 1.8rem);
     width: 4.9rem;
   }
 
-  .case-study__stroke--yellow {
+  .case-study__scribble--yellow {
     top: 12.7rem;
     left: calc(50% + var(--case-front-w) / 2 - 4rem);
     width: 5.8rem;
@@ -932,7 +932,7 @@
     padding-bottom: 6.4rem;
   }
 
-  .team__stroke--red {
+  .team__scribble--red {
     top: -2.9rem;
     right: clamp(0.15rem, 2vw, 0.7rem);
     width: clamp(3.2rem, 17vw, 4.2rem);
@@ -987,20 +987,20 @@
     margin-top: 3.8rem;
   }
 
-  .site-footer__stroke--left {
+  .site-footer__scribble--left {
     top: 9.3rem;
     left: -4.4rem;
     width: 6.5rem;
   }
 
-  .site-footer__stroke--upper {
+  .site-footer__scribble--upper {
     top: 1.4rem;
     right: -3.8rem;
     left: auto;
     width: 8rem;
   }
 
-  .site-footer__stroke--center {
+  .site-footer__scribble--center {
     top: 23.5rem;
     right: 2.5rem;
     left: auto;
@@ -1098,13 +1098,13 @@
     visibility: hidden;
   }
 
-  .case-study__stroke--green {
+  .case-study__scribble--green {
     top: -2.25rem;
     left: -0.25rem;
     width: 5.6rem;
   }
 
-  .case-study__stroke--yellow {
+  .case-study__scribble--yellow {
     top: 24.7rem;
     left: 16.2rem;
     width: 7rem;
@@ -1263,12 +1263,12 @@
     transition-duration: 1ms !important;
   }
 
-  .offer__stroke,
-  .case-study__stroke,
-  .team__stroke,
+  .offer__scribble,
+  .case-study__scribble,
+  .team__scribble,
   .team__photo-scribble,
-  .site-footer__stroke {
-    opacity: var(--stroke-opacity, 1);
+  .site-footer__scribble {
+    opacity: var(--scribble-opacity, 1);
     filter: none;
     animation: none !important;
   }

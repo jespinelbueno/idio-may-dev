@@ -269,169 +269,169 @@
   z-index: 2;
 }
 
-.offer__stroke {
+.offer__scribble {
   position: absolute;
   display: block;
   max-width: none;
-  opacity: var(--stroke-opacity, 1);
-  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
+  opacity: var(--scribble-opacity, 1);
+  animation: scribble-shape-cycle var(--scribble-frame-duration, 960ms) steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
   pointer-events: none;
-  transform: var(--stroke-transform, none);
+  transform: var(--scribble-transform, none);
   transform-origin: center;
 }
 
-.offer__stroke--red-one {
+.offer__scribble--red-one {
   top: -7%;
   left: 83%;
   z-index: 5;
   width: 12%;
-  --stroke-transform: rotate(-4deg);
-  --stroke-duration: 2.4s;
-  --stroke-delay: -0.5s;
-  --stroke-reveal-delay: 0ms;
-  --stroke-frame-duration: 840ms;
-  --stroke-frame-delay: -160ms;
-  --stroke-tilt: 5.5deg;
-  --stroke-x: 0.42rem;
-  --stroke-y: -0.28rem;
+  --scribble-transform: rotate(-4deg);
+  --scribble-duration: 2.4s;
+  --scribble-delay: -0.5s;
+  --scribble-reveal-delay: 0ms;
+  --scribble-frame-duration: 840ms;
+  --scribble-frame-delay: -160ms;
+  --scribble-tilt: 5.5deg;
+  --scribble-x: 0.42rem;
+  --scribble-y: -0.28rem;
 }
 
-.offer__stroke--red-two {
+.offer__scribble--red-two {
   top: 8vw;
   left: -2.6rem;
   z-index: 5;
   width: 11vw;
   aspect-ratio: 282 / 190;
-  --stroke-transform: rotate(1deg);
-  --stroke-duration: 2.8s;
-  --stroke-delay: -1.3s;
-  --stroke-reveal-delay: 120ms;
-  --stroke-frame-duration: 1020ms;
-  --stroke-frame-delay: -620ms;
-  --stroke-tilt: -4.8deg;
-  --stroke-x: -0.35rem;
-  --stroke-y: 0.34rem;
+  --scribble-transform: rotate(1deg);
+  --scribble-duration: 2.8s;
+  --scribble-delay: -1.3s;
+  --scribble-reveal-delay: 120ms;
+  --scribble-frame-duration: 1020ms;
+  --scribble-frame-delay: -620ms;
+  --scribble-tilt: -4.8deg;
+  --scribble-x: -0.35rem;
+  --scribble-y: 0.34rem;
 }
 
-.offer__stroke--red-two::before {
+.offer__scribble--red-two::before {
   position: absolute;
   inset: 0;
   content: "";
   background: var(--brand-red);
-  mask: url("../assets/media/decorations/strokes/offer/yellow.svg") center / contain no-repeat;
-  -webkit-mask: url("../assets/media/decorations/strokes/offer/yellow.svg") center / contain no-repeat;
+  mask: url("../assets/media/decorations/scribbles/offer/yellow.svg") center / contain no-repeat;
+  -webkit-mask: url("../assets/media/decorations/scribbles/offer/yellow.svg") center / contain no-repeat;
 }
 
-.offer__stroke--red-accent {
+.offer__scribble--red-accent {
   top: 12%;
   left: 80.5%;
   z-index: 5;
   width: 12%;
-  --stroke-transform: rotate(1deg);
-  --stroke-duration: 2.8s;
-  --stroke-delay: -1.3s;
-  --stroke-reveal-delay: 120ms;
-  --stroke-frame-duration: 1020ms;
-  --stroke-frame-delay: -620ms;
-  --stroke-tilt: -4.8deg;
-  --stroke-x: -0.35rem;
-  --stroke-y: 0.34rem;
+  --scribble-transform: rotate(1deg);
+  --scribble-duration: 2.8s;
+  --scribble-delay: -1.3s;
+  --scribble-reveal-delay: 120ms;
+  --scribble-frame-duration: 1020ms;
+  --scribble-frame-delay: -620ms;
+  --scribble-tilt: -4.8deg;
+  --scribble-x: -0.35rem;
+  --scribble-y: 0.34rem;
 }
 
-.offer__stroke--green-back {
+.offer__scribble--green-back {
   top: 30%;
   left: 104%;
   z-index: 4;
   width: 1.3%;
-  --stroke-transform: scale(1.3);
-  --stroke-duration: 2.2s;
-  --stroke-delay: -0.9s;
-  --stroke-reveal-delay: 220ms;
-  --stroke-frame-duration: 780ms;
-  --stroke-frame-delay: -310ms;
-  --stroke-tilt: 6.8deg;
-  --stroke-x: 0.18rem;
-  --stroke-y: -0.42rem;
+  --scribble-transform: scale(1.3);
+  --scribble-duration: 2.2s;
+  --scribble-delay: -0.9s;
+  --scribble-reveal-delay: 220ms;
+  --scribble-frame-duration: 780ms;
+  --scribble-frame-delay: -310ms;
+  --scribble-tilt: 6.8deg;
+  --scribble-x: 0.18rem;
+  --scribble-y: -0.42rem;
 }
 
-.offer__stroke--green-side {
+.offer__scribble--green-side {
   top: 30%;
   left: 102%;
   z-index: 4;
   width: 1.3%;
-  --stroke-transform: scale(0.7);
-  --stroke-duration: 2.7s;
-  --stroke-delay: -1.8s;
-  --stroke-reveal-delay: 320ms;
-  --stroke-frame-duration: 920ms;
-  --stroke-frame-delay: -740ms;
-  --stroke-tilt: -7.2deg;
-  --stroke-x: -0.16rem;
-  --stroke-y: 0.36rem;
+  --scribble-transform: scale(0.7);
+  --scribble-duration: 2.7s;
+  --scribble-delay: -1.8s;
+  --scribble-reveal-delay: 320ms;
+  --scribble-frame-duration: 920ms;
+  --scribble-frame-delay: -740ms;
+  --scribble-tilt: -7.2deg;
+  --scribble-x: -0.16rem;
+  --scribble-y: 0.36rem;
 }
 
-.offer__stroke--green-fill {
+.offer__scribble--green-fill {
   top: 43%;
   left: 73%;
   z-index: 3;
   width: 14%;
-  --stroke-opacity: 0.95;
-  --stroke-transform: rotate(-3deg);
-  --stroke-duration: 3.2s;
-  --stroke-delay: -0.7s;
-  --stroke-reveal-delay: 420ms;
-  --stroke-frame-duration: 1160ms;
-  --stroke-frame-delay: -470ms;
-  --stroke-tilt: 3.4deg;
-  --stroke-x: 0.46rem;
-  --stroke-y: 0.22rem;
+  --scribble-opacity: 0.95;
+  --scribble-transform: rotate(-3deg);
+  --scribble-duration: 3.2s;
+  --scribble-delay: -0.7s;
+  --scribble-reveal-delay: 420ms;
+  --scribble-frame-duration: 1160ms;
+  --scribble-frame-delay: -470ms;
+  --scribble-tilt: 3.4deg;
+  --scribble-x: 0.46rem;
+  --scribble-y: 0.22rem;
 }
 
-.offer__stroke--green-corner {
+.offer__scribble--green-corner {
   top: 4rem;
   right: -3.6rem;
   z-index: 2;
   width: 10vw;
-  --stroke-opacity: 0.95;
-  --stroke-transform: rotate(-8deg);
-  --stroke-duration: 3.1s;
-  --stroke-delay: -1.2s;
-  --stroke-reveal-delay: 180ms;
-  --stroke-frame-duration: 1040ms;
-  --stroke-frame-delay: -390ms;
-  --stroke-tilt: 4deg;
-  --stroke-x: -0.34rem;
-  --stroke-y: 0.24rem;
+  --scribble-opacity: 0.95;
+  --scribble-transform: rotate(-8deg);
+  --scribble-duration: 3.1s;
+  --scribble-delay: -1.2s;
+  --scribble-reveal-delay: 180ms;
+  --scribble-frame-duration: 1040ms;
+  --scribble-frame-delay: -390ms;
+  --scribble-tilt: 4deg;
+  --scribble-x: -0.34rem;
+  --scribble-y: 0.24rem;
 }
 
-.offer__stroke--yellow {
+.offer__scribble--yellow {
   top: 74%;
   left: 56.4%;
   z-index: 5;
   width: 18%;
-  --stroke-transform: rotate(-2deg);
-  --stroke-duration: 3s;
-  --stroke-delay: -2.4s;
-  --stroke-reveal-delay: 540ms;
-  --stroke-frame-duration: 980ms;
-  --stroke-frame-delay: -810ms;
-  --stroke-tilt: -3.6deg;
-  --stroke-x: -0.44rem;
-  --stroke-y: -0.24rem;
+  --scribble-transform: rotate(-2deg);
+  --scribble-duration: 3s;
+  --scribble-delay: -2.4s;
+  --scribble-reveal-delay: 540ms;
+  --scribble-frame-duration: 980ms;
+  --scribble-frame-delay: -810ms;
+  --scribble-tilt: -3.6deg;
+  --scribble-x: -0.44rem;
+  --scribble-y: -0.24rem;
 }
 
-.offer__stroke--blue {
+.offer__scribble--blue {
   top: 93.5%;
   left: 8%;
   z-index: 5;
   width: 21%;
-  --stroke-transform: rotate(-3deg);
-  --stroke-duration: 3.4s;
-  --stroke-delay: -1.6s;
-  --stroke-reveal-delay: 660ms;
-  --stroke-frame-duration: 1080ms;
-  --stroke-frame-delay: -250ms;
-  --stroke-tilt: 3deg;
-  --stroke-x: 0.36rem;
-  --stroke-y: 0.42rem;
+  --scribble-transform: rotate(-3deg);
+  --scribble-duration: 3.4s;
+  --scribble-delay: -1.6s;
+  --scribble-reveal-delay: 660ms;
+  --scribble-frame-duration: 1080ms;
+  --scribble-frame-delay: -250ms;
+  --scribble-tilt: 3deg;
+  --scribble-x: 0.36rem;
+  --scribble-y: 0.42rem;
 }

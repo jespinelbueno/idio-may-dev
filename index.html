@@ -12,57 +12,57 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="is-loading">
-    <svg class="stroke-frame-filters" aria-hidden="true">
+    <svg class="scribble-frame-filters" aria-hidden="true">
       <defs>
-        <filter id="stroke-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
         </filter>
-        <filter id="stroke-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="scribble-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="B" yChannelSelector="R"></feDisplacementMap>
         </filter>
-        <filter id="stroke-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="scribble-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="7.5" xChannelSelector="G" yChannelSelector="B"></feDisplacementMap>
         </filter>
-        <filter id="stroke-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="scribble-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="B"></feDisplacementMap>
         </filter>
-        <filter id="stroke-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="scribble-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
         </filter>
-        <filter id="team-stroke-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="team-scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
-          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
+          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
         </filter>
-        <filter id="team-stroke-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="team-scribble-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="B" yChannelSelector="R" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
-          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
+          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
         </filter>
-        <filter id="team-stroke-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="team-scribble-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="9.5" xChannelSelector="G" yChannelSelector="B" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
-          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
+          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
         </filter>
-        <filter id="team-stroke-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="team-scribble-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="12.5" xChannelSelector="R" yChannelSelector="B" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
-          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
+          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
         </filter>
-        <filter id="team-stroke-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <filter id="team-scribble-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="10.5" xChannelSelector="B" yChannelSelector="G" result="displaced"></feDisplacementMap>
-          <feFlood flood-color="#C3080E" result="stroke-red"></feFlood>
-          <feComposite in="stroke-red" in2="displaced" operator="in"></feComposite>
+          <feFlood flood-color="#C3080E" result="scribble-red"></feFlood>
+          <feComposite in="scribble-red" in2="displaced" operator="in"></feComposite>
         </filter>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
@@ -164,17 +164,17 @@
             <img src="assets/media/offer/editorial-motion.png" alt="Blurred group of models in motion.">
           </div>
 
-          <img class="offer__stroke offer__stroke--red-one" src="assets/media/decorations/strokes/offer/red-main.svg" alt="" aria-hidden="true">
-          <img class="offer__stroke offer__stroke--red-accent" src="assets/media/decorations/strokes/offer/red-accent.svg" alt="" aria-hidden="true">
-          <img class="offer__stroke offer__stroke--green-back" src="assets/media/decorations/strokes/offer/green.svg" alt="" aria-hidden="true">
-          <img class="offer__stroke offer__stroke--green-side" src="assets/media/decorations/strokes/offer/green.svg" alt="" aria-hidden="true">
-          <img class="offer__stroke offer__stroke--green-fill" src="assets/media/decorations/strokes/offer/green-fill.svg" alt="" aria-hidden="true">
-          <img class="offer__stroke offer__stroke--yellow" src="assets/media/decorations/strokes/offer/yellow.svg" alt="" aria-hidden="true">
-          <img class="offer__stroke offer__stroke--blue" src="assets/media/decorations/strokes/offer/blue.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--red-one" src="assets/media/decorations/scribbles/offer/red-main.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--red-accent" src="assets/media/decorations/scribbles/offer/red-accent.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--green-back" src="assets/media/decorations/scribbles/offer/green.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--green-side" src="assets/media/decorations/scribbles/offer/green.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--green-fill" src="assets/media/decorations/scribbles/offer/green-fill.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--yellow" src="assets/media/decorations/scribbles/offer/yellow.svg" alt="" aria-hidden="true">
+          <img class="offer__scribble offer__scribble--blue" src="assets/media/decorations/scribbles/offer/blue.svg" alt="" aria-hidden="true">
         </div>
 
-        <span class="offer__stroke offer__stroke--red-two" aria-hidden="true"></span>
-        <img class="offer__stroke offer__stroke--green-corner" src="assets/media/decorations/strokes/offer/green-fill.svg" alt="" aria-hidden="true">
+        <span class="offer__scribble offer__scribble--red-two" aria-hidden="true"></span>
+        <img class="offer__scribble offer__scribble--green-corner" src="assets/media/decorations/scribbles/offer/green-fill.svg" alt="" aria-hidden="true">
       </section>
 
       <section class="what-offer" aria-labelledby="what-offer-title">
@@ -235,8 +235,8 @@
         <div class="case-study__scroll-track">
           <section class="case-study" aria-labelledby="case-study-title">
             <div class="case-study__media" aria-hidden="true">
-              <img class="case-study__stroke case-study__stroke--green" src="assets/media/decorations/strokes/case-study/green.png" alt="">
-              <img class="case-study__stroke case-study__stroke--yellow" src="assets/media/decorations/strokes/case-study/yellow.png" alt="">
+              <img class="case-study__scribble case-study__scribble--green" src="assets/media/decorations/scribbles/case-study/green.png" alt="">
+              <img class="case-study__scribble case-study__scribble--yellow" src="assets/media/decorations/scribbles/case-study/yellow.png" alt="">
               <div class="case-study__stack" data-case-stack>
                 <figure class="case-study__stack-card" data-case-card="0">
                   <img src="assets/media/case-study/leisure-events.jpg" alt="">
@@ -347,7 +347,7 @@
             </article>
 
             <article class="team__member team__member--jaden" tabindex="0">
-              <img class="team__stroke team__stroke--red" src="assets/media/decorations/strokes/team/red.png" alt="" aria-hidden="true">
+              <img class="team__scribble team__scribble--red" src="assets/media/decorations/scribbles/team/red.png" alt="" aria-hidden="true">
               <div class="team__photo">
                 <img src="assets/media/team/jaden.png" alt="Jaden">
                 <div class="team__photo-copy">
@@ -405,9 +405,9 @@
 
     <footer class="site-footer" id="site-footer">
       <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true">
-      <img class="site-footer__stroke site-footer__stroke--left" src="assets/media/decorations/strokes/footer/white-center-left.svg" alt="" aria-hidden="true">
-      <img class="site-footer__stroke site-footer__stroke--upper" src="assets/media/decorations/strokes/footer/white-upper-right.svg" alt="" aria-hidden="true">
-      <img class="site-footer__stroke site-footer__stroke--center" src="assets/media/decorations/strokes/footer/white-lower-right.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/decorations/scribbles/footer/white-center-left.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/decorations/scribbles/footer/white-upper-right.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/decorations/scribbles/footer/white-lower-right.svg" alt="" aria-hidden="true">
 
       <div class="site-footer__inner">
         <div class="site-footer__lockup" aria-label="let's make it idio">

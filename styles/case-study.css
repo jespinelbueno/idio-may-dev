@@ -78,47 +78,47 @@
   --case-middle-window-color: #dfe8e4;
 }
 
-.case-study__stroke {
+.case-study__scribble {
   position: absolute;
   display: block;
   max-width: none;
-  opacity: var(--stroke-opacity, 1);
+  opacity: var(--scribble-opacity, 1);
   pointer-events: none;
-  transform: var(--stroke-transform, none);
+  transform: var(--scribble-transform, none);
   transform-origin: center;
-  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
+  animation: scribble-shape-cycle var(--scribble-frame-duration, 960ms) steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
 }
 
-.case-study__stroke--green {
+.case-study__scribble--green {
   top: clamp(-3.4rem, -4vw, -2.3rem);
   left: clamp(-2rem, -2.2vw, -1.1rem);
   z-index: 4;
   width: clamp(7.4rem, 9.2vw, 9.4rem);
-  --stroke-transform: rotate(-11deg);
-  --stroke-duration: 2.7s;
-  --stroke-delay: -0.65s;
-  --stroke-reveal-delay: 0ms;
-  --stroke-frame-duration: 940ms;
-  --stroke-frame-delay: -540ms;
-  --stroke-tilt: 4.6deg;
-  --stroke-x: 0.28rem;
-  --stroke-y: -0.32rem;
+  --scribble-transform: rotate(-11deg);
+  --scribble-duration: 2.7s;
+  --scribble-delay: -0.65s;
+  --scribble-reveal-delay: 0ms;
+  --scribble-frame-duration: 940ms;
+  --scribble-frame-delay: -540ms;
+  --scribble-tilt: 4.6deg;
+  --scribble-x: 0.28rem;
+  --scribble-y: -0.32rem;
 }
 
-.case-study__stroke--yellow {
+.case-study__scribble--yellow {
   top: clamp(23.1rem, 28.4vw, 26.7rem);
   left: clamp(17.2rem, 50vw, 21.9rem);
   z-index: 6;
   width: clamp(8.6rem, 11.8vw, 11.4rem);
-  --stroke-transform: rotate(-9deg);
-  --stroke-duration: 3s;
-  --stroke-delay: -1.45s;
-  --stroke-reveal-delay: 160ms;
-  --stroke-frame-duration: 1120ms;
-  --stroke-frame-delay: -190ms;
-  --stroke-tilt: -4.2deg;
-  --stroke-x: -0.36rem;
-  --stroke-y: 0.24rem;
+  --scribble-transform: rotate(-9deg);
+  --scribble-duration: 3s;
+  --scribble-delay: -1.45s;
+  --scribble-reveal-delay: 160ms;
+  --scribble-frame-duration: 1120ms;
+  --scribble-frame-delay: -190ms;
+  --scribble-tilt: -4.2deg;
+  --scribble-x: -0.36rem;
+  --scribble-y: 0.24rem;
 }
 
 .case-study__stack {
@@ -377,4 +377,3 @@
   background: transparent;
   font-size: 0.78rem;
 }
-

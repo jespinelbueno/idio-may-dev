@@ -46,43 +46,43 @@
   padding-top: clamp(8.7rem, 14.8vw, 11.8rem);
 }
 
-.site-footer__stroke {
+.site-footer__scribble {
   position: absolute;
   z-index: 3;
   max-width: none;
-  opacity: var(--stroke-opacity, 1);
-  animation: stroke-shape-cycle var(--stroke-frame-duration, 960ms) steps(1, end) var(--stroke-frame-delay, 0ms) infinite;
+  opacity: var(--scribble-opacity, 1);
+  animation: scribble-shape-cycle var(--scribble-frame-duration, 960ms) steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
   pointer-events: none;
   user-select: none;
 }
 
-.site-footer__stroke--left {
+.site-footer__scribble--left {
   top: clamp(8.2rem, 15.8vw, 11.4rem);
   left: clamp(-7.4rem, -7vw, -4.4rem);
   width: clamp(6.5rem, 7.7vw, 8.8rem);
-  --stroke-reveal-delay: 0ms;
-  --stroke-frame-duration: 900ms;
-  --stroke-frame-delay: -510ms;
+  --scribble-reveal-delay: 0ms;
+  --scribble-frame-duration: 900ms;
+  --scribble-frame-delay: -510ms;
 }
 
-.site-footer__stroke--upper {
+.site-footer__scribble--upper {
   top: clamp(3.2rem, 5.3vw, 4.5rem);
   left: 48.8%;
   width: clamp(9.7rem, 12.8vw, 13.8rem);
   transform: rotate(-3deg);
-  --stroke-reveal-delay: 130ms;
-  --stroke-frame-duration: 1080ms;
-  --stroke-frame-delay: -220ms;
+  --scribble-reveal-delay: 130ms;
+  --scribble-frame-duration: 1080ms;
+  --scribble-frame-delay: -220ms;
 }
 
-.site-footer__stroke--center {
+.site-footer__scribble--center {
   top: clamp(16.8rem, 27vw, 20.8rem);
   left: 39.8%;
   width: clamp(5.9rem, 7vw, 7.6rem);
   transform: rotate(-2deg);
-  --stroke-reveal-delay: 260ms;
-  --stroke-frame-duration: 980ms;
-  --stroke-frame-delay: -760ms;
+  --scribble-reveal-delay: 260ms;
+  --scribble-frame-duration: 980ms;
+  --scribble-frame-delay: -760ms;
 }
 
 .site-footer__lockup {
@@ -208,4 +208,3 @@
 .site-footer__social:focus-visible {
   transform: translateY(-0.08rem);
 }
-

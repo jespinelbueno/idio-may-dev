@@ -188,8 +188,8 @@
   width: clamp(7rem, 12vw, 10.5rem);
   aspect-ratio: 282 / 190;
   background: var(--brand-green);
-  mask: url("../assets/media/decorations/strokes/services/green.png") center / contain no-repeat;
-  -webkit-mask: url("../assets/media/decorations/strokes/services/green.png") center / contain no-repeat;
+  mask: url("../assets/media/decorations/scribbles/services/green.png") center / contain no-repeat;
+  -webkit-mask: url("../assets/media/decorations/scribbles/services/green.png") center / contain no-repeat;
   transform: rotate(5deg);
 }
 
@@ -218,4 +218,3 @@
   transform: rotate(-4deg);
   opacity: 0.9;
 }
-
