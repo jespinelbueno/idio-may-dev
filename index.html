@@ -271,7 +271,33 @@
           </div>
 
           <div class="team">
-            <div class="team__grid">
+            <div class="team__carousel-controls" aria-label="Team carousel controls">
+              <button class="team__carousel-button team__carousel-button--previous" type="button" aria-label="Show previous team member" aria-controls="team-carousel" data-team-carousel-previous disabled>
+                <span class="button-fill__label" aria-hidden="true">←</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </button>
+              <button class="team__carousel-button team__carousel-button--next" type="button" aria-label="Show next team member" aria-controls="team-carousel" data-team-carousel-next>
+                <span class="button-fill__label" aria-hidden="true">→</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </button>
+            </div>
+
+            <div class="team__carousel" id="team-carousel" role="region" aria-label="Team members" tabindex="0" data-team-carousel>
+              <div class="team__grid">
               <article class="team__member team__member--anna" tabindex="0">
                 <div class="team__photo">
                   <img class="team__photo-image team__photo-image--primary" src="assets/media/team/anna.png" alt="Anna">
@@ -323,6 +349,19 @@
                   <strong>Idiosyncrasy:</strong> Always thinking about food
                 </p>
               </article>
+
+              <article class="team__member team__member--gretel" tabindex="0">
+                <div class="team__photo">
+                  <img class="team__photo-image team__photo-image--primary" src="assets/media/team/gretel.jpg" alt="Gretel">
+                  <img class="team__photo-image team__photo-image--alternate" src="assets/media/team/gretel2.jpg" alt="" aria-hidden="true">
+                </div>
+                <h3>gretel</h3>
+                <p class="team__bio">
+                  <strong>Title:</strong> Social Media Intern<br>
+                  <strong>Team:</strong> Operations Team
+                </p>
+              </article>
+              </div>
             </div>
           </div>
         </section>

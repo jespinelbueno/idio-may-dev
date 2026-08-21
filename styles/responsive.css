@@ -412,15 +412,17 @@
   }
 
   .team__grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    grid-template-columns: none;
+    grid-auto-columns: min(21rem, 76vw);
+    justify-items: stretch;
     gap: 2.8rem;
   }
 
   .team__member--anna,
   .team__member--raquel,
   .team__member--naomi,
-  .team__member--jaden {
+  .team__member--jaden,
+  .team__member--gretel {
     --team-photo-offset: 0rem;
 
     width: min(21rem, 76vw);
@@ -909,15 +911,17 @@
   }
 
   .team__grid {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    grid-template-columns: none;
+    grid-auto-columns: min(19rem, 76vw);
+    justify-items: stretch;
     gap: 2.8rem;
   }
 
   .team__member--anna,
   .team__member--raquel,
   .team__member--naomi,
-  .team__member--jaden {
+  .team__member--jaden,
+  .team__member--gretel {
     --team-photo-offset: 0rem;
 
     width: min(19rem, 76vw);
@@ -1179,7 +1183,8 @@
   }
 
   .team__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: none;
+    grid-auto-columns: calc(25% - 1.5rem);
     justify-items: stretch;
     gap: 2rem;
   }
@@ -1187,7 +1192,8 @@
   .team__member--anna,
   .team__member--raquel,
   .team__member--naomi,
-  .team__member--jaden {
+  .team__member--jaden,
+  .team__member--gretel {
     width: auto;
     margin: 0;
     padding-top: var(--team-photo-offset);
@@ -1218,14 +1224,19 @@
     padding-top: 4.5rem;
   }
 
+  .team__carousel-controls {
+    top: clamp(21rem, 93vw, 25rem);
+  }
+
   .team__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: none;
   }
 
   .team__member--anna,
   .team__member--raquel,
   .team__member--naomi,
-  .team__member--jaden {
+  .team__member--jaden,
+  .team__member--gretel {
     padding-bottom: 1rem;
   }
 

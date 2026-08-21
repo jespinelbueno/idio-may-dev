@@ -34,6 +34,8 @@
 }
 
 .team {
+  --team-carousel-clearance: clamp(2.75rem, 4.5vw, 3.75rem);
+
   position: relative;
   width: min(78rem, calc(100vw - clamp(4rem, 9vw, 9rem)));
   min-height: clamp(40rem, 54vw, 50rem);
@@ -59,10 +61,108 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(25% - clamp(1.2rem, 2.325vw, 2.25rem));
   gap: clamp(2rem, 4vw, 4rem);
   align-items: start;
   margin-top: clamp(4.2rem, 6vw, 5.8rem);
+}
+
+.team__carousel {
+  margin: calc(0rem - var(--team-carousel-clearance));
+  padding: var(--team-carousel-clearance);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: rgb(0 71 12 / 0.58) rgb(0 71 12 / 0.12);
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+}
+
+.team__carousel::-webkit-scrollbar {
+  height: 0.45rem;
+}
+
+.team__carousel::-webkit-scrollbar-track {
+  border-radius: 999rem;
+  background: rgb(0 71 12 / 0.12);
+}
+
+.team__carousel::-webkit-scrollbar-thumb {
+  border-radius: 999rem;
+  background: rgb(0 71 12 / 0.58);
+}
+
+.team__carousel-controls {
+  position: absolute;
+  top: clamp(13rem, 20.5vw, 18.5rem);
+  right: calc(0rem - var(--team-carousel-clearance) + 0.9rem);
+  left: calc(0rem - var(--team-carousel-clearance) + 0.9rem);
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.55rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.team__carousel-button {
+  --cta-fill: var(--brand-green);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.7rem, 3.6vw, 3.25rem);
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999rem;
+  background: var(--paper);
+  color: var(--brand-green);
+  cursor: pointer;
+  isolation: isolate;
+  pointer-events: auto;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease,
+    transform 260ms ease;
+}
+
+.team__carousel-button .button-fill__label {
+  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.06em);
+}
+
+.team__carousel-button:not(:disabled):hover,
+.team__carousel-button:focus-visible {
+  color: var(--paper);
+  transform: translateY(-0.08rem);
+}
+
+.team__carousel-button:not(:disabled):hover .button-fill__blob,
+.team__carousel-button:focus-visible .button-fill__blob {
+  transform: translateZ(0) scale(1.55);
+}
+
+.team__carousel-button:not(:disabled):hover .button-fill__inner::before,
+.team__carousel-button:focus-visible .button-fill__inner::before {
+  clip-path: circle(160% at 50% 110%);
+  transition-delay: 340ms;
+}
+
+.team__carousel-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 0.18rem;
+}
+
+.team__carousel-button:disabled {
+  opacity: 0.32;
+  cursor: default;
+  transform: none;
 }
 
 .team__member {
@@ -108,8 +208,13 @@
 .team__member--anna,
 .team__member--raquel,
 .team__member--naomi,
-.team__member--jaden {
+.team__member--jaden,
+.team__member--gretel {
   padding-top: var(--team-photo-offset);
+}
+
+.team__member {
+  scroll-snap-align: start;
 }
 
 .team__photo {
@@ -253,7 +358,7 @@
 }
 
 .team__grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-columns: calc(25% - clamp(1.2rem, 2.325vw, 2.25rem));
   gap: clamp(1.6rem, 3.1vw, 3rem);
   margin-top: clamp(2.8rem, 4.2vw, 3.6rem);
 }
