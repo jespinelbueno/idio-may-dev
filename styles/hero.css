@@ -106,9 +106,9 @@
 
 .hero__headline {
   --hero-logo-gap: clamp(0.38rem, 0.75vw, 0.7rem);
-  --idio-lockup-logo-width: 2.55em;
-  --idio-lockup-logo-slot-width: 2.65em;
-  --idio-lockup-logo-y: -0.16em;
+  --idio-lockup-logo-width: 2.3em;
+  --idio-lockup-logo-slot-width: 2.4em;
+  --idio-lockup-logo-y: -0.14em;
 
   position: absolute;
   top: 50%;
@@ -120,7 +120,7 @@
   margin: 0;
   color: var(--paper);
   font-size: clamp(2rem, 4.8vw, 5.25rem);
-  font-weight: 950;
+  font-weight: 750;
   line-height: 0.82;
   letter-spacing: 0;
   text-transform: lowercase;
@@ -142,10 +142,10 @@
 
 .hero__logo {
   position: absolute;
+  top: 50%;
   left: calc(100% + var(--hero-logo-gap));
-  bottom: var(--idio-lockup-logo-y);
   width: var(--idio-lockup-logo-width);
   height: auto;
-  transform: translateY(var(--idio-lockup-logo-y));
+  transform: translateY(calc(-50% + var(--idio-lockup-logo-y)));
   filter: drop-shadow(0 0.12rem 0.3rem rgb(0 0 0 / 0.04));
 }

@@ -26,9 +26,9 @@
 
 .loader__phrase {
   --loader-logo-gap: clamp(0.38rem, 0.75vw, 0.7rem);
-  --idio-lockup-logo-width: 2.55em;
-  --idio-lockup-logo-slot-width: 2.65em;
-  --idio-lockup-logo-y: -0.16em;
+  --idio-lockup-logo-width: 2.3em;
+  --idio-lockup-logo-slot-width: 2.4em;
+  --idio-lockup-logo-y: -0.14em;
   --loader-logo-slot-width: var(--idio-lockup-logo-slot-width);
 
   position: relative;
@@ -40,7 +40,7 @@
   margin: 0 auto;
   color: inherit;
   font-size: clamp(2rem, 4.8vw, 5.25rem);
-  font-weight: 950;
+  font-weight: 750;
   line-height: 0.82;
   letter-spacing: 0;
   text-transform: lowercase;
@@ -135,14 +135,14 @@
 
 .loader__idio-logo {
   position: absolute;
+  top: 50%;
   left: calc(100% + var(--loader-logo-gap));
-  bottom: var(--idio-lockup-logo-y);
   display: block;
   width: var(--idio-lockup-logo-width);
   aspect-ratio: 531 / 230;
   background: currentColor;
   opacity: 0;
-  transform: translateY(calc(var(--idio-lockup-logo-y) + 0.14em));
+  transform: translateY(calc(-50% + var(--idio-lockup-logo-y) + 0.14em));
   mask: url("../assets/media/brand/idio-wordmark.svg") center / contain no-repeat;
   -webkit-mask: url("../assets/media/brand/idio-wordmark.svg") center / contain no-repeat;
   transition:
@@ -152,7 +152,7 @@
 
 .loader__idio-logo.is-visible {
   opacity: 1;
-  transform: translateY(var(--idio-lockup-logo-y));
+  transform: translateY(calc(-50% + var(--idio-lockup-logo-y)));
 }
 
 .loader__idio-logo[hidden] {
@@ -166,7 +166,7 @@
 
 .loader__phrase.is-logo-state .loader__idio-logo.is-visible {
   opacity: 1;
-  transform: translateY(var(--idio-lockup-logo-y));
+  transform: translateY(calc(-50% + var(--idio-lockup-logo-y)));
   transition: none;
 }
 

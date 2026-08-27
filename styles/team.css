@@ -74,23 +74,12 @@
   padding: var(--team-carousel-clearance);
   overflow-x: auto;
   overscroll-behavior-inline: contain;
-  scrollbar-color: rgb(0 71 12 / 0.58) rgb(0 71 12 / 0.12);
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scroll-snap-type: x mandatory;
 }
 
 .team__carousel::-webkit-scrollbar {
-  height: 0.45rem;
-}
-
-.team__carousel::-webkit-scrollbar-track {
-  border-radius: 999rem;
-  background: rgb(0 71 12 / 0.12);
-}
-
-.team__carousel::-webkit-scrollbar-thumb {
-  border-radius: 999rem;
-  background: rgb(0 71 12 / 0.58);
+  display: none;
 }
 
 .team__carousel-controls {
