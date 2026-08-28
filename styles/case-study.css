@@ -273,7 +273,7 @@
 
 .case-study__copy p {
   max-width: 30rem;
-  margin: clamp(1.25rem, 1.7vw, 1.55rem) 0 0;
+  margin: clamp(0.65rem, 0.9vw, 0.85rem) 0 0;
   color: var(--brand-green);
   font-size: clamp(0.78rem, 0.72vw, 0.84rem);
   font-style: normal;

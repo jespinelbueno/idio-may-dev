@@ -5,15 +5,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 12vw;
-  min-height: 3.2vw;
+  min-width: 9.25rem;
+  min-height: 2.7rem;
   margin: 2.2vw auto 0;
   overflow: hidden;
   border-radius: 999rem;
   border: 0;
   background: var(--brand-olive);
   color: var(--brand-green);
-  font-size: 0.88vw;
+  font-size: 0.72rem;
   font-weight: 650;
   line-height: 1;
   isolation: isolate;

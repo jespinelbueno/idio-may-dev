@@ -352,7 +352,7 @@ export const valuesWheelStartRotation = -120;
 export const valuesWheelEndRotation = 0;
 export const valuesWheelRenderOrder = [5, 1, 0, 2, 4, 3];
 export const valuesWheelScrollStart = 0.98;
-export const valuesWheelScrollEnd = 0.6;
+export const valuesWheelScrollEnd = 0.7;
 export const valuesWheelSmoothingFactor = 0.075;
 
 // Six keyed poses following the sketch: two-color wheel, larger two-color
