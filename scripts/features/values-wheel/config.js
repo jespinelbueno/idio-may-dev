@@ -75,6 +75,11 @@ export const valuesWheelConfig = [
     title: "responsibility",
     description:
       "Here at Idio, we believe we have a responsibility to be thorough in service and ethical in behavior, from research all the way to client relationships.",
+    calloutLines: [
+      "Here at Idio, we believe we have a responsibility to be",
+      "thorough in service and ethical in behavior, from research",
+      "all the way to client relationships.",
+    ],
     position: "bottom",
     fill: "#00470C",
     textColor: "#F7F2E9",
@@ -98,6 +103,11 @@ export const valuesWheelConfig = [
     title: "idiosyncrasy",
     description:
       "We believe good branding never sacrifices personality. The unique traits (idiosyncrasies) of a brand are what take it from great to legendary and unforgettable.",
+    calloutLines: [
+      "We believe good branding never sacrifices personality.",
+      "The unique traits (idiosyncrasies) of a brand are what",
+      "take it from great to legendary and unforgettable.",
+    ],
     position: "lower-left",
     fill: "#16233D",
     textColor: "#F7F2E9",
@@ -121,6 +131,11 @@ export const valuesWheelConfig = [
     title: "collaboration",
     description:
       "Idio fosters open dialogue and teamwork, celebrating new ideas and creative directions that communicate who our clients are to the proper audience.",
+    calloutLines: [
+      "Idio fosters open dialogue and teamwork, celebrating",
+      "new ideas and creative directions that communicate",
+      "who our clients are to the proper audience.",
+    ],
     position: "upper-left",
     fill: "#FFD569",
     textColor: "#00470C",
@@ -337,7 +352,7 @@ export const valuesWheelStartRotation = -120;
 export const valuesWheelEndRotation = 0;
 export const valuesWheelRenderOrder = [5, 1, 0, 2, 4, 3];
 export const valuesWheelScrollStart = 0.98;
-export const valuesWheelScrollEnd = 0.82;
+export const valuesWheelScrollEnd = 0.6;
 export const valuesWheelSmoothingFactor = 0.075;
 
 // Six keyed poses following the sketch: two-color wheel, larger two-color

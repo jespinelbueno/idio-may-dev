@@ -1,6 +1,6 @@
 export const initOfferParallax = () => {
   const OFFER_GRADIENT_MOTION_INTENSITY = 1.65;
-  const OFFER_GRADIENT_CATCH_UP = 0.2;
+  const OFFER_GRADIENT_CATCH_UP = 0.1;
   const REDUCED_MOTION_INTENSITY = 0.35;
   const offerSection = document.querySelector(".offer");
   

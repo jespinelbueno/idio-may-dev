@@ -6,7 +6,7 @@
   position: relative;
   width: calc(100% + (var(--offer-curve-bleed) * 2));
   min-height: calc(123vw - 5.625rem);
-  margin-top: calc(var(--offer-curve-offset) * -1);
+  margin-top: 0;
   margin-left: calc(var(--offer-curve-bleed) * -1);
   overflow: visible;
   background: transparent;

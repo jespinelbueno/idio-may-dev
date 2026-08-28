@@ -47,8 +47,8 @@
 .what-offer__header h2 {
   margin: 0;
   color: var(--paper);
-  font-size: clamp(3rem, 4.9vw, 5rem);
-  font-weight: 950;
+  font-size: clamp(2.5rem, 4.2vw, 3.8rem);
+  font-weight: 650;
   line-height: 0.9;
   letter-spacing: 0;
   text-transform: lowercase;

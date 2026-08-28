@@ -99,11 +99,6 @@
 }
 
 @media (max-width: 900px) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
   .values-callouts {
     display: none;
   }
@@ -316,7 +311,7 @@
   }
 
   .what-offer__header h2 {
-    font-size: clamp(3.1rem, 10vw, 5.2rem);
+    font-size: clamp(2.5rem, 4.2vw, 3.8rem);
   }
 
   .what-offer__items {
@@ -396,6 +391,7 @@
 
   .case-study__dots {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 1.25rem;
     order: 2;
@@ -626,6 +622,7 @@
 
   .values-title-scribble {
     width: min(13rem, 58vw);
+    transform: none;
   }
 
   .values-wheel {
@@ -775,8 +772,8 @@
   }
 
   .what-offer__header h2 {
-    font-size: clamp(2.05rem, 10.5vw, 3.8rem);
-    line-height: 0.95;
+    font-size: clamp(3rem, 14vw, 4.8rem);
+    line-height: 0.9;
     white-space: normal;
     text-wrap: balance;
   }
@@ -853,6 +850,7 @@
 
   .case-study__dots {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 1.25rem;
     order: 2;
@@ -905,7 +903,7 @@
   }
 
   .case-study__copy h2 {
-    font-size: clamp(2.35rem, 11vw, 3rem);
+    font-size: clamp(3rem, 14vw, 4.8rem);
   }
 
   .case-study__copy h3 {
@@ -1139,10 +1137,12 @@
   }
 
   .case-study__dots {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     order: initial;
-    align-content: start;
-    gap: 0.85rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
     padding-top: 8.25rem;
   }
 
@@ -1171,8 +1171,8 @@
 
   .case-study__copy h2 {
     max-width: 7.2ch;
-    font-size: 2.75rem;
-    line-height: 0.88;
+    font-size: clamp(2.5rem, 4.2vw, 3.8rem);
+    line-height: 0.9;
   }
 
   .case-study__copy h3 {

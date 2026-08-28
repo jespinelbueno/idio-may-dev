@@ -49,8 +49,8 @@
   z-index: 2;
   margin: 0;
   color: var(--paper);
-  font-size: clamp(3.3rem, 5.6vw, 5.3rem);
-  font-weight: 950;
+  font-size: clamp(2.5rem, 4.2vw, 3.8rem);
+  font-weight: 650;
   line-height: 0.9;
   letter-spacing: 0;
   text-align: center;
@@ -330,7 +330,7 @@
 
 .team-ceiling h2 {
   color: var(--brand-green);
-  font-size: clamp(3.25rem, 5vw, 4.8rem);
+  font-size: clamp(2.5rem, 4.2vw, 3.8rem);
 }
 
 .team__tagline {

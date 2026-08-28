@@ -339,7 +339,7 @@ export const initValuesWheel = () => {
         ({ title }) => `
           <img
             class="values-wheel-arrow values-wheel-arrow--${title}"
-            src="assets/arrows/wheelarrowsvg.svg"
+            src="assets/media/decorations/arrows/newwheelarrow.svg"
             data-value-title="${title}"
             alt=""
             aria-hidden="true"
@@ -349,14 +349,14 @@ export const initValuesWheel = () => {
       .join("");
     const callouts = valuesWheelConfig
       .map(
-        ({ title, description, fill }) => `
+        ({ title, description, calloutLines, fill }) => `
           <article class="values-callout values-callout--${title}" data-value-title="${title}" style="--value-color:${fill};">
             <div class="values-callout-content">
               <div class="values-callout-heading">
                 <span class="values-callout-swatch"></span>
                 <h3>${title}</h3>
               </div>
-              <p>${description}</p>
+              <p>${(calloutLines || [description]).join("<br>")}</p>
             </div>
           </article>
         `
