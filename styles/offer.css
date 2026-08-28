@@ -1,5 +1,5 @@
 .offer {
-  --offer-collage-top: clamp(24rem, 45vw, 42rem);
+  --offer-collage-top: 45.5vw;
   --offer-collage-height: min(60rem, calc(75vw - 9.1875rem));
   --offer-curve-offset: clamp(2rem, 3.6vw, 3rem);
   --offer-curve-bleed: 6vw;
