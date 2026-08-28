@@ -987,8 +987,9 @@
   }
 
   .site-footer__scribble--center {
-    top: 23.5rem;
+    top: auto;
     right: 2.5rem;
+    bottom: 2.5rem;
     left: auto;
     width: 6.8rem;
   }
