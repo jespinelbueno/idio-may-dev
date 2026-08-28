@@ -78,7 +78,7 @@
 
 .values-callout {
   position: absolute;
-  width: clamp(11.5rem, 20vw, 12.5rem);
+  width: clamp(15rem, 24vw, 17rem);
   visibility: hidden;
   opacity: 0;
   transition:
@@ -116,7 +116,7 @@
 .values-callout h3 {
   margin: 0;
   color: var(--brand-green);
-  font-size: clamp(1.35rem, 2.45vw, 1.55rem);
+  font-size: clamp(1.782rem, 3.234vw, 2.046rem);
   font-weight: 850;
   line-height: 0.95;
   letter-spacing: 0;
@@ -124,10 +124,10 @@
 }
 
 .values-callout p {
-  max-width: 12rem;
+  max-width: none;
   margin: 0 0 0 1.08rem;
   color: var(--brand-green);
-  font-size: clamp(0.46rem, 0.75vw, 0.58rem);
+  font-size: clamp(0.6072rem, 0.99vw, 0.7656rem);
   font-weight: 200;
   line-height: 1.24;
 }
@@ -142,17 +142,19 @@
 .values-callout--listening {
   top: 5%;
   right: calc(100% - 1.05rem);
+  transform: translateX(-35%);
 }
 
 .values-callout--collaboration {
   top: 44%;
   right: calc(100% - 1.05rem);
-  transform: translateX(-55px);
+  transform: translateX(calc(-55px - 35%));
 }
 
 .values-callout--excellence {
   top: 10%;
   left: calc(100% + 1.1rem);
+  transform: translateX(35%);
 
 }
 
@@ -160,17 +162,19 @@
 .values-callout--creativity {
   top: 58%;
   left: calc(100% + 4.55rem);
-  transform: translateX(15px);
+  transform: translateX(calc(15px + 35%));
 }
 
 .values-callout--idiosyncrasy {
   top: 92%;
   right: calc(100% - 1.05rem);
+  transform: translateX(-35%);
 }
 
 .values-callout--responsibility {
   top: 103%;
   left: calc(100% - 0.95rem);
+  transform: translateX(35%);
 }
 
 .values-wheel-arrow {
