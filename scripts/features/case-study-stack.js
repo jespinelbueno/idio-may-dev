@@ -296,7 +296,14 @@ export const initCaseStudyStack = () => {
     if (!pinnedSection || window.getComputedStyle(pinnedSection).position !== "sticky") return null;
   
     const trackTop = window.scrollY + caseStudyScrollTrack.getBoundingClientRect().top;
-    const scrollDistance = Math.max(caseStudyScrollTrack.offsetHeight - window.innerHeight, 1);
+    const takeoverDistance =
+      Number.parseFloat(
+        window.getComputedStyle(caseStudyScrollTrack).getPropertyValue("--team-takeover-distance"),
+      ) || 0;
+    const scrollDistance = Math.max(
+      caseStudyScrollTrack.offsetHeight - window.innerHeight - takeoverDistance,
+      1,
+    );
   
     return { trackTop, scrollDistance };
   };

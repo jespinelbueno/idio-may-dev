@@ -1,5 +1,8 @@
 .team-stage {
   position: relative;
+  margin-top: calc(var(--team-takeover-distance, 0px) * -1);
+  margin-bottom: var(--team-takeover-lag-space, 0px);
+  transform: translate3d(0, var(--team-takeover-lag, 0px), 0);
 }
 
 .team-preview-stage {
@@ -315,7 +318,7 @@
 
 .team::before {
   position: absolute;
-  top: 0;
+  top: -2px;
   bottom: 0;
   left: 50%;
   z-index: -1;

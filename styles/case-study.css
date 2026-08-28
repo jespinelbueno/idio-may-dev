@@ -334,7 +334,11 @@
 .case-study__scroll-track {
   --case-clearance: 0rem;
 
-  height: calc(100svh + (var(--case-study-count, 4) * 42svh));
+  height: calc(
+    100svh +
+    (var(--case-study-count, 4) * 42svh) +
+    var(--team-takeover-distance, 0px)
+  );
   background-color: var(--paper);
   background-image: none;
 }

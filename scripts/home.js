@@ -1,4 +1,5 @@
 import { initCaseStudyStack } from "./features/case-study-stack.js";
+import { initCaseTeamTransition } from "./features/case-team-transition.js";
 import { initHomeLoader } from "./features/home-loader.js";
 import { initHomeNav } from "./features/home-nav.js";
 import { initHeroOfferTransition } from "./features/hero-offer-transition.js";
@@ -12,6 +13,7 @@ initHomeNav();
 initHeroOfferTransition();
 initOfferParallax();
 initHomeLoader();
+initCaseTeamTransition();
 initCaseStudyStack();
 initTeamCarousel();
 initValuesWheel();
