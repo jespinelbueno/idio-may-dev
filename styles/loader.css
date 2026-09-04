@@ -27,6 +27,7 @@
 
 .loader__phrase {
   --loader-logo-gap: clamp(0.38rem, 0.75vw, 0.7rem);
+  --loader-logo-optical-offset: 0.04em;
   --idio-lockup-logo-width: 2.3em;
   --idio-lockup-logo-slot-width: 2.4em;
   --idio-lockup-logo-y: -0.14em;
@@ -51,7 +52,9 @@
 
 .loader__fixed {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--loader-logo-gap);
   animation: loader-fixed-in 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -137,7 +140,7 @@
 .loader__idio-logo {
   position: absolute;
   top: 50%;
-  left: calc(100% + var(--loader-logo-gap));
+  left: calc(100% + var(--loader-logo-gap) + var(--loader-logo-optical-offset));
   display: block;
   width: var(--idio-lockup-logo-width);
   aspect-ratio: 531 / 230;

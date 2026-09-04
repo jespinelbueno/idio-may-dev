@@ -336,10 +336,10 @@ export const initValuesWheel = () => {
   if (valuesCallouts) {
     const arrows = valuesWheelConfig
       .map(
-        ({ title }) => `
+        ({ title, arrowAsset, arrowSrc }) => `
           <img
-            class="values-wheel-arrow values-wheel-arrow--${title}"
-            src="assets/media/decorations/arrows/newwheelarrow.svg"
+            class="values-wheel-arrow values-wheel-arrow--${title} values-wheel-arrow--${arrowAsset}"
+            src="${arrowSrc}"
             data-value-title="${title}"
             alt=""
             aria-hidden="true"

@@ -123,6 +123,7 @@
 
 .hero__headline {
   --hero-logo-gap: clamp(0.38rem, 0.75vw, 0.7rem);
+  --hero-logo-optical-offset: 0.04em;
   --idio-lockup-logo-width: 2.3em;
   --idio-lockup-logo-slot-width: 2.4em;
   --idio-lockup-logo-y: -0.14em;
@@ -148,7 +149,9 @@
 
 .hero__fixed {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--hero-logo-gap);
 }
 
 .hero__logo-slot {
@@ -160,7 +163,7 @@
 .hero__logo {
   position: absolute;
   top: 50%;
-  left: calc(100% + var(--hero-logo-gap));
+  left: calc(100% + var(--hero-logo-gap) + var(--hero-logo-optical-offset));
   width: var(--idio-lockup-logo-width);
   height: auto;
   transform: translateY(calc(-50% + var(--idio-lockup-logo-y)));

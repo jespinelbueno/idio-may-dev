@@ -498,11 +498,11 @@
   }
 
   .site-footer__lockup {
-    font-size: clamp(2.8rem, 8vw, 4.4rem);
+    font-size: clamp(2.5rem, 4.2vw, 3.8rem);
   }
 
   .site-footer__logo {
-    width: clamp(4.2rem, 10vw, 6rem);
+    width: var(--footer-logo-width);
   }
 
   .site-footer__contact {
@@ -605,7 +605,7 @@
   }
 
   .values-title-scribble {
-    width: min(13rem, 58vw);
+    width: min(14.25rem, 63vw);
     transform: none;
   }
 
@@ -937,12 +937,12 @@
     flex-wrap: wrap;
     row-gap: 0.35rem;
     width: min(24rem, 100%);
-    font-size: clamp(2.85rem, 12.6vw, 4.1rem);
+    font-size: clamp(3rem, 14vw, 4.8rem);
     white-space: normal;
   }
 
   .site-footer__logo {
-    width: clamp(4.7rem, 20vw, 6rem);
+    width: var(--footer-logo-width);
   }
 
   .site-footer__contact {
@@ -974,7 +974,7 @@
   }
 
   .site-footer__scribble--left {
-    top: 9.3rem;
+    top: 12rem;
     left: -4.4rem;
     width: 6.5rem;
   }

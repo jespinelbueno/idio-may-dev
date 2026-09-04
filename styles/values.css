@@ -43,11 +43,13 @@
 
 .values-title-scribble {
   display: block;
-  width: clamp(17rem, 32vw, 19.5rem);
-  height: clamp(1.05rem, 2.08vw, 1.3rem);
+  width: clamp(18.5rem, 34.5vw, 21rem);
+  height: clamp(1.15rem, 2.25vw, 1.4rem);
   margin-top: 0.2rem;
-  background: url("../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
-  transform: translateX(3rem);
+  background: var(--brand-green);
+  -webkit-mask: url("../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
+  mask: url("../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
+  transform: translateX(2.5rem);
 }
 
 .values-wheel {
@@ -181,7 +183,7 @@
   position: absolute;
   z-index: 1;
   display: block;
-  width: 3.35rem;
+  width: auto;
   height: auto;
   visibility: hidden;
   opacity: 0;
@@ -190,6 +192,30 @@
   transition:
     opacity 180ms ease,
     visibility 0s linear 180ms;
+}
+
+.values-wheel-arrow--green1 {
+  width: 8.75rem;
+}
+
+.values-wheel-arrow--green2 {
+  height: 9.5rem;
+}
+
+.values-wheel-arrow--green3 {
+  height: 10rem;
+}
+
+.values-wheel-arrow--green4 {
+  height: 8rem;
+}
+
+.values-wheel-arrow--green5 {
+  height: 7rem;
+}
+
+.values-wheel-arrow--green6 {
+  height: 10rem;
 }
 
 .values-wheel-arrow.is-active {
