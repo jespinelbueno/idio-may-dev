@@ -1,5 +1,10 @@
 {
   "assets/arrows/wheelarrow.png": "assets/media/decorations/arrows/values-wheel-arrow.png",
+  "assets/arrows/ourteamarrows/yellow1.svg": "assets/media/decorations/arrows/our-team/yellow1.svg",
+  "assets/arrows/ourteamarrows/yellow2.svg": "assets/media/decorations/arrows/our-team/yellow2.svg",
+  "assets/arrows/ourteamarrows/yellow3.svg": "assets/media/decorations/arrows/our-team/yellow3.svg",
+  "assets/arrows/ourteamarrows/yellow4.svg": "assets/media/decorations/arrows/our-team/yellow4.svg",
+  "assets/arrows/ourteamarrows/yellow5.svg": "assets/media/decorations/arrows/our-team/yellow5.svg",
   "assets/backgrounds/landingbg.jpg": "assets/media/home/hero.jpg",
   "assets/backgrounds/ourcreativetoolkitbg.png": "assets/media/home/creative-toolkit-background.png",
   "assets/backgrounds/servicesbg.png": "assets/media/services/hero.png",
@@ -52,6 +57,7 @@
   "assets/scribbles/hiidio/butenough/yellowleft.svg": "assets/media/decorations/scribbles/hiidio/butenough/yellowleft.svg",
   "assets/scribbles/loader/line.svg": "assets/media/decorations/scribbles/loader/line.svg",
   "assets/scribbles/services/scribble1green.png": "assets/media/decorations/scribbles/services/green.png",
+  "assets/scribbles/toolkit/creativetoolkit.svg": "assets/media/decorations/scribbles/creative-toolkit-title.svg",
   "assets/scribbles/toolkit/newscribbleourcreativetoolkit.svg": "assets/media/decorations/scribbles/toolkit-title.svg",
   "assets/scribbles/scribble1red.svg": "assets/media/decorations/scribbles/offer/red-main.svg",
   "assets/scribbles/scribble2red.svg": "assets/media/decorations/scribbles/offer/red-accent.svg",

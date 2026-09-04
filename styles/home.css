@@ -2,6 +2,7 @@
 
 @import url("./foundation.css") layer(foundation);
 @import url("./loader.css") layer(components);
+@import url("./custom-cursor.css") layer(components);
 @import url("./buttons.css") layer(components);
 @import url("./footer.css") layer(components);
 @import url("./hero.css") layer(pages);

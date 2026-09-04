@@ -77,6 +77,7 @@
   padding: var(--team-carousel-clearance);
   overflow-x: auto;
   overscroll-behavior-inline: contain;
+  scroll-padding-inline: calc(var(--team-carousel-clearance) + 1rem);
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
 }
@@ -170,20 +171,59 @@
 .team__member::after {
   content: "";
   position: absolute;
-  top: calc(var(--team-photo-offset) + 95cqw);
-  right: -1cqw;
+  top: calc(var(--team-photo-offset) + var(--team-arrow-top));
+  right: var(--team-arrow-right, auto);
+  left: var(--team-arrow-left, auto);
   z-index: 4;
-  width: 34cqw;
-  aspect-ratio: 131 / 266;
-  background: var(--brand-yellow);
-  mask: url("../assets/media/decorations/arrows/team.svg") center / contain no-repeat;
-  -webkit-mask: url("../assets/media/decorations/arrows/team.svg") center / contain no-repeat;
+  width: var(--team-arrow-width);
+  aspect-ratio: var(--team-arrow-ratio);
+  background: var(--team-arrow-image) center / contain no-repeat;
   opacity: 0;
   transform: translateY(0.8rem) rotate(-1deg);
   transition:
     opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
     transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
+}
+
+.team__member:nth-child(1) {
+  --team-arrow-image: url("../assets/media/decorations/arrows/our-team/yellow1.svg");
+  --team-arrow-width: 40cqw;
+  --team-arrow-ratio: 136 / 191;
+  --team-arrow-top: 92cqw;
+  --team-arrow-left: clamp(-3.5rem, -31cqw, -2.5rem);
+}
+
+.team__member:nth-child(2) {
+  --team-arrow-image: url("../assets/media/decorations/arrows/our-team/yellow2.svg");
+  --team-arrow-width: 31cqw;
+  --team-arrow-ratio: 107 / 163;
+  --team-arrow-top: 105cqw;
+  --team-arrow-right: 7cqw;
+}
+
+.team__member:nth-child(3) {
+  --team-arrow-image: url("../assets/media/decorations/arrows/our-team/yellow3.svg");
+  --team-arrow-width: 24cqw;
+  --team-arrow-ratio: 83 / 153;
+  --team-arrow-top: 101cqw;
+  --team-arrow-left: clamp(-3.6rem, -20cqw, -2rem);
+}
+
+.team__member:nth-child(4) {
+  --team-arrow-image: url("../assets/media/decorations/arrows/our-team/yellow4.svg");
+  --team-arrow-width: 23cqw;
+  --team-arrow-ratio: 78 / 112;
+  --team-arrow-top: 108cqw;
+  --team-arrow-right: 8cqw;
+}
+
+.team__member:nth-child(5) {
+  --team-arrow-image: url("../assets/media/decorations/arrows/our-team/yellow5.svg");
+  --team-arrow-width: 12cqw;
+  --team-arrow-ratio: 42 / 106;
+  --team-arrow-top: 108cqw;
+  --team-arrow-left: 10cqw;
 }
 
 .team__member:hover,

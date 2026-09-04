@@ -1,6 +1,7 @@
 @layer foundation, components, pages, effects, responsive;
 
 @import url("./foundation.css") layer(foundation);
+@import url("./custom-cursor.css") layer(components);
 @import url("./footer.css") layer(components);
 @import url("./services-page.css") layer(pages);
 @import url("./animations.css") layer(effects);

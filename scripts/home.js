@@ -1,5 +1,6 @@
 import { initCaseStudyStack } from "./features/case-study-stack.js";
 import { initCaseTeamTransition } from "./features/case-team-transition.js";
+import { initCustomCursor } from "./features/custom-cursor.js";
 import { initHomeLoader } from "./features/home-loader.js";
 import { initHomeNav } from "./features/home-nav.js";
 import { initHeroOfferTransition } from "./features/hero-offer-transition.js";
@@ -9,6 +10,7 @@ import { initValuesWheel } from "./features/values-wheel/controller.js";
 import { initViewportHeight } from "./features/viewport-height.js";
 
 initViewportHeight();
+initCustomCursor();
 initHomeNav();
 initHeroOfferTransition();
 initOfferParallax();
