@@ -306,22 +306,6 @@
     transform 260ms ease;
 }
 
-@media (max-height: 720px) and (max-width: 900px) {
-  .case-study__scroll-track {
-    height: auto;
-  }
-
-  .case-study {
-    position: relative;
-    height: auto;
-    min-height: auto;
-  }
-
-  .case-study::before {
-    content: none;
-  }
-}
-
 /* Case study + team art direction */
 .case-team {
   --team-curve-offset: clamp(2rem, 3.6vw, 3rem);
@@ -447,4 +431,146 @@
 
 .data-case-project-stack h3{
 font-size: 10px;
+}
+
+@media (min-width: 1101px) {
+.case-team {
+    --team-preview-depth: clamp(8rem, 12vw, 9.5rem);
+  }
+}
+
+@media (min-width: 1101px) {
+.case-study__media,
+  .case-study__copy {
+    transform: none;
+  }
+}
+
+/* The container also responds to enlarged text on wide viewports. */
+.case-team {
+  container: case-layout / inline-size;
+}
+
+/* Width, available height, and text growth all select the same flow behavior. */
+@media (max-width: 1100px), (max-height: 720px), (prefers-reduced-motion: reduce) {
+  .case-study__scroll-track {
+    height: auto;
+  }
+  .case-study {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+  }
+  .case-study::before {
+    content: none;
+  }
+}
+.case-study.is-content-tall {
+  position: relative;
+  height: auto;
+  min-height: 0;
+}
+.case-study__scroll-track:has(.is-content-tall) {
+  height: auto;
+}
+@container case-layout (max-width: 68.75rem) {
+  .case-study__scroll-track {
+    height: auto;
+  }
+  .case-study {
+    --case-compact: 1;
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    width: calc(100% - var(--page-gutter) * 2);
+    padding: var(--section-space) 0 calc(var(--section-space) + 1.5rem);
+  }
+  .case-study__media {
+    container-type: inline-size;
+    width: min(100%, 28rem);
+    min-height: 0;
+    aspect-ratio: 1 / 1.02;
+    justify-self: center;
+    align-self: start;
+  }
+  .case-study__stack {
+    top: 7%;
+    left: 24%;
+    width: 61%;
+    container-type: inline-size;
+  }
+  .case-study__stack-card {
+    --case-frame-pad-x: 5cqw;
+    --case-frame-pad-top: 5cqw;
+    --case-frame-pad-bottom: 25cqw;
+    box-shadow: 0 3cqw 7cqw rgb(21 18 14 / 0.16);
+  }
+  .case-study__scribble--green {
+    top: 0;
+    left: 0;
+    width: 29%;
+  }
+  .case-study__scribble--yellow {
+    top: 70%;
+    left: 71%;
+    width: 25%;
+  }
+  .case-study__scribble--pink {
+    top: 2.8rem;
+    left: auto;
+    right: 0;
+    width: 28%;
+    opacity: 0.65;
+  }
+  .case-study__copy {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    width: min(100%, 36rem);
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .case-study__details {
+    grid-row: 1;
+    min-width: 0;
+  }
+  .case-study__dots {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0;
+  }
+  .case-study__dot {
+    width: var(--tap-size);
+    min-height: var(--tap-size);
+  }
+  .case-study__copy h2 {
+    max-width: none;
+    font-size: var(--heading-size);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+  .case-study__copy h3 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+  }
+  .case-study__copy .case-study__description {
+    max-width: 36ch;
+    margin: 1rem auto 0;
+    font-size: var(--body-size);
+    line-height: 1.5;
+  }
+  .case-study__button {
+    min-width: min(9.25rem, 100%);
+    max-width: 100%;
+    min-height: var(--tap-size);
+    padding: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+    font-size: var(--small-size);
+  }
 }

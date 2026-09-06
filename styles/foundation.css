@@ -84,3 +84,24 @@ a {
   min-height: 100vh;
   overflow-x: clip;
 }
+
+/* Opt-in responsive primitives. Future pages can adopt these tokens explicitly. */
+.page-home,
+.services-page {
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --page-max: 80rem;
+  --section-space: clamp(3rem, 7vw, 5rem);
+  --heading-size: clamp(2.25rem, 2.017rem + 1.98vw, 3.8rem);
+  --body-size: 1rem;
+  --small-size: 0.875rem;
+  --tap-size: 2.75rem;
+  --nav-height: 4.25rem;
+}
+:is(.page-home, .services-page) [id] {
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+@media (max-width: 1100px) {
+  .page-home {
+    --edge: var(--page-gutter);
+  }
+}

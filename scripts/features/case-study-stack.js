@@ -71,13 +71,13 @@ export const initCaseStudyStack = () => {
   
   const getCaseStudyCardMetrics = () => {
     const firstCard = getCaseStudyCards()[0];
-    const width = firstCard?.getBoundingClientRect().width || 360;
-    const isCompact = window.matchMedia("(max-width: 700px)").matches;
+    const width = firstCard?.offsetWidth || 360;
+    const isCompact = window.getComputedStyle(caseStudyStack).getPropertyValue("--case-compact").trim() === "1";
   
     return {
       offsetX: width * (isCompact ? -0.075 : -0.125),
       offsetY: width * (isCompact ? 0.07 : 0.02),
-      travelX: width * (isCompact ? 0.58 : 0.68),
+      travelX: width * (isCompact ? 0.13 : 0.68),
       liftY: width * (isCompact ? -0.2 : -0.24),
     };
   };
@@ -167,7 +167,7 @@ export const initCaseStudyStack = () => {
         frontCard,
       ];
   
-      if (!frontCard.animate) {
+      if (!frontCard.animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         reorderCaseStudyCards(finalOrder);
         return;
       }
@@ -311,7 +311,7 @@ export const initCaseStudyStack = () => {
   const getCaseStudyIndexFromScroll = () => {
     const metrics = getCaseStudyScrollMetrics();
   
-    if (!metrics || caseStudies.length < 2) return 0;
+    if (!metrics || caseStudies.length < 2) return null;
   
     const progress = Math.max(0, Math.min(1, (window.scrollY - metrics.trackTop) / metrics.scrollDistance));
     return Math.min(caseStudies.length - 1, Math.floor(progress * caseStudies.length));
@@ -319,7 +319,8 @@ export const initCaseStudyStack = () => {
   
   const syncCaseStudyToScroll = () => {
     caseStudyScrollFrame = 0;
-    selectCaseStudy(getCaseStudyIndexFromScroll());
+    const index = getCaseStudyIndexFromScroll();
+    if (index !== null) selectCaseStudy(index);
   };
   
   const scheduleCaseStudyScrollSync = () => {
@@ -352,6 +353,21 @@ export const initCaseStudyStack = () => {
     scheduleCaseStudyScrollSync();
   });
   
+  const pinnedSection = caseStudyScrollTrack.querySelector(".case-study");
+  const copy = pinnedSection?.querySelector(".case-study__copy");
+  const updateContentFit = () => {
+    if (!pinnedSection || !copy) return;
+    const style = window.getComputedStyle(pinnedSection);
+    const contentHeight = Math.max(copy.offsetHeight, caseStudyMedia.offsetHeight);
+    const requiredHeight = contentHeight + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    pinnedSection.classList.toggle("is-content-tall", requiredHeight > window.innerHeight);
+    window.dispatchEvent(new Event("case-layout-change"));
+    scheduleCaseStudyScrollSync();
+  };
+  if (copy) new ResizeObserver(updateContentFit).observe(copy);
+  window.addEventListener("resize", updateContentFit, { passive: true });
+  window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", updateContentFit);
+  updateContentFit();
   positionCaseStudyCards({ immediate: true });
   window.addEventListener("scroll", scheduleCaseStudyScrollSync, { passive: true });
   syncCaseStudyToScroll();

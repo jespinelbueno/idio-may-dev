@@ -543,3 +543,124 @@
 .values-mobile-list {
   display: none;
 }
+
+@keyframes value-tooltip-arrow-reveal-1 {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 0 100%);
+    transform: translateY(0.5rem) scaleX(0.18) scaleY(0.96);
+    transform-origin: 100% 45%;
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0) scaleX(1) scaleY(1);
+    transform-origin: 100% 45%;
+  }
+}
+
+/* Responsive value descriptions share the wheel's content source. */
+.values-section {
+  container: values-layout / inline-size;
+}
+.values-mobile-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(100%, 40rem);
+  margin: 0 auto;
+}
+.values-mobile-item {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgb(255 255 255 / 0.3);
+}
+.values-mobile-swatch {
+  width: 1rem;
+  aspect-ratio: 1;
+  margin-top: 0.25rem;
+  border-radius: 50%;
+}
+.values-mobile-copy h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+.values-mobile-copy p {
+  margin: 0;
+  font-size: var(--body-size);
+  line-height: 1.5;
+}
+.values-mobile-item.is-active {
+  background: rgb(255 255 255 / 0.7);
+  outline: 2px solid var(--brand-green);
+}
+@media (max-width: 1100px), (hover: none) {
+  .values-section {
+    width: calc(100% - var(--page-gutter) * 2);
+    min-height: 0;
+    padding: var(--section-space) 0;
+    gap: 2rem;
+  }
+  .values-callouts, .value-tooltip {
+    display: none;
+  }
+  .values-mobile-list {
+    display: grid;
+  }
+  .values-intro {
+    transform: none;
+    margin: 0;
+  }
+  .values-intro h2 {
+    font-size: var(--heading-size);
+    line-height: 1.05;
+    transform: none;
+  }
+  .values-title-scribble {
+    width: min(75%, 16rem);
+    transform: none;
+  }
+  .values-wheel {
+    width: min(70%, 22rem);
+    margin: 1rem auto 3rem;
+    transform: none;
+  }
+  .values-wheel-graphic {
+    transform: none;
+  }
+}
+@media (min-width: 1101px) and (hover: hover) {
+  .value-tooltip {
+    display: none;
+  }
+}
+/* Callouts require room on both sides, including with enlarged text. */
+@container values-layout (max-width: 70rem) {
+  .values-callouts, .value-tooltip {
+    display: none;
+  }
+  .values-intro, .values-intro h2, .values-wheel-graphic {
+    transform: none;
+  }
+  .values-intro {
+    margin: 0;
+  }
+  .values-wheel {
+    width: min(70%, 22rem);
+    margin: 1rem auto 3rem;
+    transform: none;
+  }
+  .values-mobile-list {
+    display: grid;
+  }
+}
+@container values-layout (max-width: 40rem) {
+  .values-mobile-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

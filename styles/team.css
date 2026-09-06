@@ -429,3 +429,91 @@
   opacity: 1;
   transform: none;
 }
+
+@media (min-width: 1101px) {
+.team-ceiling {
+    padding-top: clamp(2.2rem, 3.5vw, 3.2rem);
+  }
+}
+
+@container case-layout (max-width: 68.75rem) {
+  .team-stage {
+    margin: 0;
+    transform: none;
+  }
+  .team-preview-stage {
+    height: auto;
+  }
+  .team-ceiling {
+    width: calc(100% - var(--page-gutter) * 2);
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+  }
+  .team-ceiling h2 {
+    font-size: var(--heading-size);
+    line-height: 1.05;
+  }
+  .team__tagline {
+    line-height: 1.3;
+  }
+  .team {
+    width: calc(100% - var(--page-gutter) * 2);
+    min-height: 0;
+    padding: 1.5rem 0 var(--section-space);
+  }
+  .team__carousel-controls {
+    position: relative;
+    inset: auto;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    transform: none;
+  }
+  .team__carousel-button {
+    width: var(--tap-size);
+  }
+  .team__carousel {
+    margin: 0;
+    padding: 0.5rem 0 1rem;
+    scroll-padding-inline: 0;
+  }
+  .team__grid {
+    grid-auto-columns: 44%;
+    gap: 1.5rem;
+    margin: 0;
+  }
+  .team__member {
+    width: 100%;
+    padding: 0;
+  }
+  .team__member h3 {
+    font-size: 1.75rem;
+  }
+  .team__bio {
+    font-size: var(--small-size);
+    line-height: 1.45;
+  }
+  .team__member:hover .team__photo, .team__member:focus .team__photo, .team__member:focus-within .team__photo {
+    transform: none;
+    box-shadow: none;
+  }
+  .team__member::after {
+    display: none;
+  }
+  .team__member:focus-visible {
+    outline-offset: -2px;
+  }
+}
+@container case-layout (max-width: 40rem) {
+  .team__grid {
+    grid-auto-columns: 82%;
+    gap: 1.25rem;
+  }
+}
+@media (hover: none) {
+  .team__member:hover .team__photo,
+  .team__member:focus .team__photo,
+  .team__member:focus-within .team__photo {
+    transform: none;
+  }
+}

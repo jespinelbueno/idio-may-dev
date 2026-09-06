@@ -1,6 +1,6 @@
 # Homepage responsive plan
 
-Status: proposal, September 6, 2026. No page implementation changes made.
+Status: implemented, September 6, 2026. See `responsive-implementation.md` for final values, validation results, and remaining device checks. The sections below retain the original proposal for rationale.
 
 Direction confirmed: preserve compositions, reflow text. Scope is `index.html`; the homepage's creative toolkit section is included, but `services.html` is not being redesigned.
 

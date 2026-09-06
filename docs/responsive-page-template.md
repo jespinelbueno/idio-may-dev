@@ -1,6 +1,6 @@
 # Responsive page specification template
 
-Copy this specification for each future page. The homepage is the first application; use its verified values once implemented. This document is a planning template, not an installed skill or an automatically applied stylesheet.
+Copy this specification for each future page. The homepage is the first application; its implemented values and validation record are in [responsive-implementation.md](responsive-implementation.md). This document is a planning template, not an installed skill or an automatically applied stylesheet.
 
 ## Page and scope
 

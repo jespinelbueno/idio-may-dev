@@ -11,7 +11,7 @@
     <link rel="preload" href="assets/media/brand/idio-wordmark.svg" as="image">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="is-loading">
+  <body class="page-home is-loading">
     <svg class="scribble-frame-filters" aria-hidden="true">
       <defs>
         <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
@@ -63,7 +63,8 @@
           <span class="home-nav__brand-mark" aria-hidden="true"></span>
         </a>
 
-        <nav class="home-nav__links">
+        <button class="home-nav__toggle" type="button" aria-expanded="false" aria-controls="home-menu">Menu</button>
+        <nav class="home-nav__links" id="home-menu" aria-label="Main">
           <a href="services.html">Services</a>
           <a href="#case-study-title">Projects</a>
           <a href="#team-title">About Us</a>
@@ -102,7 +103,7 @@
         <header class="offer__intro">
           <h2 id="offer-title">hi, we’re idio</h2>
           <span class="offer__title-scribble" aria-hidden="true"></span>
-          <p>we find that unique thing about your brand<br>and make it your secret sauce ;)</p>
+          <p>we find that unique thing about your brand<br> and make it your secret sauce ;)</p>
           <a class="offer__button" href="#offer-about-title">
             <span class="button-fill__label">wanna know how?</span>
             <span class="button-fill__inner" aria-hidden="true">
@@ -117,7 +118,7 @@
         </header>
 
         <div class="offer__copy">
-          <h3 id="offer-about-title">but enough<br>about us. this is<br>about you.</h3>
+          <h3 id="offer-about-title">but enough<br> about us. this is<br> about you.</h3>
           <p>
             Are you a creative whose imagination is threatened by the <br>
             technicalities of business? Idio is the agency made by creatives,<br>
@@ -165,7 +166,7 @@
             <article class="what-offer__item what-offer__item--one">
               <div class="what-offer__copy">
                 <h3>branding</h3>
-                <p>(so they’ll remember<br>your name)</p>
+                <p>(so they’ll remember<br> your name)</p>
               </div>
               <div class="what-offer__circle" aria-hidden="true">
                 <span class="what-offer__circle-shape"></span>
@@ -178,14 +179,14 @@
               </div>
               <div class="what-offer__copy">
                 <h3>web design</h3>
-                <p>(professional pixel<br>power at your<br>service)</p>
+                <p>(professional pixel<br> power at your<br> service)</p>
               </div>
             </article>
 
             <article class="what-offer__item what-offer__item--three">
               <div class="what-offer__copy">
                 <h3>content creation</h3>
-                <p>(words and visuals<br>that mean something)</p>
+                <p>(words and visuals<br> that mean something)</p>
               </div>
               <div class="what-offer__circle" aria-hidden="true">
                 <span class="what-offer__circle-shape"></span>
@@ -197,8 +198,8 @@
                 <span class="what-offer__circle-shape"></span>
               </div>
               <div class="what-offer__copy">
-                <h3>social media<br>management</h3>
-                <p>(so you have time<br>to be creative)</p>
+                <h3>social media<br> management</h3>
+                <p>(so you have time<br> to be creative)</p>
               </div>
             </article>
           </div>
@@ -239,7 +240,7 @@
                 <p class="case-study__eyebrow">not to bring up the past but...</p>
                 <h2 id="case-study-title">previous collaborations</h2>
                 <img class="case-study__scribble case-study__scribble--pink" src="assets/media/decorations/scribbles/case-study/pink-wireframe.svg" alt="" aria-hidden="true">
-                <div class="case-study__project" data-case-project>
+                <div class="case-study__project" data-case-project aria-live="polite" aria-atomic="true">
                   <h3>Leisure Events</h3>
                   <p class="case-study__description">
                     Leisure Events is a rental company in Lynchburg VA that

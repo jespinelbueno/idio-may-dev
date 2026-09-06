@@ -11,6 +11,8 @@ This repository is a build-free GitHub Pages site. Its public pages are index.ht
 
 ## Development checks
 
+The homepage's responsive rules and validation record are documented in [docs/responsive-implementation.md](docs/responsive-implementation.md). Use [docs/responsive-page-template.md](docs/responsive-page-template.md) to plan another page's adoption.
+
 Run npm run check before committing. It resolves local HTML, CSS, and JavaScript references, parses every JavaScript module, and verifies that each legacy asset alias matches its canonical media file.
 
 ## Deployment

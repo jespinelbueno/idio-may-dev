@@ -368,3 +368,114 @@
   --scribble-frame-duration: 1080ms;
   --scribble-frame-delay: -250ms;
 }
+
+@media (min-width: 1101px) {
+.offer__copy h3 {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1100px) {
+  .offer {
+    --offer-curve-bleed: 0px;
+    /* Keep the ellipse's outer edges above the seam as content height changes. */
+    --offer-curve-offset: 4%;
+    width: 100%;
+    min-height: 0;
+    margin-left: 0;
+    padding: var(--section-space) var(--page-gutter);
+  }
+  .offer__intro, .offer__copy {
+    position: relative;
+    inset: auto;
+    width: min(100%, 36rem);
+    margin-inline: auto;
+    text-align: center;
+    transform: none;
+  }
+  .offer__intro h2 {
+    font-size: var(--heading-size);
+    line-height: 1.05;
+  }
+  .offer__title-scribble {
+    width: 7.5em;
+    max-width: 65%;
+    margin-top: 0.65rem;
+  }
+  .offer__intro p, .offer__copy p {
+    max-width: 36ch;
+    margin: 1.25rem auto 0;
+    font-size: var(--body-size);
+    line-height: 1.5;
+  }
+  .offer__intro p br, .offer__copy p br {
+    display: none;
+  }
+  .offer__copy {
+    margin-top: var(--section-space);
+  }
+  .offer__copy h3 {
+    font-size: clamp(2rem, 7.8vw, 3.5rem);
+    line-height: 1.08;
+  }
+  .offer__collage {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, 38rem);
+    height: auto;
+    aspect-ratio: 1 / 1.04;
+    margin: 3rem auto 1rem;
+    transform: none;
+    container-type: inline-size;
+  }
+  .offer__placeholder {
+    box-shadow: 0 2cqw 5cqw rgb(21 18 14 / 0.08);
+  }
+  .offer__placeholder--portrait-main {
+    top: 0;
+    left: 25%;
+    width: 44%;
+  }
+  .offer__placeholder--look {
+    top: 24%;
+    left: 73%;
+    width: 27%;
+  }
+  .offer__placeholder--still-life {
+    top: 39%;
+    left: 0;
+    width: 34%;
+  }
+  .offer__placeholder--detail {
+    top: 58%;
+    left: 29%;
+    width: 24%;
+  }
+  .offer__placeholder--motion {
+    top: 61%;
+    left: 57%;
+    width: 39%;
+  }
+  .offer > .offer__scribble {
+    display: none;
+  }
+  .offer__scribble--collage-red {
+    left: 67%;
+    top: -3%;
+    width: 19%;
+  }
+  .offer__scribble--collage-green-one, .offer__scribble--collage-green-two {
+    display: none;
+  }
+  .offer__scribble--collage-yellow {
+    left: 5%;
+    top: 65%;
+    width: 21%;
+  }
+  .offer__scribble--collage-blue {
+    left: 62%;
+    top: 85%;
+    width: 27%;
+  }
+}

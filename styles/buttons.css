@@ -120,3 +120,14 @@
   outline: 2px solid currentColor;
   outline-offset: 0.18rem;
 }
+
+@media (max-width: 1100px) {
+  .page-home .offer__button {
+    min-height: var(--tap-size);
+    min-width: min(11rem, 100%);
+    max-width: 100%;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+    font-size: var(--small-size);
+  }
+}

@@ -187,3 +187,13 @@ body.is-loading .hero__image {
 body.is-ready .hero__image {
   animation: hero-arrive 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+@media (max-width: 1100px) {
+  .page-home .loader__home {
+    padding: 1rem;
+  }
+  .page-home .loader__phrase {
+    --loader-logo-gap: 0.15em;
+    font-size: min(clamp(1.7rem, 7.2vw, 3.2rem), 8.5vw);
+  }
+}

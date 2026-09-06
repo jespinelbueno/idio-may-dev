@@ -51,4 +51,5 @@ export const initCaseTeamTransition = () => {
   window.addEventListener("scroll", scheduleTransition, { passive: true });
   window.addEventListener("resize", scheduleTransition, { passive: true });
   motionQuery.addEventListener("change", scheduleTransition);
+  window.addEventListener("case-layout-change", scheduleTransition);
 };

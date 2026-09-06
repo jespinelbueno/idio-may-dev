@@ -216,3 +216,103 @@
 .site-footer__social:focus-visible {
   transform: translateY(-0.08rem);
 }
+
+@media (max-width: 1100px) {
+  :is(.page-home, .services-page) .site-footer {
+    min-height: 0;
+  }
+  :is(.page-home, .services-page) .site-footer__inner {
+    width: calc(100% - var(--page-gutter) * 2);
+    min-height: 0;
+    padding: 5rem 0 max(2rem, env(safe-area-inset-bottom));
+  }
+  :is(.page-home, .services-page) .site-footer__lockup {
+    width: 100%;
+    font-size: clamp(2.25rem, 5.5vw, 3.8rem);
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    white-space: normal;
+  }
+  :is(.page-home, .services-page) .site-footer__contact {
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    margin-top: 2rem;
+  }
+  :is(.page-home, .services-page) .site-footer__socials {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  :is(.page-home, .services-page) .site-footer__social {
+    width: var(--tap-size);
+    padding: 0.6rem;
+  }
+  :is(.page-home, .services-page) .site-footer__email {
+    font-size: 1rem;
+    min-height: var(--tap-size);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    display: flex;
+    align-items: center;
+  }
+  :is(.page-home, .services-page) .site-footer__links {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  :is(.page-home, .services-page) .site-footer__column {
+    font-size: var(--small-size);
+    line-height: 1.4;
+    gap: 0;
+  }
+  :is(.page-home, .services-page) .site-footer__column a {
+    display: flex;
+    align-items: center;
+    min-height: var(--tap-size);
+  }
+  :is(.page-home, .services-page) .site-footer__column h2 {
+    margin: 0;
+  }
+  :is(.page-home, .services-page) .site-footer__copyright {
+    position: static;
+    margin-top: 3rem;
+    font-size: var(--small-size);
+    line-height: 1.4;
+  }
+  :is(.page-home, .services-page) .site-footer__scribble--left {
+    top: 1rem;
+    left: -1rem;
+    width: 4rem;
+  }
+  :is(.page-home, .services-page) .site-footer__scribble--upper {
+    top: 1rem;
+    left: auto;
+    right: 0;
+    width: 6rem;
+  }
+  :is(.page-home, .services-page) .site-footer__scribble--center {
+    right: 1rem;
+    bottom: 1rem;
+    width: 4rem;
+  }
+}
+@media (max-width: 640px) {
+  :is(.page-home, .services-page) .site-footer__lockup {
+    max-width: 10em;
+    font-size: clamp(2.25rem, 9vw, 3.25rem);
+  }
+  :is(.page-home, .services-page) .site-footer__phrase {
+    flex-wrap: wrap;
+  }
+  :is(.page-home, .services-page) .site-footer__contact {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 350px) {
+  :is(.page-home, .services-page) .site-footer__links {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}

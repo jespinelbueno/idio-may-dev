@@ -13,7 +13,7 @@ export const initHeroOfferTransition = () => {
   const paintTransition = () => {
     animationFrame = 0;
 
-    if (motionQuery.matches) {
+    if (motionQuery.matches || window.getComputedStyle(hero).position !== "sticky") {
       stage.style.setProperty("--hero-offer-lag-space", "0px");
       offer.style.setProperty("--hero-offer-lag", "0px");
       return;

@@ -60,6 +60,9 @@ export const initValuesWheel = () => {
     valueTooltipTitle.textContent = valueTitle || "";
     valueTooltipCopy.textContent = valueDescription || "";
     valueTooltipSwatch?.style.setProperty("background", valueColor || "");
+    valuesMobileList?.querySelectorAll(".values-mobile-item").forEach((item) => {
+      item.classList.toggle("is-active", item.dataset.valueTitle === valueTitle);
+    });
     valuesCallouts
       ?.querySelectorAll(".values-callout")
       .forEach((callout) => {
@@ -321,7 +324,7 @@ export const initValuesWheel = () => {
     valuesMobileList.innerHTML = valuesWheelConfig
       .map(
         ({ title, description, fill }) => `
-          <article class="values-mobile-item">
+          <article class="values-mobile-item" data-value-title="${title}">
             <div class="values-mobile-swatch" style="background:${fill};" aria-hidden="true"></div>
             <div class="values-mobile-copy">
               <h3>${title}</h3>
@@ -524,6 +527,18 @@ export const initValuesWheel = () => {
   });
 
   wheelSlices.forEach(({ group }, index) => {
+    const activate = () => {
+      clearHoverTimers();
+      cancelHoverExit();
+      showSliceValue(group, index);
+    };
+    group.addEventListener("click", activate);
+    group.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        activate();
+      }
+    });
     group.addEventListener("focus", () => {
       hoveredSliceIndex = index;
       activateSliceHover(group, index, 0);

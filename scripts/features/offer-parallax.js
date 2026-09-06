@@ -1,7 +1,7 @@
 export const initOfferParallax = () => {
   const OFFER_GRADIENT_MOTION_INTENSITY = 1.65;
   const OFFER_GRADIENT_CATCH_UP = 0.1;
-  const REDUCED_MOTION_INTENSITY = 0.35;
+  const REDUCED_MOTION_INTENSITY = 0;
   const offerSection = document.querySelector(".offer");
   
   if (!offerSection) return;
@@ -26,7 +26,7 @@ export const initOfferParallax = () => {
     const travelProgress = progress - 0.5;
     const motionIntensity = offerParallaxMotionQuery.matches
       ? REDUCED_MOTION_INTENSITY
-      : OFFER_GRADIENT_MOTION_INTENSITY;
+      : window.matchMedia("(max-width: 1100px)").matches ? 0.35 : OFFER_GRADIENT_MOTION_INTENSITY;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const sectionHeight = offerSection.offsetHeight || viewportHeight;
@@ -74,7 +74,7 @@ export const initOfferParallax = () => {
         "--liquid-a-y",
         `${(Math.cos(liquidPhase * 1.22) * viewportHeight * 0.055 * motionIntensity).toFixed(2)}px`,
       );
-      gradient.style.setProperty("--liquid-a-rotation", `${(Math.sin(liquidPhase) * 24).toFixed(2)}deg`);
+      gradient.style.setProperty("--liquid-a-rotation", `${(Math.sin(liquidPhase) * 24 * (motionIntensity ? 1 : 0)).toFixed(2)}deg`);
       gradient.style.setProperty(
         "--liquid-a-scale-x",
         (1 + Math.sin(liquidPhase * 1.35) * 0.18 * motionIntensity).toFixed(4),
@@ -93,7 +93,7 @@ export const initOfferParallax = () => {
       );
       gradient.style.setProperty(
         "--liquid-b-rotation",
-        `${(Math.cos(liquidCounterPhase) * -28).toFixed(2)}deg`,
+        `${(Math.cos(liquidCounterPhase) * -28 * (motionIntensity ? 1 : 0)).toFixed(2)}deg`,
       );
       gradient.style.setProperty(
         "--liquid-b-scale-x",
