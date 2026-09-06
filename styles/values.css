@@ -1,7 +1,10 @@
 .values-section {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: min(80rem, calc(100vw - clamp(3rem, 8vw, 8rem)));
-  min-height: clamp(42.5rem, 55vw, 50rem);
+  min-height: 100svh;
   margin: 0 auto;
   padding: clamp(6.2rem, 7.5vw, 6.75rem) 0 clamp(5rem, 8vw, 7rem);
   color: var(--brand-green);
@@ -27,6 +30,7 @@
   display: grid;
   justify-items: center;
   margin: 0 auto clamp(2.8rem, 5vw, 3.25rem);
+  transform: translateY(-5rem);
 }
 
 .values-intro h2 {
@@ -225,38 +229,39 @@
 }
 
 .values-wheel-arrow--listening {
-  top: -1rem;
-  left: calc(10% - 2.75rem);
-  transform: translateX(-50%) rotate(130deg);
+  top: -3rem;
+  left: calc(8% - 2.75rem);
+  transform: translateX(-50%) rotate(80deg) scale(0.8);
 }
 
 .values-wheel-arrow--collaboration {
-  top: 33%;
+  top: 20%;
   left: -6.75rem;
-  transform: rotate(130deg);
+  transform: rotate(-95deg) scale(0.8);
 }
 
 .values-wheel-arrow--excellence {
-  top: -3%;
-  right: -2.25rem;
-  transform: rotate(45deg) scaleY(-1);
+  top: 25%;
+  right: -8rem;
+  transform: rotate(180deg) scale(0.5);
 }
 
 .values-wheel-arrow--idiosyncrasy {
-  bottom: 13%;
+  bottom: 8%;
   left: -6.5rem;
-  transform: rotate(93deg);
+  transform: rotate(210deg) scale(0.7);
 }
 
 .values-wheel-arrow--creativity {
-  right: -8rem;
-  bottom: 10%;
-  transform: rotate(-46deg);
+  right: -12rem;
+  bottom: 35%;
+  transform: rotate(90deg);
 }
 
 .values-wheel-arrow--responsibility {
-  bottom: -3rem;
-  left: 71.5%;
+  bottom: -8rem;
+  left: 90%;
+  transform:  rotate(100deg) scale(0.9);
 }
 
 .values-wheel-rotor {

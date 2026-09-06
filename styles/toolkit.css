@@ -1,6 +1,6 @@
 .what-offer {
   position: relative;
-  min-height: clamp(44rem, 58.5vw, 58rem);
+  min-height: max(44rem, 100svh);
   overflow: hidden;
   background: #31480f;
   color: var(--paper);
@@ -37,7 +37,7 @@
 
 .what-offer__header {
   position: absolute;
-  top: clamp(3.25rem, 4vw, 4rem);
+  top: clamp(5.25rem, 6vw, 6rem);
   left: 50%;
   display: grid;
   justify-items: center;

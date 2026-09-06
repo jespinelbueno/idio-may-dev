@@ -376,7 +376,7 @@
   margin: 0 0 0.55rem !important;
   color: var(--brand-green);
   font-family: "Teva", "DM Sans", system-ui, sans-serif;
-  font-size: clamp(0.9rem, 1vw, 1.1rem) !important;
+  font-size: clamp(1.1rem, 1.3vw, 1.4rem) !important;
   font-weight: 400 !important;
   line-height: 1 !important;
   letter-spacing: 0.04em;

@@ -113,66 +113,16 @@
   }
 
   .services-hero {
-    min-height: max(34rem, 74vw);
+    min-height: 100svh;
   }
 
   .services-hero__image {
-    object-position: 49% 50%;
+    object-position: 50% 50%;
   }
 
-  .services-hero__title h1 {
-    font-size: clamp(4.6rem, 15vw, 7.4rem);
-  }
-
-  .services-intro {
-    min-height: auto;
-    padding: clamp(6.8rem, 14vw, 9rem) var(--edge) clamp(6rem, 13vw, 8rem);
-  }
-
-  .services-intro__inner {
-    display: grid;
-    justify-items: center;
-    gap: clamp(3.2rem, 8vw, 5rem);
-    width: min(34rem, 100%);
-    min-height: auto;
-  }
-
-  .services-intro__copy,
-  .services-intro__scribble,
-  .services-intro__photo,
-  .services-intro__arrow {
-    position: relative;
-    inset: auto;
-  }
-
-  .services-intro__copy {
-    width: 100%;
-    text-align: center;
-  }
-
-  .services-intro__copy h2,
-  .services-intro__copy p {
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .services-intro__scribble {
-    justify-self: end;
-    margin-top: -1.5rem;
-    margin-right: 8%;
-  }
-
-  .services-intro__photo {
-    right: auto;
-    bottom: auto;
-    width: min(18rem, 68vw);
-  }
-
-  .services-intro__arrow {
-    justify-self: end;
-    width: clamp(3.4rem, 12vw, 4.6rem);
-    margin-top: -4.1rem;
-    margin-right: 12%;
+  .services-hero__title,
+  .services-hero__reveal-title {
+    font-size: clamp(2.25rem, 5vw, 5.35rem);
   }
 
   .hero__image {
@@ -531,7 +481,7 @@
   }
 
   .services-nav {
-    align-items: flex-start;
+    align-items: center;
   }
 
   .services-nav__brand {
@@ -539,39 +489,17 @@
   }
 
   .services-nav__links {
-    display: grid;
-    justify-items: end;
-    gap: 0.62rem;
+    display: flex;
+    gap: clamp(1rem, 4vw, 2rem);
     font-size: 0.72rem;
   }
 
   .services-hero {
-    min-height: max(31rem, 70svh);
+    min-height: 100svh;
   }
 
   .services-hero__image {
-    object-position: 47% 50%;
-  }
-
-  .services-hero__title {
-    top: 54%;
-  }
-
-  .services-hero__title h1 {
-    font-size: clamp(4rem, 19vw, 6.1rem);
-  }
-
-  .services-hero__underline {
-    width: 96%;
-  }
-
-  .services-intro__copy h2 {
-    font-size: clamp(1.9rem, 9vw, 3rem);
-  }
-
-  .services-intro__copy p {
-    max-width: 22rem;
-    font-size: 0.78rem;
+    object-position: 50% 50%;
   }
 
   .hero {
@@ -995,6 +923,131 @@
   }
 }
 
+@media (max-width: 520px) {
+  .services-nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .services-nav__brand {
+    width: 2rem;
+  }
+
+  .services-nav__links {
+    gap: clamp(0.55rem, 3.2vw, 0.9rem);
+    font-size: clamp(0.56rem, 2.4vw, 0.66rem);
+  }
+
+  .services-hero {
+    --services-dot-y: 67%;
+    --services-reveal-radius: clamp(1.35rem, 6vw, 1.75rem);
+
+    min-height: 100svh;
+  }
+
+  .services-hero__image {
+    object-position: 52% 50%;
+  }
+
+  .services-hero__title {
+    top: 49%;
+    max-width: calc(100vw - 2rem);
+    font-size: clamp(2rem, 10vw, 3rem);
+    white-space: normal;
+  }
+
+  .services-hero__reveal-copy {
+    top: 49%;
+    width: calc(100vw - 2.5rem);
+  }
+
+  .services-hero__reveal-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+    white-space: normal;
+  }
+
+  .services-hero__reveal-subtitle {
+    margin-top: 1.25rem;
+    font-size: clamp(0.88rem, 4.5vw, 1.18rem);
+  }
+
+  .services-hero__reveal-description {
+    width: min(22rem, 92%);
+    margin-top: 2rem;
+    font-size: clamp(0.52rem, 2.5vw, 0.66rem);
+  }
+
+  .services-hero__dot {
+    width: clamp(2.7rem, 12vw, 3.5rem);
+  }
+
+  .services-offer {
+    min-height: auto;
+  }
+
+  .services-offer__inner {
+    width: calc(100vw - 2rem);
+    padding: 2.6rem 0 5rem;
+  }
+
+  .services-offer h2 {
+    font-size: clamp(2.2rem, 11vw, 3.1rem);
+  }
+
+  .services-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    width: min(100%, 26rem);
+    min-height: 0;
+    margin-top: 2.8rem;
+  }
+
+  .services-cards__stack {
+    display: contents;
+  }
+
+  .service-card,
+  .services-cards__stack .service-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: clamp(0.75rem, 4vw, 1rem);
+    transform: none;
+  }
+
+  .service-card h3 {
+    font-size: clamp(1.08rem, 5.7vw, 1.45rem);
+  }
+
+  .service-card__meta {
+    margin-top: 1rem;
+    font-size: clamp(0.39rem, 1.8vw, 0.48rem);
+  }
+
+  .service-card p {
+    font-size: clamp(0.4rem, 1.8vw, 0.48rem);
+  }
+
+  .service-card--branding {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .service-card--web {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .service-card--social {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .service-card--content {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
 @media (max-width: 430px) {
   .hero__headline {
     --hero-logo-gap: 0.32rem;
@@ -1140,7 +1193,7 @@
 
   .case-study__eyebrow {
     margin-bottom: 0.55rem !important;
-    font-size: 0.72rem !important;
+    font-size: 0.9rem !important;
   }
 
   .case-study__copy h2 {

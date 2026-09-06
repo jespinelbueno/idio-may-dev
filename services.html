@@ -7,8 +7,7 @@
     <title>Services | Idio</title>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Teva/Teva-Regular.otf" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="assets/media/services/hero.png" as="image">
-    <link rel="preload" href="assets/media/services/intro-table.png" as="image">
+    <link rel="preload" href="assets/media/services/creative-toolkit-hero.jpg" as="image">
     <link rel="stylesheet" href="styles/services.css">
   </head>
   <body class="services-page">
@@ -39,7 +38,7 @@
 
     <header class="services-nav" aria-label="Primary navigation">
       <a class="services-nav__brand" href="index.html" aria-label="Idio home">
-        <img src="assets/media/brand/idio-icon.svg" alt="">
+        <span class="services-nav__brand-mark" aria-hidden="true"></span>
       </a>
 
       <nav class="services-nav__links">
@@ -51,39 +50,81 @@
     </header>
 
     <main class="services-shell">
-      <section class="services-hero" aria-labelledby="services-title">
-        <img class="services-hero__image" src="assets/media/services/hero.png" alt="Creative studio floor with sketchbooks, plants, fabric, pencils, and a seated person.">
-        <div class="services-hero__veil" aria-hidden="true"></div>
+      <div class="services-hero-offer-transition">
+        <section class="services-hero" aria-labelledby="services-title">
+          <img class="services-hero__image" src="assets/media/services/creative-toolkit-hero.jpg" alt="People moving across a sunlit green hillside.">
+          <div class="services-hero__veil" aria-hidden="true"></div>
 
-        <div class="services-hero__title">
-          <h1 id="services-title">Services</h1>
-          <span class="services-hero__underline" aria-hidden="true"></span>
-        </div>
-      </section>
-
-      <section class="services-intro" aria-labelledby="services-intro-title">
-        <div class="services-intro__inner">
-          <div class="services-intro__copy">
-            <h2 id="services-intro-title">Idio is a full-service creative agency.</h2>
-            <p>
-              We walk you through the entire process of branding, marketing,
-              content creation and development, as well as management.
-            </p>
+          <h1 class="services-hero__title" id="services-title">the creative toolkit</h1>
+          <div class="services-hero__reveal">
+            <div class="services-hero__reveal-copy">
+              <span class="services-hero__reveal-title" aria-hidden="true">the creative toolkit</span>
+              <p class="services-hero__reveal-subtitle">Idio is a full-service creative<br>agency.</p>
+              <p class="services-hero__reveal-description">
+                We're a full-service creative agency—an all-in-one business that manages
+                all of your branding and marketing needs. From the day the dream is born,
+                to strategy, branding, design, content, and finally to marketing, our team
+                can walk you through one, or every step to provide you quality and cohesive
+                results. It's kind of like a smartphone. Why have a flashlight, a flip phone,
+                and a camera when you could have it all in one place?
+              </p>
+            </div>
           </div>
+          <span class="services-hero__dot" aria-hidden="true"></span>
+        </section>
 
-          <span class="services-intro__scribble" aria-hidden="true"></span>
+        <div class="services-hero-scroll-space" aria-hidden="true"></div>
 
-          <figure class="services-intro__photo">
-            <img src="assets/media/services/intro-table.png" alt="Styled candlelit table with flowers, fruit, glassware, and plates.">
-          </figure>
+        <section class="services-offer" aria-labelledby="services-offer-title">
+          <div class="services-offer__inner">
+            <h2 id="services-offer-title">our services</h2>
 
-          <img class="services-intro__arrow" src="assets/media/decorations/arrows/services-intro.svg" alt="" aria-hidden="true">
-        </div>
-      </section>
+            <div class="services-cards" aria-label="Creative services">
+              <article class="service-card service-card--branding">
+                <h3>branding</h3>
+                <div class="service-card__meta">
+                  <strong>graphic designer</strong>
+                  <span>creative team</span>
+                </div>
+                <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+              </article>
+
+              <div class="services-cards__stack">
+                <article class="service-card service-card--social">
+                  <h3>social media<br>management</h3>
+                  <div class="service-card__meta">
+                    <strong>graphic designer</strong>
+                    <span>creative team</span>
+                  </div>
+                  <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                </article>
+
+                <article class="service-card service-card--web">
+                  <h3>web design</h3>
+                  <div class="service-card__meta">
+                    <strong>graphic designer</strong>
+                    <span>creative team</span>
+                  </div>
+                  <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                </article>
+
+                <article class="service-card service-card--content">
+                  <h3>content<br>creation</h3>
+                  <div class="service-card__meta">
+                    <strong>graphic designer</strong>
+                    <span>creative team</span>
+                  </div>
+                  <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer class="site-footer" id="site-footer">
-      <img class="site-footer__image" src="assets/media/footer/services-background.jpg" alt="" aria-hidden="true">
+      <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/decorations/scribbles/footer/new-white-left.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/decorations/scribbles/footer/new-big-white-right.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/decorations/scribbles/footer/new-small-white-right.png" alt="" aria-hidden="true">

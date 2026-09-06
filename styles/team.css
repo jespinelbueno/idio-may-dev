@@ -382,9 +382,10 @@
   margin: 0.45rem 0 0;
   color: var(--brand-green);
   font-family: "Teva", "DM Sans", system-ui, sans-serif;
-  font-size: clamp(0.78rem, 1.1vw, 1rem);
+  font-size: clamp(1.1rem, 1.3vw, 1.4rem);
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-align: center;
   text-transform: uppercase;
 }
