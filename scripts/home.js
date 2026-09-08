@@ -1,3 +1,4 @@
+import { initArrowDraw } from "./features/arrow-draw.js";
 import { initCaseStudyStack } from "./features/case-study-stack.js";
 import { initCaseTeamTransition } from "./features/case-team-transition.js";
 import { initCustomCursor } from "./features/custom-cursor.js";
@@ -19,3 +20,4 @@ initCaseTeamTransition();
 initCaseStudyStack();
 initTeamCarousel();
 initValuesWheel();
+initArrowDraw();

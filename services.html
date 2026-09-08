@@ -33,6 +33,11 @@
           <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
         </filter>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo" result="mix"></feBlend>
+        </filter>
       </defs>
     </svg>
 
@@ -56,11 +61,11 @@
           <img class="services-hero__image" src="assets/media/services/creative-toolkit-hero.jpg" alt="People moving across a sunlit green hillside.">
           <div class="services-hero__veil" aria-hidden="true"></div>
 
-          <h1 class="services-hero__title" id="services-title">the creative toolkit</h1>
+          <h1 class="services-hero__title" id="services-title"><span>the creative</span> <span>toolkit</span></h1>
           <div class="services-hero__reveal">
             <div class="services-hero__reveal-copy">
-              <span class="services-hero__reveal-title" aria-hidden="true">the creative toolkit</span>
-              <p class="services-hero__reveal-subtitle">Idio is a full-service creative<br>agency.</p>
+              <span class="services-hero__reveal-title" aria-hidden="true"><span>the creative</span> <span>toolkit</span></span>
+              <p class="services-hero__reveal-subtitle">Idio is a full-service creative agency.</p>
               <p class="services-hero__reveal-description">
                 We're a full-service creative agency—an all-in-one business that manages
                 all of your branding and marketing needs. From the day the dream is born,
@@ -81,43 +86,177 @@
             <h2 id="services-offer-title">our services</h2>
 
             <div class="services-cards" aria-label="Creative services">
+              <img class="services-cards__scribble services-cards__scribble--butter" src="assets/media/decorations/scribbles/services/butter-scribble.svg" width="54" height="168" alt="" aria-hidden="true">
+              <img class="services-cards__scribble services-cards__scribble--blue" src="assets/media/decorations/scribbles/services/blue-scribble.svg" width="257" height="175" alt="" aria-hidden="true">
+              <img class="services-cards__scribble services-cards__scribble--green" src="assets/media/decorations/scribbles/services/green-scribble.svg" width="185" height="218" alt="" aria-hidden="true">
+
               <article class="service-card service-card--branding">
                 <h3>branding</h3>
+                <img class="service-card__underline" src="assets/media/decorations/scribbles/services/raspberry-underline.svg" width="240" height="30" alt="" aria-hidden="true">
                 <div class="service-card__meta">
-                  <strong>graphic designer</strong>
-                  <span>creative team</span>
+                  <strong>maybe a cute catch phrase here</strong>
                 </div>
-                <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                <ul class="service-card__list">
+                  <li>brand strategy &amp; positioning</li>
+                  <li>brand identity development</li>
+                  <li>logo design &amp; logo suite</li>
+                  <li>brand voice &amp; messaging</li>
+                  <li>visual direction</li>
+                </ul>
               </article>
 
               <div class="services-cards__stack">
                 <article class="service-card service-card--social">
                   <h3>social media<br>management</h3>
+                  <img class="service-card__underline" src="assets/media/decorations/scribbles/services/green-underline.svg" width="240" height="30" alt="" aria-hidden="true">
                   <div class="service-card__meta">
-                    <strong>graphic designer</strong>
-                    <span>creative team</span>
+                    <strong>maybe a cute catch phrase here</strong>
                   </div>
-                  <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                  <ul class="service-card__list">
+                    <li>Social media strategy</li>
+                    <li>Content strategy &amp; planning</li>
+                    <li>Monthly content calendars</li>
+                    <li>Platform management</li>
+                    <li>Caption writing &amp; copywriting</li>
+                    <li>Hashtag / keyword strategy</li>
+                    <li>Community engagement</li>
+                    <li>Trend research &amp; trend integration</li>
+                  </ul>
                 </article>
 
                 <article class="service-card service-card--web">
                   <h3>web design</h3>
+                  <img class="service-card__underline" src="assets/media/decorations/scribbles/services/blue-underline.svg" width="240" height="30" alt="" aria-hidden="true">
                   <div class="service-card__meta">
-                    <strong>graphic designer</strong>
-                    <span>creative team</span>
+                    <strong>maybe a cute catch phrase here</strong>
                   </div>
-                  <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                  <ul class="service-card__list">
+                    <li>Sitemap &amp; site structure</li>
+                    <li>UX/UI design</li>
+                    <li>Website wireframes</li>
+                    <li>Custom web design</li>
+                    <li>Responsive / mobile design</li>
+                  </ul>
                 </article>
 
                 <article class="service-card service-card--content">
                   <h3>content<br>creation</h3>
+                  <img class="service-card__underline" src="assets/media/decorations/scribbles/services/cream-underline.svg" width="240" height="30" alt="" aria-hidden="true">
                   <div class="service-card__meta">
-                    <strong>graphic designer</strong>
-                    <span>creative team</span>
+                    <strong>maybe a cute catch phrase here</strong>
                   </div>
-                  <p>Idiosyncrasy: always has a sweet drink that she's been sipping on for the last 5 hours.</p>
+                  <ul class="service-card__list">
+                    <li>Creative concept development</li>
+                    <li>Photography</li>
+                    <li>Videography</li>
+                    <li>Short-form video / Reels</li>
+                    <li>Social media graphics</li>
+                    <li>Product photography</li>
+                    <li>Promotional videos</li>
+                    <li>Behind-the-scenes content</li>
+                  </ul>
                 </article>
               </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="services-work" aria-labelledby="services-work-title">
+        <div class="services-work__inner">
+          <header class="services-work__heading">
+            <h2 id="services-work-title"><span class="services-work__title-accent">pics<img class="services-work__scribble services-work__scribble--circle" src="assets/media/decorations/scribbles/services/work-circle.svg" width="218" height="87" alt="" aria-hidden="true"></span> or it didn’t happen</h2>
+            <p class="services-work__subtitle">Some Visuals of Our Work</p>
+            <p class="services-work__description">We know it can be hard to “picture” how qualified an agency is without pictures, so, we covered that.</p>
+          </header>
+
+          <img class="services-work__scribble services-work__scribble--middle" src="assets/media/decorations/scribbles/services/work-middle.svg" width="346" height="254" alt="" aria-hidden="true">
+
+          <figure class="services-work__item services-work__item--branding">
+            <img src="assets/media/services/pics-or-it-didnt/branding.jpg" alt="Table setting with fruit, candles, and stacked plates." loading="lazy" decoding="async">
+            <figcaption>branding</figcaption>
+          </figure>
+          <figure class="services-work__item services-work__item--content">
+            <img src="assets/media/services/pics-or-it-didnt/content-creation.jpg" alt="Woman arranging an outdoor event." loading="lazy" decoding="async">
+            <figcaption>content creation</figcaption>
+          </figure>
+          <figure class="services-work__item services-work__item--web">
+            <img src="assets/media/services/pics-or-it-didnt/web-design.jpg" alt="Person writing in a notebook at a desk." loading="lazy" decoding="async">
+            <figcaption>web design</figcaption>
+          </figure>
+          <figure class="services-work__item services-work__item--studio">
+            <img src="assets/media/services/pics-or-it-didnt/studio.jpg" alt="Yellow sofa and a landscape painting in an art studio." loading="lazy" decoding="async">
+          </figure>
+        </div>
+      </section>
+      <div class="services-closing">
+        <section class="services-process" aria-labelledby="services-process-title">
+          <div class="services-process__inner">
+            <ol class="services-process__steps" aria-label="Our process">
+              <li class="services-process__step">
+                <h3>discovery call</h3>
+                <p>I just love idio so much its just so good and so great and i just love it. idio has enhanced my life by 1908086%</p>
+              </li>
+              <li class="services-process__step">
+                <h3>proposal</h3>
+                <p>I just love idio so much its just so good and so great and i just love it. idio has enhanced my life by 1908086%</p>
+              </li>
+              <li class="services-process__step">
+                <h3>agreement</h3>
+                <p>I just love idio so much its just so good and so great and i just love it. idio has enhanced my life by 1908086%</p>
+              </li>
+              <li class="services-process__step">
+                <h3>work begins!</h3>
+                <p>I just love idio so much its just so good and so great and i just love it. idio has enhanced my life by 1908086%</p>
+              </li>
+            </ol>
+            <div class="services-process__message">
+              <h2 id="services-process-title"><span class="services-process__first-line"><span class="services-process__accent">no matter<img class="services-process__scribble" src="assets/media/decorations/scribbles/services/process-circle.svg" width="518" height="182" alt="" aria-hidden="true"></span> the</span><br>service, we got<br>the process down.</h2>
+              <img class="services-process__underline" src="assets/media/decorations/scribbles/services/process-underline.svg" width="618" height="40" alt="" aria-hidden="true">
+              <a class="services-process__cta" href="mailto:hello@idiocreative.com?subject=Book%20a%20discovery%20call">
+                <span class="button-fill__label">book a call!!</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+        <section class="services-contact" aria-labelledby="services-contact-title">
+          <div class="services-contact__inner">
+            <div class="services-contact__visual">
+              <img class="services-contact__image" src="assets/media/services/work-with-us.jpg" width="1618" height="553" alt="Friends relaxing together with a guitar." loading="lazy" decoding="async">
+              <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/decorations/scribbles/services/work-with-us-green.svg" alt="" aria-hidden="true">
+              <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/decorations/scribbles/services/work-with-us-raspberry.svg" alt="" aria-hidden="true">
+            </div>
+            <h2 id="services-contact-title">so, wanna work with us?</h2>
+            <div class="services-contact__actions">
+              <a class="services-contact__button" href="mailto:hello@idiocreative.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
+                <span class="button-fill__label">yes</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </a>
+              <a class="services-contact__button services-contact__button--outline" href="mailto:hello@idiocreative.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
+                <span class="button-fill__label">yes</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
         </section>

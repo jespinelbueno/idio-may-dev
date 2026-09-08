@@ -295,13 +295,15 @@ export const initCaseStudyStack = () => {
   
     if (!pinnedSection || window.getComputedStyle(pinnedSection).position !== "sticky") return null;
   
-    const trackTop = window.scrollY + caseStudyScrollTrack.getBoundingClientRect().top;
+    const sectionHeight = pinnedSection.offsetHeight;
+    const trackTop = window.scrollY + caseStudyScrollTrack.getBoundingClientRect().top
+      + Math.max(sectionHeight - window.innerHeight, 0);
     const takeoverDistance =
       Number.parseFloat(
         window.getComputedStyle(caseStudyScrollTrack).getPropertyValue("--team-takeover-distance"),
       ) || 0;
     const scrollDistance = Math.max(
-      caseStudyScrollTrack.offsetHeight - window.innerHeight - takeoverDistance,
+      caseStudyScrollTrack.offsetHeight - Math.max(sectionHeight, window.innerHeight) - takeoverDistance,
       1,
     );
   
@@ -354,17 +356,20 @@ export const initCaseStudyStack = () => {
   });
   
   const pinnedSection = caseStudyScrollTrack.querySelector(".case-study");
-  const copy = pinnedSection?.querySelector(".case-study__copy");
   const updateContentFit = () => {
-    if (!pinnedSection || !copy) return;
-    const style = window.getComputedStyle(pinnedSection);
-    const contentHeight = Math.max(copy.offsetHeight, caseStudyMedia.offsetHeight);
-    const requiredHeight = contentHeight + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
-    pinnedSection.classList.toggle("is-content-tall", requiredHeight > window.innerHeight);
+    if (!pinnedSection) return;
+    // Measure the natural grid height, including stacked rows and their gap.
+    // Tall sections scroll into view before pinning at the viewport's bottom.
+    const sectionHeight = pinnedSection.offsetHeight;
+    caseStudyScrollTrack.style.setProperty("--case-study-height", `${sectionHeight}px`);
+    pinnedSection.style.setProperty(
+      "--case-study-pin-top",
+      `${Math.min(window.innerHeight - sectionHeight, 0)}px`,
+    );
     window.dispatchEvent(new Event("case-layout-change"));
     scheduleCaseStudyScrollSync();
   };
-  if (copy) new ResizeObserver(updateContentFit).observe(copy);
+  if (pinnedSection) new ResizeObserver(updateContentFit).observe(pinnedSection);
   window.addEventListener("resize", updateContentFit, { passive: true });
   window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", updateContentFit);
   updateContentFit();
