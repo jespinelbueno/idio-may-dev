@@ -29,8 +29,7 @@
   z-index: 3;
   display: grid;
   justify-items: center;
-  margin: 0 auto clamp(2.8rem, 5vw, 3.25rem);
-  transform: translateY(-5rem);
+  margin: 0 auto clamp(2rem, 4cqw, 3rem);
 }
 
 .values-intro h2 {
@@ -42,7 +41,6 @@
   letter-spacing: 0;
   text-align: center;
   text-transform: lowercase;
-  transform: translateY(-0.5rem);
 }
 
 .values-title-scribble {
@@ -69,7 +67,6 @@
   width: 100%;
   height: 100%;
   overflow: visible;
-  transform: translateY(-1.5rem);
 }
 
 .values-callouts {
@@ -604,17 +601,12 @@
     width: calc(100% - var(--page-gutter) * 2);
     min-height: 0;
     padding: var(--section-space) 0;
-    gap: 2rem;
   }
   .values-callouts, .value-tooltip {
     display: none;
   }
   .values-mobile-list {
     display: grid;
-  }
-  .values-intro {
-    transform: none;
-    margin: 0;
   }
   .values-intro h2 {
     font-size: var(--heading-size);
@@ -627,7 +619,7 @@
   }
   .values-wheel {
     width: min(70%, 22rem);
-    margin: 1rem auto 3rem;
+    margin: 0 auto 5rem;
     transform: none;
   }
   .values-wheel-graphic {
@@ -647,12 +639,9 @@
   .values-intro, .values-intro h2, .values-wheel-graphic {
     transform: none;
   }
-  .values-intro {
-    margin: 0;
-  }
   .values-wheel {
     width: min(70%, 22rem);
-    margin: 1rem auto 3rem;
+    margin: 0 auto 5rem;
     transform: none;
   }
   .values-mobile-list {
