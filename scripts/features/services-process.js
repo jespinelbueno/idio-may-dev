@@ -5,6 +5,7 @@ export function initServicesProcess() {
   if (!diagram || !rotor || !steps.length) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const phoneLayout = window.matchMedia("(max-width: 640px)");
   const clamp = (value) => Math.min(Math.max(value, 0), 1);
   const phase = (progress, start, end) => clamp((progress - start) / (end - start));
   const ease = (value) => value * value * (3 - 2 * value);
@@ -40,8 +41,9 @@ export function initServicesProcess() {
   };
 
   const requestUpdate = () => {
-    diagram.classList.toggle("is-scroll-driven", !reducedMotion.matches);
-    if (reducedMotion.matches) {
+    const animate = !reducedMotion.matches && !phoneLayout.matches;
+    diagram.classList.toggle("is-scroll-driven", animate);
+    if (!animate) {
       window.cancelAnimationFrame(animationFrame);
       animationFrame = 0;
       progress = null;

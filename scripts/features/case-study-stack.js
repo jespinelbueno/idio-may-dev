@@ -7,21 +7,21 @@ export const initCaseStudyStack = () => {
       cardColor: "var(--paper)",
     },
     {
-      client: "Leisure Events",
+      client: "Collaboration 02",
       description:
-        "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       cardColor: "var(--brand-green)",
     },
     {
-      client: "Leisure Events",
+      client: "Collaboration 03",
       description:
-        "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       cardColor: "var(--brand-olive)",
     },
     {
-      client: "Leisure Events",
+      client: "Collaboration 04",
       description:
-        "Leisure Events is a rental company in Lynchburg VA that specializes in antique décor. They requested a full brand kit, and presented the unique challenge of communicating a high quality brand with luxurious décor while positioning themselves as a comparatively inexpensive rental option.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
       cardColor: "var(--brand-olive)",
     },
   ];
@@ -35,6 +35,7 @@ export const initCaseStudyStack = () => {
   const caseStudyScrollTrack = document.querySelector(".case-study__scroll-track");
   
   if (!caseStudyMedia || !caseStudyStack || !caseStudyProject || !caseStudyScrollTrack) return;
+  const phoneLayout = window.matchMedia("(max-width: 640px)");
   let activeCaseStudyIndex = 0;
   let isCaseStudyCardAnimating = false;
   let pendingCaseStudyIndex = null;
@@ -43,6 +44,30 @@ export const initCaseStudyStack = () => {
   const CASE_STUDY_CARD_TRANSITION_MS = 260;
   const CASE_STUDY_CARD_OUTBOUND_MS = 170;
   const CASE_STUDY_CARD_INBOUND_MS = 220;
+
+  // Both layouts read the same entries; phones show one description per swipe.
+  const mobileProjects = document.createElement("div");
+  mobileProjects.className = "case-study__mobile-projects";
+  mobileProjects.tabIndex = 0;
+  mobileProjects.setAttribute("role", "region");
+  mobileProjects.setAttribute("aria-label", "Collaborations. Swipe or use the left and right arrow keys to explore.");
+  caseStudies.forEach((caseStudy, index) => {
+    const panel = caseStudyProject.cloneNode(true);
+    panel.className = "case-study__mobile-project";
+    panel.removeAttribute("data-case-project");
+    panel.removeAttribute("aria-live");
+    panel.removeAttribute("aria-atomic");
+    panel.dataset.caseMobileIndex = String(index);
+    panel.querySelector("h3").textContent = caseStudy.client;
+    panel.querySelector(".case-study__description").textContent = caseStudy.description;
+    mobileProjects.appendChild(panel);
+    caseStudyDots[index]?.setAttribute("aria-label", `Show ${caseStudy.client}`);
+  });
+  caseStudyProject.after(mobileProjects);
+  const swipeHint = document.createElement("p");
+  swipeHint.className = "case-study__swipe-hint";
+  swipeHint.textContent = "swipe to explore ↔";
+  mobileProjects.before(swipeHint);
   
   caseStudyScrollTrack?.style.setProperty("--case-study-count", String(Math.max(caseStudies.length, 1)));
   
@@ -274,12 +299,14 @@ export const initCaseStudyStack = () => {
   const selectCaseStudy = (nextIndex) => {
     const nextCaseStudy = caseStudies[nextIndex];
   
-    if (nextIndex === activeCaseStudyIndex || !nextCaseStudy) return false;
+    if (!nextCaseStudy) return false;
   
     if (isCaseStudyCardAnimating) {
       pendingCaseStudyIndex = nextIndex;
       return false;
     }
+
+    if (nextIndex === activeCaseStudyIndex) return false;
   
     activeCaseStudyIndex = nextIndex;
     setActiveCaseStudyDot(nextIndex);
@@ -311,6 +338,10 @@ export const initCaseStudyStack = () => {
   };
   
   const getCaseStudyIndexFromScroll = () => {
+    if (phoneLayout.matches) {
+      return Math.max(0, Math.min(caseStudies.length - 1,
+        Math.round(mobileProjects.scrollLeft / Math.max(mobileProjects.clientWidth, 1))));
+    }
     const metrics = getCaseStudyScrollMetrics();
   
     if (!metrics || caseStudies.length < 2) return null;
@@ -329,10 +360,54 @@ export const initCaseStudyStack = () => {
     if (caseStudyScrollFrame) return;
     caseStudyScrollFrame = window.requestAnimationFrame(syncCaseStudyToScroll);
   };
+
+  const scrollToMobileCaseStudy = (index, immediate = false) => {
+    const nextIndex = Math.max(0, Math.min(caseStudies.length - 1, index));
+    mobileProjects.scrollTo({
+      left: nextIndex * mobileProjects.clientWidth,
+      behavior: immediate || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
+  };
+
+  mobileProjects.addEventListener("scroll", () => {
+    if (phoneLayout.matches) scheduleCaseStudyScrollSync();
+  }, { passive: true });
+  mobileProjects.addEventListener("keydown", (event) => {
+    if (!phoneLayout.matches || event.target !== mobileProjects) return;
+    const index = getCaseStudyIndexFromScroll();
+    const destinations = { ArrowLeft: index - 1, ArrowRight: index + 1, Home: 0, End: caseStudies.length - 1 };
+    if (!(event.key in destinations)) return;
+    event.preventDefault();
+    scrollToMobileCaseStudy(destinations[event.key]);
+  });
+
+  // Swiping the image stack also advances the native horizontal description rail.
+  let swipeStart = null;
+  caseStudyMedia.addEventListener("pointerdown", (event) => {
+    if (!phoneLayout.matches || !event.isPrimary || event.button !== 0) return;
+    swipeStart = { x: event.clientX, y: event.clientY, id: event.pointerId };
+    caseStudyMedia.setPointerCapture(event.pointerId);
+  });
+  caseStudyMedia.addEventListener("pointerup", (event) => {
+    if (!swipeStart || swipeStart.id !== event.pointerId) return;
+    const deltaX = event.clientX - swipeStart.x;
+    const deltaY = event.clientY - swipeStart.y;
+    swipeStart = null;
+    if (Math.abs(deltaX) < 40 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
+    scrollToMobileCaseStudy(getCaseStudyIndexFromScroll() + (deltaX < 0 ? 1 : -1));
+  });
+  caseStudyMedia.addEventListener("pointercancel", () => { swipeStart = null; });
+  caseStudyMedia.addEventListener("dragstart", (event) => {
+    if (phoneLayout.matches) event.preventDefault();
+  });
   
   caseStudyDots.forEach((dot) => {
     dot.addEventListener("click", () => {
       const nextIndex = Number(dot.dataset.caseIndex);
+      if (phoneLayout.matches) {
+        scrollToMobileCaseStudy(nextIndex);
+        return;
+      }
       const metrics = getCaseStudyScrollMetrics();
   
       if (!metrics || caseStudies.length < 2) {
@@ -349,6 +424,7 @@ export const initCaseStudyStack = () => {
   });
   
   window.addEventListener("resize", () => {
+    if (phoneLayout.matches) scrollToMobileCaseStudy(activeCaseStudyIndex, true);
     if (!isCaseStudyCardAnimating) {
       positionCaseStudyCards({ immediate: true });
     }
@@ -374,6 +450,8 @@ export const initCaseStudyStack = () => {
   window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", updateContentFit);
   updateContentFit();
   positionCaseStudyCards({ immediate: true });
-  window.addEventListener("scroll", scheduleCaseStudyScrollSync, { passive: true });
+  window.addEventListener("scroll", () => {
+    if (!phoneLayout.matches) scheduleCaseStudyScrollSync();
+  }, { passive: true });
   syncCaseStudyToScroll();
 };

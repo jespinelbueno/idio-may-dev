@@ -403,6 +403,11 @@
   transform: translateY(0.38rem);
 }
 
+.case-study__mobile-projects,
+.case-study__swipe-hint {
+  display: none;
+}
+
 .case-study__button {
   min-width: 9.25rem;
   min-height: 2.7rem;
@@ -557,5 +562,99 @@ font-size: 10px;
     padding: 0.75rem 1.5rem;
     margin-top: 1.5rem;
     font-size: var(--small-size);
+  }
+}
+
+@media (max-width: 640px) {
+  .case-study__scroll-track {
+    height: auto;
+  }
+  .case-study {
+    --case-mobile-media-height: clamp(9rem, 30svh, 17rem);
+
+    position: relative;
+    top: auto;
+    display: block;
+    min-height: 0;
+    padding: 1.5rem 0 4rem;
+  }
+  .case-study::before {
+    content: none;
+  }
+  .case-study__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+  #case-study-title {
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+  }
+  .case-study__dots {
+    order: 1;
+  }
+  .case-study__scribble {
+    display: none;
+  }
+  .case-study__media {
+    position: relative;
+    top: auto;
+    z-index: 3;
+    width: 100%;
+    height: var(--case-mobile-media-height);
+    aspect-ratio: auto;
+    margin: 0 auto 1.5rem;
+    touch-action: pan-y;
+    user-select: none;
+  }
+  .case-study__stack {
+    top: 9%;
+    left: 50%;
+    width: min(62%, calc(var(--case-mobile-media-height) * 0.64));
+    transform: translateX(-42%);
+  }
+  .case-study__project:has(~ .case-study__mobile-projects) {
+    display: none;
+  }
+  .case-study__mobile-projects {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    text-align: left;
+  }
+  .case-study__mobile-projects::-webkit-scrollbar {
+    display: none;
+  }
+  .case-study__mobile-projects:focus-visible {
+    outline: 2px solid var(--brand-green);
+    outline-offset: 2px;
+  }
+  .case-study__copy .case-study__swipe-hint {
+    display: block;
+    margin: 1rem 0 0;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  .case-study__mobile-project {
+    min-width: 0;
+    padding: 1.25rem 0.25rem 1rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .case-study__mobile-project h3 {
+    margin-top: 0;
+    font-size: 1.125rem;
+    line-height: 1.2;
+  }
+  .case-study__copy .case-study__mobile-project .case-study__description {
+    max-width: none;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
   }
 }

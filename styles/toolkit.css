@@ -293,14 +293,20 @@
     display: none;
   }
 }
-@media (max-width: 350px) {
+@media (max-width: 640px) {
   .what-offer__items {
     grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
   }
   .what-offer__item {
-    width: min(100%, 17rem);
+    width: min(100%, 24rem);
     justify-self: center;
+  }
+  .what-offer__circle {
+    width: min(70vw, 15rem);
+  }
+  .what-offer__copy h3 {
+    font-size: 1.75rem;
   }
 }
 @media (hover: none) {

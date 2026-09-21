@@ -479,3 +479,28 @@
     width: 27%;
   }
 }
+
+@media (max-width: 640px) {
+  .offer__collage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    aspect-ratio: auto;
+  }
+
+  .offer__placeholder {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: auto;
+  }
+
+  .offer__placeholder img {
+    display: block;
+    height: auto;
+  }
+
+  .offer__collage > .offer__scribble {
+    display: none;
+  }
+}
