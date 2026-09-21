@@ -88,6 +88,11 @@
   --offer-curve-reference-height: calc(
     45.5vw + min(60rem, calc(75vw - 9.1875rem)) + 4rem + var(--offer-curve-offset)
   );
+  /* Match the homepage ellipse, with enough depth to cover its outer edges. */
+  --offer-curve-depth: max(
+    var(--offer-curve-offset),
+    calc(var(--offer-curve-reference-height) * 0.04 + 2px)
+  );
 
   position: relative;
   padding-bottom: var(--services-hero-offer-lag-space, 0px);
@@ -112,11 +117,12 @@
 
 .services-hero::after {
   position: absolute;
-  top: calc(100% - var(--offer-curve-offset));
+  top: calc(100% - var(--offer-curve-depth));
   left: calc(var(--offer-curve-bleed) * -1);
   z-index: 5;
   width: calc(100% + (var(--offer-curve-bleed) * 2));
-  height: var(--offer-curve-offset);
+  /* Overlap the section by 2px so fractional scroll positions cannot open a seam. */
+  height: calc(var(--offer-curve-depth) + 2px);
   content: "";
   background: var(--paper);
   clip-path: ellipse(
@@ -259,11 +265,12 @@
 
 .services-offer::after {
   position: absolute;
-  top: calc(var(--offer-curve-offset) * -1);
+  top: calc(var(--offer-curve-depth) * -1);
   right: 0;
   left: 0;
   z-index: 0;
-  height: var(--offer-curve-offset);
+  /* Overlap the section by 2px so fractional scroll positions cannot open a seam. */
+  height: calc(var(--offer-curve-depth) + 2px);
   content: "";
   background: var(--paper);
   clip-path: ellipse(
@@ -682,24 +689,67 @@
   list-style: none;
 }
 
-.services-process__steps::before,
-.services-process__steps::after {
-  position: absolute;
-  left: 0;
-  width: clamp(4rem, 8.1vw, 8.1rem);
-  aspect-ratio: 2;
-  content: "";
-  background: #f7d36b;
+.services-process__diagram {
+  --process-diameter: clamp(4rem, 8.1vw, 8.1rem);
+  position: relative;
 }
 
-.services-process__steps::before {
+.services-process__circle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.services-process__half {
+  position: absolute;
+  left: 0;
+  width: var(--process-diameter);
+  height: calc(var(--process-diameter) / 2);
+  box-sizing: border-box;
+}
+
+.services-process__half--top {
   top: 0;
+  background: #f7d36b;
   border-radius: 100% 100% 0 0 / 200% 200% 0 0;
 }
 
-.services-process__steps::after {
+.services-process__half--bottom {
   bottom: 0;
   border-radius: 0 0 100% 100% / 0 0 200% 200%;
+  background: #f7d36b;
+}
+
+.services-process__rotor {
+  position: absolute;
+  top: calc(50% - var(--process-diameter) / 2);
+  left: 0;
+  width: var(--process-diameter);
+  height: var(--process-diameter);
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #f7d36b 50%, transparent 50%);
+  visibility: hidden;
+}
+
+/* Progress is driven by scroll in services-process.js; the default stays open. */
+.services-process__diagram.is-scroll-driven .services-process__half--top {
+  transform: translateY(var(--process-offset, 0px));
+  background: rgb(247 211 107 / var(--process-top-fill, 1));
+}
+
+.services-process__diagram.is-scroll-driven .services-process__half--bottom {
+  transform: translateY(calc(-1 * var(--process-offset, 0px)));
+}
+
+.services-process__diagram.is-scroll-driven .services-process__rotor {
+  visibility: visible;
+  transform: rotate(var(--process-turn, 0deg));
+  opacity: var(--process-rotor-opacity, 0);
+}
+
+.services-process__diagram.is-scroll-driven .services-process__step {
+  opacity: var(--process-step-opacity, 1);
+  transform: translateY(var(--process-step-offset, 0px));
 }
 
 .services-process__step h3 {
@@ -785,7 +835,6 @@
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid rgb(0 71 12 / 0.6);
 }
 
 .services-contact__scribble {
@@ -834,4 +883,25 @@
   border: 1px solid var(--brand-olive);
   background: transparent;
   color: var(--brand-olive);
+}
+
+.services-contact__answer {
+  display: grid;
+  place-items: center;
+}
+
+.services-contact__answer > span {
+  grid-area: 1 / 1;
+}
+
+.services-contact__answer-hover {
+  visibility: hidden;
+}
+
+.services-contact__button--outline:is(:hover, :focus-visible) .services-contact__answer-default {
+  visibility: hidden;
+}
+
+.services-contact__button--outline:is(:hover, :focus-visible) .services-contact__answer-hover {
+  visibility: visible;
 }

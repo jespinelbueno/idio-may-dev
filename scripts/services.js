@@ -1,3 +1,4 @@
+import { initServicesProcess } from "./features/services-process.js";
 import { initServicesCardStack } from "./features/services-card-stack.js";
 import { initCustomCursor } from "./features/custom-cursor.js";
 import { initServicesHeroReveal } from "./features/services-hero-reveal.js";
@@ -9,3 +10,5 @@ initCustomCursor();
 initServicesHeroReveal();
 
 initServicesCardStack();
+
+initServicesProcess();
