@@ -59,12 +59,20 @@ export const initCaseStudyStack = () => {
     panel.removeAttribute("aria-live");
     panel.removeAttribute("aria-atomic");
     panel.dataset.caseMobileIndex = String(index);
+    const sourceImage = caseStudyStack.querySelector(`[data-case-card="${index}"] img`);
+    const image = document.createElement("div");
+    image.className = "case-study__mobile-image";
+    image.innerHTML = `<img src="${sourceImage?.getAttribute("src") || ""}" alt="${caseStudy.client}">`;
+    panel.prepend(image);
     panel.querySelector("h3").textContent = caseStudy.client;
     panel.querySelector(".case-study__description").textContent = caseStudy.description;
     mobileProjects.appendChild(panel);
     caseStudyDots[index]?.setAttribute("aria-label", `Show ${caseStudy.client}`);
   });
-  caseStudyProject.after(mobileProjects);
+  const mobileCarouselShell = document.createElement("div");
+  mobileCarouselShell.className = "case-study__mobile-carousel-shell";
+  mobileCarouselShell.appendChild(mobileProjects);
+  caseStudyProject.after(mobileCarouselShell);
 
   const mobileControls = document.createElement("div");
   mobileControls.className = "case-study__carousel-controls";
@@ -79,7 +87,7 @@ export const initCaseStudyStack = () => {
       <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
     </button>
   `;
-  caseStudyMedia.after(mobileControls);
+  mobileCarouselShell.prepend(mobileControls);
   const [previousCaseStudyButton, nextCaseStudyButton] = mobileControls.querySelectorAll("button");
   
   caseStudyScrollTrack?.style.setProperty("--case-study-count", String(Math.max(caseStudies.length, 1)));
@@ -330,7 +338,7 @@ export const initCaseStudyStack = () => {
     setActiveCaseStudyDot(nextIndex);
     updateMobileCarouselButtons(nextIndex);
     updateCaseStudyContent(nextIndex);
-    moveCaseStudyFrontCardToBack(nextIndex);
+    if (!phoneLayout.matches) moveCaseStudyFrontCardToBack(nextIndex);
     return true;
   };
   

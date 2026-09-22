@@ -6,76 +6,6 @@
   color: var(--brand-green);
 }
 
-.services-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.75rem clamp(1.6rem, 3vw, 3rem);
-  color: var(--paper);
-  pointer-events: none;
-}
-
-.services-nav__brand,
-.services-nav__links a {
-  pointer-events: auto;
-}
-
-.services-nav__brand {
-  display: grid;
-  place-items: center;
-  width: clamp(2.1rem, 3.3vw, 3rem);
-  aspect-ratio: 47 / 33;
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-.services-nav__brand-mark {
-  width: 100%;
-  height: 100%;
-  background: currentColor;
-  mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat;
-  -webkit-mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat;
-}
-
-.services-nav__links {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.8rem, 4.6vw, 4.8rem);
-  font-size: clamp(0.65rem, 0.76vw, 0.78rem);
-  font-weight: 650;
-  line-height: 1;
-}
-
-.services-nav__links a {
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-.services-nav__links a:hover,
-.services-nav__links a:focus-visible,
-.services-nav__brand:hover,
-.services-nav__brand:focus-visible {
-  opacity: 0.72;
-  transform: translateY(-0.06rem);
-}
-
-.services-nav__links a:focus-visible,
-.services-nav__brand:focus-visible {
-  outline: 0.12rem solid currentColor;
-  outline-offset: 0.3rem;
-}
-
-.services-nav__links a.is-active {
-  font-weight: 800;
-}
-
 .services-shell {
   overflow-x: clip;
   background: var(--paper);
@@ -658,14 +588,6 @@
 }
 
 
-/* One background spans both closing sections so it cannot restart at their seam. */
-.services-closing {
-  background:
-    radial-gradient(ellipse 90% 50% at 100% 55%, rgb(241 199 98 / 0.78), transparent 100%),
-    radial-gradient(ellipse 85% 35% at 15% 70%, rgb(247 215 128 / 0.65), transparent 100%),
-    var(--paper);
-}
-
 .services-process {
   padding: clamp(4rem, 9vw, 9rem) 0;
   color: var(--brand-green);
@@ -814,94 +736,4 @@
   display: flex;
   width: fit-content;
   margin: clamp(3rem, 6.5vw, 6.5rem) auto 0;
-}
-
-
-.services-contact {
-  padding: clamp(3rem, 5.6vw, 5.6rem) 0 clamp(5rem, 10vw, 10rem);
-  color: var(--brand-green);
-}
-
-.services-contact__inner {
-  width: min(86rem, 84vw);
-  margin: 0 auto;
-}
-
-.services-contact__visual {
-  position: relative;
-}
-
-.services-contact__image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.services-contact__scribble {
-  position: absolute;
-  z-index: 1;
-  display: block;
-  height: auto;
-  pointer-events: none;
-  animation: scribble-shape-cycle 960ms steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
-}
-
-.services-contact__scribble--green {
-  top: 57%;
-  left: -5.5%;
-  width: 16%;
-  --scribble-frame-delay: -180ms;
-}
-
-.services-contact__scribble--raspberry {
-  top: 2%;
-  right: -5%;
-  width: 10%;
-  --scribble-frame-delay: -540ms;
-}
-
-.services-contact h2 {
-  margin: clamp(2rem, 3.2vw, 3.2rem) 0 0;
-  font-size: clamp(2rem, 4.8vw, 4.8rem);
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-}
-
-.services-contact__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: clamp(1.6rem, 2.8vw, 2.8rem);
-}
-
-.services-contact__button {
-  margin: 0;
-  color: var(--paper);
-}
-
-.services-contact__button--outline {
-  border: 1px solid var(--brand-olive);
-  background: transparent;
-  color: var(--brand-olive);
-}
-
-.services-contact__answer {
-  display: grid;
-  place-items: center;
-}
-
-.services-contact__answer > span {
-  grid-area: 1 / 1;
-}
-
-.services-contact__answer-hover {
-  visibility: hidden;
-}
-
-.services-contact__button--outline:is(:hover, :focus-visible) .services-contact__answer-default {
-  visibility: hidden;
-}
-
-.services-contact__button--outline:is(:hover, :focus-visible) .services-contact__answer-hover {
-  visibility: visible;
 }

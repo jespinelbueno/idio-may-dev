@@ -506,8 +506,22 @@
   }
 }
 @container case-layout (max-width: 40rem) {
+  .team {
+    --team-mobile-image-height: min(118vw, 31rem);
+  }
   .team__carousel-controls {
+    position: absolute;
+    top: calc(2rem + (var(--team-mobile-image-height) / 2));
+    right: 0.5rem;
+    left: 0.5rem;
     justify-content: space-between;
+    margin: 0;
+    transform: translateY(-50%);
+  }
+  .team__photo,
+  .team__member--raquel .team__photo {
+    height: var(--team-mobile-image-height);
+    aspect-ratio: auto;
   }
   .team__grid {
     grid-auto-columns: 100%;

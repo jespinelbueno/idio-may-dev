@@ -405,6 +405,7 @@
 
 .case-study__mobile-projects,
 .case-study__swipe-hint,
+.case-study__mobile-carousel-shell,
 .case-study__carousel-controls {
   display: none;
 }
@@ -592,27 +593,27 @@ font-size: 10px;
     scroll-margin-top: calc(var(--nav-height) + 1rem);
   }
   .case-study__dots {
-    order: 1;
+    display: none;
   }
   .case-study__scribble {
     display: none;
   }
   .case-study__media {
+    display: none;
+  }
+  .case-study__mobile-carousel-shell {
+    --case-mobile-image-height: min(118vw, 31rem);
+
     position: relative;
-    top: auto;
-    z-index: 3;
+    display: block;
     width: 100%;
-    height: var(--case-mobile-media-height);
-    aspect-ratio: auto;
-    margin: 0 auto 1.5rem;
-    touch-action: pan-y;
-    user-select: none;
+    margin-top: 2rem;
   }
   .case-study__carousel-controls {
     position: absolute;
-    top: calc(1.5rem + (var(--case-mobile-media-height) / 2));
-    right: 0.25rem;
-    left: 0.25rem;
+    top: calc(var(--case-mobile-image-height) / 2);
+    right: 0.5rem;
+    left: 0.5rem;
     z-index: 6;
     display: flex;
     justify-content: space-between;
@@ -628,7 +629,7 @@ font-size: 10px;
     width: min(62%, calc(var(--case-mobile-media-height) * 0.64));
     transform: translateX(-42%);
   }
-  .case-study__project:has(~ .case-study__mobile-projects) {
+  .case-study__project:has(~ .case-study__mobile-carousel-shell) {
     display: none;
   }
   .case-study__mobile-projects {
@@ -651,9 +652,21 @@ font-size: 10px;
   }
   .case-study__mobile-project {
     min-width: 0;
-    padding: 1.25rem 0.25rem 1rem;
+    padding: 0 0.25rem 1rem;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+  }
+  .case-study__mobile-image {
+    width: 100%;
+    height: var(--case-mobile-image-height);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    background: rgb(247 242 233 / 0.56);
+  }
+  .case-study__mobile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .case-study__mobile-project h3 {
     margin-top: 0;

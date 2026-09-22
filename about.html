@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Get to know Idio Creative and the people behind the ideas.">
+    <title>About Us | Idio</title>
+    <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/media/about/team-field.png" as="image">
+    <link rel="stylesheet" href="styles/about.css">
+  </head>
+  <body class="about-page">
+    <a class="about-skip-link" href="#about-story">Skip to our story</a>
+    <svg class="scribble-frame-filters" aria-hidden="true">
+      <defs>
+        <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="B" yChannelSelector="R"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="7.5" xChannelSelector="G" yChannelSelector="B"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="B"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo" result="mix"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+
+    <header class="services-nav" aria-label="Primary navigation">
+      <a class="services-nav__brand" href="index.html" aria-label="Idio home">
+        <span class="services-nav__brand-mark" aria-hidden="true"></span>
+      </a>
+
+      <button class="services-nav__toggle" type="button" aria-expanded="false" aria-controls="about-menu">Menu</button>
+      <nav class="services-nav__links" id="about-menu" aria-label="Main">
+        <a href="services.html">Services</a>
+        <a href="index.html#case-study-title">Projects</a>
+        <a class="is-active" href="about.html" aria-current="page">About Us</a>
+        <a href="#site-footer">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Figma: SxbrTN0u4TjdTXbc94pYyK / 1713:280. Desktop reference width: 1920. -->
+    <main class="about-shell">
+      <div class="about-narrative">
+      <div class="about-background" aria-hidden="true">
+        <div class="about-background__glow about-background__glow--story"><img src="assets/media/about/story-yellow-glow.svg" alt=""></div>
+        <div class="about-background__glow about-background__glow--cream"><img src="assets/media/about/lower-cream-glow.svg" alt=""></div>
+        <div class="about-background__glow about-background__glow--yellow"><img src="assets/media/about/lower-yellow-glow.svg" alt=""></div>
+      </div>
+      <section class="about-hero" aria-labelledby="about-title">
+        <div class="about-hero__crop"><img class="about-hero__image" src="assets/media/about/team-field.png" width="4096" height="2731" alt="The Idio team gathered together in a sunlit field." fetchpriority="high"></div>
+        <h1 class="about-hero__title" id="about-title">about us</h1>
+        <img class="about-hero__underline" src="assets/media/about/hero-underline.svg" alt="" aria-hidden="true">
+        <img class="about-hero__curve" src="assets/media/about/hero-curve.svg" width="1920" height="74" alt="" aria-hidden="true">
+      </section>
+      <section class="about-story" id="about-story" aria-labelledby="about-story-title">
+        <figure class="about-photo about-photo--founder"><img src="assets/media/about/anna-founder.png" width="2731" height="4096" alt="Anna, Idio’s founder, wearing a red sweater in a field." loading="lazy"></figure>
+        <h2 id="about-story-title">so what the<br>heck is idio???</h2>
+        <img class="about-story__circle" src="assets/media/about/title-circle.svg" alt="" aria-hidden="true">
+        <article class="about-chapter about-chapter--start" aria-labelledby="about-start-title">
+          <img class="about-chapter__dot" src="assets/media/about/blue-dot.svg" width="126" height="126" alt="" aria-hidden="true">
+          <h3 id="about-start-title">Starting out</h3>
+          <p>Idio Creative was founded by Anna Moore while pursuing her master’s degree at university. Anna faced the pressure of juggling business operations while still having time and energy to create. She realized, without the time to be creative, her business was losing its appeal—the uniqueness that made it desirable in the first place.</p>
+        </article>
+        <img class="about-story__thread" src="assets/media/about/story-thread.svg" alt="" aria-hidden="true">
+        <article class="about-chapter about-chapter--journey" aria-labelledby="about-journey-title">
+          <img class="about-chapter__dot" src="assets/media/about/yellow-dot.svg" width="126" height="126" alt="" aria-hidden="true">
+          <h3 id="about-journey-title">how did we get here?</h3>
+          <p>What began as a personal passion helping local businesses with marketing, photography and related creative services, ended as a full-service creative agency, with a tight-knit and diversely talented team of experienced artists.</p>
+        </article>
+        <div class="about-collage">
+          <figure class="about-photo about-photo--snapshot"><img src="assets/media/about/early-days.png" width="2732" height="4096" alt="A candid photo from Idio’s early days." loading="lazy"></figure>
+          <figure class="about-photo about-photo--candid"><img src="assets/media/about/friends.png" width="2731" height="4096" alt="Two friends smiling together outside." loading="lazy"></figure>
+          <img class="about-collage__scribble" src="assets/media/about/collage-scribble.svg" alt="" aria-hidden="true">
+        </div>
+      </section>
+      <section class="about-next" aria-labelledby="about-next-title">
+        <img class="about-next__curve" src="assets/media/about/olive-curve.svg" width="1920" height="74" alt="" aria-hidden="true">
+        <figure class="about-photo about-photo--studio"><img src="assets/media/about/studio-group.png" alt="Four Idio teammates gathered in the studio with their creative supplies." loading="lazy"></figure>
+        <img class="about-next__scribble about-next__scribble--left" src="assets/media/about/studio-left-scribble.svg" alt="" aria-hidden="true">
+        <img class="about-next__scribble about-next__scribble--bottom" src="assets/media/about/studio-bottom-scribble.svg" alt="" aria-hidden="true">
+        <img class="about-next__thread" src="assets/media/about/next-thread.svg" alt="" aria-hidden="true">
+
+        <article class="about-chapter about-chapter--next" aria-labelledby="about-next-title">
+          <img class="about-chapter__dot" src="assets/media/about/green-dot.svg" width="126" height="126" alt="" aria-hidden="true">
+          <h2 id="about-next-title">keep it Going</h2>
+          <p>At Idio, we believe in bringing back the beauty of human-made artistry to the creative industries. We exist for the dreamers-turned-business owners.</p>
+        </article>
+      </section>
+      <section class="about-team" aria-labelledby="about-team-title">
+        <h2 id="about-team-title">lets meet<br>the team</h2>
+        <p class="about-team__intro">We’re excited to hear your story. But just so you’re not spilling your heart to a bunch of strangers… Why don’t you meet the team?<br><br>this is the idio team formed by almost accident just because they were all friends and loved working together and a couple more cool things yay yay yay!!</p>
+        <dl class="about-team__members">
+          <div><dt>jaden anderson</dt><dd>graphic designer | creative | friend</dd></div>
+          <div class="is-featured"><dt>raquel bowles</dt><dd>graphic designer | creative | friend</dd></div>
+          <div><dt>naomi moore</dt><dd>graphic designer | creative | friend</dd></div>
+          <div><dt>gretel lam</dt><dd>graphic designer | creative | friend</dd></div>
+        </dl>
+        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.png" width="4096" height="2731" alt="" loading="lazy"></div></figure>
+        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.png" width="4096" height="2731" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy"></div></figure>
+      </section>
+      </div>
+      <div class="services-closing">
+        <section class="services-contact" aria-labelledby="services-contact-title">
+          <div class="services-contact__inner">
+            <div class="services-contact__visual">
+              <img class="services-contact__image" src="assets/media/services/work-with-us.jpg" width="1618" height="553" alt="Friends relaxing together with a guitar." loading="lazy" decoding="async">
+              <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/decorations/scribbles/services/work-with-us-green.svg" alt="" aria-hidden="true">
+              <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/decorations/scribbles/services/work-with-us-raspberry.svg" alt="" aria-hidden="true">
+            </div>
+            <h2 id="services-contact-title">so, wanna work with us?</h2>
+            <div class="services-contact__actions">
+              <a class="services-contact__button" href="mailto:hello@idiocreative.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
+                <span class="button-fill__label">yes</span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </a>
+              <a class="services-contact__button services-contact__button--outline" href="mailto:hello@idiocreative.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
+                <span class="button-fill__label services-contact__answer" aria-hidden="true">
+                  <span class="services-contact__answer-default">no</span>
+                  <span class="services-contact__answer-hover">yes</span>
+                </span>
+                <span class="button-fill__inner" aria-hidden="true">
+                  <span class="button-fill__blobs">
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                    <span class="button-fill__blob"></span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="site-footer">
+      <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/decorations/scribbles/footer/new-white-left.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/decorations/scribbles/footer/new-big-white-right.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/decorations/scribbles/footer/new-small-white-right.png" alt="" aria-hidden="true">
+
+      <div class="site-footer__inner">
+        <div class="site-footer__lockup" aria-label="let's make it idio">
+          <span class="site-footer__phrase">
+            <span>let's</span>
+            <span>make</span>
+            <span>it</span>
+          </span>
+          <img class="site-footer__logo" src="assets/media/brand/idio-wordmark.svg" alt="">
+        </div>
+
+        <div class="site-footer__contact">
+          <nav class="site-footer__socials" aria-label="Social links">
+            <a class="site-footer__social" href="#site-footer" aria-label="Instagram">
+              <img src="assets/media/brand/social-instagram.svg" alt="">
+            </a>
+            <a class="site-footer__social" href="#site-footer" aria-label="YouTube">
+              <img src="assets/media/brand/social-youtube.svg" alt="">
+            </a>
+            <a class="site-footer__social" href="#site-footer" aria-label="Facebook">
+              <img src="assets/media/brand/social-facebook.svg" alt="">
+            </a>
+            <a class="site-footer__social" href="#site-footer" aria-label="Pinterest">
+              <img src="assets/media/brand/social-pinterest.svg" alt="">
+            </a>
+          </nav>
+
+          <a class="site-footer__email" href="mailto:hello@idiocreative.com">hello@idiocreative.com</a>
+        </div>
+
+        <div class="site-footer__links" aria-label="Footer navigation">
+          <section class="site-footer__column" aria-labelledby="footer-services-title">
+            <h2 id="footer-services-title"><a href="services.html">Services</a></h2>
+            <a href="services.html">Branding</a>
+            <a href="services.html">Web Design</a>
+            <a href="services.html">Content Creation</a>
+            <a href="services.html">Social Media Management</a>
+          </section>
+
+          <section class="site-footer__column" aria-labelledby="footer-about-title">
+            <h2 id="footer-about-title"><a href="about.html">About Us</a></h2>
+          </section>
+        </div>
+
+        <p class="site-footer__copyright">&copy; Copyright 2025. Idio Creative. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="scripts/about.js"></script>
+  </body>
+</html>

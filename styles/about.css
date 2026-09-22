@@ -1,12 +1,13 @@
 @layer foundation, components, pages, effects, responsive;
 
 @import url("./foundation.css") layer(foundation);
+@import url("./navigation-base.css") layer(components);
 @import url("./custom-cursor.css") layer(components);
 @import url("./buttons.css") layer(components);
-@import url("./navigation-base.css") layer(components);
 @import url("./footer.css") layer(components);
-@import url("./services-page.css") layer(pages);
+@import url("./about-page.css") layer(pages);
 @import url("./contact.css") layer(pages);
 @import url("./animations.css") layer(effects);
 @import url("./navigation.css") layer(responsive);
 @import url("./responsive.css") layer(responsive);
+@import url("./about-responsive.css") layer(responsive);

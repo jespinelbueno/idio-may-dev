@@ -8,6 +8,7 @@ const rootDirectory = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const entryPages = [
   "index.html",
   "services.html",
+  "about.html",
   "loading-screens/icon-color-loader/index.html",
 ];
 const errors = [];

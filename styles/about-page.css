@@ -1,0 +1,181 @@
+/* Measurements follow Figma frame 1713:280 (1920px desktop reference).
+   A container-relative unit keeps the desktop composition proportional. */
+.about-page {
+  --about-ink: #043c08;
+  --about-copy: #004c40;
+  --about-olive: #a5ab5f;
+  color: var(--about-ink);
+}
+
+.about-shell {
+  --u: calc(100cqw / 1920);
+  position: relative;
+  container-type: inline-size;
+  overflow: clip;
+  isolation: isolate;
+}
+
+.about-narrative :is(h1, h2, h3, p, figure, dl, dd) { margin: 0; }
+.about-narrative :is(h1, h2, h3) { font-weight: 700; }
+.about-shell a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+
+.about-skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--paper);
+  transform: translateY(-200%);
+}
+.about-skip-link:focus { transform: none; }
+
+.about-narrative {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  font-variation-settings: "opsz" 14;
+}
+
+.about-background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+}
+.about-background__glow { position: absolute; }
+.about-background__glow img { width: 100%; height: 100%; max-width: none; }
+.about-background__glow--story {
+  left: calc(2017.3475 * var(--u));
+  top: calc(1596.822 * var(--u));
+  width: calc(4097.98 * var(--u));
+  height: calc(3029.5 * var(--u));
+  transform: translate(-50%, -50%) rotate(-156.06deg);
+}
+.about-background__glow--cream {
+  left: calc(-208.2755 * var(--u));
+  top: calc(6180.624 * var(--u));
+  width: calc(3798.38 * var(--u));
+  height: calc(2311.33 * var(--u));
+  transform: translate(-50%, -50%) rotate(-167.31deg);
+}
+.about-background__glow--yellow {
+  left: calc(149.6395 * var(--u));
+  top: calc(5316.205 * var(--u));
+  width: calc(4097.98 * var(--u));
+  height: calc(2986.57 * var(--u));
+  transform: translate(-50%, -50%) rotate(-156.06deg);
+}
+
+/* Reuse the exported Figma grain as a neutral surface texture. */
+.about-narrative::after {
+  content: "";
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  pointer-events: none;
+  background: url("../assets/media/about/olive-texture.svg") repeat;
+  background-size: calc(1917 * var(--u)) calc(1189.9 * var(--u));
+  filter: grayscale(1) brightness(1.8);
+  mix-blend-mode: multiply;
+  opacity: 0.28;
+}
+
+.about-hero { position: relative; height: calc(1183 * var(--u)); color: var(--paper); }
+.about-hero__crop {
+  position: absolute;
+  top: calc(-18 * var(--u));
+  width: 100%;
+  height: calc(1201 * var(--u));
+  overflow: hidden;
+}
+.about-hero__image {
+  position: absolute;
+  top: -3.3%;
+  left: -0.01%;
+  width: 100.01%;
+  height: 106.6%;
+  max-width: none;
+}
+.about-hero__title {
+  position: absolute;
+  left: calc(649 * var(--u));
+  top: calc(453 * var(--u));
+  width: calc(621 * var(--u));
+  font-size: calc(100 * var(--u));
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.about-hero__underline {
+  position: absolute;
+  left: calc(695 * var(--u));
+  top: calc(574 * var(--u));
+  width: calc(529 * var(--u));
+  height: calc(35 * var(--u));
+  transform: scaleX(-1);
+}
+.about-hero__curve {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: calc(74 * var(--u));
+}
+
+.about-story { position: relative; height: calc(2044 * var(--u)); }
+.about-photo { position: absolute; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; }
+.about-photo--founder { left: calc(218 * var(--u)); top: calc(202 * var(--u)); width: calc(678 * var(--u)); height: calc(963 * var(--u)); overflow: hidden; }
+.about-story > h2 { position: absolute; left: calc(1001 * var(--u)); top: calc(182 * var(--u)); width: calc(701 * var(--u)); font-size: calc(96 * var(--u)); line-height: 1.3; letter-spacing: -0.02em; }
+.about-story__circle { position: absolute; left: calc(1306 * var(--u)); top: calc(286 * var(--u)); width: calc(384 * var(--u)); height: calc(168 * var(--u)); transform: rotate(176.22deg) skewX(1.39deg); pointer-events: none; }
+.about-chapter { position: absolute; width: calc(393 * var(--u)); text-align: left; }
+.about-chapter__dot { width: calc(126 * var(--u)); height: calc(126 * var(--u)); }
+.about-shell .about-chapter :is(h2, h3) { margin-top: calc(11 * var(--u)); font: 400 calc(30 * var(--u)) / 1.4 "Vollkorn", Georgia, serif; }
+.about-chapter p {
+  margin-top: calc(21 * var(--u));
+  color: var(--about-copy);
+  font-size: calc(16 * var(--u));
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+.about-chapter--start { left: calc(1001 * var(--u)); top: calc(493 * var(--u)); width: calc(496 * var(--u));  }
+.about-chapter--journey { left: calc(287 * var(--u)); top: calc(1378 * var(--u)); width: calc(419 * var(--u));  }
+.about-story__thread { position: absolute; z-index: 3; left: calc(509.26 * var(--u)); top: calc(550.47 * var(--u)); width: calc(1241.78 * var(--u)); height: calc(904.85 * var(--u)); pointer-events: none; }
+.about-photo--studio { left: calc(93 * var(--u)); top: calc(128 * var(--u)); width: calc(1047 * var(--u)); height: calc(891 * var(--u)); overflow: hidden; }
+.about-photo--studio img { position: absolute; width: 125.99%; height: 100%; left: -2.94%; top: 0.02%; max-width: none; object-fit: fill; }
+
+.about-next { position: relative; height: calc(1189.902 * var(--u)); background: var(--about-olive); }
+.about-next__thread { position: absolute; z-index: 3; left: calc(309.24 * var(--u)); top: calc(-292.02 * var(--u)); width: calc(1574.37 * var(--u)); height: calc(742.544 * var(--u)); pointer-events: none; }
+.about-photo--snapshot { left: calc(813.3735 * var(--u)); top: calc(1387.6135 * var(--u)); width: calc(453 * var(--u)); height: calc(686 * var(--u)); transform: rotate(-6.86deg); overflow: hidden; }
+.about-photo--candid { left: calc(1179.259 * var(--u)); top: calc(1094.503 * var(--u)); width: calc(558.78 * var(--u)); height: calc(838.068 * var(--u)); transform: rotate(0.31deg); }
+.about-chapter--next { left: calc(1297 * var(--u)); top: calc(511 * var(--u)); width: calc(393 * var(--u)); text-align: center; }
+
+.about-team { position: relative; height: calc(1395.098 * var(--u)); }
+.about-team > h2 { position: absolute; left: calc(150 * var(--u)); top: calc(186.098 * var(--u)); width: calc(524 * var(--u)); font-size: calc(96 * var(--u)); line-height: calc(100 * var(--u)); letter-spacing: -0.02em; }
+.about-team__intro { position: absolute; left: calc(150 * var(--u)); top: calc(428.098 * var(--u)); width: calc(385 * var(--u)); font-size: calc(16 * var(--u)); font-weight: 300; line-height: 1.3; letter-spacing: -0.02em; }
+.about-team__members { position: absolute; left: calc(739 * var(--u)); top: calc(593.098 * var(--u)); width: calc(287 * var(--u)); color: var(--about-olive); }
+.about-team__members > div { height: calc(107 * var(--u)); }
+.about-team__members dt { font-size: calc(32 * var(--u)); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15625; }
+.about-team__members dd { font-size: calc(16 * var(--u)); font-weight: 300; letter-spacing: -0.02em; line-height: 1.3; }
+.about-team__polaroid { position: absolute; left: calc(1107 * var(--u)); top: calc(242.098 * var(--u)); width: calc(620.1 * var(--u)); height: calc(970.208 * var(--u)); background: var(--paper); box-shadow: 0 calc(6.5 * var(--u)) calc(13.288 * var(--u)) rgb(0 0 0 / 40%); }
+.about-team__photo { position: absolute; left: calc(23 * var(--u)); top: calc(27 * var(--u)); width: calc(573 * var(--u)); height: calc(816 * var(--u)); overflow: hidden; }
+.about-team__photo img { position: absolute; width: 307.62%; height: 143.91%; left: -103.87%; top: -31.63%; max-width: none; }
+
+.about-photo--founder img { position: absolute; width: 100.01%; height: 105.61%; top: -5.65%; left: -0.08%; object-fit: fill; }
+
+.about-shell .about-chapter--journey h3 { margin-top: calc(36 * var(--u)); }
+
+.about-collage { position: absolute; inset: 0; z-index: 2; }
+.about-photo--snapshot img { position: absolute; height: 99.09%; width: 100.05%; left: -0.05%; top: 0.91%; object-fit: fill; }
+.about-collage__scribble { position: absolute; left: calc(691.43 * var(--u)); top: calc(1897.56 * var(--u)); width: calc(184.73 * var(--u)); height: calc(217.94 * var(--u)); pointer-events: none; }
+.about-next__curve { position: absolute; top: calc(-74 * var(--u)); width: 100%; height: calc(74 * var(--u)); }
+.about-next__scribble { position: absolute; pointer-events: none; }
+.about-next__scribble--left { left: calc(-35.45 * var(--u)); top: calc(360.44 * var(--u)); width: calc(256.41 * var(--u)); height: calc(174.06 * var(--u)); }
+.about-next__scribble--bottom { left: calc(1007.65 * var(--u)); top: calc(981.5 * var(--u)); width: calc(53.03 * var(--u)); height: calc(167.7 * var(--u)); transform: rotate(39.95deg); }
+.about-chapter--next .about-chapter__dot { margin-inline: auto; }
+.about-shell .about-chapter--next h2 { margin-top: calc(26 * var(--u)); line-height: 1.2333; }
+.about-chapter--next p { margin-top: calc(24 * var(--u)); color: var(--about-ink); }
+
+.about-team__members .is-featured { color: var(--about-ink); }
+.about-team__polaroid--front { left: calc(1108.4235 * var(--u)); top: calc(253.839 * var(--u)); transform: rotate(7.59deg); }
