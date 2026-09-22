@@ -378,12 +378,30 @@
 @media (max-width: 1100px) {
   .offer {
     --offer-curve-bleed: 0px;
-    /* Keep the ellipse's outer edges above the seam as content height changes. */
-    --offer-curve-offset: 4%;
+    --offer-curve-offset: clamp(2rem, 3.6vw, 3rem);
+    --offer-curve-reference-height: calc(
+      45.5vw + min(60rem, calc(75vw - 9.1875rem)) + 4rem + var(--offer-curve-offset)
+    );
+    --offer-curve-depth: max(
+      var(--offer-curve-offset),
+      calc(var(--offer-curve-reference-height) * 0.04 + 2px)
+    );
     width: 100%;
     min-height: 0;
     margin-left: 0;
     padding: var(--section-space) var(--page-gutter);
+    background: var(--paper);
+  }
+  .offer::after {
+    inset: calc(var(--offer-curve-depth) * -1) 0 auto;
+    height: calc(var(--offer-curve-depth) + 2px);
+    clip-path: ellipse(
+      200vw var(--offer-curve-reference-height) at 50% var(--offer-curve-reference-height)
+    );
+  }
+  .offer__gradients {
+    inset: 0;
+    clip-path: none;
   }
   .offer__intro, .offer__copy {
     position: relative;
@@ -481,6 +499,10 @@
 }
 
 @media (max-width: 640px) {
+  .offer__copy {
+    margin-top: calc(var(--section-space) + 6rem);
+  }
+
   .offer__collage {
     display: grid;
     grid-template-columns: minmax(0, 1fr);

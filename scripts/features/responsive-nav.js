@@ -6,17 +6,31 @@ export const initResponsiveNav = ({ navSelector, transitionSelector }) => {
   if (!nav || !offer || !toggle || !links) return;
 
   const compact = window.matchMedia("(max-width: 640px)");
+  const circle = document.createElement("span");
+  circle.className = "nav-circle";
+  circle.setAttribute("aria-hidden", "true");
+  const rotor = document.createElement("span");
+  rotor.className = "nav-circle__rotor";
+  circle.appendChild(rotor);
+  toggle.before(circle);
   let animationFrame = null;
   const setMenuOpen = (open, returnFocus = false) => {
     nav.classList.toggle("is-menu-open", open);
+    document.documentElement.classList.toggle(
+      "has-open-mobile-menu",
+      open && compact.matches
+    );
     toggle.setAttribute("aria-expanded", String(open));
     toggle.textContent = open ? "Close" : "Menu";
     if (returnFocus) toggle.focus();
+    links.inert = compact.matches && !open;
+    scheduleNavUpdate();
   };
   const updateNav = () => {
     animationFrame = null;
     nav.classList.toggle("is-sticky", offer.getBoundingClientRect().top <= nav.offsetHeight);
     document.body.style.setProperty("--nav-height", `${nav.offsetHeight}px`);
+    nav.style.setProperty("--menu-links-height", `${links.offsetHeight}px`);
   };
   const scheduleNavUpdate = () => {
     if (animationFrame !== null) return;
@@ -33,7 +47,9 @@ export const initResponsiveNav = ({ navSelector, transitionSelector }) => {
     }
   });
   nav.addEventListener("focusout", (event) => {
-    if (!nav.contains(event.relatedTarget)) setMenuOpen(false);
+    if (event.relatedTarget && !nav.contains(event.relatedTarget)) {
+      setMenuOpen(false);
+    }
   });
   document.addEventListener("pointerdown", (event) => {
     if (!nav.contains(event.target)) setMenuOpen(false);
@@ -45,6 +61,8 @@ export const initResponsiveNav = ({ navSelector, transitionSelector }) => {
     scheduleNavUpdate();
   });
   new ResizeObserver(scheduleNavUpdate).observe(nav);
+  new ResizeObserver(scheduleNavUpdate).observe(links);
+  links.inert = compact.matches;
   updateNav();
   window.addEventListener("scroll", scheduleNavUpdate, { passive: true });
   window.addEventListener("resize", scheduleNavUpdate, { passive: true });

@@ -13,6 +13,7 @@ export function initServicesProcess() {
   let progress = null;
   let targetProgress = 0;
   let travel = 0;
+  let bottomTravel = 0;
   let lastFrameTime = 0;
 
   const render = (timestamp) => {
@@ -31,6 +32,7 @@ export function initServicesProcess() {
     diagram.style.setProperty("--process-top-fill", String(fill));
     diagram.style.setProperty("--process-rotor-opacity", String(1 - fill));
     diagram.style.setProperty("--process-offset", `${travel * (1 - opening)}px`);
+    diagram.style.setProperty("--process-bottom-offset", `${bottomTravel * (1 - opening)}px`);
     steps.forEach((step, index) => {
       const start = 0.6 + (index / steps.length) * 0.16;
       const reveal = ease(phase(progress, start, start + 0.28));
@@ -41,7 +43,7 @@ export function initServicesProcess() {
   };
 
   const requestUpdate = () => {
-    const animate = !reducedMotion.matches && !phoneLayout.matches;
+    const animate = !reducedMotion.matches;
     diagram.classList.toggle("is-scroll-driven", animate);
     if (!animate) {
       window.cancelAnimationFrame(animationFrame);
@@ -55,8 +57,19 @@ export function initServicesProcess() {
     const viewport = window.innerHeight;
     const center = bounds.top + bounds.height / 2;
     const distance = Math.max(viewport * 0.35, viewport * 0.75 - bounds.height / 2);
-    targetProgress = clamp((viewport * 0.85 - center) / distance);
-    travel = Math.max((bounds.height - rotor.offsetWidth) / 2, 0);
+    if (phoneLayout.matches) {
+      // Open down from the top on phones, so the circle and the first step
+      // appear before a tall, single-column process has scrolled past the reader.
+      targetProgress = clamp((viewport * 0.9 - bounds.top) / (viewport * 0.65));
+      travel = 0;
+      bottomTravel = Math.max(bounds.height - rotor.offsetWidth, 0);
+      diagram.style.setProperty("--process-rotor-top", "0px");
+    } else {
+      targetProgress = clamp((viewport * 0.85 - center) / distance);
+      travel = Math.max((bounds.height - rotor.offsetWidth) / 2, 0);
+      bottomTravel = travel;
+      diagram.style.removeProperty("--process-rotor-top");
+    }
     if (progress === null) progress = targetProgress;
     if (!animationFrame) {
       lastFrameTime = performance.now();

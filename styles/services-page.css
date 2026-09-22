@@ -722,7 +722,7 @@
 
 .services-process__rotor {
   position: absolute;
-  top: calc(50% - var(--process-diameter) / 2);
+  top: var(--process-rotor-top, calc(50% - var(--process-diameter) / 2));
   left: 0;
   width: var(--process-diameter);
   height: var(--process-diameter);
@@ -738,7 +738,7 @@
 }
 
 .services-process__diagram.is-scroll-driven .services-process__half--bottom {
-  transform: translateY(calc(-1 * var(--process-offset, 0px)));
+  transform: translateY(calc(-1 * var(--process-bottom-offset, var(--process-offset, 0px))));
 }
 
 .services-process__diagram.is-scroll-driven .services-process__rotor {

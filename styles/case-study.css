@@ -404,7 +404,8 @@
 }
 
 .case-study__mobile-projects,
-.case-study__swipe-hint {
+.case-study__swipe-hint,
+.case-study__carousel-controls {
   display: none;
 }
 
@@ -607,6 +608,20 @@ font-size: 10px;
     touch-action: pan-y;
     user-select: none;
   }
+  .case-study__carousel-controls {
+    position: absolute;
+    top: calc(1.5rem + (var(--case-mobile-media-height) / 2));
+    right: 0.25rem;
+    left: 0.25rem;
+    z-index: 6;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+  .case-study__carousel-button {
+    pointer-events: auto;
+  }
   .case-study__stack {
     top: 9%;
     left: 50%;
@@ -633,12 +648,6 @@ font-size: 10px;
   .case-study__mobile-projects:focus-visible {
     outline: 2px solid var(--brand-green);
     outline-offset: 2px;
-  }
-  .case-study__copy .case-study__swipe-hint {
-    display: block;
-    margin: 1rem 0 0;
-    font-size: 0.75rem;
-    text-align: center;
   }
   .case-study__mobile-project {
     min-width: 0;

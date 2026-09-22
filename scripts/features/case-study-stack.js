@@ -48,6 +48,7 @@ export const initCaseStudyStack = () => {
   // Both layouts read the same entries; phones show one description per swipe.
   const mobileProjects = document.createElement("div");
   mobileProjects.className = "case-study__mobile-projects";
+  mobileProjects.id = "case-study-mobile-carousel";
   mobileProjects.tabIndex = 0;
   mobileProjects.setAttribute("role", "region");
   mobileProjects.setAttribute("aria-label", "Collaborations. Swipe or use the left and right arrow keys to explore.");
@@ -64,10 +65,22 @@ export const initCaseStudyStack = () => {
     caseStudyDots[index]?.setAttribute("aria-label", `Show ${caseStudy.client}`);
   });
   caseStudyProject.after(mobileProjects);
-  const swipeHint = document.createElement("p");
-  swipeHint.className = "case-study__swipe-hint";
-  swipeHint.textContent = "swipe to explore ↔";
-  mobileProjects.before(swipeHint);
+
+  const mobileControls = document.createElement("div");
+  mobileControls.className = "case-study__carousel-controls";
+  mobileControls.setAttribute("aria-label", "Collaboration carousel controls");
+  mobileControls.innerHTML = `
+    <button class="team__carousel-button case-study__carousel-button" type="button" aria-label="Show previous collaboration" aria-controls="case-study-mobile-carousel" disabled>
+      <span class="button-fill__label" aria-hidden="true">←</span>
+      <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
+    </button>
+    <button class="team__carousel-button case-study__carousel-button" type="button" aria-label="Show next collaboration" aria-controls="case-study-mobile-carousel">
+      <span class="button-fill__label" aria-hidden="true">→</span>
+      <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
+    </button>
+  `;
+  caseStudyMedia.after(mobileControls);
+  const [previousCaseStudyButton, nextCaseStudyButton] = mobileControls.querySelectorAll("button");
   
   caseStudyScrollTrack?.style.setProperty("--case-study-count", String(Math.max(caseStudies.length, 1)));
   
@@ -77,6 +90,11 @@ export const initCaseStudyStack = () => {
       dot.classList.toggle("is-active", isActive);
       dot.setAttribute("aria-pressed", String(isActive));
     });
+  };
+
+  const updateMobileCarouselButtons = (nextIndex) => {
+    previousCaseStudyButton.disabled = nextIndex <= 0;
+    nextCaseStudyButton.disabled = nextIndex >= caseStudies.length - 1;
   };
   
   const updateCaseStudyContent = (nextIndex) => {
@@ -310,6 +328,7 @@ export const initCaseStudyStack = () => {
   
     activeCaseStudyIndex = nextIndex;
     setActiveCaseStudyDot(nextIndex);
+    updateMobileCarouselButtons(nextIndex);
     updateCaseStudyContent(nextIndex);
     moveCaseStudyFrontCardToBack(nextIndex);
     return true;
@@ -368,6 +387,13 @@ export const initCaseStudyStack = () => {
       behavior: immediate || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
     });
   };
+
+  previousCaseStudyButton.addEventListener("click", () => {
+    scrollToMobileCaseStudy(getCaseStudyIndexFromScroll() - 1);
+  });
+  nextCaseStudyButton.addEventListener("click", () => {
+    scrollToMobileCaseStudy(getCaseStudyIndexFromScroll() + 1);
+  });
 
   mobileProjects.addEventListener("scroll", () => {
     if (phoneLayout.matches) scheduleCaseStudyScrollSync();
@@ -450,6 +476,7 @@ export const initCaseStudyStack = () => {
   window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", updateContentFit);
   updateContentFit();
   positionCaseStudyCards({ immediate: true });
+  updateMobileCarouselButtons(activeCaseStudyIndex);
   window.addEventListener("scroll", () => {
     if (!phoneLayout.matches) scheduleCaseStudyScrollSync();
   }, { passive: true });

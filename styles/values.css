@@ -652,4 +652,12 @@
   .values-mobile-list {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .values-mobile-item {
+    display: none;
+  }
+
+  .values-mobile-item.is-active {
+    display: grid;
+  }
 }

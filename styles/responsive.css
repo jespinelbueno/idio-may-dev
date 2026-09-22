@@ -152,11 +152,11 @@
   .services-process__steps {
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
-    padding: 0;
+    padding: 4rem 0;
   }
 
-  .services-process__circle {
-    display: none;
+  .services-process__diagram {
+    --process-diameter: 5rem;
   }
 
   .services-process__step h3 {
