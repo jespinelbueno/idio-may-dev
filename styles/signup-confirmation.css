@@ -1,0 +1,34 @@
+.signup-confirmation {
+  width: min(30rem, calc(100% - 2rem));
+  max-height: calc(100svh - 2rem);
+  padding: clamp(2rem, 5vw, 3rem);
+  overflow: auto;
+  border: 1px solid var(--brand-olive);
+  border-radius: 1.5rem;
+  background: var(--paper);
+  color: var(--brand-green);
+  text-align: center;
+  box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 20%);
+}
+.signup-confirmation::backdrop { background: rgb(0 30 10 / 65%); }
+.signup-confirmation__close { position: absolute; top: 0.5rem; right: 0.5rem; min-width: 2.75rem; min-height: 2.75rem; border: 0; background: transparent; color: inherit; font: 2rem/1 sans-serif; cursor: pointer; }
+.signup-confirmation__eyebrow { font-family: 'Teva', sans-serif; }
+.signup-confirmation h2 { margin: 1rem 0; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.05; letter-spacing: -0.03em; }
+.signup-confirmation p { line-height: 1.5; }
+.signup-confirmation .events-button { margin-top: 1rem; font: inherit; cursor: pointer; }
+.signup-confirmation button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.events-community__signup .events-button:disabled { cursor: wait; opacity: 0.7; }
+html:has(.signup-confirmation[open]) { overflow: hidden; }
+
+/* A modal enters the browser top layer, above the body-mounted custom cursor.
+   Restore the native pointer while it is open so controls remain visible. */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor:has(.signup-confirmation[open]),
+  html.has-custom-cursor:has(.signup-confirmation[open]) * {
+    cursor: auto !important;
+  }
+
+  html.has-custom-cursor:has(.signup-confirmation[open]) .signup-confirmation button {
+    cursor: pointer !important;
+  }
+}

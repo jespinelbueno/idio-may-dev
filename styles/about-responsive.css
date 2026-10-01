@@ -3,7 +3,7 @@
   .about-shell { --u: calc(100cqw / 1920); }
   .about-background__glow { display: none; }
   .about-background { background: radial-gradient(ellipse at 100% 26%, #f5cf688c, transparent 28%), radial-gradient(ellipse at 80% 85%, #f5cf6880, transparent 23%); }
-  .about-narrative::after { background-size: 960px 596px; opacity: 0.18; }
+  .about-background::before { background-size: 960px 596px; opacity: 0.18; }
   .about-hero { height: 64vw; min-height: 24rem; }
   .about-hero__crop { top: 0; height: 100%; }
   .about-hero__image { width: 100%; height: 100%; left: 0; top: 0; object-fit: cover; object-position: 50% 50%; }
@@ -30,13 +30,12 @@
   .about-story__thread { left: 5%; top: 36%; width: 92%; height: 24%; opacity: 0.35; z-index: -1; }
   .about-photo--studio { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 1047 / 891; margin-bottom: 3rem; }
 
-  .about-next { height: auto; padding: 4rem 8%; }
+  .about-next { --about-curve-height: 4vw; height: auto; padding: 4rem 8%; }
   .about-next__thread { left: 42%; top: -2rem; width: 52%; height: 8rem; }
   .about-collage { grid-area: collage; position: relative; inset: auto; width: 100%; max-width: 35rem; height: auto; aspect-ratio: 0.86; margin: 0 auto; }
   .about-photo--snapshot { left: 0; top: 30%; width: 52%; height: 68%; }
   .about-photo--candid { left: 40%; top: 0; width: 60%; height: 78%; }
   .about-collage__scribble { left: -6%; top: 83%; width: 23%; height: 20%; }
-  .about-next__curve { height: 4vw; top: -4vw; }
   .about-next__scribble--left { left: -3%; top: 7rem; width: 25%; height: 6rem; }
   .about-next__scribble--bottom { left: 72%; top: 75vw; width: 2rem; height: 5rem; }
   .about-chapter--next { margin-inline: auto; }

@@ -1,0 +1,78 @@
+/* Figma 1759:111, composed as responsive sections at a 1920px reference width. */
+.events-page { color: #043c08; }
+.events-shell { overflow: clip; }
+.events-shell :is(h1, h2, h3, p) { margin: 0; }
+.events-skip-link { position: fixed; z-index: 20; top: 1rem; left: 1rem; padding: 0.8rem 1rem; background: var(--paper); transform: translateY(-200%); }
+.events-skip-link:focus { transform: none; }
+.events-hero { position: relative; display: grid; place-items: center; height: 61.615vw; color: var(--paper); }
+.events-hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.events-hero__heading { position: relative; margin-top: -6.5vw; text-align: center; }
+.events-hero h1 { font-size: 5.208vw; line-height: 1.3; letter-spacing: -0.02em; }
+.events-hero__underline { width: 27.54vw; height: auto; margin: 0 auto; transform: scaleX(-1); }
+/* The next section paints its curve and body together, so its gradient has no seam. */
+.events-community { position: relative; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; gap: 13vw; padding: 10.94vw 15.36vw 12.45vw 8.02vw; }
+.events-community::before {
+  --curve-height: 3.854167vw;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: calc(-1 * var(--curve-height)) 0 0;
+  pointer-events: none;
+  background: url('../assets/media/events/cream-glow.svg') 65vw -32vw / 198vw auto no-repeat, url('../assets/media/events/yellow-glow.svg') center 35% / 214vw auto no-repeat, var(--paper);
+  /* Preserve the exported ellipse, with a one-pixel overlap at the body join. */
+  mask-image: url('../assets/media/events/hero-curve.svg'), linear-gradient(#000, #000);
+  mask-size: 100% var(--curve-height), 100% calc(100% - var(--curve-height) + 1px);
+  mask-position: center top, center bottom;
+  mask-repeat: no-repeat;
+}
+.events-community h2 { font-size: 5vw; line-height: 1.3; letter-spacing: -0.02em; white-space: nowrap; }
+.events-community__circled, .events-community__underlined { position: relative; display: inline-block; }
+.events-community__circle { position: absolute; width: 145%; max-width: none; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-12.72deg); }
+.events-community__underline { position: absolute; left: 0; bottom: -0.45vw; width: 14.77vw; height: auto; }
+.events-community__description { margin-top: 6.4vw; max-width: 31rem; width: 25.84vw; color: #004c40; }
+.events-community h3 { font: 400 clamp(1.125rem, 1.563vw, 1.875rem)/1.35 'Vollkorn', Georgia, serif; margin-bottom: 0.55rem; }
+.events-community__description p { font-size: clamp(0.875rem, 0.834vw, 1rem); font-weight: 300; line-height: 1.32; letter-spacing: -0.02em; }
+.events-community__description p + p { margin-top: 1.1rem; }
+.events-community__signup { display: flex; gap: 1.7vw; align-items: end; margin-top: 1.4vw; }
+.events-community__field { width: 26.14vw; flex-shrink: 0; }
+.events-community__line { position: relative; width: 100%; }
+.events-community__line > .events-scribble { width: 100%; height: auto; transform: rotate(-0.5deg); }
+.events-community__dot { position: absolute; right: 0; bottom: 0; width: 0.58vw; height: auto; }
+.events-button { flex-shrink: 0; min-width: max(9.25rem, 13.75vw); min-height: max(2.75rem, 2.917vw); margin: 0; padding: 0.8rem 1.5rem; font-size: clamp(0.75rem, 0.834vw, 1rem); white-space: nowrap; }
+.events-calendar { position: relative; width: 22.08vw; margin-top: 2.95vw; color: #c3080e; }
+.events-calendar__top { padding: 0.65vw; border: 1px solid #043c08; background: #c3080e; color: #fbd1d1; text-align: center; font-size: 1.667vw; font-weight: 700; }
+.events-calendar__sheet { display: flex; flex-direction: column; justify-content: space-between; min-height: 21.25vw; margin-top: 1.15vw; padding: 0 1.04vw 3.5vw; background: #fbd1d1; }
+.events-calendar__number { font-size: 5vw; font-weight: 700; letter-spacing: -0.02em; }
+.events-calendar__sheet p { font: 400 1.406vw/1.15 'Teva', sans-serif; letter-spacing: -0.02em; }
+.events-calendar__circle { position: absolute; width: 170%; height: auto; max-width: none; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(12.2deg); }
+.events-coming { position: relative; padding: 9.95vw 16.3vw 10vw; background: #043c08; color: var(--paper); }
+.events-coming__curve { position: absolute; bottom: calc(100% - 1px); left: 0; width: 100%; height: auto; }
+.events-coming__card { position: relative; display: grid; place-items: center; aspect-ratio: 1294 / 933; }
+.events-coming__crop { position: absolute; inset: 0; overflow: hidden; }
+.events-coming__photo { position: absolute; width: 216.01%; height: 202.36%; max-width: none; left: -47.55%; top: -102.37%; }
+.events-coming__copy { position: relative; text-align: center; }
+.events-coming h2 { font-size: 5vw; line-height: 1.3; letter-spacing: -0.02em; }
+.events-coming__copy p { width: 21.2vw; margin: 0 auto 2.86vw; font: 400 1.406vw/1.1 'Teva', sans-serif; letter-spacing: -0.02em; }
+.events-coming__left { position: absolute; top: 4vw; left: 8vw; width: 16.8vw; height: auto; }
+.events-coming__bottom { position: absolute; bottom: 1.5vw; left: 56.5vw; width: 22.9vw; height: auto; }
+.events-coming__dot { position: absolute; top: 2.2vw; left: 74vw; width: 0.58vw; height: auto; }
+.events-scribble { pointer-events: none; animation: scribble-shape-cycle 960ms steps(1, end) var(--scribble-frame-delay, 0ms) infinite; }
+.events-community__circle, .events-coming__bottom { --scribble-frame-delay: -180ms; }
+.events-calendar__circle, .events-community__underline { --scribble-frame-delay: -540ms; }
+.events-shell .services-closing { background: url('../assets/media/events/cream-glow.svg') -95vw -25vw / 198vw auto no-repeat, var(--paper); }
+.events-shell .services-contact { padding-top: 13.18vw; padding-bottom: 8.8vw; }
+.events-shell .services-contact__image { aspect-ratio: 1618 / 553; object-fit: cover; }
+
+.events-community__field label { display: block; margin-bottom: 0.35rem; font-size: 0.875rem; }
+.events-community__field input { display: block; width: 100%; min-height: 2.75rem; padding: 0.5rem 0.25rem; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; font-size: 1rem; }
+.events-community__field input::placeholder { color: #004c40; opacity: 0.65; }
+.events-community__field input:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.events-community__field input:user-invalid { outline: 2px solid var(--brand-red); outline-offset: 3px; }
+.events-community__note, .events-community__status { max-width: 31rem; font-size: 0.875rem; line-height: 1.45; }
+.events-shell .events-community__note { margin-top: 1rem; }
+.events-shell .events-community__status { margin-top: 0.5rem; }
+.events-community__status:empty { display: none; }
+.events-community__signup button { font-family: inherit; cursor: pointer; }
+
+/* Brevo’s spam trap must remain empty and outside the visible form layout. */
+.events-community__honeypot { display: none; }

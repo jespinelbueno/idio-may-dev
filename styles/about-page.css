@@ -42,6 +42,17 @@
   z-index: -1;
   inset: 0;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
+}
+.about-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/media/about/olive-texture.svg") repeat;
+  background-size: calc(1917 * var(--u)) calc(1189.9 * var(--u));
+  filter: grayscale(1) brightness(1.8);
+  opacity: 0.28;
 }
 .about-background__glow { position: absolute; }
 .about-background__glow img { width: 100%; height: 100%; max-width: none; }
@@ -65,20 +76,6 @@
   width: calc(4097.98 * var(--u));
   height: calc(2986.57 * var(--u));
   transform: translate(-50%, -50%) rotate(-156.06deg);
-}
-
-/* Reuse the exported Figma grain as a neutral surface texture. */
-.about-narrative::after {
-  content: "";
-  position: absolute;
-  z-index: 8;
-  inset: 0;
-  pointer-events: none;
-  background: url("../assets/media/about/olive-texture.svg") repeat;
-  background-size: calc(1917 * var(--u)) calc(1189.9 * var(--u));
-  filter: grayscale(1) brightness(1.8);
-  mix-blend-mode: multiply;
-  opacity: 0.28;
 }
 
 .about-hero { position: relative; height: calc(1183 * var(--u)); color: var(--paper); }
@@ -145,7 +142,30 @@
 .about-photo--studio { left: calc(93 * var(--u)); top: calc(128 * var(--u)); width: calc(1047 * var(--u)); height: calc(891 * var(--u)); overflow: hidden; }
 .about-photo--studio img { position: absolute; width: 125.99%; height: 100%; left: -2.94%; top: 0.02%; max-width: none; object-fit: fill; }
 
-.about-next { position: relative; height: calc(1189.902 * var(--u)); background: var(--about-olive); }
+.about-next {
+  --about-curve-height: calc(74 * var(--u));
+  position: relative;
+  isolation: isolate;
+  height: calc(1189.902 * var(--u));
+}
+.about-next::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: calc(-1 * var(--about-curve-height));
+  width: 100%;
+  height: calc(100% + var(--about-curve-height));
+  background: var(--about-olive) url("../assets/media/about/olive-texture.svg") center / 100% 100% no-repeat;
+  -webkit-mask-image: url("../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height));
+  mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height));
+  -webkit-mask-position: top left, bottom left;
+  mask-position: top left, bottom left;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
 .about-next__thread { position: absolute; z-index: 3; left: calc(309.24 * var(--u)); top: calc(-292.02 * var(--u)); width: calc(1574.37 * var(--u)); height: calc(742.544 * var(--u)); pointer-events: none; }
 .about-photo--snapshot { left: calc(813.3735 * var(--u)); top: calc(1387.6135 * var(--u)); width: calc(453 * var(--u)); height: calc(686 * var(--u)); transform: rotate(-6.86deg); overflow: hidden; }
 .about-photo--candid { left: calc(1179.259 * var(--u)); top: calc(1094.503 * var(--u)); width: calc(558.78 * var(--u)); height: calc(838.068 * var(--u)); transform: rotate(0.31deg); }
@@ -169,7 +189,6 @@
 .about-collage { position: absolute; inset: 0; z-index: 2; }
 .about-photo--snapshot img { position: absolute; height: 99.09%; width: 100.05%; left: -0.05%; top: 0.91%; object-fit: fill; }
 .about-collage__scribble { position: absolute; left: calc(691.43 * var(--u)); top: calc(1897.56 * var(--u)); width: calc(184.73 * var(--u)); height: calc(217.94 * var(--u)); pointer-events: none; }
-.about-next__curve { position: absolute; top: calc(-74 * var(--u)); width: 100%; height: calc(74 * var(--u)); }
 .about-next__scribble { position: absolute; pointer-events: none; }
 .about-next__scribble--left { left: calc(-35.45 * var(--u)); top: calc(360.44 * var(--u)); width: calc(256.41 * var(--u)); height: calc(174.06 * var(--u)); }
 .about-next__scribble--bottom { left: calc(1007.65 * var(--u)); top: calc(981.5 * var(--u)); width: calc(53.03 * var(--u)); height: calc(167.7 * var(--u)); transform: rotate(39.95deg); }

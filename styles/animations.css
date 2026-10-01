@@ -47,6 +47,39 @@
   }
 }
 
+.about-page :is(
+  .about-hero__underline,
+  .about-story__circle,
+  .about-story__thread,
+  .about-collage__scribble,
+  .about-next__thread,
+  .about-next__scribble
+) {
+  animation: scribble-shape-cycle 960ms steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
+}
+
+.about-story__circle,
+.about-next__scribble--bottom { --scribble-frame-delay: -420ms; }
+
+.about-collage__scribble { --scribble-frame-delay: -180ms; }
+.about-next__scribble--left { --scribble-frame-delay: -650ms; }
+.about-story__thread,
+.about-next__thread { --scribble-frame-delay: -320ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page :is(
+    .about-hero__underline,
+    .about-story__circle,
+    .about-story__thread,
+    .about-collage__scribble,
+    .about-next__thread,
+    .about-next__scribble
+  ) {
+    animation: none;
+    filter: none;
+  }
+}
+
 /* Draw from the tail, finish the head, hold, then restart like a pen sketch. */
 .arrow-draw__stroke {
   stroke-dasharray: 1;

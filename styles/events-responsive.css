@@ -1,0 +1,40 @@
+@media (max-width: 1100px) {
+  .events-community { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 4rem; padding: 6rem var(--page-gutter) 7rem; }
+  .events-community h2 { font-size: clamp(2rem, 4.7vw, 3.3rem); }
+  .events-community__description { width: 100%; margin-top: 3rem; }
+  .events-community__signup { align-items: start; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .events-community__field { width: 100%; max-width: 26rem; }
+  .events-community__signup .events-button { margin-top: 0; }
+  .events-calendar { width: 100%; margin-top: 2rem; }
+  .events-calendar__top { font-size: 1.25rem; padding: 0.6rem; }
+  .events-calendar__sheet { min-height: 17rem; padding: 0.5rem 1rem 2rem; }
+  .events-calendar__number { font-size: 3.5rem; }
+  .events-calendar__sheet p { font-size: 1.2rem; }
+  .events-calendar__circle { width: 145%; }
+  .events-coming__copy p { width: 70%; font-size: 1.05rem; margin-bottom: 1.25rem; }
+  .events-coming .events-button { margin-top: 0; }
+}
+@media (max-width: 640px) {
+  .events-hero { height: 80svh; min-height: 28rem; }
+  .events-hero h1 { font-size: clamp(3rem, 12vw, 4.5rem); }
+  .events-hero__underline { width: 65vw; }
+  .events-community { grid-template-columns: 1fr; gap: 4rem; padding-top: 4rem; padding-bottom: 6rem; }
+  .events-community h2 { font-size: clamp(1.9rem, 7.8vw, 3rem); }
+  .events-community__circle { width: 120%; }
+  .events-community__underline { width: 24vw; bottom: -1vw; }
+  .events-community__description { margin-top: 2.5rem; }
+  .events-calendar { width: min(16rem, 65%); margin: 1rem auto; }
+  .events-calendar__circle { width: 135%; }
+  .events-calendar__sheet { margin-top: 0.8rem; }
+  .events-coming { padding: 4rem var(--page-gutter) 5rem; }
+  .events-coming__card { min-height: 25rem; aspect-ratio: auto; }
+  .events-coming__photo { object-fit: cover; }
+  .events-coming h2 { font-size: clamp(2rem, 9vw, 3rem); }
+  .events-coming__copy p { width: min(15rem, 90%); }
+  .events-coming__left { width: 27%; left: -2%; top: 1rem; }
+  .events-coming__bottom { width: 40%; left: 54%; bottom: 1.5rem; }
+  .events-shell .services-contact { padding: 4rem 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .events-scribble { animation: none; filter: none; }
+}

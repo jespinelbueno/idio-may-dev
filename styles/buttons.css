@@ -1,4 +1,4 @@
-:is(.offer__button, .services-process__cta, .services-contact__button) {
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button) {
   --cta-fill: var(--brand-green);
 
   position: relative;
@@ -23,7 +23,7 @@
     transform 260ms ease;
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button)::before,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button)::before,
 .case-study__button::before {
   content: none;
 }
@@ -92,37 +92,37 @@
   transition-delay: 240ms;
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button):hover,
-:is(.offer__button, .services-process__cta, .services-contact__button):focus-visible,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):hover,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible,
 .case-study__button:hover,
 .case-study__button:focus-visible {
   color: var(--paper);
   transform: translateY(-0.08rem);
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button):hover .button-fill__blob,
-:is(.offer__button, .services-process__cta, .services-contact__button):focus-visible .button-fill__blob,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):hover .button-fill__blob,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible .button-fill__blob,
 .case-study__button:hover .button-fill__blob,
 .case-study__button:focus-visible .button-fill__blob {
   transform: translateZ(0) scale(1.55);
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button):hover .button-fill__inner::before,
-:is(.offer__button, .services-process__cta, .services-contact__button):focus-visible .button-fill__inner::before,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):hover .button-fill__inner::before,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible .button-fill__inner::before,
 .case-study__button:hover .button-fill__inner::before,
 .case-study__button:focus-visible .button-fill__inner::before {
   clip-path: circle(160% at 50% 110%);
   transition-delay: 340ms;
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button):focus-visible,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible,
 .case-study__button:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 0.18rem;
 }
 
 @media (max-width: 1100px) {
-  :is(.page-home .offer__button, .services-process__cta, .services-contact__button) {
+  :is(.page-home .offer__button, .services-process__cta, .services-contact__button, .events-button) {
     min-height: var(--tap-size, 2.75rem);
     min-width: min(11rem, 100%);
     max-width: 100%;

@@ -2,16 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://21c6bf62.sibforms.com; form-action https://21c6bf62.sibforms.com; base-uri 'none'; object-src 'none'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Get to know Idio Creative and the people behind the ideas.">
-    <title>About Us | Idio</title>
+    <meta name="description" content="Join the Idio community for creative events, good company, and emails worth opening.">
+    <title>Idio Events | Idio</title>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/media/about/team-field.png" as="image">
-    <link rel="stylesheet" href="styles/about.css">
+    <link rel="preload" href="assets/media/events/hero.png" as="image">
+    <link rel="stylesheet" href="styles/events.css">
   </head>
-  <body class="about-page">
-    <a class="about-skip-link" href="#about-story">Skip to our story</a>
+  <body class="events-page">
+    <a class="events-skip-link" href="#events-community">Skip to the community</a>
     <svg class="scribble-frame-filters" aria-hidden="true">
       <defs>
         <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
@@ -47,83 +49,63 @@
         <span class="services-nav__brand-mark" aria-hidden="true"></span>
       </a>
 
-      <button class="services-nav__toggle" type="button" aria-expanded="false" aria-controls="about-menu">Menu</button>
-      <nav class="services-nav__links" id="about-menu" aria-label="Main">
+      <button class="services-nav__toggle" type="button" aria-expanded="false" aria-controls="events-menu">Menu</button>
+      <nav class="services-nav__links" id="events-menu" aria-label="Main">
         <a href="services.html">Services</a>
         <a href="index.html#case-study-title">Projects</a>
-        <a class="is-active" href="about.html" aria-current="page">About Us</a>
-        <a href="events.html">Events</a>
+        <a href="about.html">About Us</a>
+        <a href="events.html" class="is-active" aria-current="page">Events</a>
         <a href="#site-footer">Contact</a>
       </nav>
     </header>
 
-    <!-- Figma: SxbrTN0u4TjdTXbc94pYyK / 1713:280. Desktop reference width: 1920. -->
-    <main class="about-shell">
-      <div class="about-narrative">
-      <div class="about-background" aria-hidden="true">
-        <div class="about-background__glow about-background__glow--story"><img src="assets/media/about/story-yellow-glow.svg" alt=""></div>
-        <div class="about-background__glow about-background__glow--cream"><img src="assets/media/about/lower-cream-glow.svg" alt=""></div>
-        <div class="about-background__glow about-background__glow--yellow"><img src="assets/media/about/lower-yellow-glow.svg" alt=""></div>
-      </div>
-      <section class="about-hero" aria-labelledby="about-title">
-        <div class="about-hero__crop"><img class="about-hero__image" src="assets/media/about/team-field.png" width="4096" height="2731" alt="The Idio team gathered together in a sunlit field." fetchpriority="high"></div>
-        <h1 class="about-hero__title" id="about-title">about us</h1>
-        <img class="about-hero__underline" src="assets/media/about/hero-underline.svg" alt="" aria-hidden="true">
-        <img class="about-hero__curve" src="assets/media/about/hero-curve.svg" width="1920" height="74" alt="" aria-hidden="true">
+    <!-- Figma: SxbrTN0u4TjdTXbc94pYyK / 1759:111. -->
+    <main class="events-shell">
+      <section class="events-hero" aria-labelledby="events-title">
+        <img class="events-hero__photo" src="assets/media/events/hero.png" alt="Friends making art and music together around a table." fetchpriority="high">
+        <div class="events-hero__heading"><h1 id="events-title">idio events</h1><img class="events-hero__underline events-scribble" src="assets/media/events/hero-underline.svg" alt="" aria-hidden="true"></div>
       </section>
-      <section class="about-story" id="about-story" aria-labelledby="about-story-title">
-        <figure class="about-photo about-photo--founder"><img src="assets/media/about/anna-founder.png" width="2731" height="4096" alt="Anna, Idio’s founder, wearing a red sweater in a field." loading="lazy"></figure>
-        <h2 id="about-story-title">so what the<br>heck is idio???</h2>
-        <img class="about-story__circle" src="assets/media/about/title-circle.svg" alt="" aria-hidden="true">
-        <article class="about-chapter about-chapter--start" aria-labelledby="about-start-title">
-          <img class="about-chapter__dot" src="assets/media/about/blue-dot.svg" width="126" height="126" alt="" aria-hidden="true">
-          <h3 id="about-start-title">Starting out</h3>
-          <p>Idio Creative was founded by Anna Moore while pursuing her master’s degree at university. Anna faced the pressure of juggling business operations while still having time and energy to create. She realized, without the time to be creative, her business was losing its appeal—the uniqueness that made it desirable in the first place.</p>
-        </article>
-        <img class="about-story__thread" src="assets/media/about/story-thread.svg" alt="" aria-hidden="true">
-        <article class="about-chapter about-chapter--journey" aria-labelledby="about-journey-title">
-          <img class="about-chapter__dot" src="assets/media/about/yellow-dot.svg" width="126" height="126" alt="" aria-hidden="true">
-          <h3 id="about-journey-title">how did we get here?</h3>
-          <p>What began as a personal passion helping local businesses with marketing, photography and related creative services, ended as a full-service creative agency, with a tight-knit and diversely talented team of experienced artists.</p>
-        </article>
-        <div class="about-collage">
-          <figure class="about-photo about-photo--snapshot"><img src="assets/media/about/early-days.png" width="2732" height="4096" alt="A candid photo from Idio’s early days." loading="lazy"></figure>
-          <figure class="about-photo about-photo--candid"><img src="assets/media/about/friends.png" width="2731" height="4096" alt="Two friends smiling together outside." loading="lazy"></figure>
-          <img class="about-collage__scribble" src="assets/media/about/collage-scribble.svg" alt="" aria-hidden="true">
+      <section class="events-community" id="events-community" aria-labelledby="events-community-title">
+        <div class="events-community__copy">
+          <h2 id="events-community-title"><span class="events-community__circled">emails<img class="events-community__circle events-scribble" src="assets/media/events/email-circle.svg" alt="" aria-hidden="true"></span> are boring.<br>but we <span class="events-community__underlined">aren’t!<img class="events-community__underline events-scribble" src="assets/media/events/email-underline.svg" alt="" aria-hidden="true"></span></h2>
+          <div class="events-community__description"><h3>so wanna join our email list?</h3>
+          <p>hello creative entrepreneurs! we promise that our emails will always be cool and fun and happy and that you’ll be grateful that you joined and you’ll never ever be annoyed by how many you receive because we won’t even send that many and we promise that when we do send them they will always be coooool.</p>
+          <p>how can you say no to that???</p></div>
+          <form class="events-community__signup" id="community-signup" method="post" action="https://21c6bf62.sibforms.com/serve/MUIFAFF4JjBjXfyEU5JyC2DzCP5Bv5QHJ9DLnZckuLcnrtsktw58e6bCDKEYAV7Om3TgRcMcrBkGVrzh2RFIHm1JqZEmxPMoZBZhIBZzfQb2BD-P3hCidqGeqD_W7oQuO3vYfEO_40fD5ewGex7ckpJGms2C6_SxYJHVr3CQNEjAbU62KBedoVnYOdJpsxi2vNS0MgeoX8IoX7aV2g==" aria-label="Join the Idio email list" aria-describedby="community-signup-note">
+            <div class="events-community__field">
+              <label for="community-email">your email</label>
+              <div class="events-community__line">
+                <input id="community-email" name="EMAIL" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" spellcheck="false" autocapitalize="none" required maxlength="254" aria-describedby="community-signup-note community-signup-status">
+                <img class="events-scribble" src="assets/media/events/signup-line.svg" alt="" aria-hidden="true">
+                <img class="events-community__dot" src="assets/media/events/signup-dot.svg" alt="" aria-hidden="true">
+              </div>
+            </div>
+            <input class="events-community__honeypot" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="locale" value="en">
+            <button class="events-button" type="submit"><span class="button-fill__label">join the community →</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></button>
+          </form>
+          <p class="events-community__note" id="community-signup-note">Join for Idio news and events. Unsubscribe anytime.</p>
+          <p class="events-community__status" id="community-signup-status" role="status" aria-live="polite"></p>
         </div>
+        <aside class="events-calendar" aria-label="Today: join the community">
+          <div class="events-calendar__top">today</div><div class="events-calendar__sheet"><span class="events-calendar__number">01.</span><p>cool events are happening right now and you’re missing them so sign up asap!!!</p></div>
+          <img class="events-calendar__circle events-scribble" src="assets/media/events/calendar-circle.svg" alt="" aria-hidden="true">
+        </aside>
       </section>
-      <section class="about-next" aria-labelledby="about-next-title">
-        <figure class="about-photo about-photo--studio"><img src="assets/media/about/studio-group.png" alt="Four Idio teammates gathered in the studio with their creative supplies." loading="lazy"></figure>
-        <img class="about-next__scribble about-next__scribble--left" src="assets/media/about/studio-left-scribble.svg" alt="" aria-hidden="true">
-        <img class="about-next__scribble about-next__scribble--bottom" src="assets/media/about/studio-bottom-scribble.svg" alt="" aria-hidden="true">
-        <img class="about-next__thread" src="assets/media/about/next-thread.svg" alt="" aria-hidden="true">
-
-        <article class="about-chapter about-chapter--next" aria-labelledby="about-next-title">
-          <img class="about-chapter__dot" src="assets/media/about/green-dot.svg" width="126" height="126" alt="" aria-hidden="true">
-          <h2 id="about-next-title">keep it Going</h2>
-          <p>At Idio, we believe in bringing back the beauty of human-made artistry to the creative industries. We exist for the dreamers-turned-business owners.</p>
-        </article>
+      <section class="events-coming" aria-labelledby="events-coming-title">
+        <img class="events-coming__curve" src="assets/media/events/green-curve.svg" alt="" aria-hidden="true"><img class="events-coming__dot" src="assets/media/events/coming-dot.svg" alt="" aria-hidden="true">
+        <div class="events-coming__card"><div class="events-coming__crop"><img class="events-coming__photo" src="assets/media/events/community.png" alt="Friends sharing drinks and conversation at a creative gathering."></div>
+          <div class="events-coming__copy"><h2 id="events-coming-title">coming soon</h2><p>(some really cool community that you won’t want to miss)</p><a class="events-button" href="#community-signup" data-community-signup-link><span class="button-fill__label">ahem, give up that email</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></a></div>
+        </div>
+        <img class="events-coming__left events-scribble" src="assets/media/events/coming-left.svg" alt="" aria-hidden="true"><img class="events-coming__bottom events-scribble" src="assets/media/events/coming-bottom.svg" alt="" aria-hidden="true">
       </section>
-      <section class="about-team" aria-labelledby="about-team-title">
-        <h2 id="about-team-title">lets meet<br>the team</h2>
-        <p class="about-team__intro">We’re excited to hear your story. But just so you’re not spilling your heart to a bunch of strangers… Why don’t you meet the team?<br><br>this is the idio team formed by almost accident just because they were all friends and loved working together and a couple more cool things yay yay yay!!</p>
-        <dl class="about-team__members">
-          <div><dt>jaden anderson</dt><dd>graphic designer | creative | friend</dd></div>
-          <div class="is-featured"><dt>raquel bowles</dt><dd>graphic designer | creative | friend</dd></div>
-          <div><dt>naomi moore</dt><dd>graphic designer | creative | friend</dd></div>
-          <div><dt>gretel lam</dt><dd>graphic designer | creative | friend</dd></div>
-        </dl>
-        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.png" width="4096" height="2731" alt="" loading="lazy"></div></figure>
-        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.png" width="4096" height="2731" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy"></div></figure>
-      </section>
-      </div>
       <div class="services-closing">
         <section class="services-contact" aria-labelledby="services-contact-title">
           <div class="services-contact__inner">
             <div class="services-contact__visual">
-              <img class="services-contact__image" src="assets/media/services/work-with-us.jpg" width="1618" height="553" alt="Friends relaxing together with a guitar." loading="lazy" decoding="async">
-              <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/decorations/scribbles/services/work-with-us-green.svg" alt="" aria-hidden="true">
-              <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/decorations/scribbles/services/work-with-us-raspberry.svg" alt="" aria-hidden="true">
+              <img class="services-contact__image" src="assets/media/events/contact.png" width="1618" height="553" alt="Friends running through a sunlit field." loading="lazy" decoding="async">
+              <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/events/contact-yellow.svg" alt="" aria-hidden="true">
+              <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/events/contact-red.svg" alt="" aria-hidden="true">
             </div>
             <h2 id="services-contact-title">so, wanna work with us?</h2>
             <div class="services-contact__actions">
@@ -212,6 +194,16 @@
       </div>
     </footer>
 
-    <script type="module" src="scripts/about.js"></script>
+    <dialog class="signup-confirmation" id="signup-confirmation" aria-labelledby="signup-confirmation-title" aria-describedby="signup-confirmation-description">
+      <form method="dialog">
+        <button class="signup-confirmation__close" type="submit" aria-label="Close confirmation">×</button>
+        <p class="signup-confirmation__eyebrow">idio community</p>
+        <h2 id="signup-confirmation-title">thanks for joining us!</h2>
+        <p id="signup-confirmation-description">Your signup request has been received. If you receive a confirmation email, click its link to finish joining the list.</p>
+        <button class="events-button" type="submit" autofocus><span class="button-fill__label">got it!</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></button>
+      </form>
+    </dialog>
+
+    <script type="module" src="scripts/events.js"></script>
   </body>
 </html>
