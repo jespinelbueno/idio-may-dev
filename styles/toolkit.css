@@ -293,21 +293,84 @@
     display: none;
   }
 }
+/* The phone layout follows the winding thread in the wireframe. */
+.what-offer__mobile-prefix, .what-offer__mobile-background { display: none; }
+.what-offer__desktop-prefix { font: inherit; }
 @media (max-width: 640px) {
-  .what-offer__items {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.5rem;
+  .what-offer { padding: 0; container-type: inline-size; }
+  .what-offer__bg, .what-offer__desktop-prefix { display: none; }
+  .what-offer__mobile-prefix { display: inline; font: inherit; }
+  .what-offer__mobile-background {
+    display: block;
+    position: absolute;
+    width: 310.45cqw;
+    height: 149.5cqw;
+    left: 50%;
+    top: 50%;
+    overflow: hidden;
+    transform: translate(-50%, -50%) rotate(90deg);
+    z-index: -3;
   }
-  .what-offer__item {
-    width: min(100%, 24rem);
-    justify-self: center;
+  .what-offer__mobile-background img {
+    position: absolute;
+    width: 116.36%;
+    height: 362.8%;
+    max-width: none;
+    left: -5.74%;
+    top: -207.61%;
   }
-  .what-offer__circle {
-    width: min(70vw, 15rem);
+  .what-offer__inner { width: 100%; height: 310.45cqw; }
+  .what-offer__header { position: absolute; top: 22.4cqw; left: 0; width: 100%; }
+  .what-offer__header h2 { font-size: 7.96cqw; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; }
+  .what-offer__header h2 img { visibility: hidden; }
+  .what-offer__header h2 span::after {
+    content: "";
+    position: absolute;
+    inset: -1cqw -2cqw;
+    background: url("../assets/media/home/mobile/toolkit-title.svg") center / contain no-repeat;
   }
-  .what-offer__copy h3 {
-    font-size: 1.75rem;
+  .what-offer__items { position: absolute; inset: 0; display: block; margin: 0; }
+  .what-offer__items::before {
+    content: "";
+    position: absolute;
+    left: 31.84cqw;
+    top: 72.14cqw;
+    width: 89.2cqw;
+    height: 202.75cqw;
+    background: url("../assets/media/home/mobile/toolkit-thread.svg") center / contain no-repeat;
+    pointer-events: none;
   }
+  .what-offer__item { position: absolute; display: block; width: 100%; height: 50cqw; inset: auto; }
+  .what-offer__item--one { top: 57.96cqw; }
+  .what-offer__item--two { top: 97.26cqw; }
+  .what-offer__item--three { top: 154.73cqw; }
+  .what-offer__item--four { top: 224.88cqw; }
+  .what-offer__circle { position: absolute; width: 28.19cqw; left: 23.63cqw; top: 0; }
+  .what-offer__circle-shape {
+    overflow: visible;
+    background: none;
+    filter: none;
+  }
+  .what-offer__circle-shape::before {
+    width: 432.52%;
+    height: 432.52%;
+    left: -164.51%;
+    top: -161.15%;
+    background: url("../assets/media/home/mobile/toolkit-circle.svg") center / contain no-repeat;
+  }
+  .what-offer__item--one .what-offer__circle-shape::before { background-image: url("../assets/media/home/mobile/toolkit-circle-branding.svg"); }
+  .what-offer__circle-shape::after, .what-offer__circle::after { display: none; }
+  .what-offer__item:has(.what-offer__circle:hover) .what-offer__circle-shape::before { opacity: 1; }
+  .what-offer__copy { position: absolute; width: 43.28cqw; max-width: none; top: 2.99cqw; left: 50.7cqw; text-shadow: none; }
+  .what-offer__copy h3 { font-size: 5.97cqw; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; }
+  .what-offer__copy p { margin: 1.2cqw 0 0; font-size: 3.98cqw; color: rgb(247 242 233 / 0.7); letter-spacing: -0.02em; line-height: 1.15; }
+  .what-offer__item--two .what-offer__circle { left: 57.46cqw; }
+  .what-offer__item--two .what-offer__copy { left: 14.18cqw; top: 8.71cqw; }
+  .what-offer__item--three .what-offer__circle { left: 16.67cqw; top: 18.9cqw; }
+  .what-offer__item--three .what-offer__copy { left: 6.96cqw; top: 0; width: 47.76cqw; }
+  .what-offer__item--four .what-offer__circle { left: 46.52cqw; }
+  .what-offer__item--four .what-offer__copy { left: 13.06cqw; top: 29.35cqw; width: 53.98cqw; }
+  .what-offer__item--four .what-offer__copy p { width: 43.28cqw; margin-inline: auto; }
 }
 @media (hover: none) {
   .what-offer__item:has(.what-offer__circle:hover) .what-offer__circle,
