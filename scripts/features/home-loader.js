@@ -15,6 +15,7 @@ const LOADER_SWAP_MS = 120;
 const LOADER_FINAL_HOLD_MS = 950;
 
 export const initHomeLoader = () => {
+  const recentVisit = document.documentElement.classList.contains("home-loader-recent");
   const loader = document.querySelector(".loader");
   const loaderWord = document.querySelector("[data-loader-word]");
   const loaderLogo = document.querySelector("[data-loader-logo]");
@@ -32,6 +33,14 @@ export const initHomeLoader = () => {
   const revealHomePage = () => {
     document.body.classList.remove("is-loading");
     document.body.classList.add("is-ready");
+
+    if (!recentVisit) {
+      try {
+        localStorage.setItem(document.documentElement.dataset.homeLoaderKey, String(Date.now()));
+      } catch {
+        // The page can still reveal when storage is unavailable.
+      }
+    }
   };
 
   const maybeRevealHomePage = () => {
@@ -43,6 +52,19 @@ export const initHomeLoader = () => {
   if (!loader || !loaderWord) {
     loaderSequenceComplete = true;
     maybeRevealHomePage();
+    return;
+  }
+
+  if (recentVisit) {
+    const heroImage = document.querySelector(".hero__image");
+
+    if (!heroImage || heroImage.complete) {
+      revealHomePage();
+    } else {
+      heroImage.addEventListener("load", revealHomePage, { once: true });
+      heroImage.addEventListener("error", revealHomePage, { once: true });
+    }
+
     return;
   }
 

@@ -1,10 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-home-loader-key="idio-home-loader-v1">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="EMESTUDIOS SS25 Collection Factory landing page.">
     <title>Idio</title>
+    <script>
+      try {
+        const key = document.documentElement.dataset.homeLoaderKey;
+        const lastShown = Number(localStorage.getItem(key));
+        const age = Date.now() - lastShown;
+
+        if (lastShown > 0 && age >= 0 && age < 7 * 24 * 60 * 60 * 1000) {
+          document.documentElement.classList.add("home-loader-recent");
+        }
+      } catch {
+        // Private browsing or disabled storage still gets the normal loader.
+      }
+    </script>
+    <script defer src="scripts/register-cache.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/media/home/hero.jpg" as="image">
     <link rel="preload" href="assets/media/brand/idio-wordmark.svg" as="image">
@@ -118,12 +132,30 @@
         </header>
 
         <div class="offer__copy">
-          <h3 id="offer-about-title">but enough<br> about us. this is<br> about you.</h3>
+          <h3 id="offer-about-title"><span class="offer__desktop-title">but enough<br> about us. this is<br> about you.</span><span class="offer__mobile-title">but enough about us. this is about you.</span></h3>
           <p>
             Are you a creative whose imagination is threatened by the
             technicalities of business? Idio is the agency made by creatives,
             for creatives. So we’re dying to know, what’s holding you back?
           </p>
+        </div>
+
+        <div class="offer__mobile-carousel" role="region" aria-label="Creative work carousel">
+          <div class="offer__mobile-track" tabindex="0" aria-label="Swipe to explore creative work">
+            <figure class="offer__mobile-slide">
+              <img src="assets/media/home/mobile/collage-left.png" alt="Creative editorial artwork" loading="lazy">
+            </figure>
+            <figure class="offer__mobile-slide offer__mobile-slide--portrait">
+              <img src="assets/media/home/mobile/collage-portrait.png" alt="Woman in a blue dress behind a floral event table" loading="lazy">
+              <img class="offer__mobile-logo" src="assets/media/home/mobile/collage-portrait-logo.png" alt="Leisure Events" loading="lazy">
+            </figure>
+            <figure class="offer__mobile-slide offer__mobile-slide--right">
+              <img src="assets/media/home/mobile/collage-right.png" alt="Leisure Events table setting" loading="lazy">
+              <img class="offer__mobile-logo" src="assets/media/home/mobile/collage-right-logo.png" alt="Leisure Events" loading="lazy">
+            </figure>
+          </div>
+          <button class="offer__mobile-prev" type="button" aria-label="Previous image">←</button>
+          <button class="offer__mobile-next" type="button" aria-label="Next image">→</button>
         </div>
 
         <div class="offer__collage" aria-label="Editorial image collage">
@@ -159,7 +191,7 @@
 
         <div class="what-offer__inner">
           <header class="what-offer__header">
-            <h2 id="what-offer-title">the <span>creative<img src="assets/media/decorations/scribbles/creative-toolkit-title.svg" alt="" aria-hidden="true"></span> toolkit</h2>
+            <h2 id="what-offer-title"><b class="what-offer__desktop-prefix">the </b><b class="what-offer__mobile-prefix">our </b><span>creative<img src="assets/media/decorations/scribbles/creative-toolkit-title.svg" alt="" aria-hidden="true"></span> toolkit</h2>
           </header>
 
           <div class="what-offer__items" aria-label="Our creative toolkit services">
@@ -379,6 +411,7 @@
           </div>
 
           <div class="values-wheel">
+            <div class="values-wheel-mobile" role="group" aria-label="Choose a value"></div>
             <svg
               class="values-wheel-graphic"
               viewBox="0 0 700 700"

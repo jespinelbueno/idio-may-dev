@@ -1,3 +1,4 @@
+import { initMobileLanding } from "./features/mobile-landing.js";
 import { initArrowDraw } from "./features/arrow-draw.js";
 import { initCaseStudyStack } from "./features/case-study-stack.js";
 import { initCaseTeamTransition } from "./features/case-team-transition.js";
@@ -20,4 +21,5 @@ initCaseTeamTransition();
 initCaseStudyStack();
 initTeamCarousel();
 initValuesWheel();
+initMobileLanding();
 initArrowDraw();

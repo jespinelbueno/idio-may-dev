@@ -774,11 +774,7 @@
 /* Keep section spacing while sharing the homepage button component. */
 .services-process__cta {
   display: flex;
-  width: fit-content;
-  min-width: 12.0625rem;
-  min-height: 3.5rem;
   margin: clamp(3rem, 6.5vw, 6.5rem) auto 0;
-  font-size: 1rem;
 }
 
 @media (min-width: 901px) {

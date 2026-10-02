@@ -288,8 +288,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 9.25rem;
+  height: 2.7rem;
   min-width: 9.25rem;
   min-height: 2.7rem;
+  padding: 0 0.5rem;
   margin-top: clamp(1.8rem, 2.25vw, 2.5rem);
   overflow: hidden;
   border-radius: 999rem;
@@ -411,8 +414,6 @@
 }
 
 .case-study__button {
-  min-width: 9.25rem;
-  min-height: 2.7rem;
   border: 0;
   border-radius: 999rem;
   background: var(--brand-olive);
@@ -421,7 +422,7 @@
 
 .case-study__button:hover,
 .case-study__button:focus-visible {
-  color: var(--paper);
+  color: var(--brand-olive);
 }
 
 .case-study__button-arrow {
@@ -558,12 +559,9 @@ font-size: 10px;
     line-height: 1.5;
   }
   .case-study__button {
-    min-width: min(9.25rem, 100%);
-    max-width: 100%;
-    min-height: var(--tap-size);
-    padding: 0.75rem 1.5rem;
+    width: min(11rem, 100%);
+    height: var(--tap-size);
     margin-top: 1.5rem;
-    font-size: var(--small-size);
   }
 }
 

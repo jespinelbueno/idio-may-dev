@@ -132,7 +132,7 @@
 
 .team__carousel-button:not(:disabled):hover,
 .team__carousel-button:focus-visible {
-  color: var(--paper);
+  color: var(--brand-olive);
   transform: translateY(-0.08rem);
 }
 

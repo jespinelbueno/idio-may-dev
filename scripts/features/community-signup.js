@@ -13,7 +13,11 @@ export const initCommunitySignup = ({ sendSignup = sendCommunitySignup } = {}) =
   let retryAfter = 0;
 
   document.querySelectorAll('[data-community-signup-link]').forEach((link) => {
-    link.addEventListener('click', () => email.focus({ preventScroll: true }));
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.querySelector('#events-community')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      email.focus({ preventScroll: true });
+    });
   });
   email.addEventListener('input', () => {
     email.setCustomValidity('');

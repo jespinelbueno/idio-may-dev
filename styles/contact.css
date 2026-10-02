@@ -76,12 +76,16 @@
 
 .services-contact__button {
   margin: 0;
-  color: var(--paper);
+  color: var(--brand-green);
 }
 
 .services-contact__button--outline {
   border: 1px solid var(--brand-olive);
   background: transparent;
+  color: var(--brand-olive);
+}
+
+.services-contact__button:is(:hover, :focus-visible) {
   color: var(--brand-olive);
 }
 

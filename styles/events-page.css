@@ -10,7 +10,7 @@
 .events-hero__heading { position: relative; text-align: center; }
 .events-hero h1 { font-size: var(--landing-title-size); font-weight: 600; line-height: 1; letter-spacing: 0; white-space: nowrap; }
 .events-hero__underline { width: 85%; height: auto; margin: 0 auto; transform: scaleX(-1); }
-.events-community { position: relative; z-index: 1; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; gap: 13vw; padding: 10.94vw 15.36vw 12.45vw 8.02vw; }
+.events-community { position: relative; z-index: 1; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; align-content: center; gap: 13vw; min-height: 100vh; min-height: 100svh; box-sizing: border-box; padding: 10.94vw 15.36vw 12.45vw 8.02vw; }
 .events-community__background {
   --curve-height: var(--landing-curve-peek);
   position: absolute;
@@ -50,7 +50,7 @@
 .events-community__line { position: relative; width: 100%; }
 .events-community__line > .events-scribble { width: 100%; height: auto; transform: rotate(-0.5deg); }
 .events-community__dot { position: absolute; right: 0; bottom: 0; width: 0.58vw; height: auto; }
-.events-button { flex-shrink: 0; min-width: max(9.25rem, 13.75vw); min-height: max(2.75rem, 2.917vw); margin: 0; padding: 0.8rem 1.5rem; font-size: clamp(0.75rem, 0.834vw, 1rem); white-space: nowrap; }
+.events-button { margin: 0; white-space: nowrap; }
 .events-calendar { position: relative; width: 22.08vw; margin-top: 2.95vw; color: #c3080e; }
 .events-calendar__top { padding: 0.65vw; border: 1px solid #043c08; background: #c3080e; color: #fbd1d1; text-align: center; font-size: 1.667vw; font-weight: 700; }
 .events-calendar__sheet { display: flex; flex-direction: column; justify-content: space-between; min-height: 21.25vw; margin-top: 1.15vw; padding: 0 1.04vw 3.5vw; background: #fbd1d1; }
