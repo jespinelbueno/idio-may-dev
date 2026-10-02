@@ -41,9 +41,7 @@
   position: absolute;
   z-index: 1;
   inset: 0;
-  bottom: var(--page-takeover-lag, 0px);
   background: var(--paper);
-  transform: translate3d(0, var(--page-takeover-lag, 0px), 0);
   pointer-events: none;
   -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
   mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
@@ -87,7 +85,7 @@
   transform: translate(-50%, -50%) rotate(-156.06deg);
 }
 
-.about-hero-takeover { position: relative; padding-bottom: var(--page-takeover-lag-space, 0px); }
+.about-hero-takeover { position: relative; }
 .about-hero { position: sticky; top: 0; z-index: 0; height: var(--hero-vh); color: var(--paper); }
 .about-hero__crop {
   position: absolute;
@@ -126,7 +124,7 @@
   height: auto;
   transform: scaleX(-1);
 }
-.about-story { position: relative; z-index: 3; height: calc(2044 * var(--u)); transform: translate3d(0, var(--page-takeover-lag, 0px), 0); }
+.about-story { position: relative; z-index: 3; height: calc(2044 * var(--u)); }
 .about-photo { position: absolute; }
 .about-photo img { width: 100%; height: 100%; object-fit: cover; }
 .about-photo--founder { left: calc(218 * var(--u)); top: calc(202 * var(--u)); width: calc(678 * var(--u)); height: calc(963 * var(--u)); overflow: hidden; }

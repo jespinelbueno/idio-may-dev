@@ -1,7 +1,7 @@
 /* Figma 1759:111, composed as responsive sections at a 1920px reference width. */
 .events-page { color: #043c08; }
 .events-shell { overflow: clip; }
-.events-hero-takeover { position: relative; isolation: isolate; padding-bottom: var(--page-takeover-lag-space, 0px); }
+.events-hero-takeover { position: relative; isolation: isolate; }
 .events-shell :is(h1, h2, h3, p) { margin: 0; }
 .events-skip-link { position: fixed; z-index: 20; top: 1rem; left: 1rem; padding: 0.8rem 1rem; background: var(--paper); transform: translateY(-200%); }
 .events-skip-link:focus { transform: none; }
@@ -10,7 +10,7 @@
 .events-hero__heading { position: relative; text-align: center; }
 .events-hero h1 { font-size: var(--landing-title-size); font-weight: 600; line-height: 1; letter-spacing: 0; white-space: nowrap; }
 .events-hero__underline { width: 85%; height: auto; margin: 0 auto; transform: scaleX(-1); }
-.events-community { position: relative; z-index: 1; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; gap: 13vw; padding: 10.94vw 15.36vw 12.45vw 8.02vw; transform: translate3d(0, var(--page-takeover-lag, 0px), 0); }
+.events-community { position: relative; z-index: 1; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; gap: 13vw; padding: 10.94vw 15.36vw 12.45vw 8.02vw; }
 .events-community__background {
   --curve-height: var(--landing-curve-peek);
   position: absolute;
