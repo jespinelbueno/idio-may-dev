@@ -47,6 +47,21 @@
   }
 }
 
+.services-page :is(.services-hero__underline, .services-hero__reveal-underline) {
+  animation: scribble-shape-cycle 960ms steps(1, end) infinite;
+}
+
+.services-hero__reveal-underline {
+  animation-delay: -420ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-page :is(.services-hero__underline, .services-hero__reveal-underline) {
+    animation: none;
+    filter: none;
+  }
+}
+
 .about-page :is(
   .about-hero__underline,
   .about-story__circle,

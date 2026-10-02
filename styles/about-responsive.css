@@ -2,14 +2,9 @@
 @media (max-width: 900px) {
   .about-shell { --u: calc(100cqw / 1920); }
   .about-background__glow { display: none; }
-  .about-background { background: radial-gradient(ellipse at 100% 26%, #f5cf688c, transparent 28%), radial-gradient(ellipse at 80% 85%, #f5cf6880, transparent 23%); }
+  .about-background { background: radial-gradient(ellipse at 100% 26%, #f5cf688c, transparent 28%), radial-gradient(ellipse at 80% 85%, #f5cf6880, transparent 23%), var(--paper); }
   .about-background::before { background-size: 960px 596px; opacity: 0.18; }
-  .about-hero { height: 64vw; min-height: 24rem; }
-  .about-hero__crop { top: 0; height: 100%; }
-  .about-hero__image { width: 100%; height: 100%; left: 0; top: 0; object-fit: cover; object-position: 50% 50%; }
-  .about-hero__title { left: 15%; top: 40%; width: 70%; font-size: clamp(2.75rem, 7vw, 4rem); line-height: 1.2; }
-  .about-hero__underline { left: 32%; top: calc(40% + clamp(3.1rem, 8vw, 4.7rem)); width: 36%; height: 1.2rem; }
-  .about-hero__curve { height: 4vw; }
+  .about-hero__image { object-position: 50% 50%; }
 
   .about-story {
     display: grid;

@@ -37,6 +37,8 @@
   --brand-navy: #16233d;
   --brand-pink: #facbd0;
   --hero-vh: 100svh;
+  --landing-title-size: clamp(2rem, 4.8vw, 5.25rem);
+  --landing-curve-peek: clamp(2rem, 3.6vw, 3rem);
   --offer-stage-h: clamp(64rem, 78vw, 72rem);
   --offer-stage-w: min(79rem, calc(100vw - clamp(10rem, 18vw, 18rem)));
   --edge: clamp(1rem, 3vw, 3.2rem);
@@ -103,6 +105,9 @@ a {
   scroll-margin-top: calc(var(--nav-height) + 1rem);
 }
 @media (max-width: 1100px) {
+  :root {
+    --landing-title-size: min(clamp(1.7rem, 7.2vw, 3.2rem), 8.5vw);
+  }
   .page-home {
     --edge: var(--page-gutter);
   }

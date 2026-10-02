@@ -1,30 +1,42 @@
 /* Figma 1759:111, composed as responsive sections at a 1920px reference width. */
 .events-page { color: #043c08; }
 .events-shell { overflow: clip; }
+.events-hero-takeover { position: relative; isolation: isolate; padding-bottom: var(--page-takeover-lag-space, 0px); }
 .events-shell :is(h1, h2, h3, p) { margin: 0; }
 .events-skip-link { position: fixed; z-index: 20; top: 1rem; left: 1rem; padding: 0.8rem 1rem; background: var(--paper); transform: translateY(-200%); }
 .events-skip-link:focus { transform: none; }
-.events-hero { position: relative; display: grid; place-items: center; height: 61.615vw; color: var(--paper); }
-.events-hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.events-hero__heading { position: relative; margin-top: -6.5vw; text-align: center; }
-.events-hero h1 { font-size: 5.208vw; line-height: 1.3; letter-spacing: -0.02em; }
-.events-hero__underline { width: 27.54vw; height: auto; margin: 0 auto; transform: scaleX(-1); }
-/* The next section paints its curve and body together, so its gradient has no seam. */
-.events-community { position: relative; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; gap: 13vw; padding: 10.94vw 15.36vw 12.45vw 8.02vw; }
-.events-community::before {
-  --curve-height: 3.854167vw;
-  content: "";
+.events-hero { position: sticky; top: 0; z-index: 0; display: grid; place-items: center; height: var(--hero-vh); color: var(--paper); }
+.events-hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.events-hero__heading { position: relative; text-align: center; }
+.events-hero h1 { font-size: var(--landing-title-size); font-weight: 600; line-height: 1; letter-spacing: 0; white-space: nowrap; }
+.events-hero__underline { width: 85%; height: auto; margin: 0 auto; transform: scaleX(-1); }
+.events-community { position: relative; z-index: 1; isolation: isolate; display: grid; grid-template-columns: 1.9fr 1fr; align-items: start; gap: 13vw; padding: 10.94vw 15.36vw 12.45vw 8.02vw; transform: translate3d(0, var(--page-takeover-lag, 0px), 0); }
+.events-community__background {
+  --curve-height: var(--landing-curve-peek);
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: calc(-1 * var(--curve-height)) 0 0;
+  overflow: hidden;
   pointer-events: none;
-  background: url('../assets/media/events/cream-glow.svg') 65vw -32vw / 198vw auto no-repeat, url('../assets/media/events/yellow-glow.svg') center 35% / 214vw auto no-repeat, var(--paper);
-  /* Preserve the exported ellipse, with a one-pixel overlap at the body join. */
+  background: var(--paper);
+  -webkit-mask-image: url('../assets/media/events/hero-curve.svg'), linear-gradient(#000, #000);
   mask-image: url('../assets/media/events/hero-curve.svg'), linear-gradient(#000, #000);
-  mask-size: 100% var(--curve-height), 100% calc(100% - var(--curve-height) + 1px);
+  -webkit-mask-size: 100% var(--curve-height), 100% calc(100% - var(--curve-height) + 2px);
+  mask-size: 100% var(--curve-height), 100% calc(100% - var(--curve-height) + 2px);
+  -webkit-mask-position: center top, center bottom;
   mask-position: center top, center bottom;
+  -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
+.events-community__copy, .events-calendar { position: relative; z-index: 1; }
+.events-community__glow { position: absolute; display: block; max-width: none; transform: translate(-50%, -50%) rotate(-156.06deg); }
+.events-community__glow--top, .events-community__glow--upper, .events-community__glow--middle, .events-community__glow--lower { width: 213.4375vw; height: 157.786vw; }
+/* Figma's ellipse centers are measured from the top of the curved background. */
+.events-community__glow--top { left: 62.78vw; top: 15.72vw; }
+.events-community__glow--upper { left: 61.79vw; top: 26.03vw; }
+.events-community__glow--middle { left: 56.79vw; top: 60.36vw; }
+.events-community__glow--lower { left: 62.78vw; top: 93.69vw; }
+.events-community__glow--cream { left: 118.63vw; top: 26.80vw; width: 197.832vw; height: 120.382vw; transform: translate(-50%, -50%) rotate(-167.31deg); }
 .events-community h2 { font-size: 5vw; line-height: 1.3; letter-spacing: -0.02em; white-space: nowrap; }
 .events-community__circled, .events-community__underlined { position: relative; display: inline-block; }
 .events-community__circle { position: absolute; width: 145%; max-width: none; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-12.72deg); }
@@ -59,9 +71,9 @@
 .events-scribble { pointer-events: none; animation: scribble-shape-cycle 960ms steps(1, end) var(--scribble-frame-delay, 0ms) infinite; }
 .events-community__circle, .events-coming__bottom { --scribble-frame-delay: -180ms; }
 .events-calendar__circle, .events-community__underline { --scribble-frame-delay: -540ms; }
-.events-shell .services-closing { background: url('../assets/media/events/cream-glow.svg') -95vw -25vw / 198vw auto no-repeat, var(--paper); }
-.events-shell .services-contact { padding-top: 13.18vw; padding-bottom: 8.8vw; }
-.events-shell .services-contact__image { aspect-ratio: 1618 / 553; object-fit: cover; }
+.events-shell .services-closing { position: relative; isolation: isolate; overflow: hidden; background: var(--paper); }
+.events-closing__glow { position: absolute; z-index: 0; display: block; max-width: none; width: 197.832vw; height: 120.382vw; left: -10.74vw; top: 42.12vw; transform: translate(-50%, -50%) rotate(-167.31deg); pointer-events: none; }
+.events-shell .services-contact { position: relative; z-index: 1; }
 
 .events-community__field label { display: block; margin-bottom: 0.35rem; font-size: 0.875rem; }
 .events-community__field input { display: block; width: 100%; min-height: 2.75rem; padding: 0.5rem 0.25rem; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; font-size: 1rem; }

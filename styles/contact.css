@@ -1,7 +1,15 @@
-/* Shared closing section for Services and About Us. */
+/* Shared closing section for Services, About Us, and Events. */
 /* One background spans both closing sections so it cannot restart at their seam. */
 .services-closing {
   background:
+    radial-gradient(ellipse 90% 50% at 100% 55%, rgb(241 199 98 / 0.78), transparent 100%),
+    radial-gradient(ellipse 85% 35% at 15% 70%, rgb(247 215 128 / 0.65), transparent 100%),
+    var(--paper);
+}
+
+.services-page .services-closing {
+  background:
+    var(--services-paper-grain) 0 0 / 0.42rem 0.42rem,
     radial-gradient(ellipse 90% 50% at 100% 55%, rgb(241 199 98 / 0.78), transparent 100%),
     radial-gradient(ellipse 85% 35% at 15% 70%, rgb(247 215 128 / 0.65), transparent 100%),
     var(--paper);
@@ -19,12 +27,14 @@
 
 .services-contact__visual {
   position: relative;
+  aspect-ratio: 1618 / 553;
 }
 
 .services-contact__image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .services-contact__scribble {

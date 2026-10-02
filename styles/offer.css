@@ -1,7 +1,7 @@
 .offer {
   --offer-collage-top: 45.5vw;
   --offer-collage-height: min(60rem, calc(75vw - 9.1875rem));
-  --offer-curve-offset: clamp(2rem, 3.6vw, 3rem);
+  --offer-curve-offset: var(--landing-curve-peek);
   --offer-curve-bleed: 6vw;
 
   position: relative;
@@ -32,7 +32,14 @@
   z-index: -1;
   content: "";
   background: var(--paper);
-  clip-path: ellipse(200vw 100% at 50% 100%);
+  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
+  mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
+  -webkit-mask-position: center top, center bottom;
+  mask-position: center top, center bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   pointer-events: none;
 }
 
@@ -41,7 +48,14 @@
   inset: calc(var(--offer-curve-offset) * -1) 0 0;
   z-index: 0;
   overflow: hidden;
-  clip-path: ellipse(200vw 100% at 50% 100%);
+  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
+  mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
+  -webkit-mask-position: center top, center bottom;
+  mask-position: center top, center bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   pointer-events: none;
 }
 
@@ -370,22 +384,89 @@
 }
 
 @media (min-width: 1101px) {
-.offer__copy h3 {
+  .offer {
+    --offer-collage-top: 45.75vw;
+    --offer-collage-height: min(71.25rem, 59.375vw);
+  }
+
+  .offer__intro {
+    top: 13.85vw;
+  }
+
+  .offer__intro h2 {
+    font-size: min(4rem, 3.333vw);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .offer__intro p {
+    width: min(46.3125rem, 100%);
+    margin: 4.3rem auto 0;
+    font-size: min(2rem, 1.667vw);
+    font-weight: 700;
+  }
+
+  .offer__button {
+    min-width: 12.0625rem;
+    min-height: 3.5rem;
+    margin-top: 2.65vw;
+    font-size: 1rem;
+  }
+
+  .offer__copy {
+    top: calc(var(--offer-collage-top) + 3.5vw);
+    left: calc(var(--offer-curve-bleed) + 10.6vw);
+    width: min(32.8125rem, 27.35vw);
+  }
+
+  .offer__copy h3 {
+    font-size: min(4rem, 3.333vw);
+    font-weight: 700;
+    line-height: 1.2;
     white-space: nowrap;
+  }
+
+  .offer__copy p {
+    width: min(28.75rem, 100%);
+    margin-top: 2.4rem;
+    font-size: min(1rem, 0.833vw);
+    line-height: 1.32;
+  }
+
+  .offer__collage {
+    left: calc(50% + 0.2rem);
+    width: min(94.5rem, 78.75vw);
+  }
+
+  .offer__placeholder--detail {
+    top: 57%;
+    left: 35.87%;
+  }
+
+  .offer__placeholder--portrait-main {
+    left: 35.87%;
+    width: 38.36%;
+  }
+
+  .offer__placeholder--look {
+    left: 76.5%;
+  }
+
+  .offer__placeholder--still-life {
+    width: 33.53%;
+  }
+
+  .offer__placeholder--motion {
+    top: 57.5%;
+    left: 60.7%;
+    width: 31.4%;
+    aspect-ratio: 475 / 316;
   }
 }
 
 @media (max-width: 1100px) {
   .offer {
     --offer-curve-bleed: 0px;
-    --offer-curve-offset: clamp(2rem, 3.6vw, 3rem);
-    --offer-curve-reference-height: calc(
-      45.5vw + min(60rem, calc(75vw - 9.1875rem)) + 4rem + var(--offer-curve-offset)
-    );
-    --offer-curve-depth: max(
-      var(--offer-curve-offset),
-      calc(var(--offer-curve-reference-height) * 0.04 + 2px)
-    );
     width: 100%;
     min-height: 0;
     margin-left: 0;
@@ -393,15 +474,13 @@
     background: var(--paper);
   }
   .offer::after {
-    inset: calc(var(--offer-curve-depth) * -1) 0 auto;
-    height: calc(var(--offer-curve-depth) + 2px);
-    clip-path: ellipse(
-      200vw var(--offer-curve-reference-height) at 50% var(--offer-curve-reference-height)
-    );
+    inset: calc(var(--offer-curve-offset) * -1) 0 auto;
+    height: calc(var(--offer-curve-offset) + 2px);
   }
   .offer__gradients {
     inset: 0;
-    clip-path: none;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
   .offer__intro, .offer__copy {
     position: relative;

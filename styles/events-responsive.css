@@ -15,9 +15,6 @@
   .events-coming .events-button { margin-top: 0; }
 }
 @media (max-width: 640px) {
-  .events-hero { height: 80svh; min-height: 28rem; }
-  .events-hero h1 { font-size: clamp(3rem, 12vw, 4.5rem); }
-  .events-hero__underline { width: 65vw; }
   .events-community { grid-template-columns: 1fr; gap: 4rem; padding-top: 4rem; padding-bottom: 6rem; }
   .events-community h2 { font-size: clamp(1.9rem, 7.8vw, 3rem); }
   .events-community__circle { width: 120%; }
@@ -33,8 +30,9 @@
   .events-coming__copy p { width: min(15rem, 90%); }
   .events-coming__left { width: 27%; left: -2%; top: 1rem; }
   .events-coming__bottom { width: 40%; left: 54%; bottom: 1.5rem; }
-  .events-shell .services-contact { padding: 4rem 0; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .events-hero { background: url('../assets/media/events/hero.png') center / cover no-repeat; }
+  .events-hero__video { display: none; }
   .events-scribble { animation: none; filter: none; }
 }

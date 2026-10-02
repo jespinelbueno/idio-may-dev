@@ -39,11 +39,20 @@
 
 .about-background {
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   inset: 0;
+  bottom: var(--page-takeover-lag, 0px);
+  background: var(--paper);
+  transform: translate3d(0, var(--page-takeover-lag, 0px), 0);
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
+  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
+  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(to bottom, #000 0%, #000 90%, transparent 100%);
+  -webkit-mask-size: 100% var(--landing-curve-peek), 100% calc(100% - var(--hero-vh) + 2px);
+  mask-size: 100% var(--landing-curve-peek), 100% calc(100% - var(--hero-vh) + 2px);
+  -webkit-mask-position: center calc(var(--hero-vh) - var(--landing-curve-peek)), center bottom;
+  mask-position: center calc(var(--hero-vh) - var(--landing-curve-peek)), center bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 .about-background::before {
   content: "";
@@ -78,48 +87,46 @@
   transform: translate(-50%, -50%) rotate(-156.06deg);
 }
 
-.about-hero { position: relative; height: calc(1183 * var(--u)); color: var(--paper); }
+.about-hero-takeover { position: relative; padding-bottom: var(--page-takeover-lag-space, 0px); }
+.about-hero { position: sticky; top: 0; z-index: 0; height: var(--hero-vh); color: var(--paper); }
 .about-hero__crop {
   position: absolute;
-  top: calc(-18 * var(--u));
+  inset: 0;
   width: 100%;
-  height: calc(1201 * var(--u));
+  height: 100%;
   overflow: hidden;
 }
 .about-hero__image {
   position: absolute;
-  top: -3.3%;
-  left: -0.01%;
-  width: 100.01%;
-  height: 106.6%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   max-width: none;
+  object-fit: cover;
+  object-position: center;
 }
-.about-hero__title {
+.about-hero__heading {
   position: absolute;
-  left: calc(649 * var(--u));
-  top: calc(453 * var(--u));
-  width: calc(621 * var(--u));
-  font-size: calc(100 * var(--u));
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  transform: translate(-50%, -50%);
+}
+.about-narrative .about-hero__title {
+  font-size: var(--landing-title-size);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
   text-align: center;
+  white-space: nowrap;
 }
 .about-hero__underline {
-  position: absolute;
-  left: calc(695 * var(--u));
-  top: calc(574 * var(--u));
-  width: calc(529 * var(--u));
-  height: calc(35 * var(--u));
+  width: 85%;
+  height: auto;
   transform: scaleX(-1);
 }
-.about-hero__curve {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: calc(74 * var(--u));
-}
-
-.about-story { position: relative; height: calc(2044 * var(--u)); }
+.about-story { position: relative; z-index: 3; height: calc(2044 * var(--u)); transform: translate3d(0, var(--page-takeover-lag, 0px), 0); }
 .about-photo { position: absolute; }
 .about-photo img { width: 100%; height: 100%; object-fit: cover; }
 .about-photo--founder { left: calc(218 * var(--u)); top: calc(202 * var(--u)); width: calc(678 * var(--u)); height: calc(963 * var(--u)); overflow: hidden; }
@@ -145,6 +152,7 @@
 .about-next {
   --about-curve-height: calc(74 * var(--u));
   position: relative;
+  z-index: 2;
   isolation: isolate;
   height: calc(1189.902 * var(--u));
 }
@@ -159,8 +167,9 @@
   background: var(--about-olive) url("../assets/media/about/olive-texture.svg") center / 100% 100% no-repeat;
   -webkit-mask-image: url("../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
   mask-image: url("../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
-  -webkit-mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height));
-  mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height));
+  /* Let the straight fill sit behind the curve so their antialiased mask edges cannot expose a seam. */
+  -webkit-mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height) + 3px);
+  mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height) + 3px);
   -webkit-mask-position: top left, bottom left;
   mask-position: top left, bottom left;
   -webkit-mask-repeat: no-repeat;
@@ -171,7 +180,7 @@
 .about-photo--candid { left: calc(1179.259 * var(--u)); top: calc(1094.503 * var(--u)); width: calc(558.78 * var(--u)); height: calc(838.068 * var(--u)); transform: rotate(0.31deg); }
 .about-chapter--next { left: calc(1297 * var(--u)); top: calc(511 * var(--u)); width: calc(393 * var(--u)); text-align: center; }
 
-.about-team { position: relative; height: calc(1395.098 * var(--u)); }
+.about-team { position: relative; z-index: 2; height: calc(1395.098 * var(--u)); }
 .about-team > h2 { position: absolute; left: calc(150 * var(--u)); top: calc(186.098 * var(--u)); width: calc(524 * var(--u)); font-size: calc(96 * var(--u)); line-height: calc(100 * var(--u)); letter-spacing: -0.02em; }
 .about-team__intro { position: absolute; left: calc(150 * var(--u)); top: calc(428.098 * var(--u)); width: calc(385 * var(--u)); font-size: calc(16 * var(--u)); font-weight: 300; line-height: 1.3; letter-spacing: -0.02em; }
 .about-team__members { position: absolute; left: calc(739 * var(--u)); top: calc(593.098 * var(--u)); width: calc(287 * var(--u)); color: var(--about-olive); }

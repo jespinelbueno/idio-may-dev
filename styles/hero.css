@@ -137,7 +137,7 @@
   width: fit-content;
   margin: 0;
   color: var(--paper);
-  font-size: clamp(2rem, 4.8vw, 5.25rem);
+  font-size: var(--landing-title-size);
   font-weight: 600;
   line-height: 0.82;
   letter-spacing: 0;
@@ -181,7 +181,6 @@
 
   .hero__headline {
     --hero-logo-gap: 0.15em;
-    font-size: min(clamp(1.7rem, 7.2vw, 3.2rem), 8.5vw);
     left: 50%;
   }
 }

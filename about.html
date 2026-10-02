@@ -7,7 +7,7 @@
     <title>About Us | Idio</title>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/media/about/team-field.png" as="image">
+    <link rel="preload" href="assets/media/about/team-field.jpg" as="image">
     <link rel="stylesheet" href="styles/about.css">
   </head>
   <body class="about-page">
@@ -65,14 +65,13 @@
         <div class="about-background__glow about-background__glow--cream"><img src="assets/media/about/lower-cream-glow.svg" alt=""></div>
         <div class="about-background__glow about-background__glow--yellow"><img src="assets/media/about/lower-yellow-glow.svg" alt=""></div>
       </div>
-      <section class="about-hero" aria-labelledby="about-title">
-        <div class="about-hero__crop"><img class="about-hero__image" src="assets/media/about/team-field.png" width="4096" height="2731" alt="The Idio team gathered together in a sunlit field." fetchpriority="high"></div>
-        <h1 class="about-hero__title" id="about-title">about us</h1>
-        <img class="about-hero__underline" src="assets/media/about/hero-underline.svg" alt="" aria-hidden="true">
-        <img class="about-hero__curve" src="assets/media/about/hero-curve.svg" width="1920" height="74" alt="" aria-hidden="true">
+      <div class="about-hero-takeover">
+      <section class="about-hero" data-takeover-hero aria-labelledby="about-title">
+        <div class="about-hero__crop"><img class="about-hero__image" src="assets/media/about/team-field.jpg" width="2560" height="1707" alt="The Idio team gathered together in a sunlit field." fetchpriority="high"></div>
+        <div class="about-hero__heading"><h1 class="about-hero__title" id="about-title">about us</h1><img class="about-hero__underline" src="assets/media/about/hero-underline.svg" alt="" aria-hidden="true"></div>
       </section>
-      <section class="about-story" id="about-story" aria-labelledby="about-story-title">
-        <figure class="about-photo about-photo--founder"><img src="assets/media/about/anna-founder.png" width="2731" height="4096" alt="Anna, Idio’s founder, wearing a red sweater in a field." loading="lazy"></figure>
+      <section class="about-story" data-takeover-section id="about-story" aria-labelledby="about-story-title">
+        <figure class="about-photo about-photo--founder"><img src="assets/media/about/anna-founder.jpg" width="1333" height="2000" alt="Anna, Idio’s founder, wearing a red sweater in a field." loading="lazy"></figure>
         <h2 id="about-story-title">so what the<br>heck is idio???</h2>
         <img class="about-story__circle" src="assets/media/about/title-circle.svg" alt="" aria-hidden="true">
         <article class="about-chapter about-chapter--start" aria-labelledby="about-start-title">
@@ -87,13 +86,14 @@
           <p>What began as a personal passion helping local businesses with marketing, photography and related creative services, ended as a full-service creative agency, with a tight-knit and diversely talented team of experienced artists.</p>
         </article>
         <div class="about-collage">
-          <figure class="about-photo about-photo--snapshot"><img src="assets/media/about/early-days.png" width="2732" height="4096" alt="A candid photo from Idio’s early days." loading="lazy"></figure>
-          <figure class="about-photo about-photo--candid"><img src="assets/media/about/friends.png" width="2731" height="4096" alt="Two friends smiling together outside." loading="lazy"></figure>
+          <figure class="about-photo about-photo--snapshot"><img src="assets/media/about/early-days.jpg" width="1334" height="2000" alt="A candid photo from Idio’s early days." loading="lazy"></figure>
+          <figure class="about-photo about-photo--candid"><img src="assets/media/about/friends.jpg" width="1333" height="2000" alt="Two friends smiling together outside." loading="lazy"></figure>
           <img class="about-collage__scribble" src="assets/media/about/collage-scribble.svg" alt="" aria-hidden="true">
         </div>
       </section>
+      </div>
       <section class="about-next" aria-labelledby="about-next-title">
-        <figure class="about-photo about-photo--studio"><img src="assets/media/about/studio-group.png" alt="Four Idio teammates gathered in the studio with their creative supplies." loading="lazy"></figure>
+        <figure class="about-photo about-photo--studio"><img src="assets/media/about/studio-group.jpg" alt="Four Idio teammates gathered in the studio with their creative supplies." loading="lazy"></figure>
         <img class="about-next__scribble about-next__scribble--left" src="assets/media/about/studio-left-scribble.svg" alt="" aria-hidden="true">
         <img class="about-next__scribble about-next__scribble--bottom" src="assets/media/about/studio-bottom-scribble.svg" alt="" aria-hidden="true">
         <img class="about-next__thread" src="assets/media/about/next-thread.svg" alt="" aria-hidden="true">
@@ -113,8 +113,8 @@
           <div><dt>naomi moore</dt><dd>graphic designer | creative | friend</dd></div>
           <div><dt>gretel lam</dt><dd>graphic designer | creative | friend</dd></div>
         </dl>
-        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.png" width="4096" height="2731" alt="" loading="lazy"></div></figure>
-        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.png" width="4096" height="2731" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy"></div></figure>
+        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.jpg" width="2400" height="1600" alt="" loading="lazy"></div></figure>
+        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/about/team-portrait-source.jpg" width="2400" height="1600" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy"></div></figure>
       </section>
       </div>
       <div class="services-closing">
@@ -159,7 +159,7 @@
     </main>
 
     <footer class="site-footer" id="site-footer">
-      <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true">
+      <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
       <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/decorations/scribbles/footer/new-white-left.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/decorations/scribbles/footer/new-big-white-right.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/decorations/scribbles/footer/new-small-white-right.png" alt="" aria-hidden="true">

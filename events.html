@@ -9,7 +9,6 @@
     <title>Idio Events | Idio</title>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/media/events/hero.png" as="image">
     <link rel="stylesheet" href="styles/events.css">
   </head>
   <body class="events-page">
@@ -61,11 +60,21 @@
 
     <!-- Figma: SxbrTN0u4TjdTXbc94pYyK / 1759:111. -->
     <main class="events-shell">
-      <section class="events-hero" aria-labelledby="events-title">
-        <img class="events-hero__photo" src="assets/media/events/hero.png" alt="Friends making art and music together around a table." fetchpriority="high">
+      <div class="events-hero-takeover">
+      <section class="events-hero" data-takeover-hero aria-labelledby="events-title">
+        <video class="events-hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/media/events/hero.png" aria-hidden="true">
+          <source src="assets/media/events/bgvideo.mp4" type="video/mp4">
+        </video>
         <div class="events-hero__heading"><h1 id="events-title">idio events</h1><img class="events-hero__underline events-scribble" src="assets/media/events/hero-underline.svg" alt="" aria-hidden="true"></div>
       </section>
-      <section class="events-community" id="events-community" aria-labelledby="events-community-title">
+      <section class="events-community" data-takeover-section id="events-community" aria-labelledby="events-community-title">
+        <div class="events-community__background" aria-hidden="true">
+          <img class="events-community__glow events-community__glow--lower" src="assets/media/events/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--top" src="assets/media/events/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--upper" src="assets/media/events/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--middle" src="assets/media/events/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--cream" src="assets/media/events/cream-glow.svg" alt="">
+        </div>
         <div class="events-community__copy">
           <h2 id="events-community-title"><span class="events-community__circled">emails<img class="events-community__circle events-scribble" src="assets/media/events/email-circle.svg" alt="" aria-hidden="true"></span> are boring.<br>but we <span class="events-community__underlined">aren’t!<img class="events-community__underline events-scribble" src="assets/media/events/email-underline.svg" alt="" aria-hidden="true"></span></h2>
           <div class="events-community__description"><h3>so wanna join our email list?</h3>
@@ -92,18 +101,20 @@
           <img class="events-calendar__circle events-scribble" src="assets/media/events/calendar-circle.svg" alt="" aria-hidden="true">
         </aside>
       </section>
+      </div>
       <section class="events-coming" aria-labelledby="events-coming-title">
         <img class="events-coming__curve" src="assets/media/events/green-curve.svg" alt="" aria-hidden="true"><img class="events-coming__dot" src="assets/media/events/coming-dot.svg" alt="" aria-hidden="true">
-        <div class="events-coming__card"><div class="events-coming__crop"><img class="events-coming__photo" src="assets/media/events/community.png" alt="Friends sharing drinks and conversation at a creative gathering."></div>
+        <div class="events-coming__card"><div class="events-coming__crop"><img class="events-coming__photo" src="assets/media/events/community.jpg" alt="Friends sharing drinks and conversation at a creative gathering." loading="lazy" decoding="async"></div>
           <div class="events-coming__copy"><h2 id="events-coming-title">coming soon</h2><p>(some really cool community that you won’t want to miss)</p><a class="events-button" href="#community-signup" data-community-signup-link><span class="button-fill__label">ahem, give up that email</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></a></div>
         </div>
         <img class="events-coming__left events-scribble" src="assets/media/events/coming-left.svg" alt="" aria-hidden="true"><img class="events-coming__bottom events-scribble" src="assets/media/events/coming-bottom.svg" alt="" aria-hidden="true">
       </section>
       <div class="services-closing">
+        <img class="events-closing__glow" src="assets/media/events/cream-glow.svg" alt="" aria-hidden="true">
         <section class="services-contact" aria-labelledby="services-contact-title">
           <div class="services-contact__inner">
             <div class="services-contact__visual">
-              <img class="services-contact__image" src="assets/media/events/contact.png" width="1618" height="553" alt="Friends running through a sunlit field." loading="lazy" decoding="async">
+              <img class="services-contact__image" src="assets/media/events/contact.jpg" width="1618" height="553" alt="Friends running through a sunlit field." loading="lazy" decoding="async">
               <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/events/contact-yellow.svg" alt="" aria-hidden="true">
               <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/events/contact-red.svg" alt="" aria-hidden="true">
             </div>
@@ -141,7 +152,7 @@
     </main>
 
     <footer class="site-footer" id="site-footer">
-      <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true">
+      <img class="site-footer__image" src="assets/media/footer/home-background.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
       <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/decorations/scribbles/footer/new-white-left.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/decorations/scribbles/footer/new-big-white-right.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/decorations/scribbles/footer/new-small-white-right.png" alt="" aria-hidden="true">
