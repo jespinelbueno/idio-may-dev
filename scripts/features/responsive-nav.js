@@ -21,7 +21,7 @@ export const initResponsiveNav = ({ navSelector, transitionSelector }) => {
       open && compact.matches
     );
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "Close" : "Menu";
+    toggle.textContent = open ? "close" : "menu";
     if (returnFocus) toggle.focus();
     links.inert = compact.matches && !open;
     scheduleNavUpdate();
