@@ -13,13 +13,9 @@ const INTERACTIVE_SELECTOR = [
 export function initCustomCursor() {
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   const cursor = document.createElement("div");
-  const label = document.createElement("span");
 
   cursor.className = "custom-cursor";
   cursor.setAttribute("aria-hidden", "true");
-  label.className = "custom-cursor__label";
-  label.textContent = "click me";
-  cursor.append(label);
   document.body.append(cursor);
 
   const setEnabled = () => {

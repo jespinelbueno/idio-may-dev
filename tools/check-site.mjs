@@ -10,6 +10,7 @@ const entryPages = [
   "services.html",
   "about.html",
   "events.html",
+  "contact.html",
   "loading-screens/icon-color-loader/index.html",
 ];
 const errors = [];

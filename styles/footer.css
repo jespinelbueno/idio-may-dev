@@ -4,6 +4,7 @@
   min-height: clamp(29rem, 47vw, 36rem);
   background: var(--brand-green);
   color: var(--paper);
+  text-transform: lowercase;
   isolation: isolate;
 }
 

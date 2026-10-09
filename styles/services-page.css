@@ -688,7 +688,7 @@
   width: var(--process-diameter);
   height: var(--process-diameter);
   border-radius: 50%;
-  background: linear-gradient(to bottom, #f7d36b 50%, transparent 50%);
+  background: linear-gradient(to bottom, #f7d36b 50%, #d9ad35 50%);
   visibility: hidden;
 }
 

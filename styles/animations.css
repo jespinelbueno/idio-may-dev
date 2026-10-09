@@ -95,6 +95,19 @@
   }
 }
 
+/* Scroll progress controls the About Us thread's mask in about-thread-draw.js. */
+.about-thread-draw__stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-thread-draw__artwork {
+    mask: none;
+    opacity: 1 !important;
+  }
+}
+
 /* Draw from the tail, finish the head, hold, then restart like a pen sketch. */
 .arrow-draw__stroke {
   stroke-dasharray: 1;
@@ -103,7 +116,7 @@
 
 .values-wheel-arrow.is-active .arrow-draw__stroke,
 .team__member:is(:hover, :focus, :focus-within) .arrow-draw__stroke {
-  animation: arrow-draw-shaft 1.7s linear infinite;
+  animation: arrow-draw-shaft 0.85s linear infinite;
 }
 
 .values-wheel-arrow.is-active .arrow-draw__stroke--head,
@@ -113,7 +126,7 @@
 
 .values-wheel-arrow.is-active .arrow-draw__complete,
 .team__member:is(:hover, :focus, :focus-within) .arrow-draw__complete {
-  animation: arrow-draw-complete 1.7s linear infinite;
+  animation: arrow-draw-complete 0.85s linear infinite;
 }
 
 @keyframes arrow-draw-complete {

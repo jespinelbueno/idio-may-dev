@@ -1,0 +1,146 @@
+/* Contact wireframe: 1920 × 1167. Container units retain its proportions. */
+.contact-hero {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--brand-green);
+  color: var(--paper);
+}
+
+.contact-hero__image {
+  position: absolute;
+  z-index: -1;
+  top: -13.8817%;
+  left: -4.375%;
+  width: 106.6146%;
+  max-width: none;
+  height: 116.9666%;
+  object-fit: cover;
+}
+
+.contact-hero__intro {
+  position: absolute;
+  top: 38.9032%;
+  left: 50%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 33.3333%;
+  height: 5.2083cqw;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: "Teva", sans-serif;
+  font-size: 1.40625cqw;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.contact-hero__title {
+  position: absolute;
+  top: 47.3865%;
+  left: 50%;
+  width: 71.5625%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: 5.2083cqw;
+  font-weight: 700;
+  font-variation-settings: "opsz" 14;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.contact-hero__title a {
+  display: inline-block;
+}
+
+.contact-hero__title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.12em;
+}
+
+.contact-hero__title a:focus-visible,
+.contact-hero__social:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+}
+
+.contact-hero__socials {
+  position: absolute;
+  top: 62.7249%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 2.7083cqw;
+  transform: translateX(-50%);
+}
+
+.contact-hero__social {
+  display: grid;
+  place-items: center;
+}
+
+.contact-hero__social img {
+  width: auto;
+  height: 1.7708cqw;
+}
+
+.contact-hero__accent {
+  position: absolute;
+  pointer-events: none;
+}
+
+.contact-hero__accent img {
+  width: 100%;
+  height: auto;
+}
+
+.contact-hero__accent--upper-right {
+  top: 43.7694%;
+  left: 82.128%;
+  width: 3.6228%;
+}
+
+.contact-hero__accent--right {
+  top: 50.8378%;
+  left: 83.7859%;
+  width: 3.6721%;
+}
+
+.contact-hero__accent--left {
+  top: 53.1199%;
+  left: 10.9786%;
+  width: 3.2242%;
+}
+
+.contact-hero__accent--lower-left {
+  top: 56.235%;
+  left: 12.2204%;
+  width: 2.615%;
+}
+
+.contact-hero__accent--bottom-left {
+  top: 58.4619%;
+  left: 15.8798%;
+  width: 0.5251%;
+}
+
+.contact-skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 0.5rem;
+  left: var(--page-gutter);
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+  color: var(--brand-green);
+  transform: translateY(-200%);
+}
+
+.contact-skip-link:focus-visible {
+  transform: none;
+}
