@@ -5,7 +5,7 @@ export function initServicesProcess() {
   if (!diagram || !rotor || !steps.length) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const phoneLayout = window.matchMedia("(max-width: 640px)");
+  const phoneLayout = window.matchMedia("(max-width: 1100px)");
   const clamp = (value) => Math.min(Math.max(value, 0), 1);
   const phase = (progress, start, end) => clamp((progress - start) / (end - start));
   const ease = (value) => value * value * (3 - 2 * value);
@@ -57,7 +57,7 @@ export function initServicesProcess() {
     const viewport = window.innerHeight;
     const center = bounds.top + bounds.height / 2;
     const distance = Math.max(viewport * 0.35, viewport * 0.75 - bounds.height / 2);
-    if (phoneLayout.matches) {
+    if (phoneLayout.matches || bounds.height > viewport * 0.7) {
       // Open down from the top on phones, so the circle and the first step
       // appear before a tall, single-column process has scrolled past the reader.
       targetProgress = clamp((viewport * 0.9 - bounds.top) / (viewport * 0.65));

@@ -44,7 +44,7 @@
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(24rem, 1.05fr);
   column-gap: clamp(2.5rem, 3.75vw, 4.5rem);
-  width: min(80rem, calc(100vw - clamp(5rem, 12vw, 12rem)));
+  width: var(--content-width);
   height: 100svh;
   min-height: clamp(35rem, 46vw, 42rem);
   margin: 0 auto;
@@ -246,9 +246,9 @@
 .case-study__copy h2 {
   margin: 0;
   color: var(--brand-green);
-  font-size: clamp(2.5rem, 4.2vw, 3.8rem);
+  font-size: var(--heading-size);
   font-weight: 650;
-  line-height: 0.9;
+  line-height: var(--heading-line);
   letter-spacing: 0;
   text-transform: lowercase;
 }
@@ -257,9 +257,9 @@
   margin: clamp(4rem, 6.2vw, 5.7rem) 0 0;
   color: var(--brand-green);
   font-family: "Vollkorn", Georgia, serif;
-  font-size: clamp(1.35rem, 1.5vw, 1.65rem);
+  font-size: var(--subheading-size);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
@@ -275,10 +275,10 @@
   max-width: 30rem;
   margin: clamp(0.65rem, 0.9vw, 0.85rem) 0 0;
   color: var(--brand-green);
-  font-size: clamp(0.78rem, 0.72vw, 0.84rem);
+  font-size: var(--body-size);
   font-style: normal;
   font-weight: 450;
-  line-height: 1.34;
+  line-height: var(--body-line);
 }
 
 .case-study__button {
@@ -288,25 +288,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 9.25rem;
-  height: 2.7rem;
+  width: max-content;
+  height: auto;
   min-width: 9.25rem;
-  min-height: 2.7rem;
-  padding: 0 0.5rem;
+  min-height: var(--tap-size);
+  padding: 0.75rem 1.25rem;
   margin-top: clamp(1.8rem, 2.25vw, 2.5rem);
   overflow: hidden;
   border-radius: 999rem;
   border: 0;
   background: var(--brand-olive);
   color: var(--brand-green);
-  font-size: 0.72rem;
+  font-size: var(--small-size);
   font-weight: 650;
-  line-height: 1;
+  line-height: 1.35;
   isolation: isolate;
   transition:
     background 260ms ease,
     color 180ms ease,
     transform 260ms ease;
+
+  max-width: 100%;
 }
 
 /* Case study + team art direction */
@@ -373,15 +375,23 @@
 
 .case-study__copy h2 {
   max-width: 10ch;
-  line-height: 0.9;
+  line-height: var(--heading-line);
+
+  font-size: var(--heading-size);
 }
 
 .case-study__copy h3 {
   margin-top: clamp(2.5rem, 3.2vw, 3.25rem);
+
+  font-size: var(--subheading-size);
+
+  line-height: 1.2;
 }
 
 .case-study__copy p {
-  font-size: clamp(0.78rem, 0.72vw, 0.84rem);
+  font-size: var(--body-size);
+
+  line-height: var(--body-line);
 }
 
 .case-study__scribble--pink {
@@ -417,7 +427,19 @@
   border: 0;
   border-radius: 999rem;
   background: var(--brand-olive);
-  font-size: 0.72rem;
+  font-size: var(--small-size);
+
+  min-height: var(--tap-size);
+
+  height: auto;
+
+  width: max-content;
+
+  max-width: 100%;
+
+  padding: 0.75rem 1.25rem;
+
+  line-height: 1.35;
 }
 
 .case-study__button:hover,
@@ -439,7 +461,7 @@
 }
 
 .data-case-project-stack h3{
-font-size: 10px;
+  font-size: var(--subheading-size);
 }
 
 @media (min-width: 1101px) {
@@ -545,23 +567,35 @@ font-size: 10px;
   .case-study__copy h2 {
     max-width: none;
     font-size: var(--heading-size);
-    line-height: 1.05;
+    line-height: var(--heading-line);
     overflow-wrap: anywhere;
   }
   .case-study__copy h3 {
     margin-top: 1.5rem;
-    font-size: 1.5rem;
+    font-size: var(--subheading-size);
+
+    line-height: 1.2;
   }
   .case-study__copy .case-study__description {
     max-width: 36ch;
     margin: 1rem auto 0;
     font-size: var(--body-size);
-    line-height: 1.5;
+    line-height: var(--body-line);
   }
   .case-study__button {
-    width: min(11rem, 100%);
-    height: var(--tap-size);
+    width: max-content;
+    height: auto;
     margin-top: 1.5rem;
+
+    font-size: var(--small-size);
+
+    min-height: var(--tap-size);
+
+    max-width: 100%;
+
+    padding: 0.75rem 1.25rem;
+
+    line-height: 1.35;
   }
 }
 
@@ -668,13 +702,13 @@ font-size: 10px;
   }
   .case-study__mobile-project h3 {
     margin-top: 0;
-    font-size: 1.125rem;
+    font-size: var(--subheading-size);
     line-height: 1.2;
   }
   .case-study__copy .case-study__mobile-project .case-study__description {
     max-width: none;
     margin-top: 0.75rem;
-    font-size: 0.875rem;
-    line-height: 1.45;
+    font-size: var(--body-size);
+    line-height: var(--body-line);
   }
 }

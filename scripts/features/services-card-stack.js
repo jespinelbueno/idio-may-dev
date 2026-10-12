@@ -5,14 +5,15 @@ export function initServicesCardStack() {
   const cards = [...stack.querySelectorAll('.service-card')];
   if (!cards.length) return;
 
-  const desktop = window.matchMedia('(min-width: 901px)');
+  const desktop = window.matchMedia('(min-width: 1101px)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const transferred = new Set();
   let movingUntil = 0;
   let lastPointer = null;
 
   const select = (card) => {
-    if (!desktop.matches || performance.now() < movingUntil) return;
+    const layout = window.getComputedStyle(stack).getPropertyValue('--services-stack-mode').trim();
+    if (!desktop.matches || layout === 'flow' || performance.now() < movingUntil) return;
     const returning = transferred.has(card);
     if (returning) transferred.delete(card);
     else transferred.add(card);

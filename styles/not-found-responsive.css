@@ -1,0 +1,16 @@
+@media (max-width: 640px) {
+  .not-found__content { width: 100%; }
+  .not-found__intro {
+    width: min(100%, 22rem);
+    margin-top: var(--space-xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found__frame { animation: none; }
+  .not-found__frame--one { visibility: visible; }
+  .not-found__frame--two { visibility: hidden; }
+  .not-found__button,
+  .not-found__button .button-fill__blob,
+  .not-found__button .button-fill__inner::before { transition: none; }
+}

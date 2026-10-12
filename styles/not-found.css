@@ -1,0 +1,10 @@
+@layer foundation, components, pages, effects, responsive;
+
+@import url("./foundation.css") layer(foundation);
+@import url("./navigation-base.css") layer(components);
+@import url("./custom-cursor.css") layer(components);
+@import url("./buttons.css") layer(components);
+@import url("./not-found-page.css") layer(pages);
+@import url("./not-found-animation.css") layer(effects);
+@import url("./navigation.css") layer(responsive);
+@import url("./not-found-responsive.css") layer(responsive);

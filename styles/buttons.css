@@ -1,23 +1,25 @@
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button) {
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button) {
   --cta-fill: var(--brand-green);
 
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 9.25rem;
-  height: 2.7rem;
+  width: max-content;
+  min-width: min(11rem, 100%);
+  max-width: 100%;
+  min-height: var(--tap-size);
   flex-shrink: 0;
-  padding: 0 0.5rem;
+  padding: 0.75rem 1.25rem;
   margin: 2.2vw auto 0;
   overflow: hidden;
   border-radius: 999rem;
   border: 0;
   background: var(--brand-olive);
   color: var(--brand-green);
-  font-size: 0.72rem;
+  font-size: var(--small-size);
   font-weight: 650;
-  line-height: 1;
+  line-height: 1.35;
   isolation: isolate;
   transition:
     background 260ms ease,
@@ -25,7 +27,7 @@
     transform 260ms ease;
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button)::before,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button)::before,
 .case-study__button::before {
   content: none;
 }
@@ -94,39 +96,38 @@
   transition-delay: 240ms;
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):hover,
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):hover,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):focus-visible,
 .case-study__button:hover,
 .case-study__button:focus-visible {
   color: var(--brand-olive);
   transform: translateY(-0.08rem);
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):hover .button-fill__blob,
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible .button-fill__blob,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):hover .button-fill__blob,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):focus-visible .button-fill__blob,
 .case-study__button:hover .button-fill__blob,
 .case-study__button:focus-visible .button-fill__blob {
   transform: translateZ(0) scale(1.55);
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):hover .button-fill__inner::before,
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible .button-fill__inner::before,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):hover .button-fill__inner::before,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):focus-visible .button-fill__inner::before,
 .case-study__button:hover .button-fill__inner::before,
 .case-study__button:focus-visible .button-fill__inner::before {
   clip-path: circle(160% at 50% 110%);
   transition-delay: 340ms;
 }
 
-:is(.offer__button, .services-process__cta, .services-contact__button, .events-button):focus-visible,
+:is(.offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button):focus-visible,
 .case-study__button:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 0.18rem;
 }
 
 @media (max-width: 1100px) {
-  :is(.page-home .offer__button, .services-process__cta, .services-contact__button, .events-button) {
-    width: min(11rem, 100%);
-    height: var(--tap-size, 2.75rem);
+  :is(.page-home .offer__button, .services-process__cta, .services-contact__button, .events-button, .coming-soon__button, .not-found__button) {
+    min-height: var(--tap-size);
     margin-top: 1.5rem;
   }
 }

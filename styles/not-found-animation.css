@@ -1,0 +1,18 @@
+.not-found__frame--one {
+  animation: not-found-frame-one 600ms steps(1, end) infinite;
+}
+
+.not-found__frame--two {
+  visibility: hidden;
+  animation: not-found-frame-two 600ms steps(1, end) infinite;
+}
+
+@keyframes not-found-frame-one {
+  0%, 100% { visibility: visible; }
+  50% { visibility: hidden; }
+}
+
+@keyframes not-found-frame-two {
+  0%, 100% { visibility: hidden; }
+  50% { visibility: visible; }
+}

@@ -1,0 +1,141 @@
+/* Figma 1939:236, adapted to the site's shared hero and content proportions. */
+.coming-soon {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  display: grid;
+  place-items: center;
+  min-height: max(var(--hero-vh), 34rem);
+  padding-block: calc(var(--nav-height) + var(--space-xl));
+  overflow: hidden;
+  background: var(--brand-green);
+  color: var(--paper);
+}
+
+.coming-soon__background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.coming-soon__image {
+  position: absolute;
+  top: -12.7678%;
+  left: -3.3333%;
+  width: 106.6146%;
+  height: 116.9666%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.coming-soon__content {
+  width: var(--content-width);
+  margin-inline: auto;
+  text-align: center;
+  font-variation-settings: "opsz" 14;
+  /* Keep the heading at the hero midpoint, with supporting copy below it. */
+  transform: translateY(var(--soon-copy-offset, 0));
+}
+
+.coming-soon__title {
+  --soon-underline-scale: 0.5;
+  --soon-circle-scale: 0.7;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25em;
+  margin: 0;
+  font-size: var(--landing-title-size);
+  font-weight: 600;
+  line-height: var(--heading-line);
+  letter-spacing: -0.02em;
+}
+
+.coming-soon__opening,
+.coming-soon__phrase,
+.coming-soon__word {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.coming-soon__underline {
+  position: absolute;
+  top: calc(100% - 0.08em);
+  left: 50%;
+  max-width: none;
+  transform: translateX(-50%) scale(var(--soon-underline-scale));
+  transform-origin: top center;
+  pointer-events: none;
+  animation: scribble-shape-cycle 960ms steps(1, end) -180ms infinite;
+}
+
+.coming-soon__circle {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  width: 701.02px;
+  height: 146.959px;
+  transform: translate(-50%, -50%) scale(var(--soon-circle-scale));
+  pointer-events: none;
+}
+
+.coming-soon__circle-turn {
+  position: relative;
+  display: block;
+  width: 701.02px;
+  height: 146.959px;
+  transform: scaleY(-1) rotate(-177.61deg);
+}
+
+.coming-soon__circle img {
+  position: absolute;
+  top: -0.8083px;
+  left: -1.3319px;
+  max-width: none;
+  animation: scribble-shape-cycle 960ms steps(1, end) -540ms infinite;
+}
+
+.coming-soon__intro {
+  position: relative;
+  width: min(100%, 36rem);
+  margin: var(--space-lg) auto 0;
+  font-family: "Teva", sans-serif;
+  font-size: var(--label-size);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.coming-soon__button {
+  --cta-fill: #f5cf68;
+  margin: var(--space-2xl) auto 0;
+  border: 1px solid var(--cta-fill);
+  background: transparent;
+  color: var(--cta-fill);
+}
+
+.coming-soon__button:is(:hover, :focus-visible) {
+  color: #043c08;
+}
+
+.coming-soon__button:focus-visible {
+  outline-color: var(--paper);
+}
+
+.coming-soon-skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 0.5rem;
+  left: var(--page-gutter);
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+  color: var(--brand-green);
+  transform: translateY(-200%);
+}
+
+.coming-soon-skip-link:focus-visible {
+  transform: none;
+}

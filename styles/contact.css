@@ -16,18 +16,18 @@
 }
 
 .services-contact {
-  padding: clamp(3rem, 5.6vw, 5.6rem) 0 clamp(5rem, 10vw, 10rem);
+  padding: var(--section-space) 0 var(--editorial-space);
   color: var(--brand-green);
 }
 
 .services-contact__inner {
-  width: min(86rem, 84vw);
+  width: var(--content-width);
   margin: 0 auto;
 }
 
 .services-contact__visual {
   position: relative;
-  aspect-ratio: 1618 / 553;
+  aspect-ratio: var(--banner-ratio);
 }
 
 .services-contact__image {
@@ -62,8 +62,8 @@
 
 .services-contact h2 {
   margin: clamp(2rem, 3.2vw, 3.2rem) 0 0;
-  font-size: clamp(2rem, 4.8vw, 4.8rem);
-  line-height: 1.15;
+  font-size: var(--heading-size);
+  line-height: var(--heading-line);
   letter-spacing: -0.025em;
 }
 

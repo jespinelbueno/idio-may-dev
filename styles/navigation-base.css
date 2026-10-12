@@ -1,5 +1,5 @@
-/* Shared interior-page navigation; responsive behavior lives in navigation.css. */
-.services-nav {
+/* Shared homepage and interior-page navigation; responsive behavior lives in navigation.css. */
+:is(.home-nav, .services-nav) {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,17 +8,22 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0.75rem clamp(1.6rem, 3vw, 3rem);
+  padding: 0.75rem var(--page-gutter);
+  min-height: var(--nav-height);
+  transition: background-color 180ms ease, color 180ms ease;
   color: var(--paper);
   pointer-events: none;
 }
 
-.services-nav__brand,
-.services-nav__links a {
+:is(.home-nav__brand, .services-nav__brand),
+:is(.home-nav__links, .services-nav__links) a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-size);
   pointer-events: auto;
 }
 
-.services-nav__brand {
+:is(.home-nav__brand, .services-nav__brand) {
   display: grid;
   place-items: center;
   width: clamp(2.1rem, 3.3vw, 3rem);
@@ -28,7 +33,7 @@
     transform 180ms ease;
 }
 
-.services-nav__brand-mark {
+:is(.home-nav__brand-mark, .services-nav__brand-mark) {
   width: 100%;
   height: 100%;
   background: currentColor;
@@ -36,36 +41,39 @@
   -webkit-mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat;
 }
 
-.services-nav__links {
+:is(.home-nav__links, .services-nav__links) {
   display: flex;
   align-items: center;
-  gap: clamp(1.8rem, 4.6vw, 4.8rem);
-  font-size: clamp(0.65rem, 0.76vw, 0.78rem);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  font-size: var(--small-size);
   font-weight: 650;
   line-height: 1;
 }
 
-.services-nav__links a {
+:is(.home-nav__links, .services-nav__links) a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-size);
   transition:
     opacity 180ms ease,
     transform 180ms ease;
 }
 
-.services-nav__links a:hover,
-.services-nav__links a:focus-visible,
-.services-nav__brand:hover,
-.services-nav__brand:focus-visible {
+:is(.home-nav__links, .services-nav__links) a:hover,
+:is(.home-nav__links, .services-nav__links) a:focus-visible,
+:is(.home-nav__brand, .services-nav__brand):hover,
+:is(.home-nav__brand, .services-nav__brand):focus-visible {
   opacity: 0.72;
   transform: translateY(-0.06rem);
 }
 
-.services-nav__links a:focus-visible,
-.services-nav__brand:focus-visible {
+:is(.home-nav__links, .services-nav__links) a:focus-visible,
+:is(.home-nav__brand, .services-nav__brand):focus-visible {
   outline: 0.12rem solid currentColor;
   outline-offset: 0.3rem;
 }
 
-.services-nav__links a.is-active {
+:is(.home-nav__links, .services-nav__links) a.is-active {
   font-weight: 800;
 }
 

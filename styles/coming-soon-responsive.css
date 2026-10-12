@@ -1,0 +1,38 @@
+@media (max-width: 640px) {
+  .coming-soon__image {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-position: 53% center;
+  }
+
+  .coming-soon__title {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3em;
+  }
+
+  .coming-soon__intro {
+    width: min(100%, 22rem);
+    margin-top: var(--space-xl);
+  }
+
+  .coming-soon__button {
+    margin-top: var(--space-xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon__underline,
+  .coming-soon__circle img {
+    animation: none;
+    filter: none;
+  }
+
+  .coming-soon__button,
+  .coming-soon__button .button-fill__blob,
+  .coming-soon__button .button-fill__inner::before {
+    transition: none;
+  }
+}

@@ -5,8 +5,9 @@ export function initServicesHeroReveal() {
   const offer = stage?.querySelector(".services-offer");
   const dotMarker = hero?.querySelector(".services-hero__dot");
   const whiteTitle = hero?.querySelector(".services-hero__title");
+  const revealCopy = hero?.querySelector(".services-hero__reveal-copy");
 
-  if (!stage || !hero || !scrollSpace || !offer || !dotMarker || !whiteTitle) {
+  if (!stage || !hero || !scrollSpace || !offer || !dotMarker || !whiteTitle || !revealCopy) {
     return;
   }
 
@@ -18,6 +19,19 @@ export function initServicesHeroReveal() {
 
     const stageTop = stage.getBoundingClientRect().top + window.scrollY;
     const heroHeight = hero.offsetHeight || window.innerHeight;
+    const titleHeight = whiteTitle.offsetHeight;
+    hero.style.setProperty("--services-title-height", `${titleHeight}px`);
+    if (window.innerWidth <= 640 || window.innerHeight <= 720) {
+      // Keep both titles aligned while leaving room for the paragraph in the reveal.
+      const navHeight = document.querySelector(".services-nav")?.offsetHeight || 68;
+      const titleCenter = Math.max(
+        navHeight + titleHeight / 2 + 24,
+        Math.min(heroHeight * 0.49, heroHeight - revealCopy.offsetHeight + titleHeight / 2 - 48),
+      );
+      hero.style.setProperty("--services-title-y", `${titleCenter}px`);
+    } else {
+      hero.style.removeProperty("--services-title-y");
+    }
     const holdDistance = Math.max(scrollSpace.offsetHeight - heroHeight, 0);
     const rawProgress = Math.min(Math.max((window.scrollY - stageTop) / heroHeight, 0), 1);
     const transitionProgress = Math.min(Math.max((rawProgress - 0.05) / 0.95, 0), 1);
@@ -89,5 +103,6 @@ export function initServicesHeroReveal() {
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
   reducedMotion.addEventListener("change", requestUpdate);
+  new ResizeObserver(requestUpdate).observe(revealCopy);
   update();
 }

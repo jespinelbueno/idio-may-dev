@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="This page could not be found. Head back home to Idio Creative.">
+    <title>404 — Page Not Found | Idio</title>
+    <!-- Resolve assets and links even when GitHub Pages serves this at a nested URL. -->
+    <base href="/">
+    <script>
+      if (location.hostname.endsWith(".github.io")) {
+        document.querySelector("base").setAttribute("href", "/idio-may-dev/");
+      }
+    </script>
+    <script defer src="scripts/register-cache.js"></script>
+    <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="styles/not-found.css">
+  </head>
+  <body class="not-found-page">
+    <a class="not-found-skip-link" href="404.html#not-found-title">Skip to page content</a>
+    <svg class="scribble-frame-filters" aria-hidden="true"><defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo" result="mix"></feBlend>
+        </filter>
+    </defs></svg>
+    <header class="services-nav" aria-label="Primary navigation">
+      <a class="services-nav__brand" href="index.html" aria-label="Idio home">
+        <span class="services-nav__brand-mark" aria-hidden="true"></span>
+      </a>
+      <button class="services-nav__toggle" type="button" aria-expanded="false" aria-controls="not-found-menu">menu</button>
+      <nav class="services-nav__links" id="not-found-menu" aria-label="Main">
+        <a href="services.html">services</a>
+        <a href="index.html#case-study-title">projects</a>
+        <a href="about.html">about us</a>
+        <a href="events.html">events</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </header>
+    <!-- Figma 1971:637 and 1971:651: alternate the original vector sets. -->
+    <main>
+      <section class="not-found" aria-labelledby="not-found-title">
+        <div class="not-found__content">
+          <h1 class="not-found__title" id="not-found-title">
+            <span class="not-found__accessible-title">404 — Page not found</span>
+            <span class="not-found__artwork" aria-hidden="true">
+              <span class="not-found__canvas">
+                <span class="not-found__frame not-found__frame--one">
+                  <img class="not-found__digit not-found__digit--left" src="assets/media/not-found/four-frame-1.svg" width="371.834" height="546.862" alt="">
+                  <img class="not-found__digit not-found__digit--zero" src="assets/media/not-found/zero-frame-1.svg" width="418.787" height="498.686" alt="">
+                  <img class="not-found__digit not-found__digit--right" src="assets/media/not-found/four-frame-1.svg" width="371.834" height="546.862" alt="">
+                </span>
+                <span class="not-found__frame not-found__frame--two">
+                  <img class="not-found__digit not-found__digit--left" src="assets/media/not-found/four-frame-2.svg" width="423.348" height="514.715" alt="">
+                  <img class="not-found__digit not-found__digit--zero" src="assets/media/not-found/zero-frame-2.svg" width="400.815" height="516.036" alt="">
+                  <img class="not-found__digit not-found__digit--right" src="assets/media/not-found/four-frame-2.svg" width="423.348" height="514.715" alt="">
+                </span>
+              </span>
+            </span>
+          </h1>
+          <p class="not-found__intro">this page is not real hehe you should probably go back to the homepage</p>
+          <a class="not-found__button" href="index.html">
+            <span class="button-fill__label">i wanna go home!</span>
+            <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="scripts/not-found.js"></script>
+  </body>
+</html>
