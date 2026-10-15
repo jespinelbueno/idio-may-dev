@@ -47,7 +47,7 @@ The hero title token is already shared successfully. Contact's long email addres
 ### Home
 
 - Preserve its art direction and the shared hero-title token.
-- The phone “about you” paragraph is approximately 8.2px, with a roughly 10.8px line height, beneath a 31.8px heading. This is the clearest homepage proportion problem. Its owning rule is in `styles/offer.css`, in the final phone media query.
+- The phone “about you” paragraph is approximately 8.2px, with a roughly 10.8px line height, beneath a 31.8px heading. This is the clearest homepage proportion problem. Its owning rule is in `styles/pages/home/offer.css`, in the final phone media query.
 - Desktop narrative, collaboration descriptions, team biographies, and values descriptions are approximately 10–12.5px. Increasing readable copy requires additional room, not simply a larger font inside the existing geometry.
 - Main desktop section headings currently span approximately 48–60.5px; the phone toolkit and values headings are about 30–32px while intro, collaboration, and team headings are about 40px. Define which are primary and which are secondary rather than allowing unrelated formulas to decide.
 - Keep the loader sequence and timing, hero transition, carousel layouts, and values-wheel smoothing unchanged during proportion work.
@@ -72,7 +72,7 @@ The hero title token is already shared successfully. Contact's long email addres
 
 - Hero scale matches Home. Signup and “coming soon” desktop headings are larger than equivalent homepage headings and use uncapped `5vw` rules. Larger-screen growth is a source-based concern beyond the measured desktop viewport.
 - Signup body copy stays at 14px while primary paragraphs elsewhere become 16px. The large calendar and generous spacing make that small copy more conspicuous.
-- **Confirmed footer defect:** `styles/footer.css` scopes responsive rules to Home, Services, and About, omitting Events. At 390px, Events keeps a compressed 464px desktop-style footer while the other three use an approximately 743px flow layout. Text is crowded near the copyright line.
+- **Confirmed footer defect:** `styles/components/footer.css` scopes responsive rules to Home, Services, and About, omitting Events. At 390px, Events keeps a compressed 464px desktop-style footer while the other three use an approximately 743px flow layout. Text is crowded near the copyright line.
 - At 320px, the footer wordmark extends to approximately x=333px and its email to x=369px, beyond the 305px scrollport. Both visibly clip. Include Events in the shared footer's responsive contract.
 - Keep the calendar and photograph compositions, with decorations positioned relative to those objects rather than unrelated page-wide units.
 

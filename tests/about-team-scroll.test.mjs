@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { getTeamScrollProgress, getTeamCardTransform, getTeamShuffleFrames } from "../scripts/features/about-team-scroll-progress.js";
+import { getTeamScrollProgress, getTeamCardTransform, getTeamShuffleFrames } from "../scripts/features/about/about-team-scroll-progress.js";
 
 test("all five people have a reading hold before the sticky section releases", () => {
   const step = 630;

@@ -9,7 +9,7 @@
 .privacy-hero h1 em { font-family: 'Vollkorn', Georgia, serif; font-weight: 500; }
 .privacy-hero__intro { max-width: 30rem; margin: 2rem 0; font-size: clamp(1.0625rem, 1.6vw, 1.3rem); line-height: 1.5; }
 .privacy-hero__date { margin: 2.5rem 0 0; font-size: 0.875rem; line-height: 1.5; }
-.privacy-hero__logo { position: absolute; top: 25%; right: 5%; display: block; width: clamp(9rem, 17vw, 14rem); aspect-ratio: 47 / 33; background: var(--brand-green); mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat; -webkit-mask: url("../assets/media/brand/idio-icon.svg") center / contain no-repeat; }
+.privacy-hero__logo { position: absolute; top: 25%; right: 5%; display: block; width: clamp(9rem, 17vw, 14rem); aspect-ratio: 47 / 33; background: var(--brand-green); mask: url("../../assets/media/brand/idio-icon.svg") center / contain no-repeat; -webkit-mask: url("../../assets/media/brand/idio-icon.svg") center / contain no-repeat; }
 .privacy-overview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; width: var(--content-width); margin: 3rem auto 0; padding-bottom: 3rem; border-bottom: 1px solid var(--brand-olive); }
 .privacy-overview p { display: grid; align-content: start; gap: 0.55rem; margin: 0; font-size: 0.9375rem; line-height: 1.5; }
 .privacy-overview span { font-family: 'Teva', sans-serif; font-size: 1.1rem; }

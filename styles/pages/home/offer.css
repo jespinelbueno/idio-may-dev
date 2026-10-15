@@ -21,8 +21,8 @@
   z-index: -1;
   content: "";
   background: var(--paper);
-  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
-  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-image: url("../../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
   -webkit-mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
   mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
   -webkit-mask-position: center top, center bottom;
@@ -37,8 +37,8 @@
   inset: calc(var(--offer-curve-offset) * -1) 0 0;
   z-index: 0;
   overflow: hidden;
-  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
-  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-image: url("../../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
   -webkit-mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
   mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% calc(100% - var(--offer-curve-offset) + 2px);
   -webkit-mask-position: center top, center bottom;
@@ -177,8 +177,8 @@
   position: absolute;
   inset: 0;
   background: var(--brand-green);
-  mask: url("../assets/media/decorations/scribbles/offer-title.svg") center / contain no-repeat;
-  -webkit-mask: url("../assets/media/decorations/scribbles/offer-title.svg") center / contain no-repeat;
+  mask: url("../../../assets/media/decorations/scribbles/offer-title.svg") center / contain no-repeat;
+  -webkit-mask: url("../../../assets/media/decorations/scribbles/offer-title.svg") center / contain no-repeat;
 }
 
 .offer__intro p {
@@ -637,7 +637,7 @@
     top: 1.7em;
     width: 44%;
     aspect-ratio: 148.527 / 31.2579;
-    background: url("../assets/media/home/mobile/offer-underline.svg") center / contain no-repeat;
+    background: url("../../../assets/media/home/mobile/offer-underline.svg") center / contain no-repeat;
     transform: rotate(8.95deg);
   }
   .offer__copy p {
@@ -656,7 +656,7 @@
     top: 3.2rem;
     width: 60px;
     height: 111px;
-    background: url("../assets/media/home/mobile/offer-arrow.svg") center / contain no-repeat;
+    background: url("../../../assets/media/home/mobile/offer-arrow.svg") center / contain no-repeat;
     transform: scaleY(-1);
   }
   .offer__collage { display: none; }

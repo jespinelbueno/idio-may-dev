@@ -16,7 +16,7 @@ These are source-level findings, not a completed browser visual audit. The curre
 
 | Area | Current behavior | Planned correction |
 | --- | --- | --- |
-| Cascade | `styles/responsive.css` has repeated 900px and 640px rules; `case-study.css` and `team.css` also redefine earlier rules. The responsive layer outranks section styles. | Consolidate each property's rules into one deliberate behavior per mode, removing superseded declarations during the same change. |
+| Cascade | `styles/responsive/responsive.css` has repeated 900px and 640px rules; `case-study.css` and `team.css` also redefine earlier rules. The responsive layer outranks section styles. | Consolidate each property's rules into one deliberate behavior per mode, removing superseded declarations during the same change. |
 | Offer | Mobile stacks five full-width images, changes their aspect ratios, and hides every scribble. The section retains its desktop 112%-wide curved wrapper and negative margin. | Separate the full-bleed background from a contained content area. Preserve a compact collage with explicit geometry and selected decorations. |
 | Hero | Mobile imposes a 43rem minimum. JavaScript replaces `100svh` with `innerHeight` on every resize. | Establish one viewport-height policy and remove accidental oversized minimums on phones. |
 | Toolkit | All four items become one column below 900px, while the heading retains `white-space: nowrap`. | Use a deliberate compact arrangement with wrapping typography and artwork sized from its own cells. |

@@ -1,9 +1,9 @@
 import "./privacy-bootstrap.js";
-import { initPrivacyPreferences } from "./features/privacy-preferences.js";
-import { initResponsiveNav } from "./features/responsive-nav.js";
-import { initCustomCursor } from "./features/custom-cursor.js";
-import { initFooterLinkCircles } from "./features/footer-link-circles.js";
-import { initCopyrightYear } from "./features/copyright-year.js";
+import { initPrivacyPreferences } from "./features/shared/privacy-preferences.js";
+import { initResponsiveNav } from "./features/shared/responsive-nav.js";
+import { initCustomCursor } from "./features/shared/custom-cursor.js";
+import { initFooterLinkCircles } from "./features/shared/footer-link-circles.js";
+import { initCopyrightYear } from "./features/shared/copyright-year.js";
 
 initResponsiveNav({ navSelector: ".services-nav", transitionSelector: ".privacy-layout" });
 initCustomCursor();

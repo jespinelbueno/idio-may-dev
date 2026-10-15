@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
-const source = readFileSync(new URL("../scripts/features/home-loader.js", import.meta.url), "utf8")
+const source = readFileSync(new URL("../scripts/features/home/home-loader.js", import.meta.url), "utf8")
   .replace("export const initHomeLoader", "const initHomeLoader");
 
 const createLoader = ({ optIn, loaded = true, missingMarkup = false } = {}) => {

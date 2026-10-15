@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
-const source = readFileSync(new URL("../scripts/features/services-hero-reveal.js", import.meta.url), "utf8")
+const source = readFileSync(new URL("../scripts/features/services/services-hero-reveal.js", import.meta.url), "utf8")
   .replace("export function", "function");
 
 function createHero({ reduced = false, width = 390 } = {}) {

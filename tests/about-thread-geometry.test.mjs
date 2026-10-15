@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { getAboutThreadTransform } from "../scripts/features/about-thread-geometry.js";
+import { getAboutThreadTransform } from "../scripts/features/about/about-thread-geometry.js";
 
 test("the artwork endpoints stay on their circles across alternating and stacked layouts", () => {
   const guides = [

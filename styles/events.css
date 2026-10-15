@@ -1,15 +1,15 @@
 @layer foundation, components, pages, effects, responsive;
 
-@import url("./foundation.css") layer(foundation);
-@import url("./buttons.css?v=2") layer(components);
-@import url("./privacy-controls.css?v=2") layer(components);
-@import url("./navigation-base.css") layer(components);
-@import url("./custom-cursor.css") layer(components);
-@import url("./footer.css") layer(components);
-@import url("./signup-confirmation.css") layer(components);
-@import url("./events-page.css") layer(pages);
-@import url("./contact.css") layer(pages);
-@import url("./animations.css") layer(effects);
-@import url("./navigation.css") layer(responsive);
-@import url("./responsive.css") layer(responsive);
-@import url("./events-responsive.css") layer(responsive);
+@import url("./foundation/foundation.css") layer(foundation);
+@import url("./components/buttons.css?v=2") layer(components);
+@import url("./components/privacy-controls.css?v=2") layer(components);
+@import url("./components/navigation-base.css") layer(components);
+@import url("./components/custom-cursor.css") layer(components);
+@import url("./components/footer.css") layer(components);
+@import url("./components/signup-confirmation.css") layer(components);
+@import url("./pages/events-page.css") layer(pages);
+@import url("./components/contact.css") layer(pages);
+@import url("./animations/animations.css") layer(effects);
+@import url("./responsive/navigation.css") layer(responsive);
+@import url("./responsive/responsive.css") layer(responsive);
+@import url("./responsive/events-responsive.css") layer(responsive);

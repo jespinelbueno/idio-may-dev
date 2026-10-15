@@ -1,11 +1,11 @@
 @layer foundation, components, pages, effects, responsive;
 
-@import url("./foundation.css") layer(foundation);
-@import url("./buttons.css?v=2") layer(components);
-@import url("./privacy-controls.css?v=2") layer(components);
-@import url("./navigation-base.css") layer(components);
-@import url("./custom-cursor.css") layer(components);
-@import url("./coming-soon-page.css") layer(pages);
-@import url("./animations.css") layer(effects);
-@import url("./navigation.css") layer(responsive);
-@import url("./coming-soon-responsive.css") layer(responsive);
+@import url("./foundation/foundation.css") layer(foundation);
+@import url("./components/buttons.css?v=2") layer(components);
+@import url("./components/privacy-controls.css?v=2") layer(components);
+@import url("./components/navigation-base.css") layer(components);
+@import url("./components/custom-cursor.css") layer(components);
+@import url("./pages/coming-soon-page.css") layer(pages);
+@import url("./animations/animations.css") layer(effects);
+@import url("./responsive/navigation.css") layer(responsive);
+@import url("./responsive/coming-soon-responsive.css") layer(responsive);

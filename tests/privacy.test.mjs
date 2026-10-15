@@ -163,7 +163,7 @@ test("public pages load consent first and provide working non-JavaScript privacy
     assert.ok(read(entry).startsWith('import "./privacy-bootstrap.js";'), page);
   }
   assert.doesNotMatch(read("index.html"), /localStorage/);
-  assert.doesNotMatch(read("scripts/features/home-loader.js"), /localStorage/);
+  assert.doesNotMatch(read("scripts/features/home/home-loader.js"), /localStorage/);
   assert.match(read("events.html"), /href="privacy.html#newsletter"/);
 });
 

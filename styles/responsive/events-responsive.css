@@ -37,7 +37,7 @@
   .events-coming__bottom { width: 40%; left: 54%; bottom: 1.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .events-hero { background: url('../assets/media/events/hero.png') center / cover no-repeat; }
+  .events-hero { background: url('../../assets/media/events/hero.png') center / cover no-repeat; }
   .events-hero__video { display: none; }
   .events-scribble { animation: none; filter: none; }
 }

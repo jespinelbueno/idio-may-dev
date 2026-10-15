@@ -60,8 +60,8 @@
   height: calc(var(--offer-curve-offset) + 2px);
   content: "";
   background: var(--paper);
-  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
-  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-image: url("../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
   -webkit-mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% 4px;
   mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% 4px;
   -webkit-mask-position: center top, center bottom;
@@ -233,8 +233,8 @@
   height: calc(var(--offer-curve-offset) + 2px);
   content: "";
   background: var(--paper);
-  -webkit-mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
-  mask-image: url("../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  -webkit-mask-image: url("../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../../assets/media/about/hero-curve.svg"), linear-gradient(#000, #000);
   -webkit-mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% 4px;
   mask-size: calc(100% - var(--offer-curve-bleed) - var(--offer-curve-bleed)) var(--offer-curve-offset), 100% 4px;
   -webkit-mask-position: center top, center bottom;

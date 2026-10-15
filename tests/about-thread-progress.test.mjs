@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { getAboutThreadProgress, smoothAboutThreadProgress } from "../scripts/features/about-thread-progress.js";
+import { getAboutThreadProgress, smoothAboutThreadProgress } from "../scripts/features/about/about-thread-progress.js";
 
 const atScroll = (scroll) => getAboutThreadProgress([
   { top: 500 - scroll, bottom: 1100 - scroll },

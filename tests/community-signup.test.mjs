@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { COMMUNITY_SIGNUP_ENDPOINT, isValidSignupEmail, sendCommunitySignup, SignupError } from '../scripts/features/community-signup-request.js';
-import { initCommunitySignup } from '../scripts/features/community-signup.js';
+import { COMMUNITY_SIGNUP_ENDPOINT, isValidSignupEmail, sendCommunitySignup, SignupError } from '../scripts/features/events/community-signup-request.js';
+import { initCommunitySignup } from '../scripts/features/events/community-signup.js';
 
 const response = (body, status = 200, type = 'application/json') => ({ok: status >= 200 && status < 300, status, headers: new Headers({'content-type': type}), json: async () => body});
 

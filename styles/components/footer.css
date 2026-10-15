@@ -13,7 +13,7 @@
   position: absolute;
   inset: 0;
   z-index: 5;
-  background: url("../assets/media/home/textures/paper-grain.svg") 0 0 / 240px 240px repeat;
+  background: url("../../assets/media/home/textures/paper-grain.svg") 0 0 / 240px 240px repeat;
   opacity: 0.10;
   pointer-events: none;
 }

@@ -1,9 +1,9 @@
 import "./privacy-bootstrap.js";
-import { initPrivacyPreferences } from "./features/privacy-preferences.js";
-import { initImageSaveDeterrent } from "./features/image-save-deterrent.js";
-import { initContactArtwork } from "./features/contact-artwork.js";
-import { initResponsiveNav } from "./features/responsive-nav.js";
-import { initCustomCursor } from "./features/custom-cursor.js";
+import { initPrivacyPreferences } from "./features/shared/privacy-preferences.js";
+import { initImageSaveDeterrent } from "./features/shared/image-save-deterrent.js";
+import { initContactArtwork } from "./features/contact/contact-artwork.js";
+import { initResponsiveNav } from "./features/shared/responsive-nav.js";
+import { initCustomCursor } from "./features/shared/custom-cursor.js";
 
 initImageSaveDeterrent();
 initContactArtwork();

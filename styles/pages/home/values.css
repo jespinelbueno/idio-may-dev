@@ -62,8 +62,8 @@
   width: 100%;
   height: 100%;
   background: var(--brand-green);
-  -webkit-mask: url("../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
-  mask: url("../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
+  -webkit-mask: url("../../../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
+  mask: url("../../../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
 }
 
 .values-wheel {
@@ -590,8 +590,8 @@
     inset: 0;
     opacity: 0.3;
     background:
-      url("../assets/media/home/mobile/values-glow-top.svg") 65% top / 175% auto no-repeat,
-      url("../assets/media/home/mobile/values-glow-bottom.svg") 20% bottom / 195% auto no-repeat;
+      url("../../../assets/media/home/mobile/values-glow-top.svg") 65% top / 175% auto no-repeat,
+      url("../../../assets/media/home/mobile/values-glow-bottom.svg") 20% bottom / 195% auto no-repeat;
   }
   .values-callouts { display: none; }
   .values-intro { margin-bottom: 2.75rem; transform: none; }
@@ -604,7 +604,7 @@
     margin: -0.1rem 0 0 2.5rem;
   }
   .values-title-scribble::before {
-    background: url("../assets/media/home/mobile/values-underline.svg") center / contain no-repeat;
+    background: url("../../../assets/media/home/mobile/values-underline.svg") center / contain no-repeat;
     mask: none;
     -webkit-mask: none;
   }
@@ -637,7 +637,7 @@
     bottom: 0;
     width: min(100%, 115px);
     height: 3.57px;
-    background: url("../assets/media/home/mobile/value-underline.svg") left bottom / 115px 3.57px no-repeat;
+    background: url("../../../assets/media/home/mobile/value-underline.svg") left bottom / 115px 3.57px no-repeat;
     pointer-events: none;
   }
   .values-mobile-copy p { margin: 0; font-size: var(--body-size); font-weight: 300; line-height: var(--body-line); letter-spacing: -0.02em; color: #004c40; }
