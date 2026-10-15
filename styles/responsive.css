@@ -247,8 +247,23 @@
 }
 
 @media (max-width: 640px) {
+  .services-page {
+    overflow-x: clip;
+  }
+
   .services-shell {
     --mobile-unit: calc(min(100vw, 32rem) / 402);
+    /* Keep horizontal clipping off the sticky hero's containing block. */
+    overflow: visible;
+  }
+
+  .services-hero-offer-transition {
+    --offer-curve-bleed: 0px;
+    padding-bottom: 0;
+  }
+
+  .services-hero {
+    transform: translateZ(0);
   }
 
   :is(.services-offer, .services-work, .services-closing) {
@@ -257,6 +272,7 @@
 
   .services-offer {
     background: var(--paper);
+    transform: none;
   }
 
   .services-offer__inner {
@@ -353,6 +369,8 @@
 
   .services-work {
     position: relative;
+    /* Its glow extends upward across the offer boundary. */
+    z-index: 2;
     isolation: isolate;
     padding: 0 0 calc(var(--mobile-unit) * 80);
     background: var(--paper);
@@ -698,6 +716,30 @@
   :is(.services-page, .about-page, .events-page) .services-contact__button:focus-visible::before {
     outline: 2px solid var(--brand-olive);
     outline-offset: 3px;
+  }
+}
+
+/* Scale a separate blue surface so mobile scrolling never repaints a changing
+   full-screen clipping path. Copy keeps its own size and fades in place. */
+@media (max-width: 640px) and (min-height: 521px) {
+  .services-hero__reveal {
+    overflow: visible;
+    background: none;
+    clip-path: none;
+    will-change: auto;
+  }
+
+  .services-hero__reveal::before {
+    position: absolute;
+    top: var(--services-dot-y);
+    left: 50%;
+    width: var(--services-reveal-diameter, 200vmax);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    content: "";
+    background: linear-gradient(180deg, #96b6cf, #8aafd0);
+    transform: translate(-50%, -50%) scale(var(--services-reveal-scale, 0.02));
+    will-change: transform;
   }
 }
 

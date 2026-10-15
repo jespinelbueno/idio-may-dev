@@ -6,12 +6,12 @@ export function initServicesHeroReveal() {
   const dotMarker = hero?.querySelector(".services-hero__dot");
   const whiteTitle = hero?.querySelector(".services-hero__title");
   const revealCopy = hero?.querySelector(".services-hero__reveal-copy");
+  const reveal = hero?.querySelector(".services-hero__reveal");
 
-  if (!stage || !hero || !scrollSpace || !offer || !dotMarker || !whiteTitle || !revealCopy) {
+  if (!stage || !hero || !scrollSpace || !offer || !dotMarker || !whiteTitle || !revealCopy || !reveal) {
     return;
   }
 
-  const reveal = hero.querySelector(".services-hero__reveal");
   const nav = document.querySelector(".services-nav");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let animationFrame = 0;
@@ -42,8 +42,12 @@ export function initServicesHeroReveal() {
     const copyHeight = revealCopy.offsetHeight;
     const navHeight = nav?.offsetHeight || 68;
     const holdDistance = Math.max(scrollSpace.offsetHeight - heroHeight, 0);
-    const maximumLag = reducedMotion.matches || window.innerHeight <= 520
-      ? 0 : Math.min(window.innerHeight * 0.2, 12 * 16);
+    const mobile = window.innerWidth <= 640;
+    const staticLayout = window.innerHeight <= 520;
+    // Mobile browser chrome changes innerHeight during a swipe. Never turn
+    // those changes into moving section boundaries or extra page height.
+    const maximumLag = reducedMotion.matches || mobile || staticLayout
+      ? 0 : Math.min(heroHeight * 0.2, 12 * 16);
     setStyle(hero, "--services-title-height", `${titleHeight}px`);
     if (window.innerWidth <= 640 || window.innerHeight <= 720) {
       // Keep both titles aligned while leaving room for the paragraph in the reveal.
@@ -69,6 +73,9 @@ export function initServicesHeroReveal() {
       Math.hypot(originX, heroBounds.height - originY),
       Math.hypot(heroBounds.width - originX, heroBounds.height - originY),
     ) + 2;
+    if (mobile && !staticLayout) {
+      setStyle(reveal, "--services-reveal-diameter", `${(endingRadius * 2).toFixed(2)}px`);
+    }
     const titleLeft = titleBounds.left - heroBounds.left;
     const titleRight = titleBounds.right - heroBounds.left;
     const titleTop = titleBounds.top - heroBounds.top;
@@ -87,8 +94,10 @@ export function initServicesHeroReveal() {
       titleIntersectionRadius,
       copyFadeDistance: Math.max(titleCoverageRadius - titleIntersectionRadius, 1),
       maximumLag,
+      mobile,
+      viewportWidth: window.innerWidth,
       end: stageTop + heroHeight * 2 + holdDistance,
-      staticLayout: window.innerHeight <= 520,
+      staticLayout,
     };
   };
 
@@ -107,7 +116,11 @@ export function initServicesHeroReveal() {
 
     // Scope frequently changing variables to their consumers, rather than
     // invalidating inherited styles throughout the entire hero subtree.
-    setStyle(reveal || hero, "--services-reveal-radius", `${revealRadius.toFixed(2)}px`);
+    if (geometry.mobile && !geometry.staticLayout) {
+      setStyle(reveal, "--services-reveal-scale", (revealRadius / endingRadius).toFixed(6));
+    } else {
+      setStyle(reveal, "--services-reveal-radius", `${revealRadius.toFixed(2)}px`);
+    }
     setStyle(revealCopy, "--services-copy-opacity", copyOpacity.toFixed(3));
     setStyle(offer, "--services-hero-offer-lag", `${(ease(takeoverProgress) * maximumLag).toFixed(2)}px`);
     lastRenderedScroll = scroll;
@@ -126,9 +139,17 @@ export function initServicesHeroReveal() {
     needsMeasurement = true;
     requestUpdate();
   };
+  const onResize = () => {
+    // The stable CSS hero size is unchanged when Safari hides its toolbar.
+    // ResizeObserver still handles real hero, copy, or navigation changes.
+    if (geometry?.mobile && window.innerWidth === geometry.viewportWidth &&
+      hero.offsetHeight === geometry.heroHeight &&
+      (window.innerHeight <= 520) === geometry.staticLayout) return;
+    invalidateGeometry();
+  };
 
   window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", invalidateGeometry);
+  window.addEventListener("resize", onResize);
   window.addEventListener("load", invalidateGeometry);
   window.addEventListener("pageshow", invalidateGeometry);
   reducedMotion.addEventListener("change", invalidateGeometry);
