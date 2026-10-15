@@ -269,7 +269,7 @@
   overflow: hidden;
   color: var(--brand-green);
   font-size: var(--body-size);
-  font-weight: 420;
+  font-weight: 300;
   line-height: var(--body-line);
   opacity: 0;
   transform: translateY(-0.18rem);
@@ -277,10 +277,6 @@
     max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 180ms ease,
     transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.team__bio strong {
-  font-weight: 900;
 }
 
 .team__member:hover .team__bio,
