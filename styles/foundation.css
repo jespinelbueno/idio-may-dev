@@ -71,6 +71,14 @@ img {
   max-width: 100%;
 }
 
+/* Discourage casual saving without interfering with scrolling or carousel swipes. */
+img,
+picture,
+svg {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;

@@ -1,3 +1,4 @@
+import { initImageSaveDeterrent } from "./features/image-save-deterrent.js";
 import { initMobileLanding } from "./features/mobile-landing.js";
 import { initArrowDraw } from "./features/arrow-draw.js";
 import { initCaseStudyStack } from "./features/case-study-stack.js";
@@ -6,16 +7,19 @@ import { initCustomCursor } from "./features/custom-cursor.js";
 import { initHomeLoader } from "./features/home-loader.js";
 import { initHomeNav } from "./features/home-nav.js";
 import { initFooterLinkCircles } from "./features/footer-link-circles.js";
+import { initCopyrightYear } from "./features/copyright-year.js";
 import { initHeroOfferTransition } from "./features/hero-offer-transition.js";
 import { initOfferParallax } from "./features/offer-parallax.js";
 import { initTeamCarousel } from "./features/team-carousel.js";
 import { initValuesWheel } from "./features/values-wheel/controller.js";
 import { initViewportHeight } from "./features/viewport-height.js";
 
+initImageSaveDeterrent();
 initViewportHeight();
 initCustomCursor();
 initHomeNav();
 initFooterLinkCircles();
+initCopyrightYear();
 initHeroOfferTransition();
 initOfferParallax();
 initHomeLoader();

@@ -151,6 +151,7 @@ for (const entryPage of entryPages) {
 for (const filePath of listJavaScriptFiles(resolve(rootDirectory, "scripts"))) {
   discoveredJavaScript.add(filePath);
 }
+discoveredJavaScript.add(resolve(rootDirectory, "service-worker.js"));
 
 for (const filePath of discoveredJavaScript) {
   try {

@@ -17,4 +17,10 @@ Run npm run check before committing. It resolves local HTML, CSS, and JavaScript
 
 ## Deployment
 
-Pushes to main run the GitHub Pages workflow. Set the repository Pages source to GitHub Actions if it is not already enabled.
+Pushes to main run the GitHub Pages workflow. Set the repository Pages source to GitHub Actions if it is not already enabled. The workflow checks the source, packages only public site files with tools/prepare-pages.mjs, and deploys the unchanged HTML, CSS, JavaScript, and media. Pull requests run checks without deployment permissions.
+
+See [docs/security-audit.md](docs/security-audit.md) for the security review, implemented protections, and remaining hosting/provider settings.
+
+## Image saving
+
+The shared image-save-deterrent feature blocks image/SVG context menus and native dragging on public content pages. Shared styles suppress image long-press callouts where supported. Text selection, navigation, and carousel swipes remain available. This discourages casual saving; it cannot prevent direct image downloads, developer-tool access, or screenshots of public images.

@@ -1,5 +1,5 @@
 // Bump this version when changing the cache strategy or needing a clean asset cache.
-const CACHE_NAME = "idio-site-v4";
+const CACHE_NAME = "idio-site-v5";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
@@ -16,25 +16,14 @@ self.addEventListener("activate", (event) => {
 });
 
 const saveResponse = (cache, request, response, event) => {
-  if (response.ok) {
+  const cacheControl = response.headers.get("cache-control") || "";
+  if (response.ok && response.type === "basic" && !response.redirected
+    && !/\b(?:no-store|private|no-cache)\b/i.test(cacheControl)) {
     event.waitUntil(cache.put(request, response.clone()).catch(() => {
       // Storage can be unavailable or full; the network response remains usable.
     }));
   }
   return response;
-};
-
-const networkFirst = async (request, event) => {
-  const cache = await caches.open(CACHE_NAME);
-
-  try {
-    const response = await fetch(request, { cache: "no-cache" });
-    return saveResponse(cache, request, response, event);
-  } catch (error) {
-    const cached = await cache.match(request);
-    if (cached) return cached;
-    throw error;
-  }
 };
 
 const staleWhileRevalidate = async (request, event) => {
@@ -53,16 +42,21 @@ const staleWhileRevalidate = async (request, event) => {
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
-  if (request.method !== "GET" || request.headers.has("range")) return;
+  if (request.method !== "GET" || request.headers.has("range")
+    || request.headers.has("authorization") || request.cache === "no-store") return;
 
   const url = new URL(request.url);
   const scope = new URL(self.registration.scope);
   if (url.origin !== scope.origin || !url.pathname.startsWith(scope.pathname)) return;
+  // Query variants must not create persistent, attacker-controlled cache entries.
+  if (url.search) return;
 
   const path = url.pathname.slice(scope.pathname.length);
-  if (path.startsWith("assets/")) {
+  // Cache only public media. Documents, scripts, styles, and SVG-as-document
+  // navigations use the browser's normal network/HTTP cache handling so an
+  // offline executable copy cannot outlive a deployed security fix.
+  if (request.mode !== "navigate" && path.startsWith("assets/")
+    && /\.(?:avif|gif|ico|jpe?g|png|svg|webp|mp4|webm|woff2?|ttf|otf)$/i.test(path)) {
     event.respondWith(staleWhileRevalidate(request, event));
-  } else if (request.mode === "navigate" || /\.(?:css|js)$/.test(path)) {
-    event.respondWith(networkFirst(request, event));
   }
 });

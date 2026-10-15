@@ -50,7 +50,11 @@ export const initCaseStudyStack = () => {
     const sourceImage = caseStudyStack.querySelector(`[data-case-card="${index}"] img`);
     const image = document.createElement("div");
     image.className = "case-study__mobile-image";
-    image.innerHTML = `<img src="${sourceImage?.getAttribute("src") || ""}" alt="${caseStudy.client}">`;
+    const mobileImage = document.createElement("img");
+    const imageSource = sourceImage?.getAttribute("src");
+    if (imageSource) mobileImage.setAttribute("src", imageSource);
+    mobileImage.alt = caseStudy.client;
+    image.appendChild(mobileImage);
     panel.prepend(image);
     panel.querySelector("h3").textContent = caseStudy.client;
     panel.querySelector(".case-study__description").textContent = caseStudy.description;
