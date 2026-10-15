@@ -1,8 +1,8 @@
 @layer foundation, components, pages, effects, responsive;
 
 @import url("./foundation.css") layer(foundation);
-@import url("./buttons.css") layer(components);
-@import url("./privacy-controls.css") layer(components);
+@import url("./buttons.css?v=2") layer(components);
+@import url("./privacy-controls.css?v=2") layer(components);
 @import url("./custom-cursor.css") layer(components);
 @import url("./carousel-controls.css") layer(components);
 @import url("./navigation-base.css") layer(components);

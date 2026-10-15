@@ -16,17 +16,22 @@ before relying on the form for Canada-facing express consent or sending marketin
 - Every main public page has persistent privacy and cookie-settings links. The
   preserved backup loader is a development reference, not a new public experience.
 - `privacy-bootstrap.js` is imported first by the existing page script entries
-  and executes before optional intro storage. Nothing optional
+  and executes before intro selection. Nothing optional
   is read for its feature or written before a valid affirmative choice.
-- The preference record `idio-privacy-v1` stores version, a boolean for intro
-  memory, saved time, and expiry. Both acceptance and rejection last 180 days.
+- The preference record `idio-privacy-v1` stores version, a boolean for the shorter
+  intro, saved time, and expiry. Both acceptance and rejection last 180 days.
   No visitor ID, IP address, email, location, or remote consent log is created.
 - Invalid, future-dated, unknown-version, and expired preferences default to off.
   Missing permission removes legacy intro timestamps without using them.
-- The intro timestamp is used for seven days, with expiry enforced on the next
-  check, rather than a claim that localStorage expires itself. Withdrawal removes
-  it immediately in the current tab and propagates via browser storage events.
-- Blocked storage and quota failure leave optional memory off. The popup explains
+- A valid affirmative preference selects only “make it yours” and “make it idio”.
+  Every other state selects the full eight-word sequence and final lockup. Both
+  sequences finish before reveal, and both wait for the browser load event.
+- No separate visit timestamp is needed or written. Legacy `idio-home-loader-v1`
+  records are removed on initialization, preference changes, and resume where
+  storage access permits. The choice applies for its 180-day lifetime; there is
+  no seven-day visit gate. Withdrawal affects the next homepage visit, including
+  other tabs after storage events. An already-running sequence is not restarted.
+- Blocked storage and quota failure leave the shorter intro off. The popup explains
   persistence failure and allows continuing without a saved choice. Fully blocked
   storage can require browser settings to remove an old record.
 - Closing the first dialog rejects optional storage. Closing reopened settings
@@ -92,7 +97,7 @@ regional disclosures, transfer safeguards, and actual business operations.
    accounts, geolocation, or other data collection: review the integration,
    update CSP, inventory and public notice, and implement purpose-specific gating
    before it loads. Version the consent record and obtain a fresh choice for new
-   optional purposes. Do not reuse intro-memory acceptance for another purpose.
+   optional purposes. Do not reuse shorter-intro acceptance for another purpose.
 
 ## Sources reviewed
 
@@ -107,7 +112,7 @@ regional disclosures, transfer safeguards, and actual business operations.
 ## Verification
 
 Run `npm run check`. Privacy regression tests cover default denial, acceptance,
-rejection, expiry, malformed data, timestamp lifetime, withdrawal across tabs,
+rejection, expiry, malformed data, legacy timestamp cleanup, withdrawal across tabs,
 blocked/quota-limited storage, public links, and scoped worker migration. Browser
 QA covers the actual dialog and page layout separately. No live email signup,
 deployment, or provider-account change is performed by these checks.

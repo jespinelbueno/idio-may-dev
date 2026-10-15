@@ -15,7 +15,6 @@ const fixture = (entries = {}, { blocked = false, writeBlocked = false, unsuppor
   const data = new Map(Object.entries(entries));
   const reads = [];
   const writes = [];
-  const classes = new Set();
   const handlers = {};
   const documentHandlers = {};
   let now = NOW;
@@ -30,7 +29,6 @@ const fixture = (entries = {}, { blocked = false, writeBlocked = false, unsuppor
     },
     document: {
       visibilityState: "visible",
-      documentElement: { classList: { add: key => classes.add(key), remove: key => classes.delete(key) } },
       addEventListener: (type, fn) => documentHandlers[type] = fn,
     },
     window: {
@@ -39,7 +37,7 @@ const fixture = (entries = {}, { blocked = false, writeBlocked = false, unsuppor
     },
   };
   vm.runInNewContext(read("scripts/privacy-bootstrap.js"), context);
-  return { api: context.window.idioPrivacy, data, reads, writes, classes,
+  return { api: context.window.idioPrivacy, data, reads, writes,
     storage: key => handlers.storage({ key }), resume: () => documentHandlers.visibilitychange(),
     advance: days => { now += days * DAY; } };
 };
@@ -47,28 +45,27 @@ const fixture = (entries = {}, { blocked = false, writeBlocked = false, unsuppor
 test("first visit never reads or writes optional memory and removes legacy intro data", () => {
   const f = fixture({ [INTRO]: String(NOW - DAY) });
   assert.equal(f.api.allowsIntro(), false);
-  f.api.rememberIntro();
   assert.equal(f.api.getPreference(), null);
   assert.equal(f.data.has(INTRO), false);
   assert.equal(f.reads.includes(INTRO), false);
   assert.equal(f.writes.length, 0);
 });
 
-test("both rejection and acceptance persist; optional memory follows consent", () => {
+test("both rejection and acceptance persist without writing visit timestamps", () => {
   const f = fixture();
   assert.equal(f.api.save(false), true);
-  f.api.rememberIntro();
   assert.equal(f.data.has(INTRO), false);
   assert.equal(f.api.getPreference().intro, false);
   assert.equal(f.api.save(true), true);
-  f.api.rememberIntro();
-  assert.equal(f.data.get(INTRO), String(NOW));
+  assert.equal(f.api.allowsIntro(), true);
+  assert.equal(f.data.has(INTRO), false);
+  assert.deepEqual(f.writes, [PREF, PREF]);
   assert.equal(f.api.getPreference().expiresAt, NOW + 180 * DAY);
   assert.equal(f.api.save(false), true);
   assert.equal(f.data.has(INTRO), false);
 });
 
-test("only explicit boolean true enables memory", () => {
+test("only explicit boolean true enables the shorter intro", () => {
   for (const value of [undefined, null, 1, "true", "1", {}, []]) {
     const f = fixture();
     f.api.save(value);
@@ -76,13 +73,17 @@ test("only explicit boolean true enables memory", () => {
   }
 });
 
-test("recent intro is read only with a valid saved acceptance", () => {
-  const f = fixture({ [PREF]: saved(true), [INTRO]: String(NOW - DAY) });
-  assert.equal(f.api.allowsIntro(), true);
-  assert.equal(f.classes.has("home-loader-recent"), true);
+test("a valid opt-in selects the shorter intro without a visit timestamp", () => {
+  for (const entries of [{ [PREF]: saved(true) }, { [PREF]: saved(true, NOW - 20 * DAY), [INTRO]: String(NOW - DAY) }]) {
+    const f = fixture(entries);
+    assert.equal(f.api.allowsIntro(), true);
+    assert.equal(f.data.has(INTRO), false);
+    assert.equal(f.reads.includes(INTRO), false);
+    assert.equal(f.writes.length, 0);
+  }
   const rejected = fixture({ [PREF]: saved(false), [INTRO]: String(NOW - DAY) });
-  assert.equal(rejected.reads.includes(INTRO), false);
-  assert.equal(rejected.classes.has("home-loader-recent"), false);
+  assert.equal(rejected.api.allowsIntro(), false);
+  assert.equal(rejected.data.has(INTRO), false);
 });
 
 test("expired, future, corrupted, and unrecognized permissions fail closed", () => {
@@ -100,18 +101,18 @@ test("expired, future, corrupted, and unrecognized permissions fail closed", () 
   }
 });
 
-test("old, future, and malformed intro timestamps never bypass the animation", () => {
+test("legacy visit timestamps are deleted and never influence intro selection", () => {
   for (const value of [String(NOW - 7 * DAY), String(NOW + DAY), "bad", "0"]) {
     const f = fixture({ [PREF]: saved(true), [INTRO]: value });
-    assert.equal(f.classes.has("home-loader-recent"), false);
+    assert.equal(f.api.allowsIntro(), true);
     assert.equal(f.data.has(INTRO), false);
+    assert.equal(f.reads.includes(INTRO), false);
   }
 });
 
-test("permission expiry is enforced before a write in a long-lived tab", () => {
+test("permission expiry disables the shorter intro in a long-lived tab", () => {
   const f = fixture({ [PREF]: saved(true), [INTRO]: String(NOW) });
   f.advance(180);
-  f.api.rememberIntro();
   assert.equal(f.data.has(INTRO), false);
   assert.equal(f.api.allowsIntro(), false);
   f.resume();
@@ -132,13 +133,12 @@ test("withdrawal and cleared storage propagate to other open tabs", () => {
   assert.equal(f.api.allowsIntro(), false);
 });
 
-test("blocked storage and quota failure never enable optional memory", () => {
+test("blocked storage and quota failure never enable the shorter intro", () => {
   for (const options of [{ blocked: true }, { writeBlocked: true }]) {
     const f = fixture({}, options);
     assert.equal(f.api.save(true), false);
     assert.equal(f.api.allowsIntro(), false);
     assert.equal(f.api.save(false), false);
-    f.api.rememberIntro();
     assert.equal(f.data.has(INTRO), false);
   }
   const f = fixture({ [PREF]: saved(true), [INTRO]: String(NOW) }, { writeBlocked: true });
@@ -147,10 +147,9 @@ test("blocked storage and quota failure never enable optional memory", () => {
   assert.equal(f.data.has(INTRO), false);
 });
 
-test("browsers without an accessible settings dialog cannot use optional memory", () => {
+test("browsers without an accessible settings dialog cannot enable the shorter intro", () => {
   const f = fixture({ [PREF]: saved(true), [INTRO]: String(NOW) }, { unsupportedDialog: true });
   assert.equal(f.api.allowsIntro(), false);
-  f.api.rememberIntro();
   assert.equal(f.data.has(INTRO), false);
   assert.equal(f.reads.includes(INTRO), false);
 });

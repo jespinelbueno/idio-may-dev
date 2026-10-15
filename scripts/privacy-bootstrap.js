@@ -1,16 +1,15 @@
-// Imported first by each page entry: check consent before optional intro memory.
+// Imported first by each page entry: select intro behavior from a valid choice.
 (() => {
   const PREFERENCE_KEY = "idio-privacy-v1";
-  const INTRO_KEY = "idio-home-loader-v1";
+  const LEGACY_INTRO_KEY = "idio-home-loader-v1";
   const DAY = 24 * 60 * 60 * 1000;
   const LIFETIME = 180 * DAY;
   const canShowSettings = typeof HTMLDialogElement !== "undefined"
     && typeof HTMLDialogElement.prototype.showModal === "function";
   let preference = null;
 
-  const removeIntro = () => {
-    try { localStorage.removeItem(INTRO_KEY); } catch { /* Storage may be blocked. */ }
-    document.documentElement.classList.remove("home-loader-recent");
+  const removeLegacyIntro = () => {
+    try { localStorage.removeItem(LEGACY_INTRO_KEY); } catch { /* Storage may be blocked. */ }
   };
   const isValid = (value) => value && value.version === 1
     && typeof value.intro === "boolean"
@@ -25,32 +24,15 @@
     try { localStorage.removeItem(PREFERENCE_KEY); } catch { /* Storage may be blocked. */ }
     return null;
   };
-  const allowed = () => {
-    if (canShowSettings && isValid(preference) && preference.intro) return true;
-    removeIntro();
-    return false;
-  };
+  const allowed = () => canShowSettings && isValid(preference) === true && preference.intro;
   const notify = () => window.dispatchEvent(new CustomEvent("idio:privacy-change"));
   preference = read();
-  if (allowed()) {
-    try {
-      const lastShown = Number(localStorage.getItem(INTRO_KEY));
-      const age = Date.now() - lastShown;
-      if (lastShown > 0 && age >= 0 && age < 7 * DAY) {
-        document.documentElement.classList.add("home-loader-recent");
-      } else {
-        removeIntro();
-      }
-    } catch { removeIntro(); }
-  }
+  // The preference alone selects the short intro; visit timestamps are retired.
+  removeLegacyIntro();
 
   window.idioPrivacy = Object.freeze({
     getPreference: () => isValid(preference) ? { ...preference } : null,
     allowsIntro: allowed,
-    rememberIntro: () => {
-      if (!allowed()) return;
-      try { localStorage.setItem(INTRO_KEY, String(Date.now())); } catch { /* No fallback tracking. */ }
-    },
     save: (intro) => {
       const savedAt = Date.now();
       const next = { version: 1, intro: intro === true, savedAt, expiresAt: savedAt + LIFETIME };
@@ -63,7 +45,7 @@
         try { localStorage.removeItem(PREFERENCE_KEY); } catch { /* Browser site-data controls may be needed. */ }
       }
       preference = persisted ? next : null;
-      if (!allowed()) removeIntro();
+      removeLegacyIntro();
       notify();
       return persisted;
     },
@@ -71,13 +53,13 @@
   window.addEventListener("storage", (event) => {
     if (event.key !== PREFERENCE_KEY && event.key !== null) return;
     preference = read();
-    allowed();
+    removeLegacyIntro();
     notify();
   });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState !== "visible") return;
     preference = read();
-    allowed();
+    removeLegacyIntro();
     notify();
   });
 })();

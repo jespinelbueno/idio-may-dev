@@ -13,16 +13,16 @@ export const initPrivacyPreferences = () => {
     <button class="privacy-dialog__close" type="button" aria-label="Close cookie settings and reject optional storage">×</button>
     <p class="privacy-dialog__eyebrow">a little housekeeping</p>
     <h2 id="privacy-dialog-title" tabindex="-1" autofocus>your browser.<br>your call.</h2>
-    <p id="privacy-dialog-description">We don’t use advertising or analytics trackers on this website. With your permission, we can remember that you’ve seen our homepage intro so you can skip it next time.</p>
+    <p id="privacy-dialog-description">We don’t use advertising or analytics trackers on this website. With your permission, we can remember your preference for a shorter homepage intro: “make it yours”, then “make it idio”.</p>
     <p class="privacy-dialog__note">Optional storage stays off until you accept. We save your choice for 180 days. Newsletter signup is a separate choice.</p>
     <div class="privacy-dialog__actions">
-      <button class="privacy-button privacy-button--animated" type="button" data-privacy-reject>${buttonLabel("Reject optional")}</button>
       <button class="privacy-button privacy-button--animated" type="button" data-privacy-accept>${buttonLabel("Accept optional")}</button>
+      <button class="privacy-button privacy-button--animated privacy-button--outline" type="button" data-privacy-reject>${buttonLabel("Reject optional")}</button>
     </div>
     <details class="privacy-dialog__details">
       <summary>Customize my choice</summary>
       <p><strong>Remember this choice · always on</strong><br>A small browser record remembers acceptance or rejection. Normal browser caching also helps deliver the site.</p>
-      <label class="privacy-dialog__option"><input type="checkbox" name="intro-memory"><span><strong>Remember the intro · optional</strong><br>A timestamp lets us skip the intro for seven days after it’s shown. It stays in this browser and isn’t sent to Idio.</span></label>
+      <label class="privacy-dialog__option"><input type="checkbox" name="intro-memory"><span><strong>Shorter homepage intro · optional</strong><br>Opt in for “make it yours”, then “make it idio” on future homepage visits. Otherwise, you’ll see the full intro. This choice stays in your browser and isn’t sent to Idio.</span></label>
       <p>No analytics or advertising categories are available because neither is installed on this website.</p>
       <button class="privacy-button privacy-button--animated" type="button" data-privacy-save>${buttonLabel("Save my selection")}</button>
     </details>
@@ -44,8 +44,8 @@ export const initPrivacyPreferences = () => {
       : "Close cookie settings and reject optional storage");
     document.querySelectorAll("[data-privacy-summary]").forEach((node) => {
       node.textContent = preference
-        ? `Your current choice: intro memory ${preference.intro ? "on" : "off"}. Saved until ${new Date(preference.expiresAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.`
-        : "Optional intro memory is off. No browser storage choice has been saved.";
+        ? `Your current choice: shorter intro ${preference.intro ? "on" : "off"}. Saved until ${new Date(preference.expiresAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.`
+        : "The full intro is enabled. No browser storage choice has been saved.";
     });
   };
   const open = (trigger = null) => {

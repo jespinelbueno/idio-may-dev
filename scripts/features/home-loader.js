@@ -15,17 +15,18 @@ const LOADER_SWAP_MS = 120;
 const LOADER_FINAL_HOLD_MS = 950;
 
 export const initHomeLoader = () => {
-  const recentVisit = document.documentElement.classList.contains("home-loader-recent");
+  const shortIntro = window.idioPrivacy?.allowsIntro() === true;
   const loader = document.querySelector(".loader");
   const loaderWord = document.querySelector("[data-loader-word]");
   const loaderLogo = document.querySelector("[data-loader-logo]");
   const loaderPhrase = document.querySelector(".loader__phrase");
   const loaderFixed = document.querySelector(".loader__fixed");
   const loaderWordSlot = document.querySelector(".loader__words");
-  const loaderScreens = [...LOADER_TEXT_SCREENS, LOADER_FINAL_SCREEN];
-  const loaderScreenClasses = loaderScreens.map(({ className }) => className);
+  const textScreens = shortIntro ? LOADER_TEXT_SCREENS.slice(-1) : LOADER_TEXT_SCREENS;
+  const loaderScreens = [...textScreens, LOADER_FINAL_SCREEN];
+  const loaderScreenClasses = [...LOADER_TEXT_SCREENS, LOADER_FINAL_SCREEN].map(({ className }) => className);
 
-  let activeLoaderText = LOADER_TEXT_SCREENS[0].text;
+  let activeLoaderText = textScreens[0].text;
   let loaderSequenceComplete = false;
   let loaderPageLoaded = document.readyState === "complete";
   let loaderMeasureFrame = null;
@@ -33,16 +34,7 @@ export const initHomeLoader = () => {
   const revealHomePage = () => {
     document.body.classList.remove("is-loading");
     document.body.classList.add("is-ready");
-
-    if (!recentVisit) window.idioPrivacy?.rememberIntro();
   };
-
-  // Acceptance happens after the first intro; withdrawal immediately disables memory.
-  window.addEventListener("idio:privacy-change", () => {
-    if (!recentVisit && document.body.classList.contains("is-ready")) {
-      window.idioPrivacy?.rememberIntro();
-    }
-  });
 
   const maybeRevealHomePage = () => {
     if (loaderSequenceComplete && loaderPageLoaded) {
@@ -53,19 +45,6 @@ export const initHomeLoader = () => {
   if (!loader || !loaderWord) {
     loaderSequenceComplete = true;
     maybeRevealHomePage();
-    return;
-  }
-
-  if (recentVisit) {
-    const heroImage = document.querySelector(".hero__image");
-
-    if (!heroImage || heroImage.complete) {
-      revealHomePage();
-    } else {
-      heroImage.addEventListener("load", revealHomePage, { once: true });
-      heroImage.addEventListener("error", revealHomePage, { once: true });
-    }
-
     return;
   }
 
@@ -132,6 +111,7 @@ export const initHomeLoader = () => {
   };
 
   setLoaderScreen(loaderScreens[0]);
+  loader.classList.add("is-initialized");
   measureLoaderWords();
   document.fonts?.ready.then(measureLoaderWords);
   window.addEventListener("resize", scheduleLoaderWordMeasure, { passive: true });
@@ -143,7 +123,7 @@ export const initHomeLoader = () => {
   window.setTimeout(() => {
     loaderSequenceComplete = true;
     maybeRevealHomePage();
-  }, LOADER_SCREEN_MS * (loaderScreens.length - 1) + LOADER_FINAL_HOLD_MS);
+  }, LOADER_SCREEN_MS * (loaderScreens.length - 1) + LOADER_SWAP_MS + LOADER_FINAL_HOLD_MS);
 
   if (loaderPageLoaded) {
     maybeRevealHomePage();

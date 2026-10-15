@@ -19,9 +19,10 @@
 .privacy-dialog h2 { margin: 0 0 1.25rem; font-size: clamp(2.5rem, 7vw, 3.5rem); font-weight: 650; line-height: 0.98; letter-spacing: -0.04em; }
 .privacy-dialog p { line-height: 1.5; }
 .privacy-dialog__note, .privacy-dialog__policy { font-size: 0.875rem; }
-.privacy-dialog__actions .privacy-button { width: 100%; }
+.privacy-dialog__actions .privacy-button { width: 100%; min-width: 0; }
 .privacy-dialog__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-block: 1.5rem 0.75rem; }
-.privacy-button { width: auto; min-width: 0; margin: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; padding: 0.8rem 1.1rem; border: 1px solid var(--brand-green); border-radius: 2rem; background: var(--paper); color: var(--brand-green); font: 600 0.9375rem/1.25 'DM Sans', sans-serif; text-align: center; cursor: pointer; }
+.privacy-button { width: auto; margin: 0; font-family: "DM Sans", sans-serif; cursor: pointer; }
+.privacy-button--outline { border: 1px solid var(--brand-olive); background: transparent; color: var(--brand-olive); }
 .privacy-button:not(.privacy-button--animated):is(:hover, :focus-visible) { background: var(--brand-green); color: var(--paper); }
 .privacy-dialog :is(button, input, summary, a):focus-visible, .privacy-links a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .privacy-dialog__details { text-align: left; font-size: 0.875rem; }
