@@ -3,10 +3,11 @@ import { isValidSignupEmail, sendCommunitySignup } from './community-signup-requ
 export const initCommunitySignup = ({ sendSignup = sendCommunitySignup } = {}) => {
   const form = document.querySelector('#community-signup');
   const email = form?.querySelector('input[type="email"]');
+  const optIn = form?.querySelector('input[name="OPT_IN"]');
   const status = document.getElementById('community-signup-status');
   const dialog = document.getElementById('signup-confirmation');
   const button = form?.querySelector('button[type="submit"]');
-  if (!form || !email || !status || !dialog || !button) return;
+  if (!form || !email || !optIn || !status || !dialog || !button) return;
   const label = button.querySelector('.button-fill__label');
   const defaultLabel = label.textContent;
   let pending = false;
@@ -43,11 +44,12 @@ export const initCommunitySignup = ({ sendSignup = sendCommunitySignup } = {}) =
     pending = true;
     button.disabled = true;
     email.readOnly = true;
+    optIn.disabled = true;
     form.setAttribute('aria-busy', 'true');
     label.textContent = 'sending…';
     status.textContent = 'Sending your signup…';
     try {
-      if (await sendSignup(email.value) !== true) throw new Error('Unexpected result');
+      if (await sendSignup(email.value, { optIn: optIn.checked }) !== true) throw new Error('Unexpected result');
       form.reset();
       status.textContent = 'Your signup request has been received.';
       dialog.showModal();
@@ -64,6 +66,7 @@ export const initCommunitySignup = ({ sendSignup = sendCommunitySignup } = {}) =
       pending = false;
       button.disabled = false;
       email.readOnly = false;
+      optIn.disabled = false;
       form.removeAttribute('aria-busy');
       label.textContent = defaultLabel;
     }

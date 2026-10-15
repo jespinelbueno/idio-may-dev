@@ -34,8 +34,8 @@ test("every public HTML page restricts code, data destinations, frames, and form
     }
     assert.deepEqual(policy.get("base-uri"), [page === "404.html" ? "'self'" : "'none'"]);
     assert.deepEqual(policy.get("connect-src"), page === "events.html"
-      ? ["'self'", "https://21c6bf62.sibforms.com"] : ["'self'"]);
-    assert.deepEqual(policy.get("form-action"), [page === "events.html" ? "https://21c6bf62.sibforms.com" : "'none'"]);
+      ? ["'self'", "https://e0a2c1d4.sibforms.com"] : ["'self'"]);
+    assert.deepEqual(policy.get("form-action"), [page === "events.html" ? "https://e0a2c1d4.sibforms.com" : "'none'"]);
     assert.match(html, /<meta name="referrer" content="no-referrer">/);
     assert.doesNotMatch(html, /\son[a-z]+\s*=/i);
     assert.doesNotMatch(html, /\b(?:href|src|action)\s*=\s*["']\s*(?:javascript:|http:|\/\/)/i);

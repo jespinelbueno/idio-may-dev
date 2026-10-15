@@ -1,4 +1,4 @@
-export const COMMUNITY_SIGNUP_ENDPOINT = 'https://21c6bf62.sibforms.com/serve/MUIFAFF4JjBjXfyEU5JyC2DzCP5Bv5QHJ9DLnZckuLcnrtsktw58e6bCDKEYAV7Om3TgRcMcrBkGVrzh2RFIHm1JqZEmxPMoZBZhIBZzfQb2BD-P3hCidqGeqD_W7oQuO3vYfEO_40fD5ewGex7ckpJGms2C6_SxYJHVr3CQNEjAbU62KBedoVnYOdJpsxi2vNS0MgeoX8IoX7aV2g==';
+export const COMMUNITY_SIGNUP_ENDPOINT = 'https://e0a2c1d4.sibforms.com/serve/MUIFAADTJr0_nfd4Tqr0DMKfye3XCZunKihJV6WPT_2txzxiwNYykBwzvENOAu66YxsgeeS6ZDOyPWYKM-mhq-NuQHcpxdxR21c5dQyN_sIIHNHKiCR62JF6b3JvmYyKODvbsRALrRgLbRkt5f5MJAOGPJSpHF_lXcJJk7cWVXzUuYlnTz650s7KgacZXaxOy0FIGCnzd7piOfYgDw==';
 const MAX_EMAIL_LENGTH = 254;
 
 export const isValidSignupEmail = (email) => {
@@ -15,12 +15,14 @@ export class SignupError extends Error {
   }
 }
 
-export const sendCommunitySignup = async (email, { fetchImpl = fetch, timeoutMs = 15000 } = {}) => {
+export const sendCommunitySignup = async (email, { optIn = false, fetchImpl = fetch, timeoutMs = 15000 } = {}) => {
   if (!isValidSignupEmail(email)) throw new SignupError('invalid');
+  if (optIn !== true) throw new SignupError('consent');
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   const body = new FormData();
   body.set('EMAIL', email);
+  body.set('OPT_IN', '1');
   body.set('locale', 'en');
   body.set('email_address_check', '');
 

@@ -92,6 +92,10 @@
 .events-shell .events-community__note { margin-top: 1rem; }
 .events-shell .events-community__status { margin-top: 0.5rem; }
 .events-community__status:empty { display: none; }
+.events-community__consent { display: flex; flex: 1 0 100%; width: 100%; align-items: flex-start; gap: 0.65rem; max-width: 31rem; font-size: 0.875rem; line-height: 1.45; cursor: pointer; }
+.events-community__consent input { flex: 0 0 auto; width: 1.1rem; height: 1.1rem; margin: 0.1rem 0 0; accent-color: #043c08; }
+.events-community__consent input:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.events-community__note a { text-decoration: underline; text-underline-offset: 0.15em; }
 .events-community__signup button { font-family: inherit; cursor: pointer; }
 
 /* Brevo’s spam trap must remain empty and outside the visible form layout. */

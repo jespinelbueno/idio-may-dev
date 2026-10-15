@@ -5,6 +5,7 @@
   }
   .events-community__description { width: 100%; margin-top: 3rem; }
   .events-community__signup { align-items: start; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .events-community__consent { flex: none; }
   .events-community__field { flex: none; width: 100%; max-width: 26rem; }
   .events-community__signup .events-button { margin-top: 0; }
   .events-calendar { width: 100%; margin-top: 2rem; }

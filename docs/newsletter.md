@@ -1,6 +1,7 @@
 # Events email signup
 
-The Events form posts to the public Brevo form endpoint from the supplied embed.
+The Events form posts to the public Brevo form endpoint from the latest supplied embed
+(`e0a2c1d4.sibforms.com`), replacing the previous Events campaign.
 With JavaScript, it uses Brevo's `?isAjax=1` contract. Without JavaScript, it retains
 native POST submission to Brevo. No secret API key belongs in this repository.
 
@@ -12,6 +13,9 @@ Confirmation-email and list settings are controlled in Brevo.
 ## Protections implemented
 
 - Required email format and length validation, plus the Brevo honeypot.
+- An unchecked, required consent checkbox sends `OPT_IN=1` only after the visitor
+  opts in. The request helper also rejects missing consent before any request.
+- The signup note explains Brevo’s role and links to its privacy policy.
 - Fixed HTTPS submission destination, no cookies, no referrer, no redirects.
 - Page CSP limits scripts to local files and connections/forms to this Brevo host.
 - Provider HTML, messages, and redirect URLs are never rendered or followed.
