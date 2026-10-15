@@ -70,6 +70,14 @@ assets/
 
 The two sets of team portraits are intentional page-specific variants. Similar photographs and artwork with different file contents remain separate; reorganization does not recompress or alter media.
 
+## Image delivery
+
+Active raster images use WebP (quality 84) with their original dimensions and transparency. Responsive photographs have an 800px-wide variant in their section's `mobile/` folder; landscape hero variants are 1280px wide. HTML `srcset` and matching hero preload `imagesrcset` select the appropriate file. Keep these candidates synchronized when replacing a hero.
+
+Offscreen photographs use native lazy loading and asynchronous decoding. The About team selector also creates lazy responsive images without preloading or waiting for every portrait. Mobile case-study clones retain the source image's responsive candidates.
+
+The original JPG/PNG URLs redirect directly to WebP through the alias map. Both hosts cache media for one day; these filenames are editable and must not receive immutable caching. Hostinger also compresses text responses when `mod_deflate` is available.
+
 ## Compatibility and maintenance
 
 The organization pass moved 106 canonical files and removed 50 byte-identical legacy copies. The 152 retained public media/font URLs are recorded in `tools/asset-aliases.json`. There is no top-level `services/` folder or duplicate legacy asset tree.

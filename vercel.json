@@ -63,12 +63,12 @@
     },
     {
       "source": "/assets/backgrounds/landingbg.jpg",
-      "destination": "/assets/media/home/hero/background.jpg",
+      "destination": "/assets/media/home/hero/background.webp",
       "permanent": true
     },
     {
       "source": "/assets/backgrounds/ourcreativetoolkitbg.png",
-      "destination": "/assets/media/home/toolkit/background.png",
+      "destination": "/assets/media/home/toolkit/background.webp",
       "permanent": true
     },
     {
@@ -93,32 +93,32 @@
     },
     {
       "source": "/assets/gradients/trisection/cream.jpg",
-      "destination": "/assets/media/home/case-study/background-cream.jpg",
+      "destination": "/assets/media/home/case-study/background-cream.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/hiidio/dekker1.jpg",
-      "destination": "/assets/media/home/offer/collage-dekker.png",
+      "destination": "/assets/media/home/offer/collage-dekker.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/hiidio/fruitspirit1.jpg",
-      "destination": "/assets/media/home/offer/collage-fruit-spirit.png",
+      "destination": "/assets/media/home/offer/collage-fruit-spirit.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/hiidio/leisureevents1.jpg",
-      "destination": "/assets/media/home/offer/collage-leisure-portrait.jpg",
+      "destination": "/assets/media/home/offer/collage-leisure-portrait.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/hiidio/leisureevents2.jpg",
-      "destination": "/assets/media/home/offer/collage-leisure-table.jpg",
+      "destination": "/assets/media/home/offer/collage-leisure-table.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/hiidio/painting1.jpg",
-      "destination": "/assets/media/home/offer/collage-painting.jpg",
+      "destination": "/assets/media/home/offer/collage-painting.webp",
       "permanent": true
     },
     {
@@ -133,22 +133,22 @@
     },
     {
       "source": "/assets/img/ourteamphotos/anna.png",
-      "destination": "/assets/media/team/home/anna.png",
+      "destination": "/assets/media/team/home/anna.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/ourteamphotos/jaden.png",
-      "destination": "/assets/media/team/home/jaden.jpg",
+      "destination": "/assets/media/team/home/jaden.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/ourteamphotos/naomi.png",
-      "destination": "/assets/media/team/home/naomi.jpg",
+      "destination": "/assets/media/team/home/naomi.webp",
       "permanent": true
     },
     {
       "source": "/assets/img/photos/casestudymain_cropped.jpg",
-      "destination": "/assets/media/home/case-study/leisure-events.jpg",
+      "destination": "/assets/media/home/case-study/leisure-events.webp",
       "permanent": true
     },
     {
@@ -158,7 +158,7 @@
     },
     {
       "source": "/assets/media/about/anna-founder.jpg",
-      "destination": "/assets/media/about/story/anna-founder.jpg",
+      "destination": "/assets/media/about/story/anna-founder.webp",
       "permanent": true
     },
     {
@@ -173,17 +173,17 @@
     },
     {
       "source": "/assets/media/about/contact-banner.jpg",
-      "destination": "/assets/media/about/contact/contact-banner.jpg",
+      "destination": "/assets/media/about/contact/contact-banner.webp",
       "permanent": true
     },
     {
       "source": "/assets/media/about/early-days.jpg",
-      "destination": "/assets/media/about/story/early-days.jpg",
+      "destination": "/assets/media/about/story/early-days.webp",
       "permanent": true
     },
     {
       "source": "/assets/media/about/friends.jpg",
-      "destination": "/assets/media/about/story/friends.jpg",
+      "destination": "/assets/media/about/story/friends.webp",
       "permanent": true
     },
     {
@@ -233,7 +233,7 @@
     },
     {
       "source": "/assets/media/about/studio-group.jpg",
-      "destination": "/assets/media/about/next/studio-group.jpg",
+      "destination": "/assets/media/about/next/studio-group.webp",
       "permanent": true
     },
     {
@@ -243,7 +243,7 @@
     },
     {
       "source": "/assets/media/about/team-field.jpg",
-      "destination": "/assets/media/about/hero/team-field.jpg",
+      "destination": "/assets/media/about/hero/team-field.webp",
       "permanent": true
     },
     {
@@ -288,7 +288,7 @@
     },
     {
       "source": "/assets/media/coming-soon/team-field.jpg",
-      "destination": "/assets/media/coming-soon/hero/team-field.jpg",
+      "destination": "/assets/media/coming-soon/hero/team-field.webp",
       "permanent": true
     },
     {
@@ -363,7 +363,7 @@
     },
     {
       "source": "/assets/media/events/community.jpg",
-      "destination": "/assets/media/events/coming/community.jpg",
+      "destination": "/assets/media/events/coming/community.webp",
       "permanent": true
     },
     {
@@ -403,7 +403,7 @@
     },
     {
       "source": "/assets/media/events/hero.png",
-      "destination": "/assets/media/events/hero/poster.png",
+      "destination": "/assets/media/events/hero/poster.webp",
       "permanent": true
     },
     {
@@ -443,17 +443,17 @@
     },
     {
       "source": "/assets/media/home/hero.jpg",
-      "destination": "/assets/media/home/hero/background.jpg",
+      "destination": "/assets/media/home/hero/background.webp",
       "permanent": true
     },
     {
       "source": "/assets/media/home/mobile/collage-portrait-logo.png",
-      "destination": "/assets/media/home/offer/mobile/collage-portrait-logo.png",
+      "destination": "/assets/media/home/offer/mobile/collage-portrait-logo.webp",
       "permanent": true
     },
     {
       "source": "/assets/media/home/mobile/collage-right-logo.png",
-      "destination": "/assets/media/home/offer/mobile/collage-right-logo.png",
+      "destination": "/assets/media/home/offer/mobile/collage-right-logo.webp",
       "permanent": true
     },
     {
@@ -593,7 +593,7 @@
     },
     {
       "source": "/assets/media/services/hero.jpg",
-      "destination": "/assets/media/services/hero/background.jpg",
+      "destination": "/assets/media/services/hero/background.webp",
       "permanent": true
     },
     {
@@ -698,12 +698,12 @@
     },
     {
       "source": "/services/assets/img/mainbg.jpg",
-      "destination": "/assets/media/services/hero/background.jpg",
+      "destination": "/assets/media/services/hero/background.webp",
       "permanent": true
     },
     {
       "source": "/services/assets/img/sowanna:question(\\?|%3[Ff])/bg.jpg",
-      "destination": "/assets/media/about/contact/contact-banner.jpg",
+      "destination": "/assets/media/about/contact/contact-banner.webp",
       "permanent": true
     },
     {
@@ -765,6 +765,222 @@
       "source": "/services/assets/underlines/raspberryunderline.svg",
       "destination": "/assets/media/services/cards/raspberry-underline.svg",
       "permanent": true
+    },
+    {
+      "source": "/assets/media/services/work/web-design.jpg",
+      "destination": "/assets/media/services/work/web-design.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/work/branding.jpg",
+      "destination": "/assets/media/services/work/branding.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/work/studio.jpg",
+      "destination": "/assets/media/services/work/studio.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/work/content-creation.jpg",
+      "destination": "/assets/media/services/work/content-creation.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/hero/background.jpg",
+      "destination": "/assets/media/services/hero/background.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/coming-soon/hero/team-field.jpg",
+      "destination": "/assets/media/coming-soon/hero/team-field.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/coming/community.jpg",
+      "destination": "/assets/media/events/coming/community.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/home/gretel.jpg",
+      "destination": "/assets/media/team/home/gretel.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/home/naomi.jpg",
+      "destination": "/assets/media/team/home/naomi.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/home/raquel.jpg",
+      "destination": "/assets/media/team/home/raquel.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/home/jaden.jpg",
+      "destination": "/assets/media/team/home/jaden.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/about/anna.jpg",
+      "destination": "/assets/media/team/about/anna.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/about/gretel.jpg",
+      "destination": "/assets/media/team/about/gretel.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/about/naomi.jpg",
+      "destination": "/assets/media/team/about/naomi.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/about/raquel.jpg",
+      "destination": "/assets/media/team/about/raquel.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/about/jaden.jpg",
+      "destination": "/assets/media/team/about/jaden.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/next/studio-group.jpg",
+      "destination": "/assets/media/about/next/studio-group.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/contact/contact-banner.jpg",
+      "destination": "/assets/media/about/contact/contact-banner.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/hero/team-field.jpg",
+      "destination": "/assets/media/about/hero/team-field.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/story/anna-founder.jpg",
+      "destination": "/assets/media/about/story/anna-founder.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/story/early-days.jpg",
+      "destination": "/assets/media/about/story/early-days.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/story/friends.jpg",
+      "destination": "/assets/media/about/story/friends.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/shared/backgrounds/wireframe.jpg",
+      "destination": "/assets/media/shared/backgrounds/wireframe.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/shared/photos/friends-field.jpg",
+      "destination": "/assets/media/shared/photos/friends-field.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/collage-leisure-table.jpg",
+      "destination": "/assets/media/home/offer/collage-leisure-table.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/collage-painting.jpg",
+      "destination": "/assets/media/home/offer/collage-painting.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/collage-leisure-portrait.jpg",
+      "destination": "/assets/media/home/offer/collage-leisure-portrait.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/hero/background.jpg",
+      "destination": "/assets/media/home/hero/background.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/case-study/christian-dekker.jpg",
+      "destination": "/assets/media/home/case-study/christian-dekker.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/case-study/background-cream.jpg",
+      "destination": "/assets/media/home/case-study/background-cream.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/case-study/leisure-events.jpg",
+      "destination": "/assets/media/home/case-study/leisure-events.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/hero/poster.png",
+      "destination": "/assets/media/events/hero/poster.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/team/home/anna.png",
+      "destination": "/assets/media/team/home/anna.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/collage-fruit-spirit.png",
+      "destination": "/assets/media/home/offer/collage-fruit-spirit.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/collage-dekker.png",
+      "destination": "/assets/media/home/offer/collage-dekker.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/toolkit/circle-base.png",
+      "destination": "/assets/media/home/toolkit/circle-base.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/toolkit/background.png",
+      "destination": "/assets/media/home/toolkit/background.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/toolkit/circle-idle.png",
+      "destination": "/assets/media/home/toolkit/circle-idle.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/toolkit/circle-hover.png",
+      "destination": "/assets/media/home/toolkit/circle-hover.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/mobile/collage-portrait-logo.png",
+      "destination": "/assets/media/home/offer/mobile/collage-portrait-logo.webp",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/offer/mobile/collage-right-logo.png",
+      "destination": "/assets/media/home/offer/mobile/collage-right-logo.webp",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
     }
   ]
 }

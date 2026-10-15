@@ -12,7 +12,7 @@
     <script src="scripts/page-loader-bootstrap.js"></script>
     <link rel="preload" href="assets/fonts/dm-sans/dm-sans-variable.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/teva/regular.otf" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="assets/media/shared/backgrounds/wireframe.jpg" as="image">
+    <link rel="preload" href="assets/media/shared/backgrounds/wireframe.webp" as="image" imagesrcset="assets/media/shared/backgrounds/mobile/wireframe.webp 800w, assets/media/shared/backgrounds/wireframe.webp 1707w" imagesizes="100vw" fetchpriority="high">
     <link rel="stylesheet" href="styles/contact-page.css?v=privacy-20261015-short-loader">
   </head>
   <body class="contact-page">
@@ -78,7 +78,7 @@
     <main>
       <section class="contact-hero" aria-labelledby="contact-title">
         <div class="contact-hero__background" aria-hidden="true">
-          <img class="contact-hero__image" src="assets/media/shared/backgrounds/wireframe.jpg" width="1707" height="2560" alt="" fetchpriority="high">
+          <img class="contact-hero__image" src="assets/media/shared/backgrounds/wireframe.webp" width="1707" height="2560" alt="" fetchpriority="high" decoding="async" loading="lazy" srcset="assets/media/shared/backgrounds/mobile/wireframe.webp 800w, assets/media/shared/backgrounds/wireframe.webp 1707w" sizes="100vw">
         </div>
         <div class="contact-hero__content">
           <p class="contact-hero__intro">whether for creative collaboration, partnership, quotes or more</p>

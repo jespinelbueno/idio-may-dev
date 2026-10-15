@@ -86,7 +86,7 @@ const visitHtml = (filePath) => {
   for (const match of html.matchAll(referencePattern)) {
     visitReference(filePath, match[1], { publicAsset: match[1].startsWith("assets/") });
   }
-  for (const match of html.matchAll(/\bsrcset\s*=\s*["']([^"']+)["']/gi)) {
+  for (const match of html.matchAll(/\b(?:srcset|imagesrcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const candidate of match[1].split(",")) {
       visitReference(filePath, candidate.trim().split(/\s+/)[0]);
     }

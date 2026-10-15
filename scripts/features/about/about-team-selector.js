@@ -5,7 +5,7 @@ const memberNames = {
   naomi: "Naomi Moore", gretel: "Gretel Lam",
 };
 
-export const initAboutTeamSelector = async () => {
+export const initAboutTeamSelector = () => {
   const section = document.querySelector(".about-team");
   const list = section?.querySelector(".about-team__members");
   const stack = section?.querySelector(".about-team__stack");
@@ -21,23 +21,20 @@ export const initAboutTeamSelector = async () => {
   status.setAttribute("role", "status");
   section.querySelector(".about-team__layout").append(status);
 
-  try {
-    await Promise.all(members.map(async (member) => {
-      const image = new Image();
-      image.src = `assets/media/team/about/${member}.jpg`;
-      await image.decode();
-    }));
-  } catch { return; }
-
   const cards = members.map((member) => {
     const card = template.cloneNode(true);
     card.removeAttribute("id");
     card.classList.remove("about-team__polaroid--front");
     const image = card.querySelector("img");
-    image.src = `assets/media/team/about/${member}.jpg`;
+    const imagePath = `assets/media/team/about/${member}.webp`;
+    const mobilePath = `assets/media/team/about/mobile/${member}.webp`;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.sizes = "(max-width: 760px) 85vw, 32rem";
+    image.srcset = `${mobilePath} 800w, ${imagePath} 2560w`;
+    image.src = imagePath;
     image.alt = `${memberNames[member]} in a field.`;
     image.setAttribute("data-member-photo", "");
-    image.loading = "eager";
     return card;
   });
   stack.replaceChildren(...cards);

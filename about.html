@@ -12,7 +12,7 @@
     <script src="scripts/page-loader-bootstrap.js"></script>
     <link rel="preload" href="assets/fonts/dm-sans/dm-sans-variable.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/vollkorn/vollkorn-variable.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/media/about/hero/team-field.jpg" as="image">
+    <link rel="preload" href="assets/media/about/hero/team-field.webp" as="image" imagesrcset="assets/media/about/hero/mobile/team-field.webp 1280w, assets/media/about/hero/team-field.webp 2560w" imagesizes="100vw" fetchpriority="high">
     <link rel="stylesheet" href="styles/about.css?v=privacy-20261015-short-loader">
   </head>
   <body class="about-page">
@@ -85,12 +85,12 @@
       </div>
       <div class="about-hero-takeover">
       <section class="about-hero" data-takeover-hero aria-labelledby="about-title">
-        <div class="about-hero__crop"><img class="about-hero__image" src="assets/media/about/hero/team-field.jpg" width="2560" height="1707" alt="The Idio team gathered together in a sunlit field." fetchpriority="high"></div>
+        <div class="about-hero__crop"><img class="about-hero__image" src="assets/media/about/hero/team-field.webp" width="2560" height="1707" alt="The Idio team gathered together in a sunlit field." fetchpriority="high" decoding="async" srcset="assets/media/about/hero/mobile/team-field.webp 1280w, assets/media/about/hero/team-field.webp 2560w" sizes="100vw"></div>
         <div class="about-hero__heading"><h1 class="about-hero__title" id="about-title">about us</h1><img class="about-hero__underline" src="assets/media/about/hero/hero-underline.svg" alt="" aria-hidden="true"></div>
       </section>
       <section class="about-story" data-takeover-section id="about-story" aria-labelledby="about-story-title">
         <div class="about-story__layout">
-        <figure class="about-photo about-photo--founder"><img src="assets/media/about/story/anna-founder.jpg" width="1707" height="2560" alt="Anna, Idio’s founder, wearing a red sweater in a field." loading="lazy"></figure>
+        <figure class="about-photo about-photo--founder"><img src="assets/media/about/story/anna-founder.webp" width="1707" height="2560" alt="Anna, Idio’s founder, wearing a red sweater in a field." loading="lazy" decoding="async" srcset="assets/media/about/story/mobile/anna-founder.webp 800w, assets/media/about/story/anna-founder.webp 1707w" sizes="100vw"></figure>
         <div class="about-story__intro">
         <h2 id="about-story-title">so what the<br>heck is <span class="about-story__accent">idio???<img class="about-story__circle" src="assets/media/about/story/title-circle.svg" alt="" aria-hidden="true"></span></h2>
         <article class="about-chapter about-chapter--start" aria-labelledby="about-start-title">
@@ -106,8 +106,8 @@
           <p>Anna began with local businesses, providing creative services that took a little off their plates. whether it was social media management, photography, or other creative needs, Anna used her skill set to help local businesses express their unique qualities. what began as a personal passion helping local businesses with marketing, photography and related creative services, ended as a full-service creative agency, with a tight-knit and diversely talented team of experienced artists.</p>
         </article>
         <div class="about-collage">
-          <figure class="about-photo about-photo--snapshot"><img src="assets/media/about/story/early-days.jpg" width="1708" height="2560" alt="A candid photo from Idio’s early days." loading="lazy"></figure>
-          <figure class="about-photo about-photo--candid"><img src="assets/media/about/story/friends.jpg" width="1707" height="2560" alt="Two friends smiling together outside." loading="lazy"></figure>
+          <figure class="about-photo about-photo--snapshot"><img src="assets/media/about/story/early-days.webp" width="1708" height="2560" alt="A candid photo from Idio’s early days." loading="lazy" decoding="async" srcset="assets/media/about/story/mobile/early-days.webp 800w, assets/media/about/story/early-days.webp 1708w" sizes="100vw"></figure>
+          <figure class="about-photo about-photo--candid"><img src="assets/media/about/story/friends.webp" width="1707" height="2560" alt="Two friends smiling together outside." loading="lazy" decoding="async" srcset="assets/media/about/story/mobile/friends.webp 800w, assets/media/about/story/friends.webp 1707w" sizes="100vw"></figure>
           <img class="about-collage__scribble" src="assets/media/about/story/collage-scribble.svg" alt="" aria-hidden="true">
         </div>
         </div>
@@ -115,7 +115,7 @@
       </div>
       <section class="about-next" aria-labelledby="about-next-title">
         <div class="about-next__layout">
-        <figure class="about-photo about-photo--studio"><img src="assets/media/about/next/studio-group.jpg" width="1228" height="1818" alt="Four Idio teammates gathered in the studio with their creative supplies." loading="lazy"></figure>
+        <figure class="about-photo about-photo--studio"><img src="assets/media/about/next/studio-group.webp" width="1228" height="1818" alt="Four Idio teammates gathered in the studio with their creative supplies." loading="lazy" decoding="async" srcset="assets/media/about/next/mobile/studio-group.webp 800w, assets/media/about/next/studio-group.webp 1228w" sizes="100vw"></figure>
         <img class="about-next__scribble about-next__scribble--left" src="assets/media/about/next/studio-left-scribble.svg" alt="" aria-hidden="true">
         <img class="about-next__scribble about-next__scribble--bottom" src="assets/media/about/next/studio-bottom-scribble.svg" alt="" aria-hidden="true">
 
@@ -146,8 +146,8 @@
           <div><dt><button type="button" data-about-member="gretel" aria-pressed="false" aria-controls="about-team-portrait">gretel lam</button></dt><dd>social media | operations</dd></div>
         </dl>
         <div class="about-team__stack" id="about-team-portrait">
-        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/team/about/raquel.jpg" width="2560" height="1707" alt="" loading="lazy"></div></figure>
-        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/team/about/raquel.jpg" width="2560" height="1707" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy"></div></figure>
+        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/team/about/raquel.webp" width="2560" height="1707" alt="" loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/raquel.webp 800w, assets/media/team/about/raquel.webp 2560w" sizes="100vw"></div></figure>
+        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/team/about/raquel.webp" width="2560" height="1707" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/raquel.webp 800w, assets/media/team/about/raquel.webp 2560w" sizes="100vw"></div></figure>
         </div>
         </div>
         </div>
@@ -157,7 +157,7 @@
         <section class="services-contact" aria-labelledby="services-contact-title">
           <div class="services-contact__inner">
             <div class="services-contact__visual">
-              <img class="services-contact__image" src="assets/media/about/contact/contact-banner.jpg" width="1818" height="1228" alt="Friends relaxing together with a guitar." loading="lazy" decoding="async">
+              <img class="services-contact__image" src="assets/media/about/contact/contact-banner.webp" width="1818" height="1228" alt="Friends relaxing together with a guitar." loading="lazy" decoding="async" srcset="assets/media/about/contact/mobile/contact-banner.webp 800w, assets/media/about/contact/contact-banner.webp 1818w" sizes="100vw">
               <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/services/contact/work-with-us-green.svg" alt="" aria-hidden="true">
               <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/services/contact/work-with-us-raspberry.svg" alt="" aria-hidden="true">
             </div>
@@ -195,7 +195,7 @@
     </main>
 
     <footer class="site-footer" id="site-footer">
-      <img class="site-footer__image" src="assets/media/shared/backgrounds/wireframe.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="site-footer__image" src="assets/media/shared/backgrounds/wireframe.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1707" height="2560" srcset="assets/media/shared/backgrounds/mobile/wireframe.webp 800w, assets/media/shared/backgrounds/wireframe.webp 1707w" sizes="100vw">
       <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/footer/decorations/home-left.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/footer/decorations/home-upper.svg" alt="" aria-hidden="true">
       <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/footer/decorations/home-lower-right.svg" alt="" aria-hidden="true">

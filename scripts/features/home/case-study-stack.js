@@ -51,6 +51,12 @@ export const initCaseStudyStack = () => {
     const image = document.createElement("div");
     image.className = "case-study__mobile-image";
     const mobileImage = document.createElement("img");
+    mobileImage.loading = "lazy";
+    mobileImage.decoding = "async";
+    if (sourceImage?.srcset) {
+      mobileImage.srcset = sourceImage.srcset;
+      mobileImage.sizes = "100vw";
+    }
     const imageSource = sourceImage?.getAttribute("src");
     if (imageSource) mobileImage.setAttribute("src", imageSource);
     mobileImage.alt = caseStudy.client;
