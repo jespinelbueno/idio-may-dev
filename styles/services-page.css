@@ -2,9 +2,18 @@
   --services-glow-width: min(65rem, 72vw);
   --services-glow-height: min(48rem, 54vw);
   --services-glow-color: rgb(247 215 128 / 0.5);
-  --services-paper-grain: radial-gradient(rgb(21 18 14 / 0.03) 0.55px, transparent 0.55px);
   background: var(--paper);
   color: var(--brand-green);
+}
+
+:is(.services-offer, .services-work, .services-closing) {
+  --brand-green: #043c08;
+  --brand-olive: #a5ab5f;
+  --brand-red: #c3080e;
+  --brand-pink: #fbd1d1;
+  --brand-blue: #96b6cf;
+  --brand-navy: #18233b;
+  --brand-tan: #dcb370;
 }
 
 .services-shell {
@@ -203,7 +212,6 @@
   overflow: visible;
   /* The two gradient halves meet at the section boundary. */
   background:
-    var(--services-paper-grain) 0 0 / 0.42rem 0.42rem,
     radial-gradient(
       ellipse var(--services-glow-width) var(--services-glow-height) at var(--offer-curve-bleed) 100%,
       var(--services-glow-color),
@@ -293,15 +301,6 @@
   width: 18%;
 }
 
-.services-cards__scribble--green {
-  --scribble-frame-duration: 1050ms;
-  --scribble-frame-delay: -650ms;
-
-  right: -5.5%;
-  bottom: -13%;
-  width: 13%;
-}
-
 .service-card {
   position: relative;
   display: flex;
@@ -332,8 +331,7 @@
 }
 
 .service-card__meta {
-  margin-top: auto;
-  padding-top: 0.75rem;
+  margin-top: 0.75rem;
   font-size: var(--body-size);
   line-height: var(--body-line);
 }
@@ -343,21 +341,12 @@
 }
 
 .service-card__list {
-  margin: 0.65em 0 0;
+  margin: auto 0 0;
+  padding-top: 0.75rem;
   padding-left: 1em;
   font-size: var(--body-size);
   font-weight: 400;
   line-height: var(--body-line);
-}
-
-.service-card--content .service-card__meta {
-  margin-top: 0.75rem;
-  padding-top: 0;
-}
-
-.service-card--content .service-card__list {
-  margin-top: auto;
-  padding-top: 0.75rem;
 }
 
 .service-card--branding {
@@ -373,8 +362,8 @@
 }
 
 .service-card--social {
-  --card-background: var(--brand-olive);
-  --card-ink: var(--brand-green);
+  --card-background: var(--brand-green);
+  --card-ink: var(--brand-olive);
 }
 
 .service-card--content {
@@ -487,7 +476,6 @@
   padding: var(--section-space) 0 var(--editorial-space);
   color: var(--brand-green);
   background:
-    var(--services-paper-grain) 0 0 / 0.42rem 0.42rem,
     radial-gradient(
       ellipse var(--services-glow-width) var(--services-glow-height) at 0 0,
       var(--services-glow-color),
@@ -504,6 +492,8 @@
 }
 
 .services-work__heading {
+  position: relative;
+  isolation: isolate;
   width: 49%;
 }
 
@@ -532,20 +522,32 @@
   margin: 0;
 }
 
+.services-work__gallery,
+.services-work__track {
+  display: contents;
+}
+
+.services-work__carousel-controls {
+  display: none;
+}
+
+.services-mobile-picture {
+  display: contents;
+}
+
+.services-work__mobile-description {
+  display: none;
+}
+
+.services-process__mobile-label {
+  display: none;
+}
+
 .services-work__item img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.services-work__item figcaption {
-  margin-top: var(--space-md);
-  font-family: "Teva", "DM Sans", system-ui, sans-serif;
-  font-size: var(--label-size);
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
 
 .services-work__item--branding {
@@ -560,10 +562,6 @@
   left: 51.86%;
   width: 49.5%;
   height: 35.35%;
-}
-
-.services-work__item--content figcaption {
-  text-align: right;
 }
 
 .services-work__item--web {
@@ -599,12 +597,18 @@
 }
 
 .services-work__scribble--circle {
-  top: 60%;
-  left: -36%;
+  top: 0;
+  left: -7%;
   z-index: -1;
-  width: 165%;
-  transform: translateY(-50%);
+  width: 82%;
   --scribble-frame-delay: -180ms;
+}
+
+.services-work__scribble--left {
+  top: 72%;
+  left: 5%;
+  width: 10.2%;
+  --scribble-frame-delay: -720ms;
 }
 
 .services-work__scribble--middle {
@@ -621,6 +625,7 @@
 }
 
 .services-process__inner {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
@@ -635,6 +640,12 @@
   gap: clamp(1rem, 1.8vw, 1.8rem);
   margin: 0;
   padding: clamp(4rem, 6.2vw, 6.2rem) 0;
+  /* Retain the diagram's original footprint with the shorter final steps. */
+  min-height: calc(
+    2 * clamp(4rem, 6.2vw, 6.2rem) +
+    4 * (var(--subheading-size) * 1.2 + 0.65rem + var(--body-size) * var(--body-line) * 3) +
+    3 * clamp(1rem, 1.8vw, 1.8rem)
+  );
   list-style: none;
 }
 
@@ -717,11 +728,20 @@
 }
 
 .services-process__message {
+  --process-message-reserve: calc(clamp(3rem, 6.5vw, 6.5rem) + var(--tap-size));
+  --process-button-gap: clamp(3rem, 9.5vw, 11.375rem);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: fit-content(100%) minmax(0, 1fr);
   width: 100%;
   min-width: 0;
+  /* Reserve the former button space so the headline keeps its position. */
+  padding-bottom: var(--process-message-reserve);
 }
 
 .services-process__message h2 {
+  grid-column: 1;
   margin: 0;
   font-size: var(--heading-size);
   line-height: var(--heading-line);
@@ -746,12 +766,13 @@
   width: 126%;
   height: auto;
   max-width: none;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotate(-5.78deg) skewX(0.88deg);
   pointer-events: none;
   animation: scribble-shape-cycle 960ms steps(1, end) -320ms infinite;
 }
 
 .services-process__underline {
+  grid-column: 1 / -1;
   display: block;
   width: 74%;
   height: auto;
@@ -759,10 +780,15 @@
   pointer-events: none;
 }
 
-/* Keep section spacing while sharing the homepage button component. */
+/* Measure the design's button gap from the underline, independent of the diagram. */
 .services-process__cta {
+  grid-column: 1 / 2;
+  position: absolute;
+  top: calc(100% - var(--process-message-reserve) + var(--process-button-gap));
+  right: 0;
+  left: 0;
   display: flex;
-  margin: clamp(3rem, 6.5vw, 6.5rem) auto 0;
+  margin: 0 auto;
 }
 
 @media (min-width: 1101px) {

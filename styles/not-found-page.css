@@ -9,7 +9,7 @@
   place-items: center;
   min-height: max(var(--hero-vh), 34rem);
   padding: calc(var(--nav-height) + var(--space-xl)) var(--page-gutter);
-  background: var(--not-found-navy) url("../assets/media/not-found/grain.svg") repeat;
+  background: var(--not-found-navy);
   color: var(--not-found-blue);
 }
 

@@ -1,3 +1,4 @@
+import { initFooterLinkCircles } from "./features/footer-link-circles.js";
 import { initResponsiveNav } from "./features/responsive-nav.js";
 import { initCustomCursor } from "./features/custom-cursor.js";
 
@@ -8,3 +9,5 @@ initCommunitySignup();
 initEventsHeroVideo();
 initResponsiveNav({ navSelector: ".services-nav", transitionSelector: ".events-community" });
 initCustomCursor();
+
+initFooterLinkCircles();

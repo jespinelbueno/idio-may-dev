@@ -6,13 +6,28 @@ export function initServicesCardStack() {
   if (!cards.length) return;
 
   const desktop = window.matchMedia('(min-width: 1101px)');
+  const mobile = window.matchMedia('(max-width: 640px)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const transferred = new Set();
   let movingUntil = 0;
   let lastPointer = null;
+  let mobileOrder = [cards[1], cards[3], cards[2], cards[0]].filter(Boolean);
+
+  const renderMobileOrder = () => {
+    mobileOrder.forEach((card, index) => {
+      card.style.setProperty('--mobile-stack-position', String(index));
+      if (mobile.matches) card.querySelector('.service-card__select')?.setAttribute('aria-pressed', String(index === mobileOrder.length - 1));
+    });
+  };
 
   const select = (card) => {
     const layout = window.getComputedStyle(stack).getPropertyValue('--services-stack-mode').trim();
+    if (mobile.matches && layout === 'mobile-stack') {
+      const selected = mobileOrder.at(-1) === card ? mobileOrder[0] : card;
+      mobileOrder = mobileOrder.filter(item => item !== selected).concat(selected);
+      renderMobileOrder();
+      return;
+    }
     if (!desktop.matches || layout === 'flow' || performance.now() < movingUntil) return;
     const returning = transferred.has(card);
     if (returning) transferred.delete(card);
@@ -40,7 +55,7 @@ export function initServicesCardStack() {
   // Only physical pointer movement selects a card. A moving card exposing the
   // next card must not automatically deal the entire pile under a still cursor.
   stack.addEventListener('pointermove', (event) => {
-    if (event.pointerType === 'touch') return;
+    if (!desktop.matches || event.pointerType === 'touch') return;
     const changed = !lastPointer || event.clientX !== lastPointer.x || event.clientY !== lastPointer.y;
     lastPointer = { x: event.clientX, y: event.clientY };
     if (!changed || performance.now() < movingUntil) return;
@@ -49,4 +64,15 @@ export function initServicesCardStack() {
   });
   stack.addEventListener('pointerleave', () => { lastPointer = null; });
   stack.classList.add('is-interactive');
+  const syncLabels = () => {
+    cards.forEach((card) => {
+      const button = card.querySelector('.service-card__select');
+      const name = card.querySelector('h3').innerText.replace(/\s+/g, ' ');
+      button.setAttribute('aria-label', mobile.matches ? `Show ${name} service details; select the front card to view the next service` : `Move ${name} between stacks`);
+      if (!mobile.matches) button.setAttribute('aria-pressed', String(transferred.has(card)));
+    });
+    renderMobileOrder();
+  };
+  mobile.addEventListener('change', syncLabels);
+  syncLabels();
 }

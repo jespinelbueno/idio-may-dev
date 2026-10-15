@@ -1,5 +1,5 @@
 // Bump this version when changing the cache strategy or needing a clean asset cache.
-const CACHE_NAME = "idio-site-v2";
+const CACHE_NAME = "idio-site-v4";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

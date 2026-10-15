@@ -15,17 +15,6 @@
   isolation: isolate;
 }
 
-.offer::before {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  content: "";
-  background-image: radial-gradient(rgb(21 18 14 / 0.09) 0.55px, transparent 0.55px);
-  background-size: 0.42rem 0.42rem;
-  opacity: 0.28;
-  pointer-events: none;
-}
-
 .offer::after {
   position: absolute;
   inset: calc(var(--offer-curve-offset) * -1) 0 0;
@@ -57,6 +46,14 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   pointer-events: none;
+}
+
+.offer__gradient-field {
+  position: absolute;
+  inset: 0;
+  /* Fade moving glows before they reach the section's curved or straight edges. */
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 clamp(2rem, 6vw, 5rem), #000 calc(100% - clamp(2rem, 6vw, 5rem)), transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 clamp(2rem, 6vw, 5rem), #000 calc(100% - clamp(2rem, 6vw, 5rem)), transparent);
 }
 
 .offer__gradient {
@@ -167,10 +164,18 @@
 }
 
 .offer__title-scribble {
+  position: relative;
   display: block;
   width: 18vw;
   aspect-ratio: 66 / 5;
   margin: 0.55rem auto 0;
+}
+
+/* Filter the wrapper after its child has been masked into the ink shape. */
+.offer__title-scribble::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: var(--brand-green);
   mask: url("../assets/media/decorations/scribbles/offer-title.svg") center / contain no-repeat;
   -webkit-mask: url("../assets/media/decorations/scribbles/offer-title.svg") center / contain no-repeat;
@@ -584,37 +589,61 @@
 /* Only the copy and collage are represented in the mobile wireframe. */
 .offer__mobile-title, .offer__mobile-carousel { display: none; }
 
-@media (max-width: 640px) {
+@media (min-width: 641px) and (max-width: 1100px) {
+  .offer {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--section-space) 2rem;
+  }
+  .offer__intro { grid-column: 1 / -1; }
   .offer__copy {
+    grid-column: 1;
     width: 100%;
+    margin: 0;
+    align-self: center;
+    text-align: left;
+  }
+  .offer__desktop-title { display: none; }
+  .offer__mobile-title { display: block; }
+  .offer__copy h3 { font-size: clamp(2rem, 4vw, 2.75rem); }
+  .offer__copy p { margin: 1.25rem 0 0; }
+  .offer__collage { grid-column: 2; width: 100%; margin: 0; align-self: center; }
+}
+
+@media (max-width: 640px) {
+  .offer__gradients { display: none; }
+  .offer__copy {
+    width: min(calc(100% - 1.5rem), 21.625rem);
     margin-top: var(--editorial-space);
-    padding-bottom: 2.3rem;
+    padding-bottom: 0;
     text-align: left;
   }
   .offer__desktop-title { display: none; }
   .offer__mobile-title { display: block; }
   .offer__copy h3 {
-    max-width: 338px;
-    font-size: var(--heading-size);
+    max-width: 100%;
+    font-size: clamp(1.5rem, 8.145vw, 2.0465rem);
     font-weight: 700;
-    line-height: var(--heading-line);
+    line-height: 1.069;
     letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 14;
 
     white-space: normal;
   }
   .offer__copy h3::after {
     content: "";
-    display: block;
-    width: 148px;
-    height: 31px;
-    margin: -0.65rem 0 -0.1rem 24%;
+    position: absolute;
+    left: 28.4%;
+    top: 1.7em;
+    width: 44%;
+    aspect-ratio: 148.527 / 31.2579;
     background: url("../assets/media/home/mobile/offer-underline.svg") center / contain no-repeat;
     transform: rotate(8.95deg);
   }
   .offer__copy p {
-    width: calc(100% - 4.5rem);
+    width: calc(100% - 5rem);
     max-width: 36ch;
-    margin: var(--space-lg) 0 0;
+    margin: 1.5rem 0 0;
     font-size: var(--body-size);
     font-weight: 300;
     line-height: var(--body-line);
@@ -624,7 +653,7 @@
     content: "";
     position: absolute;
     right: 0;
-    top: calc(var(--heading-size) * 2.5);
+    top: 3.2rem;
     width: 60px;
     height: 111px;
     background: url("../assets/media/home/mobile/offer-arrow.svg") center / contain no-repeat;
@@ -635,7 +664,7 @@
     display: block;
     position: relative;
     width: 100vw;
-    margin: 1.5rem 0 0 calc(50% - 50vw);
+    margin: 2.25rem 0 0 calc(50% - 50vw);
     container-type: inline-size;
     z-index: 3;
   }
@@ -644,7 +673,7 @@
     align-items: center;
     gap: 5.5cqw;
     overflow-x: auto;
-    padding-inline: 8.3cqw;
+    padding-inline: 18.925cqw;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
   }
@@ -674,6 +703,7 @@
     top: 50%;
     z-index: 2;
     transform: translate(-50%, -50%);
+    width: var(--tap-size);
   }
   .offer__mobile-carousel .team__carousel-button:not(:disabled):hover,
   .offer__mobile-carousel .team__carousel-button:focus-visible {
@@ -681,5 +711,4 @@
   }
   .offer__mobile-prev { left: 13.8%; }
   .offer__mobile-next { left: 86.2%; }
-  .offer__mobile-prev:focus-visible, .offer__mobile-next:focus-visible { outline: 2px solid var(--brand-green); }
 }

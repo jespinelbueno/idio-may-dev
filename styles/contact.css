@@ -7,13 +7,6 @@
     var(--paper);
 }
 
-.services-page .services-closing {
-  background:
-    var(--services-paper-grain) 0 0 / 0.42rem 0.42rem,
-    radial-gradient(ellipse 90% 50% at 100% 55%, rgb(241 199 98 / 0.78), transparent 100%),
-    radial-gradient(ellipse 85% 35% at 15% 70%, rgb(247 215 128 / 0.65), transparent 100%),
-    var(--paper);
-}
 
 .services-contact {
   padding: var(--section-space) 0 var(--editorial-space);
@@ -77,6 +70,10 @@
 .services-contact__button {
   margin: 0;
   color: var(--brand-green);
+}
+
+.services-page .services-contact__button:not(.services-contact__button--outline) {
+  color: var(--paper);
 }
 
 .services-contact__button--outline {

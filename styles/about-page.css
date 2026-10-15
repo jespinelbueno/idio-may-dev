@@ -52,14 +52,6 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
-.about-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  /* Match the frame's updated fine Duo grain without tinting the paper base. */
-  background: url("../assets/media/about/paper-grain.svg") 0 0 / 240px 240px repeat;
-  opacity: 0.3;
-}
 .about-background__glow { position: absolute; }
 .about-background__glow img { width: 100%; height: 100%; max-width: none; }
 .about-background__glow--story {
@@ -185,26 +177,25 @@
   object-fit: fill;
 }
 .about-chapter { position: relative; width: min(100%, 45ch); min-width: 0; text-align: left; }
-.about-chapter__dot { width: 4.25rem; height: 4.25rem; }
+.about-chapter__dot { position: relative; z-index: 4; width: 4.25rem; height: 4.25rem; }
 .about-shell .about-chapter :is(h2, h3) {
   margin-top: var(--space-md);
   font: 400 var(--subheading-size)/1.25 "Vollkorn", Georgia, serif;
 }
 .about-chapter p { margin-top: var(--space-md); color: var(--about-copy); font-size: var(--body-size); font-weight: 400; line-height: var(--body-line); }
 .about-chapter--journey { grid-area: journey; align-self: center; justify-self: center; width: min(85%, 28rem); }
+.about-story__thread:not(.about-thread-draw) { display: none; }
+.about-next__thread:not(.about-thread-draw) { display: none; }
 .about-story__thread {
   position: absolute;
   z-index: -1;
-  /* The guide starts at (700, 4) in the 1241.77 × 905.69 artwork.
-     Place that point at the center of the 4.25rem blue chapter marker. */
-  left: 2.125rem;
-  top: 2.125rem;
-  width: 167%;
-  transform: translate(-56.372%, -0.442%);
+  left: 0;
+  top: 0;
   max-width: none;
-  height: auto;
+  transform-origin: 0 0;
   pointer-events: none;
 }
+
 .about-collage {
   grid-area: collage;
   position: relative;
@@ -225,7 +216,7 @@
   position: absolute;
   z-index: -1;
   inset: calc(-1 * var(--about-curve-height)) 0 0;
-  background: var(--about-olive) url("../assets/media/about/olive-texture.svg") center / cover no-repeat;
+  background: var(--about-olive) url("../assets/media/home/textures/team-olive.svg") 0 0 / 1920px 1256px repeat;
   -webkit-mask-image: url("../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
   mask-image: url("../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
   -webkit-mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height) + 3px);
@@ -240,19 +231,16 @@
 .about-chapter--next { grid-area: chapter; justify-self: center; width: min(100%, 24rem); text-align: center; }
 .about-chapter--next .about-chapter__dot { margin-inline: auto; }
 .about-chapter--next p { color: var(--about-ink); }
-/* The artwork ends at x=1248 in its 1575.88-wide viewBox. Anchor that
-   point above the chapter marker instead of positioning against the photograph. */
 .about-next__thread {
   position: absolute;
   z-index: 3;
-  left: 50%;
-  top: -0.75rem;
-  width: min(275%, 66rem);
+  left: 0;
+  top: 0;
   max-width: none;
-  height: auto;
-  transform: translate(-79.2%, -100%);
+  transform-origin: 0 0;
   pointer-events: none;
 }
+
 .about-next__scribble { position: absolute; z-index: 3; pointer-events: none; }
 .about-next__scribble--left { left: -5%; top: 28%; width: 15%; height: auto; }
 .about-next__scribble--bottom { left: 51%; bottom: -2rem; width: 2rem; height: auto; transform: rotate(39.95deg); }
@@ -271,6 +259,24 @@
 .about-team__photo img { position: absolute; width: 307.62%; height: 143.91%; left: -103.87%; top: -31.63%; max-width: none; }
 .about-team__photo img[data-member-photo] { inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .about-team__photo-status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* The backdrop shares the pinned stage, so scrolling only advances the cards. */
+.about-team__stage { position: relative; isolation: isolate; }
+.about-team__background {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: clip;
+  background: var(--paper);
+  pointer-events: none;
+}
+/* Fade the pinned artwork into the closing section's paper at the handoff. */
+.about-team__background::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(10rem, 24svh, 18rem);
+  background: linear-gradient(to bottom, transparent, var(--paper));
+}
 /* Scroll holds the composition; a single tilted card turns away to reveal the next. */
 .about-team__stack { display: contents; }
 .about-team.is-scroll-stack { padding: 0; height: calc(100svh + var(--team-scroll-distance) + var(--team-intro-height, 0px)); }
@@ -292,7 +298,6 @@
   box-shadow: 0 6px 18px rgb(31 39 20 / 14%);
 }
 .about-team__members > div { transition: color 180ms ease; }
-.about-page .services-contact { padding-top: var(--space-lg); }
 
 
-.about-team__mobile-intro { display: none; }
+.about-team__mobile-intro, .about-team__caption, .about-team__controls { display: none; }

@@ -1,4 +1,5 @@
 import { getAboutThreadProgress, smoothAboutThreadProgress } from "./about-thread-progress.js";
+import { getAboutThreadTransform } from "./about-thread-geometry.js";
 
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 
@@ -6,15 +7,26 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 const threads = [
   {
     selector: ".about-story__thread",
-    strokeWidth: 44,
-    guide: "M700 4 C800 4 960 6 1030 7 C1125 5 1237 84 1237 155 C1238 179 1233 218 1218 236 C1160 281 1128 289 1050 311 L972 331 L160 390 C123 400 90 443 75 475 C63 491 75 516 98 524 C145 545 245 556 296 530 C310 519 310 496 286 500 C266 495 247 520 233 548 C210 620 226 699 211 739 C190 807 147 845 40 895 L3 905",
+    startSelector: ".about-chapter--start .about-chapter__dot",
+    endSelector: ".about-chapter--journey .about-chapter__dot",
+    guideStart: { x: 700, y: 5 },
+    guideEnd: { x: 4, y: 901 },
+    startViewport: 0.8,
+    finishViewport: 0.65,
+    strokeWidth: 28,
+    guide: "M700 5 C850 8 1080 10 1190 72 C1260 115 1268 150 1268 217 C1266 240 1230 287 1200 326 C1140 364 1110 377 1020 408 C880 448 700 474 600 485 C470 505 365 523 276 534 C242 544 220 564 211 583 C191 615 196 628 197 655 C204 678 289 706 335 679 C350 666 333 653 314 646 C297 640 274 647 260 649 C243 653 233 674 221 694 C182 764 162 851 92 883 C65 897 36 902 4 901",
   },
   {
     selector: ".about-next__thread",
-    finishViewport: 0.8,
-    // A close trace keeps the loop's crossing from exposing its tail prematurely.
-    strokeWidth: 20,
-    guide: "M4 0 L7 20 L39 79 L102 164 L195 261 L287 339 L385 408 L531 496 L643 550 L746 589 L906 633 L1079 667 L1194 673 L1325 668 L1433 639 L1511 597 L1553 558 L1570 535 L1573 508 L1570 495 L1547 464 L1513 443 L1494 443 L1468 450 L1412 492 L1350 570 L1316 618 L1263 709 L1248 742",
+    startSelector: ".about-chapter--journey .about-chapter__dot",
+    endSelector: ".about-chapter--next .about-chapter__dot",
+    guideStart: { x: 5, y: 4 },
+    guideEnd: { x: 1054, y: 563 },
+    // Hold at the yellow marker while its chapter moves through reading view.
+    startViewport: 0.25,
+    finishViewport: 0.65,
+    strokeWidth: 24,
+    guide: "M5 4 L14 25 L30 60 L60 107 L90 149 L130 183 L170 217 L220 249 L280 271 L340 292 L400 303 L480 315 L580 326 L680 333 L800 339 L920 341 L1000 337 L1080 324 L1140 303 L1180 286 L1205 271 L1210 262 L1195 258 L1175 260 L1155 272 L1140 288 L1120 312 L1100 346 L1080 398 L1063 464 L1055 516 L1053 549 L1054 563",
   },
 ];
 
@@ -25,6 +37,11 @@ const createNode = (tag, attributes) => {
 };
 
 export const initAboutThreadDraw = () => {
+  const mobile = window.matchMedia("(max-width: 760px), (max-width: 1024px) and (max-height: 500px) and (pointer: coarse)");
+  if (mobile.matches) {
+    mobile.addEventListener("change", () => initAboutThreadDraw(), { once: true });
+    return;
+  }
   const images = threads.map((thread) => ({ ...thread, image: document.querySelector(thread.selector) }))
     .filter(({ image }) => image);
   if (!images.length) return;
@@ -37,10 +54,12 @@ export const initAboutThreadDraw = () => {
 
   const update = (timestamp) => {
     frame = null;
+    if (mobile.matches) { previousTimestamp = null; return; }
     const viewportHeight = window.innerHeight;
-    const progressByThread = getAboutThreadProgress(activeThreads.map(({ svg, finishViewport }) => {
-      const { top, bottom } = svg.getBoundingClientRect();
-      return { top, bottom, finishViewport };
+    const progressByThread = getAboutThreadProgress(activeThreads.map(({ startMarker, endMarker, startViewport, finishViewport }) => {
+      const start = startMarker.getBoundingClientRect();
+      const end = endMarker.getBoundingClientRect();
+      return { top: start.top + start.height / 2, bottom: end.top + end.height / 2, startViewport, finishViewport };
     }), viewportHeight);
     // Ease one shared pen, rather than easing the two masks independently.
     const target = progressByThread.reduce((total, progress) => total + progress, 0);
@@ -62,12 +81,44 @@ export const initAboutThreadDraw = () => {
   };
 
   const scheduleUpdate = () => {
+    if (mobile.matches) return;
     if (frame === null) frame = window.requestAnimationFrame(update);
   };
 
+  const layoutThreads = () => {
+    if (mobile.matches) return;
+    const layoutWidth = document.querySelector(".about-shell").clientWidth;
+    activeThreads.forEach(({ svg, startMarker, endMarker, guideStart, guideEnd, width, index }) => {
+      const parent = svg.offsetParent || svg.parentElement;
+      const origin = parent.getBoundingClientRect();
+      const center = (marker) => {
+        const bounds = marker.getBoundingClientRect();
+        return { x: bounds.left + bounds.width / 2 - origin.left, y: bounds.top + bounds.height / 2 - origin.top };
+      };
+      const start = center(startMarker);
+      const chapter = startMarker.parentElement.getBoundingClientRect();
+      const markerSize = startMarker.getBoundingClientRect().width;
+      // In the wireframe the second stroke resumes below the yellow chapter's
+      // copy. Keep that reading gap while its scroll timing holds at the circle.
+      if (index === 1) {
+        start.x += markerSize * 0.6;
+        start.y = chapter.bottom - origin.top + markerSize * 0.75;
+      }
+      const matrix = getAboutThreadTransform(start, center(endMarker), guideStart, guideEnd, width, layoutWidth);
+      svg.style.transform = `matrix(${matrix.join(",")})`;
+    });
+    scheduleUpdate();
+  };
+  const layoutObserver = new ResizeObserver(layoutThreads);
+  document.querySelectorAll(".about-story__layout, .about-next__layout").forEach((element) => layoutObserver.observe(element));
+
   // Install in drawing order even when the SVG assets load at different speeds.
   const loadThreads = async () => {
-    for (const [index, { image, guide, strokeWidth, finishViewport = 0.45 }] of images.entries()) {
+    for (const [index, thread] of images.entries()) {
+      const { image, guide, strokeWidth, startSelector, endSelector, guideStart, guideEnd, startViewport, finishViewport } = thread;
+      const startMarker = document.querySelector(startSelector);
+      const endMarker = document.querySelector(endSelector);
+      if (!startMarker || !endMarker) continue;
       try {
         const response = await fetch(image.getAttribute("src"));
         if (!response.ok) continue;
@@ -94,18 +145,19 @@ export const initAboutThreadDraw = () => {
         // The root asset has an inline display declaration, so initialize before insertion.
         artwork.style.opacity = "0";
         image.replaceWith(svg);
-        activeThreads.push({ svg, artwork, stroke, maskId, finishViewport });
+        activeThreads.push({ svg, artwork, stroke, maskId, startMarker, endMarker, guideStart, guideEnd, startViewport, finishViewport, width, index });
         displayedProgress = null;
-        new ResizeObserver(scheduleUpdate).observe(svg);
-        scheduleUpdate();
+        layoutThreads();
       } catch {
-        // Preserve the static image when fetching or parsing is unavailable.
+        // Chapter markers remain readable if the decorative artwork is unavailable.
       }
     }
   };
   loadThreads();
 
   window.addEventListener("scroll", scheduleUpdate, { passive: true });
-  window.addEventListener("resize", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", layoutThreads, { passive: true });
+  document.fonts.ready.then(layoutThreads);
+  window.addEventListener("load", layoutThreads, { once: true });
   reducedMotion.addEventListener("change", scheduleUpdate);
 };

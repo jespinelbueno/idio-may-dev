@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none">
+<!-- Homepage frame 1945:155: Duo noise, 1px, density 36%, #DCB370 / white 25%. -->
+<rect width="240" height="240" fill="white" filter="url(#home-paper-grain)"/>
+<defs>
+<filter id="home-paper-grain" x="0" y="0" width="240" height="240" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.97 0.97" stitchTiles="stitch" numOctaves="3" seed="9441" result="noise"/>
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+<!-- A fractional frequency avoids integer-pixel aliasing; expanded luminance keeps the Duo bands visible. -->
+<feComponentTransfer in="alphaNoise" result="grainDistribution"><feFuncA type="linear" slope="3" intercept="-1"/></feComponentTransfer>
+<feComponentTransfer in="grainDistribution" result="brownMask"><feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/></feComponentTransfer>
+<feFlood flood-color="#DCB370" result="brown"/>
+<feComposite in="brown" in2="brownMask" operator="in" result="brownGrain"/>
+<feComponentTransfer in="grainDistribution" result="whiteMask"><feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/></feComponentTransfer>
+<feFlood flood-color="white" flood-opacity="0.25" result="white"/>
+<feComposite in="white" in2="whiteMask" operator="in" result="whiteGrain"/>
+<feMerge><feMergeNode in="brownGrain"/><feMergeNode in="whiteGrain"/></feMerge>
+</filter>
+</defs>
+</svg>

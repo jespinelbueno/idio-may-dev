@@ -43,6 +43,11 @@
 }
 
 @media (max-width: 640px) {
+  /* The homepage menu's isolated parent must also stack above the footer. */
+  .page-home > .site-shell {
+    z-index: 1;
+  }
+
   :is(.home-nav, .services-nav) {
     --menu-diameter: 3.5rem;
     --menu-top: max(0.5rem, env(safe-area-inset-top));

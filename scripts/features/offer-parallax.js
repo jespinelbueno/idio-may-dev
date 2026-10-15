@@ -24,10 +24,12 @@ export const initOfferParallax = () => {
   const paintOfferParallax = (progress) => {
     const orbit = progress * Math.PI * 2;
     const travelProgress = progress - 0.5;
+    const viewportWidth = document.documentElement.clientWidth;
+    // Blend the motion continuously as the layout grows instead of jumping at 1100px.
+    const responsiveMotion = Math.max(0, Math.min(1, (viewportWidth - 640) / 800));
     const motionIntensity = offerParallaxMotionQuery.matches
       ? REDUCED_MOTION_INTENSITY
-      : window.matchMedia("(max-width: 1100px)").matches ? 0.35 : OFFER_GRADIENT_MOTION_INTENSITY;
-    const viewportWidth = window.innerWidth;
+      : 0.35 + responsiveMotion * (OFFER_GRADIENT_MOTION_INTENSITY - 0.35);
     const viewportHeight = window.innerHeight;
     const sectionHeight = offerSection.offsetHeight || viewportHeight;
     const counterScroll =

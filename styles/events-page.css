@@ -80,12 +80,9 @@
 .events-shell .services-closing { position: relative; isolation: isolate; overflow: hidden; background: var(--paper); }
 .events-closing__glow { position: absolute; z-index: 0; display: block; max-width: none; width: 197.832vw; height: 120.382vw; left: -10.74vw; top: 42.12vw; transform: translate(-50%, -50%) rotate(-167.31deg); pointer-events: none; }
 .events-shell .services-contact { position: relative; z-index: 1; }
-/* Preserve the contact and footer frames; fit the new artwork without stretching. */
+/* Fit the contact artwork without stretching. */
 .events-shell .services-contact__scribble--green { aspect-ratio: 256.421 / 174.135; object-fit: contain; }
 .events-shell .services-contact__scribble--raspberry { aspect-ratio: 158.205 / 118.84; object-fit: contain; }
-.events-page .site-footer__scribble--left { aspect-ratio: 187 / 175; object-fit: contain; }
-.events-page .site-footer__scribble--center { display: block; aspect-ratio: 193 / 170; }
-.events-footer__stroke { position: absolute; top: 50%; left: 50%; width: 82.418%; height: auto; max-width: none; transform: translate(-50%, -50%) rotate(-87.47deg); }
 
 .events-community__field label { display: block; margin-bottom: 0.35rem; font-size: 0.875rem; }
 .events-community__field input { display: block; width: 100%; min-height: 2.75rem; padding: 0.5rem 0.25rem; border: 0; border-radius: 0; outline: none; background: transparent; color: inherit; font: inherit; font-size: 1rem; }

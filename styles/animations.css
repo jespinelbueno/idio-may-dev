@@ -47,6 +47,27 @@
   }
 }
 
+.page-home :is(.offer__title-scribble, .what-offer__header h2 img, .values-title-scribble),
+.page-home .offer__copy h3::after,
+.page-home .offer__copy::after,
+.page-home .what-offer__header h2 span::after,
+.page-home .what-offer__items::before,
+.page-home .values-mobile-copy h3::after {
+  animation: scribble-shape-cycle var(--scribble-frame-duration, 960ms) steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
+}
+
+.page-home .offer__title-scribble {
+  --scribble-frame-delay: -180ms;
+}
+
+.page-home .what-offer__header {
+  --scribble-frame-delay: -420ms;
+}
+
+.page-home .values-title-scribble {
+  --scribble-frame-delay: -650ms;
+}
+
 .services-page :is(.services-hero__underline, .services-hero__reveal-underline) {
   animation: scribble-shape-cycle 960ms steps(1, end) infinite;
 }

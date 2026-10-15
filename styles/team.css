@@ -28,10 +28,7 @@
   z-index: -1;
   width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
-  background:
-    radial-gradient(rgb(21 18 14 / 0.07) 0.55px, transparent 0.55px),
-    #adb45f;
-  background-size: 0.42rem 0.42rem, auto;
+  background: #a5ab5f url("../assets/media/home/textures/team-olive.svg") 0 0 / 1920px 1256px repeat;
   clip-path: ellipse(200vw var(--team-ellipse-depth) at 50% var(--team-ellipse-depth));
   transform: translateX(50%);
 }
@@ -97,65 +94,6 @@
   gap: 0.55rem;
   pointer-events: none;
   transform: translateY(-50%);
-}
-
-.team__carousel-button {
-  --cta-fill: var(--brand-green);
-
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(2.7rem, 3.6vw, 3.25rem);
-  aspect-ratio: 1;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  border-radius: 999rem;
-  background: var(--paper);
-  color: var(--brand-green);
-  cursor: pointer;
-  isolation: isolate;
-  pointer-events: auto;
-  transition:
-    color 180ms ease,
-    opacity 180ms ease,
-    transform 260ms ease;
-}
-
-.team__carousel-button .button-fill__label {
-  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
-  font-weight: 700;
-  line-height: 1;
-  transform: translateY(-0.06em);
-}
-
-.team__carousel-button:not(:disabled):hover,
-.team__carousel-button:focus-visible {
-  color: var(--brand-olive);
-  transform: translateY(-0.08rem);
-}
-
-.team__carousel-button:not(:disabled):hover .button-fill__blob,
-.team__carousel-button:focus-visible .button-fill__blob {
-  transform: translateZ(0) scale(1.55);
-}
-
-.team__carousel-button:not(:disabled):hover .button-fill__inner::before,
-.team__carousel-button:focus-visible .button-fill__inner::before {
-  clip-path: circle(160% at 50% 110%);
-  transition-delay: 340ms;
-}
-
-.team__carousel-button:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 0.18rem;
-}
-
-.team__carousel-button:disabled {
-  opacity: 0.32;
-  cursor: default;
-  transform: none;
 }
 
 .team__member {
@@ -369,10 +307,7 @@
   z-index: -1;
   width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
-  background:
-    radial-gradient(rgb(21 18 14 / 0.07) 0.55px, transparent 0.55px),
-    #adb45f;
-  background-size: 0.42rem 0.42rem, auto;
+  background: #a5ab5f url("../assets/media/home/textures/team-olive.svg") 0 0 / 1920px 1256px repeat;
   transform: translateX(-50%);
 }
 
@@ -514,7 +449,8 @@
 }
 @container case-layout (max-width: 40rem) {
   .team {
-    --team-mobile-image-height: min(118vw, 31rem);
+    /* Match the first homepage collage's mobile portrait proportions. */
+    --team-mobile-image-height: 66.54vw;
   }
   .team__carousel-controls {
     position: absolute;
@@ -527,7 +463,9 @@
   }
   .team__photo,
   .team__member--raquel .team__photo {
+    width: min(100%, 62.15vw);
     height: var(--team-mobile-image-height);
+    margin-inline: auto;
     aspect-ratio: auto;
   }
   .team__grid {
@@ -547,6 +485,13 @@
   .team__member:focus-within .team__bio {
     max-height: none;
   }
+}
+@media (min-width: 641px) and (max-width: 1100px) {
+  .team__grid { grid-auto-columns: calc((100% - 1.5rem) / 2); gap: 1.5rem; }
+  .team__photo, .team__member--raquel .team__photo { aspect-ratio: 4 / 5; height: auto; }
+  .team__member:hover .team__bio,
+  .team__member:focus .team__bio,
+  .team__member:focus-within .team__bio { max-height: none; }
 }
 @media (hover: none) {
   .team__member:hover .team__photo,

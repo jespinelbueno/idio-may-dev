@@ -1,0 +1,60 @@
+/* Shared arrow controls used by the site’s image and team carousels. */
+.team__carousel-button {
+  --cta-fill: var(--brand-green);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.7rem, 3.6vw, 3.25rem);
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999rem;
+  background: var(--paper);
+  color: var(--brand-green);
+  cursor: pointer;
+  isolation: isolate;
+  pointer-events: auto;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease,
+    transform 260ms ease;
+}
+
+.team__carousel-button .button-fill__label {
+  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.06em);
+}
+
+.team__carousel-button:not(:disabled):hover,
+.team__carousel-button:focus-visible {
+  color: var(--brand-olive);
+  transform: translateY(-0.08rem);
+}
+
+.team__carousel-button:not(:disabled):hover .button-fill__blob,
+.team__carousel-button:focus-visible .button-fill__blob {
+  transform: translateZ(0) scale(1.55);
+}
+
+.team__carousel-button:not(:disabled):hover .button-fill__inner::before,
+.team__carousel-button:focus-visible .button-fill__inner::before {
+  clip-path: circle(160% at 50% 110%);
+  transition-delay: 340ms;
+}
+
+.team__carousel-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 0.18rem;
+}
+
+.team__carousel-button:disabled {
+  opacity: 0.32;
+  cursor: default;
+  transform: none;
+}
+

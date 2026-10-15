@@ -1,3 +1,4 @@
+import { initFooterLinkCircles } from "./features/footer-link-circles.js";
 import { initResponsiveNav } from "./features/responsive-nav.js";
 import { initCustomCursor } from "./features/custom-cursor.js";
 import { initAboutTeamSelector } from "./features/about-team-selector.js";
@@ -8,3 +9,5 @@ initCustomCursor();
 initAboutThreadDraw();
 
 initAboutTeamSelector();
+
+initFooterLinkCircles();

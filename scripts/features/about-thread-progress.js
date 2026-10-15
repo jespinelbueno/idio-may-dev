@@ -6,8 +6,8 @@ export const getAboutThreadProgress = (segments, viewportHeight) => {
   const pen = viewportHeight * 0.8;
   let previousEnd = -Infinity;
 
-  return segments.map(({ top, bottom, finishViewport = 0.45 }) => {
-    const start = Math.max(top, previousEnd);
+  return segments.map(({ top, bottom, startViewport = 0.8, finishViewport = 0.45 }) => {
+    const start = Math.max(top + viewportHeight * (0.8 - startViewport), previousEnd);
     const end = Math.max(start + 1, bottom + viewportHeight * (0.8 - finishViewport));
     previousEnd = end;
     return clamp((pen - start) / (end - start));

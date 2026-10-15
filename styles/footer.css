@@ -9,16 +9,12 @@
 }
 
 .site-footer::before {
+  content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
-  content: "";
-  background:
-    radial-gradient(rgb(247 242 233 / 0.22) 0.045rem, transparent 0.045rem),
-    radial-gradient(rgb(21 18 14 / 0.12) 0.04rem, transparent 0.04rem);
-  background-position: 0 0, 0.16rem 0.19rem;
-  background-size: 0.34rem 0.34rem, 0.44rem 0.44rem;
-  opacity: 0.25;
+  z-index: 5;
+  background: url("../assets/media/home/textures/paper-grain.svg") 0 0 / 240px 240px repeat;
+  opacity: 0.10;
   pointer-events: none;
 }
 
@@ -30,12 +26,9 @@
   height: 100%;
   max-width: none;
   object-fit: cover;
+  object-position: center;
   pointer-events: none;
   user-select: none;
-}
-
-.site-footer__image {
-  object-position: 50% 22%;
 }
 
 .site-footer__inner {
@@ -82,6 +75,7 @@
   --scribble-reveal-delay: 260ms;
   --scribble-frame-duration: 980ms;
   --scribble-frame-delay: -760ms;
+  transform: rotate(-87.47deg);
 }
 
 .site-footer__lockup {
@@ -141,8 +135,8 @@
     transform 180ms ease;
 }
 
-.site-footer__social img,
-.site-footer__social svg {
+.site-footer__social > img:not(.site-footer__hover-circle),
+.site-footer__social > svg:not(.site-footer__hover-circle) {
   width: 100%;
   height: 100%;
   overflow: visible;
@@ -226,36 +220,102 @@
   transform: translateY(-0.08rem);
 }
 
+.site-footer a {
+  position: relative;
+}
+
+.site-footer__hover-circle {
+  position: absolute;
+  left: -0.9em;
+  top: 50%;
+  width: calc(100% + 1.8em);
+  height: 2em;
+  max-width: none;
+  overflow: visible;
+  opacity: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: opacity 100ms ease;
+}
+
+.site-footer__social .site-footer__hover-circle {
+  height: calc(100% + 0.4em);
+}
+
+.site-footer__circle-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.site-footer__circle-complete {
+  opacity: 0;
+}
+
+.site-footer a:is(:hover, :focus-visible) {
+  opacity: 1;
+}
+
+.site-footer a:focus-visible {
+  outline: none;
+}
+
+.site-footer a:is(:hover, :focus-visible) .site-footer__hover-circle {
+  opacity: 1;
+}
+
+.site-footer a:is(:hover, :focus-visible) .site-footer__circle-stroke {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 560ms linear;
+}
+
+.site-footer a:is(:hover, :focus-visible) .site-footer__circle-stroke--finish {
+  transition-duration: 140ms;
+  transition-delay: 420ms;
+}
+
+.site-footer a:is(:hover, :focus-visible) .site-footer__circle-complete {
+  opacity: 1;
+  transition: opacity 0s 560ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__hover-circle,
+  .site-footer a:is(:hover, :focus-visible) .site-footer__circle-stroke,
+  .site-footer a:is(:hover, :focus-visible) .site-footer__circle-complete {
+    transition: none;
+  }
+}
+
 @media (max-width: 1100px) {
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer {
+  .site-footer {
     min-height: 0;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__inner {
+  .site-footer__inner {
     width: calc(100% - var(--page-gutter) * 2);
     min-height: 0;
     padding: 5rem 0 max(2rem, env(safe-area-inset-bottom));
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__lockup {
+  .site-footer__lockup {
     width: 100%;
     font-size: clamp(2.25rem, 5.5vw, 3.8rem);
     flex-wrap: wrap;
     row-gap: 0.5rem;
     white-space: normal;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__contact {
+  .site-footer__contact {
     flex-wrap: wrap;
     gap: 1.5rem 3rem;
     margin-top: 2rem;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__socials {
+  .site-footer__socials {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__social {
+  .site-footer__social {
     width: var(--tap-size);
     padding: 0.6rem;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__email {
+  .site-footer__email {
     font-size: 1rem;
     min-height: var(--tap-size);
     max-width: 100%;
@@ -263,64 +323,64 @@
     display: flex;
     align-items: center;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__links {
+  .site-footer__links {
     position: static;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
     margin-top: 3rem;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__column {
+  .site-footer__column {
     font-size: var(--small-size);
     line-height: 1.4;
     gap: 0;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__column a {
+  .site-footer__column a {
     display: flex;
     align-items: center;
     min-height: var(--tap-size);
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__column h2 {
+  .site-footer__column h2 {
     margin: 0;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__copyright {
+  .site-footer__copyright {
     position: static;
     margin-top: 3rem;
     font-size: var(--small-size);
     line-height: 1.4;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__scribble--left {
+  .site-footer__scribble--left {
     top: 1rem;
     left: -1rem;
     width: 4rem;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__scribble--upper {
+  .site-footer__scribble--upper {
     top: 1rem;
     left: auto;
     right: 0;
     width: 6rem;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__scribble--center {
+  .site-footer__scribble--center {
     right: 1rem;
     bottom: 1rem;
     width: 4rem;
   }
 }
 @media (max-width: 640px) {
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__lockup {
+  .site-footer__lockup {
     max-width: 10em;
     font-size: clamp(2.25rem, 9vw, 3.25rem);
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__phrase {
+  .site-footer__phrase {
     flex-wrap: wrap;
   }
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__contact {
+  .site-footer__contact {
     flex-direction: column;
     align-items: flex-start;
   }
 }
 @media (max-width: 640px) {
-  :is(.page-home, .services-page, .about-page, .events-page) .site-footer__links {
+  .site-footer__links {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
   }

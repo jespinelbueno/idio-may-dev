@@ -1,9 +1,6 @@
-import { valuesWheelConfig } from "./values-wheel/config.js";
-
 export const initMobileLanding = () => {
   const carousel = document.querySelector(".offer__mobile-carousel");
-  const mobileWheel = document.querySelector(".values-wheel-mobile");
-  if (!carousel && !mobileWheel) return;
+  if (!carousel) return;
 
   const mobileQuery = window.matchMedia("(max-width: 640px)");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -48,32 +45,4 @@ export const initMobileLanding = () => {
     align();
   }
 
-  if (mobileWheel) {
-    const list = document.querySelector(".values-mobile-list");
-    const select = (title) => {
-      list?.querySelectorAll(".values-mobile-item").forEach(item => {
-        item.classList.toggle("is-active", item.dataset.valueTitle === title);
-      });
-      mobileWheel.querySelectorAll("button").forEach(button => {
-        button.setAttribute("aria-pressed", String(button.dataset.valueTitle === title));
-      });
-    };
-    valuesWheelConfig.forEach(({ title, label }) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.dataset.valueTitle = title;
-      button.setAttribute("aria-label", label);
-      button.addEventListener("click", () => select(title));
-      mobileWheel.appendChild(button);
-    });
-    if (list) list.setAttribute("aria-live", "polite");
-    const syncMobileValue = () => {
-      if (mobileQuery.matches) select("creativity");
-      else {
-        list?.querySelectorAll(".values-mobile-item.is-active").forEach(item => item.classList.remove("is-active"));
-      }
-    };
-    mobileQuery.addEventListener("change", syncMobileValue);
-    if (mobileQuery.matches) select("creativity");
-  }
 };

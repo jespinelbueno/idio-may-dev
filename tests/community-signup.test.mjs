@@ -92,7 +92,9 @@ test('invalid email and filled honeypot cannot send; false success cannot open p
 test('HTML fallback and restrictive page policy match the request endpoint', () => {
   const html=readFileSync(new URL('../events.html',import.meta.url),'utf8');
   assert.ok(html.includes(`method="post" action="${COMMUNITY_SIGNUP_ENDPOINT}"`));
-  assert.ok(html.includes('connect-src https://21c6bf62.sibforms.com;'));
+  const connectSources = html.match(/\bconnect-src ([^;]+);/)?.[1].split(/\s+/);
+  // The footer fetches its SVG locally; signup still uses the pinned provider.
+  assert.deepEqual(connectSources, ["'self'", 'https://21c6bf62.sibforms.com']);
   assert.ok(html.includes("script-src 'self';"));
   assert.ok(html.includes('id="signup-confirmation" aria-labelledby='));
 });

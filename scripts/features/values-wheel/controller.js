@@ -25,6 +25,10 @@ export const initValuesWheel = () => {
   const valueTooltipCopy = document.querySelector(".value-tooltip-copy");
   const valuesCallouts = document.querySelector(".values-callouts");
   const valuesMobileList = document.querySelector(".values-mobile-list");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const compactLayout = window.matchMedia("(max-width: 78rem), (hover: none)");
+  const hoverInput = window.matchMedia("(hover: hover)");
+  let selectedCompactValue = "creativity";
 
   if (!valuesWheel || !valuesWheelGraphic || !valueTooltip) {
     return;
@@ -57,6 +61,12 @@ export const initValuesWheel = () => {
     }
 
     const { valueTitle, valueDescription, valuePosition, valueColor } = slice.dataset;
+    if (compactLayout.matches) selectedCompactValue = valueTitle;
+    valuesWheelGraphic.querySelectorAll(".wheel-slice-group").forEach((group) => {
+      if (!hoverInput.matches) {
+        group.setAttribute("aria-pressed", String(group.dataset.valueTitle === valueTitle));
+      }
+    });
     valueTooltipTitle.textContent = valueTitle || "";
     valueTooltipCopy.textContent = valueDescription || "";
     valueTooltipSwatch?.style.setProperty("background", valueColor || "");
@@ -111,9 +121,10 @@ export const initValuesWheel = () => {
 
       const group = document.createElementNS(SVG_NAMESPACE, "g");
       group.setAttribute("class", "wheel-slice-group");
-      group.setAttribute("role", "button");
+      group.setAttribute("role", hoverInput.matches ? "group" : "button");
       group.setAttribute("aria-label", `${slice.title}: ${slice.description}`);
       group.setAttribute("tabindex", "0");
+      if (!hoverInput.matches) group.setAttribute("aria-pressed", "false");
       group.dataset.valueTitle = slice.title;
       group.dataset.valueDescription = slice.description;
       group.dataset.valuePosition = slice.position;
@@ -158,6 +169,8 @@ export const initValuesWheel = () => {
   let renderedWheelProgress = 0;
   let smoothnessFrame = null;
   const applyValuesWheelRenderOrder = () => {
+    // Moving a focused SVG group drops keyboard focus in Chromium.
+    if (valuesWheelGraphic.contains(document.activeElement)) return;
     valuesWheelRenderOrder.forEach((index) => {
       valuesWheelRotor.appendChild(wheelSlices[index].group);
     });
@@ -205,7 +218,7 @@ export const initValuesWheel = () => {
   const showSliceValue = (group, index, tooltipDelay = 0) => {
     setActiveSliceState(index);
     valuesWheel.classList.add("has-hover-focus");
-    valuesWheelRotor.appendChild(group);
+    if (document.activeElement !== group) valuesWheelRotor.appendChild(group);
 
     const showTooltip = () => {
       setValueTooltip(group);
@@ -219,10 +232,6 @@ export const initValuesWheel = () => {
   };
 
   const showDefaultValueTooltip = () => {
-    if (!valuesWheel.classList.contains("is-scroll-settled")) {
-      return;
-    }
-
     clearActiveSliceState();
     clearValueTooltip();
   };
@@ -246,7 +255,7 @@ export const initValuesWheel = () => {
   };
 
   const activateSliceHover = (group, index, delay = 72) => {
-    if (!valuesWheel.classList.contains("is-scroll-settled")) {
+    if (!hoverInput.matches && !valuesWheel.classList.contains("is-scroll-settled")) {
       return;
     }
 
@@ -368,6 +377,23 @@ export const initValuesWheel = () => {
     valuesCallouts.innerHTML = `${arrows}${callouts}`;
   }
 
+  const syncCompactSelection = () => {
+    valuesMobileList?.querySelectorAll(".values-mobile-item").forEach((item) => {
+      item.classList.toggle("is-active", compactLayout.matches && item.dataset.valueTitle === selectedCompactValue);
+    });
+    wheelSlices.forEach(({ group }) => {
+      group.setAttribute("role", hoverInput.matches ? "group" : "button");
+      if (hoverInput.matches) {
+        group.removeAttribute("aria-pressed");
+      } else {
+        group.setAttribute("aria-pressed", String(compactLayout.matches && group.dataset.valueTitle === selectedCompactValue));
+      }
+    });
+  };
+  compactLayout.addEventListener("change", syncCompactSelection);
+  hoverInput.addEventListener("change", syncCompactSelection);
+  syncCompactSelection();
+
   const updateValuesWheelShape = (scrollProgress = 0) => {
     const clampedProgress = clamp(scrollProgress);
     let lowerFrameIndex = valuesWheelFrames.length - 2;
@@ -397,7 +423,7 @@ export const initValuesWheel = () => {
     const isSettled = clampedProgress >= 0.999;
 
     valuesWheel.classList.toggle("is-scroll-settled", isSettled);
-    if (!isSettled) {
+    if (!isSettled && !hoverInput.matches) {
       clearHoverTimers();
       clearActiveSliceState();
       clearValueTooltip();
@@ -487,7 +513,7 @@ export const initValuesWheel = () => {
   const setValuesWheelTargetProgress = (progress, immediate = false) => {
     targetWheelProgress = clamp(progress);
 
-    if (targetWheelProgress >= 1 || immediate || valuesWheelSmoothingFactor >= 1) {
+    if (immediate || valuesWheelSmoothingFactor >= 1) {
       renderedWheelProgress = targetWheelProgress;
       updateValuesWheelShape(renderedWheelProgress);
       return;
@@ -497,7 +523,7 @@ export const initValuesWheel = () => {
   };
 
   const updateValuesWheelScrollMorph = () => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (reducedMotion.matches) {
       setValuesWheelTargetProgress(1, true);
       return;
     }
@@ -528,13 +554,14 @@ export const initValuesWheel = () => {
 
   wheelSlices.forEach(({ group }, index) => {
     const activate = () => {
+      if (hoverInput.matches) return;
       clearHoverTimers();
       cancelHoverExit();
       showSliceValue(group, index);
     };
     group.addEventListener("click", activate);
     group.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
+      if (!hoverInput.matches && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault();
         activate();
       }
@@ -564,5 +591,6 @@ export const initValuesWheel = () => {
 
   window.addEventListener("scroll", queueValuesWheelMorph, { passive: true });
   window.addEventListener("resize", queueValuesWheelMorph);
+  reducedMotion.addEventListener("change", queueValuesWheelMorph);
   updateValuesWheelScrollMorph();
 };

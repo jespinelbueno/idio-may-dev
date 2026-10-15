@@ -4,6 +4,7 @@
 @import url("./loader.css") layer(components);
 @import url("./custom-cursor.css") layer(components);
 @import url("./buttons.css") layer(components);
+@import url("./carousel-controls.css") layer(components);
 @import url("./navigation-base.css") layer(components);
 @import url("./footer.css") layer(components);
 @import url("./hero.css") layer(pages);

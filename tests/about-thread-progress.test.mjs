@@ -57,3 +57,16 @@ test("damping follows elapsed time across different refresh rates", () => {
   assert.ok(Math.abs(at30 - at60) < 1e-12);
   assert.equal(smoothAboutThreadProgress(null, 1.5, 0), 1.5);
 });
+
+test("the yellow chapter has a scroll hold before the path continues to green", () => {
+  const progress = (scroll) => getAboutThreadProgress([
+    { top: 500 - scroll, bottom: 1500 - scroll, startViewport: 0.8, finishViewport: 0.65 },
+    { top: 1500 - scroll, bottom: 2600 - scroll, startViewport: 0.25, finishViewport: 0.65 },
+  ], 1000);
+  for (let scroll = 850; scroll <= 1250; scroll += 10) assert.deepEqual(progress(scroll), [1, 0]);
+  assert.ok(progress(840)[0] < 1);
+  assert.ok(progress(1260)[1] > 0);
+  assert.deepEqual(progress(1950), [1, 1]);
+  // Reverse scrolling restores the same yellow stop.
+  assert.deepEqual(progress(1000), [1, 0]);
+});
