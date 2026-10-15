@@ -10,7 +10,7 @@
   position: relative;
   height: calc(
     100svh +
-    (var(--case-study-count, 4) * 42svh) +
+    (var(--case-study-count, 2) * 42svh) +
     var(--case-ceiling-hold-distance, 0px)
   );
 }
@@ -155,9 +155,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 0;
-  padding-top: clamp(9.5rem, 10.5vw, 12rem);
+  justify-content: flex-start;
+  gap: 2.5rem;
+  padding-top: var(--case-dot-offset, clamp(9.5rem, 10.5vw, 12rem));
 }
 
 .case-study__dot {
@@ -187,11 +187,6 @@
     transform 180ms ease;
 }
 
-.case-study__dot:hover::before,
-.case-study__dot:focus-visible::before {
-  transform: translate(-50%, -50%) scale(1.28);
-}
-
 .case-study__dot:focus-visible {
   outline: 0;
   box-shadow: 0 0 0 0.22rem rgb(14 83 37 / 0.18);
@@ -204,6 +199,12 @@
 .case-study__dot.is-active::before {
   background: var(--brand-green);
   transform: translate(-50%, -50%) scale(1.18);
+}
+
+.case-study__dot:hover::before,
+.case-study__dot:focus-visible::before {
+  background: var(--brand-yellow);
+  transform: translate(-50%, -50%) scale(1.28);
 }
 
 .case-study__details {
@@ -301,7 +302,7 @@
 
   height: calc(
     var(--case-study-height, 100svh) +
-    (var(--case-study-count, 4) * 42svh) +
+    (var(--case-study-count, 2) * 42svh) +
     var(--team-takeover-distance, 0px)
   );
   background-color: var(--paper);

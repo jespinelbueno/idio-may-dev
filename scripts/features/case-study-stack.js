@@ -7,22 +7,10 @@ export const initCaseStudyStack = () => {
       cardColor: "var(--paper)",
     },
     {
-      client: "Collaboration 02",
+      client: "Christian Dekker",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "Christian Dekker is an up-and-coming music artist whose genre-defying style is easier understood or experienced than defined. We set out to do just that. The key was defining the core principles of Christian’s image while leaving room for growth for the varying stages of his career.",
       cardColor: "var(--brand-green)",
-    },
-    {
-      client: "Collaboration 03",
-      description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      cardColor: "var(--brand-olive)",
-    },
-    {
-      client: "Collaboration 04",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      cardColor: "var(--brand-pink)",
     },
   ];
   
@@ -468,6 +456,15 @@ export const initCaseStudyStack = () => {
   const pinnedSection = caseStudyScrollTrack.querySelector(".case-study");
   const updateContentFit = () => {
     if (!pinnedSection) return;
+    const dots = caseStudyDots[0]?.parentElement;
+    if (dots && caseStudyClient && window.getComputedStyle(dots).flexDirection === "column") {
+      const heading = caseStudyClient.getBoundingClientRect();
+      const firstDot = caseStudyDots[0].getBoundingClientRect();
+      // Keep the first dot centered beside the project name as headings wrap.
+      dots.style.setProperty("--case-dot-offset", `${Math.max(0,
+        heading.top + heading.height / 2 - dots.getBoundingClientRect().top - firstDot.height / 2,
+      )}px`);
+    }
     // Measure the natural grid height, including stacked rows and their gap.
     // Tall sections scroll into view before pinning at the viewport's bottom.
     const sectionHeight = pinnedSection.offsetHeight;
