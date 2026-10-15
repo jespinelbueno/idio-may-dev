@@ -1,5 +1,4 @@
-import { getTeamScrollProgress, getTeamCardPose } from "./about-team-scroll-progress.js";
-import { smoothAboutThreadProgress } from "./about-thread-progress.js";
+import { getTeamScrollProgress, getTeamCardTransform, getTeamShuffleFrames } from "./about-team-scroll-progress.js";
 
 const memberNames = {
   anna: "Anna Moore", jaden: "Jaden Anderson", raquel: "Raquel Bowles",
@@ -77,24 +76,27 @@ export const initAboutTeamSelector = async () => {
   section.querySelector(".about-team__layout").append(caption, controls);
   stack.setAttribute("role", "group");
   let selected = 0;
-  let displayed = null;
-  let previousTimestamp = null;
+  let order = [...cards];
+  let initialized = false;
   let frame = null;
   let step = 0;
+  let pendingIndex = null;
+  let shuffleVersion = 0;
+  let isShuffling = false;
+  const animations = new Set();
+  const compact = () => section.clientWidth <= 1100;
 
-  const render = (progress) => {
-    const active = Math.min(members.length - 1, Math.floor(progress + 0.5));
-    cards.forEach((card, index) => {
-      const pose = getTeamCardPose(index, progress, cards.length);
-      if (mobile.matches) {
-        pose.x = pose.y = pose.z = pose.rotate = pose.turn = 0;
-        pose.opacity = index === active ? 1 : 0;
-      }
-      card.style.transform = `translate3d(${pose.x}px, ${pose.y}px, ${pose.z}px) rotateZ(${pose.rotate}deg) rotateY(${pose.turn}deg)`;
-      card.style.opacity = String(pose.opacity);
-      card.style.zIndex = String(cards.length - index);
-      card.setAttribute("aria-hidden", String(index !== active));
+  const positionCards = () => {
+    order.forEach((card, depth) => {
+      const index = cards.indexOf(card);
+      card.style.transform = mobile.matches ? "none" : getTeamCardTransform(depth, stack.offsetWidth, compact());
+      card.style.opacity = mobile.matches && index !== selected ? "0" : "1";
+      card.style.zIndex = String(cards.length - depth);
+      card.setAttribute("aria-hidden", String(index !== selected));
     });
+  };
+
+  const renderLabels = (active) => {
     buttons.forEach((button, index) => {
       button.setAttribute("aria-pressed", String(index === active));
       button.closest("dl > div").classList.toggle("is-featured", index === active);
@@ -108,16 +110,80 @@ export const initAboutTeamSelector = async () => {
     selected = active;
   };
 
-  const update = (timestamp) => {
+  const animate = (card, keyframes, duration, easing, fill = "both") => {
+    const animation = card.animate(keyframes, { duration, easing, fill });
+    animations.add(animation);
+    return animation;
+  };
+  const resetShuffle = () => {
+    shuffleVersion++;
+    animations.forEach((animation) => animation.cancel());
+    animations.clear();
+    pendingIndex = null;
+    isShuffling = false;
+  };
+  const selectMember = async (index, immediate = false) => {
+    if (isShuffling) { pendingIndex = index; return; }
+    if (initialized && selected === index) return;
+    const front = order[0];
+    const target = cards[index];
+    const finalOrder = [target, ...order.filter((card) => card !== target && card !== front)];
+    if (front !== target) finalOrder.push(front);
+    renderLabels(index);
+    if (!initialized || immediate || mobile.matches || motion.matches || !front.animate) {
+      initialized = true;
+      order = finalOrder;
+      positionCards();
+      return;
+    }
+
+    isShuffling = true;
+    const version = ++shuffleVersion;
+    const previousTransforms = new Map(order.map((card) => [card, card.style.transform]));
+    const width = stack.offsetWidth;
+    // Reserve room for the tilted corners inside the page's clipped artwork.
+    const availableTravel = section.getBoundingClientRect().right - stack.getBoundingClientRect().right - width * 0.18;
+    const { outbound, inbound } = getTeamShuffleFrames(width, cards.length - 1, compact(), availableTravel);
+    try {
+      front.style.zIndex = "100";
+      const leaving = animate(front, outbound, 170, "cubic-bezier(0.3, 0, 0.2, 1)", "forwards");
+      await leaving.finished;
+      order = finalOrder;
+      positionCards();
+      front.style.zIndex = "100";
+      const settling = order.filter((card) => card !== front).map((card) => animate(card, [
+        { transform: previousTransforms.get(card) },
+        { transform: card.style.transform },
+      ], 260, "cubic-bezier(0.22, 1, 0.36, 1)"));
+      leaving.cancel();
+      const returning = animate(front, inbound, 220, "cubic-bezier(0.22, 1, 0.36, 1)", "forwards");
+      // Keep the card above the stack until it has cleared the right edge.
+      const lowerCard = window.setTimeout(() => {
+        if (version === shuffleVersion) front.style.zIndex = "1";
+      }, 85);
+      try {
+        await Promise.all([returning, ...settling].map((animation) => animation.finished));
+      } finally { window.clearTimeout(lowerCard); }
+    } catch (error) {
+      if (error.name !== "AbortError") throw error;
+    } finally {
+      if (version === shuffleVersion) {
+        animations.forEach((animation) => animation.cancel());
+        animations.clear();
+        positionCards();
+        isShuffling = false;
+        const nextIndex = pendingIndex;
+        pendingIndex = null;
+        if (nextIndex !== null) selectMember(nextIndex);
+      }
+    }
+  };
+
+  const update = () => {
     frame = null;
-    const target = mobile.matches || motion.matches ? selected : getTeamScrollProgress(section.getBoundingClientRect().top + prelude.offsetHeight, step, cards.length);
-    const elapsed = previousTimestamp === null ? 1000 / 60 : Math.min(64, timestamp - previousTimestamp);
-    displayed = mobile.matches || motion.matches ? target : smoothAboutThreadProgress(displayed, target, elapsed, 80);
-    render(displayed);
-    if (displayed !== target) {
-      previousTimestamp = timestamp;
-      frame = window.requestAnimationFrame(update);
-    } else previousTimestamp = null;
+    if (mobile.matches || motion.matches) return;
+    const progress = getTeamScrollProgress(section.getBoundingClientRect().top + prelude.offsetHeight, step, cards.length);
+    selectMember(Math.min(cards.length - 1, Math.floor(progress + 0.5)));
   };
   const schedule = () => {
     if (frame === null) frame = window.requestAnimationFrame(update);
@@ -130,14 +196,18 @@ export const initAboutTeamSelector = async () => {
     stack.tabIndex = mobile.matches ? 0 : -1;
     stack.setAttribute("aria-label", mobile.matches ? "Team portraits. Swipe or use the arrow keys and buttons to meet everyone." : "Team portraits");
     section.style.setProperty("--team-intro-height", `${prelude.offsetHeight}px`);
-    displayed = null;
+    resetShuffle();
+    if (!initialized) selectMember(selected, true);
+    // A resize can interrupt a shuffle before its cards have been reordered.
+    order = [cards[selected], ...order.filter((card) => card !== cards[selected])];
+    positionCards();
     schedule();
   };
   list.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-about-member]");
     const index = buttons.indexOf(button);
     if (index < 0) return;
-    if (mobile.matches || motion.matches) { displayed = index; render(index); }
+    if (mobile.matches || motion.matches) selectMember(index);
     else {
       const top = window.scrollY + section.getBoundingClientRect().top + prelude.offsetHeight;
       window.scrollTo({ top: top + (index + 0.35) * step, behavior: "smooth" });
@@ -145,8 +215,7 @@ export const initAboutTeamSelector = async () => {
   });
   const select = (index) => {
     if (!mobile.matches) return;
-    displayed = Math.max(0, Math.min(members.length - 1, index));
-    render(displayed);
+    selectMember(Math.max(0, Math.min(members.length - 1, index)));
   };
   previous.addEventListener("click", () => select(selected - 1));
   next.addEventListener("click", () => select(selected + 1));

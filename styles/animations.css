@@ -68,16 +68,20 @@
   --scribble-frame-delay: -650ms;
 }
 
-.services-page :is(.services-hero__underline, .services-hero__reveal-underline) {
-  animation: scribble-shape-cycle 960ms steps(1, end) infinite;
+.services-page :is(.services-hero__underline, .services-hero__reveal-underline, .service-card__underline) {
+  animation: scribble-shape-cycle 960ms steps(1, end) var(--scribble-frame-delay, 0ms) infinite;
 }
+
+.service-card--web { --scribble-frame-delay: -180ms; }
+.service-card--social { --scribble-frame-delay: -420ms; }
+.service-card--content { --scribble-frame-delay: -650ms; }
 
 .services-hero__reveal-underline {
   animation-delay: -420ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .services-page :is(.services-hero__underline, .services-hero__reveal-underline) {
+  .services-page :is(.services-hero__underline, .services-hero__reveal-underline, .service-card__underline) {
     animation: none;
     filter: none;
   }

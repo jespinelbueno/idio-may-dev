@@ -2,32 +2,32 @@ const clamp = (value, maximum = 1) => Math.max(0, Math.min(maximum, value));
 
 export const getTeamScrollProgress = (top, step, count) => clamp(-top / step - 0.35, count - 1);
 
-export const getTeamCardPose = (index, progress, count) => {
-  const current = Math.min(Math.floor(progress), count - 1);
-  const fraction = progress - current;
-  const turn = clamp((fraction - 0.35) / 0.65);
-  const eased = turn * turn * turn * (turn * (turn * 6 - 15) + 10);
-  if (index < current) return { x: -52, y: -20, z: 20, rotate: 1.5, turn: -78, opacity: 0 };
-  if (index === current) return {
-    x: -52 * eased, y: -20 * eased, z: 20 * eased,
-    rotate: 7.59 - 6 * eased, turn: -100 * eased,
-    opacity: 1 - clamp((eased - 0.9) / 0.1),
-  };
-  if (index === current + 1) return {
-    x: 5 * (1 - eased), y: 5 * (1 - eased), z: -14 * (1 - eased),
-    rotate: -3 + 10.59 * eased, turn: 6 * (1 - eased), opacity: 1,
-  };
-  const depth = index - current;
-  // Settle every remaining card during the turn so the next segment starts
-  // at the same pose, without a small jump in the back of the stack.
-  const nextDepth = depth - 1;
-  const nextOffset = nextDepth === 1 ? 5 : nextDepth * 4;
-  const nextRotate = nextDepth === 1 ? -3 : -3 - nextDepth;
+// Match the homepage's gently fanned stack, keeping deeper cards tucked in.
+export const getTeamCardTransform = (depth, width, compact = false) => {
+  const visualDepth = Math.min(depth, 2);
+  const x = visualDepth * width * (compact ? -0.075 : -0.125);
+  const y = visualDepth * width * (compact ? 0.07 : 0.02);
+  return `translate3d(${x}px, ${y}px, ${-depth}px) rotate(${6.5 - visualDepth * 5.3}deg) scale(${1 - visualDepth * 0.038})`;
+};
+
+export const getTeamShuffleFrames = (width, backDepth, compact = false, availableTravel = Infinity) => {
+  const travelX = Math.min(width * (compact ? 0.13 : 0.68), Math.max(0, availableTravel));
+  const liftY = width * (compact ? -0.2 : -0.24);
+  const visualDepth = Math.min(backDepth, 2);
+  const offsetX = width * (compact ? -0.075 : -0.125);
+  const offsetY = width * (compact ? 0.07 : 0.02);
+  const outside = `translate3d(${travelX}px, -0.55rem, 18px) rotate(11deg) scale(1.012)`;
   return {
-    x: depth * 4 + (nextOffset - depth * 4) * eased,
-    y: depth * 4 + (nextOffset - depth * 4) * eased,
-    z: -14 * (depth - eased),
-    rotate: -3 - depth + (nextRotate + 3 + depth) * eased,
-    turn: nextDepth === 1 ? 6 * eased : 0, opacity: 1,
+    outbound: [
+      { offset: 0, transform: getTeamCardTransform(0, width, compact), filter: "brightness(1)", boxShadow: "0 0.85rem 1.7rem rgb(21 18 14 / 0.16)" },
+      { offset: 0.42, transform: `translate3d(${travelX * 0.56}px, ${liftY}px, 32px) rotate(6deg) scale(1.028)`, filter: "brightness(1.04)", boxShadow: "0 1.2rem 2rem rgb(21 18 14 / 0.22)" },
+      { offset: 1, transform: outside, filter: "brightness(1.03)", boxShadow: "0 1.05rem 1.75rem rgb(21 18 14 / 0.2)" },
+    ],
+    inbound: [
+      { offset: 0, transform: outside },
+      { offset: 0.45, transform: `translate3d(${travelX * 0.38}px, 2.2rem, -18px) rotate(4deg) scale(0.972)` },
+      { offset: 0.78, transform: `translate3d(${visualDepth * offsetX - 8}px, ${visualDepth * offsetY + 4}px, ${-backDepth}px) rotate(${6.5 - visualDepth * 5.3 - 1.2}deg) scale(${1 - visualDepth * 0.038 - 0.008})` },
+      { offset: 1, transform: getTeamCardTransform(backDepth, width, compact) },
+    ],
   };
 };
