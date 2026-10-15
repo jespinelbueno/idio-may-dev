@@ -11,33 +11,52 @@ export function initServicesHeroReveal() {
     return;
   }
 
+  const reveal = hero.querySelector(".services-hero__reveal");
+  const nav = document.querySelector(".services-nav");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let animationFrame = 0;
+  let geometry = null;
+  let needsMeasurement = true;
+  let lastRenderedScroll = null;
+  const renderedStyles = new WeakMap();
+  const clamp = (value) => Math.min(Math.max(value, 0), 1);
+  const ease = (value) => value * value * (3 - 2 * value);
+  const setStyle = (element, name, value) => {
+    let values = renderedStyles.get(element);
+    if (!values) {
+      values = new Map();
+      renderedStyles.set(element, values);
+    }
+    if (values.get(name) === value) return;
+    values.set(name, value);
+    element.style.setProperty(name, value);
+  };
 
-  const update = () => {
-    animationFrame = 0;
-
+  // Geometry changes on layout updates, not on scroll. Keep the unavoidable
+  // alignment write/read here, outside the animation's scrolling frames.
+  const measure = () => {
+    needsMeasurement = false;
     const stageTop = stage.getBoundingClientRect().top + window.scrollY;
     const heroHeight = hero.offsetHeight || window.innerHeight;
     const titleHeight = whiteTitle.offsetHeight;
-    hero.style.setProperty("--services-title-height", `${titleHeight}px`);
+    const copyHeight = revealCopy.offsetHeight;
+    const navHeight = nav?.offsetHeight || 68;
+    const holdDistance = Math.max(scrollSpace.offsetHeight - heroHeight, 0);
+    const maximumLag = reducedMotion.matches || window.innerHeight <= 520
+      ? 0 : Math.min(window.innerHeight * 0.2, 12 * 16);
+    setStyle(hero, "--services-title-height", `${titleHeight}px`);
     if (window.innerWidth <= 640 || window.innerHeight <= 720) {
       // Keep both titles aligned while leaving room for the paragraph in the reveal.
-      const navHeight = document.querySelector(".services-nav")?.offsetHeight || 68;
       const titleCenter = Math.max(
         navHeight + titleHeight / 2 + 24,
-        Math.min(heroHeight * 0.49, heroHeight - revealCopy.offsetHeight + titleHeight / 2 - 48),
+        Math.min(heroHeight * 0.49, heroHeight - copyHeight + titleHeight / 2 - 48),
       );
-      hero.style.setProperty("--services-title-y", `${titleCenter}px`);
+      setStyle(hero, "--services-title-y", `${titleCenter}px`);
     } else {
       hero.style.removeProperty("--services-title-y");
+      renderedStyles.get(hero)?.delete("--services-title-y");
     }
-    const holdDistance = Math.max(scrollSpace.offsetHeight - heroHeight, 0);
-    const rawProgress = Math.min(Math.max((window.scrollY - stageTop) / heroHeight, 0), 1);
-    const transitionProgress = Math.min(Math.max((rawProgress - 0.05) / 0.95, 0), 1);
-    const revealProgress = reducedMotion.matches
-      ? Number(transitionProgress >= 0.5)
-      : transitionProgress * transitionProgress * (3 - (2 * transitionProgress));
+    setStyle(stage, "--services-hero-offer-lag-space", `${maximumLag.toFixed(2)}px`);
     const heroBounds = hero.getBoundingClientRect();
     const dotBounds = dotMarker.getBoundingClientRect();
     const titleBounds = whiteTitle.getBoundingClientRect();
@@ -50,7 +69,6 @@ export function initServicesHeroReveal() {
       Math.hypot(originX, heroBounds.height - originY),
       Math.hypot(heroBounds.width - originX, heroBounds.height - originY),
     ) + 2;
-    const revealRadius = startingRadius + ((endingRadius - startingRadius) * revealProgress);
     const titleLeft = titleBounds.left - heroBounds.left;
     const titleRight = titleBounds.right - heroBounds.left;
     const titleTop = titleBounds.top - heroBounds.top;
@@ -64,45 +82,62 @@ export function initServicesHeroReveal() {
       Math.hypot(originX - titleLeft, originY - titleBottom),
       Math.hypot(originX - titleRight, originY - titleBottom),
     );
-    const copyFadeDistance = Math.max(titleCoverageRadius - titleIntersectionRadius, 1);
-    const copyTransition = Math.min(
-      Math.max((revealRadius - titleIntersectionRadius) / copyFadeDistance, 0),
-      1,
-    );
-    const copyOpacity = copyTransition * copyTransition * (3 - (2 * copyTransition));
+    geometry = {
+      stageTop, heroHeight, holdDistance, startingRadius, endingRadius,
+      titleIntersectionRadius,
+      copyFadeDistance: Math.max(titleCoverageRadius - titleIntersectionRadius, 1),
+      maximumLag,
+      end: stageTop + heroHeight * 2 + holdDistance,
+      staticLayout: window.innerHeight <= 520,
+    };
+  };
 
-    hero.style.setProperty("--services-reveal-radius", `${revealRadius.toFixed(2)}px`);
-    hero.style.setProperty("--services-copy-opacity", copyOpacity.toFixed(3));
+  const update = () => {
+    animationFrame = 0;
+    if (needsMeasurement) measure();
+    const { stageTop, heroHeight, holdDistance, startingRadius, endingRadius,
+      titleIntersectionRadius, copyFadeDistance, maximumLag } = geometry;
+    const scroll = window.scrollY;
+    const transitionProgress = clamp((clamp((scroll - stageTop) / heroHeight) - 0.05) / 0.95);
+    const revealProgress = reducedMotion.matches
+      ? Number(transitionProgress >= 0.5) : ease(transitionProgress);
+    const revealRadius = startingRadius + (endingRadius - startingRadius) * revealProgress;
+    const copyOpacity = ease(clamp((revealRadius - titleIntersectionRadius) / copyFadeDistance));
+    const takeoverProgress = clamp((scroll - stageTop - heroHeight - holdDistance) / heroHeight);
 
-    if (reducedMotion.matches) {
-      stage.style.setProperty("--services-hero-offer-lag-space", "0px");
-      offer.style.setProperty("--services-hero-offer-lag", "0px");
-      return;
-    }
-
-    const takeoverProgress = Math.min(
-      Math.max((window.scrollY - stageTop - heroHeight - holdDistance) / heroHeight, 0),
-      1,
-    );
-    const easedTakeover = takeoverProgress * takeoverProgress * (3 - (2 * takeoverProgress));
-    const maximumLag = Math.min(window.innerHeight * 0.2, 12 * 16);
-
-    stage.style.setProperty("--services-hero-offer-lag-space", `${maximumLag.toFixed(2)}px`);
-    offer.style.setProperty(
-      "--services-hero-offer-lag",
-      `${(easedTakeover * maximumLag).toFixed(2)}px`,
-    );
+    // Scope frequently changing variables to their consumers, rather than
+    // invalidating inherited styles throughout the entire hero subtree.
+    setStyle(reveal || hero, "--services-reveal-radius", `${revealRadius.toFixed(2)}px`);
+    setStyle(revealCopy, "--services-copy-opacity", copyOpacity.toFixed(3));
+    setStyle(offer, "--services-hero-offer-lag", `${(ease(takeoverProgress) * maximumLag).toFixed(2)}px`);
+    lastRenderedScroll = scroll;
   };
 
   const requestUpdate = () => {
-    if (!animationFrame) {
-      animationFrame = window.requestAnimationFrame(update);
+    if (!needsMeasurement && geometry && lastRenderedScroll !== null) {
+      const scroll = window.scrollY;
+      if (geometry.staticLayout ||
+        (scroll >= geometry.end && lastRenderedScroll >= geometry.end) ||
+        (scroll <= geometry.stageTop && lastRenderedScroll <= geometry.stageTop)) return;
     }
+    if (!animationFrame) animationFrame = window.requestAnimationFrame(update);
+  };
+  const invalidateGeometry = () => {
+    needsMeasurement = true;
+    requestUpdate();
   };
 
   window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
-  reducedMotion.addEventListener("change", requestUpdate);
-  new ResizeObserver(requestUpdate).observe(revealCopy);
+  window.addEventListener("resize", invalidateGeometry);
+  window.addEventListener("load", invalidateGeometry);
+  window.addEventListener("pageshow", invalidateGeometry);
+  reducedMotion.addEventListener("change", invalidateGeometry);
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(invalidateGeometry);
+    observer.observe(revealCopy);
+    observer.observe(hero);
+    if (nav) observer.observe(nav);
+  }
+  document.fonts?.ready.then(invalidateGeometry);
   update();
 }

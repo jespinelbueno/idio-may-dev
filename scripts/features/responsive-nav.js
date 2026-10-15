@@ -14,6 +14,8 @@ export const initResponsiveNav = ({ navSelector, transitionSelector }) => {
   circle.appendChild(rotor);
   toggle.before(circle);
   let animationFrame = null;
+  let previousNavHeight = null;
+  let previousLinksHeight = null;
   const setMenuOpen = (open, returnFocus = false) => {
     nav.classList.toggle("is-menu-open", open);
     document.documentElement.classList.toggle(
@@ -28,9 +30,19 @@ export const initResponsiveNav = ({ navSelector, transitionSelector }) => {
   };
   const updateNav = () => {
     animationFrame = null;
-    nav.classList.toggle("is-sticky", offer.getBoundingClientRect().top <= nav.offsetHeight);
-    document.body.style.setProperty("--nav-height", `${nav.offsetHeight}px`);
-    nav.style.setProperty("--menu-links-height", `${links.offsetHeight}px`);
+    // Read before changing classes/styles; scrolling rarely changes these sizes.
+    const offerTop = offer.getBoundingClientRect().top;
+    const navHeight = nav.offsetHeight;
+    const linksHeight = links.offsetHeight;
+    nav.classList.toggle("is-sticky", offerTop <= navHeight);
+    if (navHeight !== previousNavHeight) {
+      document.body.style.setProperty("--nav-height", `${navHeight}px`);
+      previousNavHeight = navHeight;
+    }
+    if (linksHeight !== previousLinksHeight) {
+      nav.style.setProperty("--menu-links-height", `${linksHeight}px`);
+      previousLinksHeight = linksHeight;
+    }
   };
   const scheduleNavUpdate = () => {
     if (animationFrame !== null) return;

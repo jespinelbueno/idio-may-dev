@@ -611,7 +611,7 @@
 
   :is(.services-page, .about-page, .events-page) .services-contact {
     --mobile-unit: calc(min(100vw, 32rem) / 402);
-    padding: calc(var(--mobile-unit) * 68) 0 calc(var(--mobile-unit) * 141);
+    padding: calc(var(--mobile-unit) * 68) 0 calc(var(--mobile-unit) * 64);
   }
 
   :is(.services-page, .about-page, .events-page) .services-contact__inner {
