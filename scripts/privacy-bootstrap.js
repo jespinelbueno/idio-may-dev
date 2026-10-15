@@ -1,9 +1,11 @@
-// Synchronous: check consent before the homepage reads optional intro memory.
+// Imported first by each page entry: check consent before optional intro memory.
 (() => {
   const PREFERENCE_KEY = "idio-privacy-v1";
   const INTRO_KEY = "idio-home-loader-v1";
   const DAY = 24 * 60 * 60 * 1000;
   const LIFETIME = 180 * DAY;
+  const canShowSettings = typeof HTMLDialogElement !== "undefined"
+    && typeof HTMLDialogElement.prototype.showModal === "function";
   let preference = null;
 
   const removeIntro = () => {
@@ -19,12 +21,12 @@
     try {
       const value = JSON.parse(localStorage.getItem(PREFERENCE_KEY));
       if (isValid(value)) return value;
-      localStorage.removeItem(PREFERENCE_KEY);
     } catch { /* Invalid or unavailable storage means optional use is off. */ }
+    try { localStorage.removeItem(PREFERENCE_KEY); } catch { /* Storage may be blocked. */ }
     return null;
   };
   const allowed = () => {
-    if (isValid(preference) && preference.intro) return true;
+    if (canShowSettings && isValid(preference) && preference.intro) return true;
     removeIntro();
     return false;
   };

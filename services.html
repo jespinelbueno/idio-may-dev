@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Services from Idio Creative, a full-service creative agency.">
     <title>Services | Idio</title>
-    <script src="scripts/privacy-bootstrap.js"></script>
     <script defer src="scripts/register-cache.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Teva/Teva-Regular.otf" as="font" type="font/otf" crossorigin>
@@ -336,14 +335,15 @@
           </section>
         </div>
 
-        <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
+        <div class="site-footer__legal">
+          <nav class="site-footer__privacy-links" aria-label="Privacy links">
+            <a href="privacy.html">privacy &amp; browser storage</a>
+            <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
+          </nav>
+          <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
+        </div>
       </div>
     </footer>
-
-    <nav class="privacy-links" aria-label="Privacy links">
-      <a href="privacy.html">privacy &amp; browser storage</a>
-      <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
-    </nav>
 
     <script type="module" src="scripts/services.js"></script>
   </body>

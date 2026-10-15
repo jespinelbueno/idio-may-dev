@@ -1,4 +1,8 @@
 @media (max-width: 640px) {
+  .contact-hero {
+    padding-bottom: calc(8rem + env(safe-area-inset-bottom));
+  }
+
   .contact-hero__image {
     /* Keep the warm, central band of the same image on portrait screens. */
     top: -32%;

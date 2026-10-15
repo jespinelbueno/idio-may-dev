@@ -13,14 +13,16 @@
   text-align: center;
 }
 .privacy-dialog::backdrop { background: rgb(0 30 10 / 65%); }
+.privacy-dialog:not([open]) { display: none; }
 .privacy-dialog__close { position: absolute; top: 0.5rem; right: 0.5rem; min-width: 2.75rem; min-height: 2.75rem; border: 0; background: transparent; color: inherit; font: 2rem/1 sans-serif; }
 .privacy-dialog__eyebrow { margin: 0.25rem 0 1rem; font: 1.1rem/1.4 'Teva', sans-serif; }
 .privacy-dialog h2 { margin: 0 0 1.25rem; font-size: clamp(2.5rem, 7vw, 3.5rem); font-weight: 650; line-height: 0.98; letter-spacing: -0.04em; }
 .privacy-dialog p { line-height: 1.5; }
 .privacy-dialog__note, .privacy-dialog__policy { font-size: 0.875rem; }
+.privacy-dialog__actions .privacy-button { width: 100%; }
 .privacy-dialog__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-block: 1.5rem 0.75rem; }
-.privacy-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; padding: 0.8rem 1.1rem; border: 1px solid var(--brand-green); border-radius: 2rem; background: var(--paper); color: var(--brand-green); font: 600 0.9375rem/1.25 'DM Sans', sans-serif; text-align: center; cursor: pointer; }
-.privacy-button:is(:hover, :focus-visible) { background: var(--brand-green); color: var(--paper); }
+.privacy-button { width: auto; min-width: 0; margin: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; padding: 0.8rem 1.1rem; border: 1px solid var(--brand-green); border-radius: 2rem; background: var(--paper); color: var(--brand-green); font: 600 0.9375rem/1.25 'DM Sans', sans-serif; text-align: center; cursor: pointer; }
+.privacy-button:not(.privacy-button--animated):is(:hover, :focus-visible) { background: var(--brand-green); color: var(--paper); }
 .privacy-dialog :is(button, input, summary, a):focus-visible, .privacy-links a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .privacy-dialog__details { text-align: left; font-size: 0.875rem; }
 .privacy-dialog__details summary { display: list-item; width: fit-content; min-height: 2.75rem; padding-block: 0.7rem; margin-inline: auto; cursor: pointer; font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; }
@@ -31,8 +33,25 @@
 .privacy-dialog__policy { display: inline-block; padding-block: 0.6rem; text-decoration: underline; text-underline-offset: 0.2em; line-height: 1.5; }
 .privacy-dialog__status:empty { display: none; }
 .privacy-dialog__status { font-size: 0.875rem; font-weight: 650; }
-.privacy-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 2rem; padding: 0.8rem var(--page-gutter, 1rem); background: var(--brand-green); color: var(--paper); font-size: 0.875rem; line-height: 1.4; }
+.privacy-links {
+  position: absolute;
+  z-index: 1;
+  right: var(--page-gutter);
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: var(--page-gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 2rem;
+  color: inherit;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
 .privacy-links a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-underline-offset: 0.2em; }
+@media (max-width: 640px) {
+  .privacy-links { flex-direction: column; gap: 0; }
+}
 html:has(.privacy-dialog[open]) { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) {
   html.has-custom-cursor:has(.privacy-dialog[open]), html.has-custom-cursor:has(.privacy-dialog[open]) * { cursor: auto !important; }
@@ -44,3 +63,11 @@ html:has(.privacy-dialog[open]) { overflow: hidden; }
 
 .privacy-dialog [hidden] { display: none; }
 .privacy-dialog__continue { margin-bottom: 0.75rem; }
+
+.privacy-dialog .privacy-button:focus-visible { outline-color: var(--brand-green); }
+@media (prefers-reduced-motion: reduce) {
+  .privacy-button--animated,
+  .privacy-button--animated .button-fill__blob,
+  .privacy-button--animated .button-fill__inner::before { transition: none !important; }
+  .privacy-button--animated:is(:hover, :focus-visible) { transform: none; }
+}

@@ -2,30 +2,32 @@ export const initPrivacyPreferences = () => {
   const privacy = window.idioPrivacy;
   if (!privacy || !document.querySelector("[data-privacy-settings]") || document.querySelector("#privacy-preferences")) return;
   const dialog = document.createElement("dialog");
+  if (typeof dialog.showModal !== "function") return;
   dialog.id = "privacy-preferences";
   dialog.className = "privacy-dialog";
   dialog.setAttribute("aria-labelledby", "privacy-dialog-title");
   dialog.setAttribute("aria-describedby", "privacy-dialog-description");
-  // Fixed local markup only; no visitor, URL, or provider content is interpolated.
+  const buttonLabel = (label) => `<span class="button-fill__label">${label}</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>`;
+  // Fixed local labels only; no visitor, URL, or provider content is interpolated.
   dialog.innerHTML = `
     <button class="privacy-dialog__close" type="button" aria-label="Close cookie settings and reject optional storage">×</button>
     <p class="privacy-dialog__eyebrow">a little housekeeping</p>
-    <h2 id="privacy-dialog-title">your browser.<br>your call.</h2>
+    <h2 id="privacy-dialog-title" tabindex="-1" autofocus>your browser.<br>your call.</h2>
     <p id="privacy-dialog-description">We don’t use advertising or analytics trackers on this website. With your permission, we can remember that you’ve seen our homepage intro so you can skip it next time.</p>
     <p class="privacy-dialog__note">Optional storage stays off until you accept. We save your choice for 180 days. Newsletter signup is a separate choice.</p>
     <div class="privacy-dialog__actions">
-      <button class="privacy-button" type="button" data-privacy-reject autofocus>Reject optional</button>
-      <button class="privacy-button" type="button" data-privacy-accept>Accept optional</button>
+      <button class="privacy-button privacy-button--animated" type="button" data-privacy-reject>${buttonLabel("Reject optional")}</button>
+      <button class="privacy-button privacy-button--animated" type="button" data-privacy-accept>${buttonLabel("Accept optional")}</button>
     </div>
     <details class="privacy-dialog__details">
       <summary>Customize my choice</summary>
       <p><strong>Remember this choice · always on</strong><br>A small browser record remembers acceptance or rejection. Normal browser caching also helps deliver the site.</p>
       <label class="privacy-dialog__option"><input type="checkbox" name="intro-memory"><span><strong>Remember the intro · optional</strong><br>A timestamp lets us skip the intro for seven days after it’s shown. It stays in this browser and isn’t sent to Idio.</span></label>
       <p>No analytics or advertising categories are available because neither is installed on this website.</p>
-      <button class="privacy-button" type="button" data-privacy-save>Save my selection</button>
+      <button class="privacy-button privacy-button--animated" type="button" data-privacy-save>${buttonLabel("Save my selection")}</button>
     </details>
     <p class="privacy-dialog__status" role="status" aria-live="polite"></p>
-    <button class="privacy-button privacy-dialog__continue" type="button" hidden>Continue without saving</button>
+    <button class="privacy-button privacy-button--animated privacy-dialog__continue" type="button" hidden>${buttonLabel("Continue without saving")}</button>
     <a class="privacy-dialog__policy" href="privacy.html">Read our privacy &amp; browser storage notice →</a>
   `;
   document.body.append(dialog);
@@ -85,12 +87,17 @@ export const initPrivacyPreferences = () => {
   window.addEventListener("idio:privacy-change", sync);
   sync();
   // The notice stays readable without an automatic popup.
-  if (document.body.classList.contains("privacy-page")) return;
+  if (document.body.classList.contains("privacy-page") || privacy.getPreference()) return;
   const promptWhenReady = () => {
     if (prompted || privacy.getPreference() || document.body.classList.contains("is-loading")) return;
     open();
+    if (prompted) {
+      observer.disconnect();
+      document.removeEventListener("close", promptWhenReady, true);
+    }
   };
   const observer = new MutationObserver(promptWhenReady);
   observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  document.addEventListener("close", promptWhenReady, true);
   promptWhenReady();
 };

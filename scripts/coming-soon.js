@@ -1,3 +1,4 @@
+import "./privacy-bootstrap.js";
 import { initPrivacyPreferences } from "./features/privacy-preferences.js";
 import { initImageSaveDeterrent } from "./features/image-save-deterrent.js";
 import { initComingSoonArtwork } from "./features/coming-soon-artwork.js";

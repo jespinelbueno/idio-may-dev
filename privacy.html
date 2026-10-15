@@ -7,12 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="How Idio Creative handles your information, newsletter choices, and browser storage. Clear information and controls, all in one place.">
     <title>Privacy &amp; browser storage | Idio</title>
-    <script src="scripts/privacy-bootstrap.js"></script>
     <script defer src="scripts/register-cache.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="styles/privacy.css">
   </head>
   <body class="privacy-page">
+    <svg class="scribble-frame-filters" aria-hidden="true">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo" result="mix"></feBlend>
+        </filter>
+        <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-2" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.019 0.027" numOctaves="2" seed="29" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="B" yChannelSelector="R"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-3" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.052" numOctaves="2" seed="47" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="7.5" xChannelSelector="G" yChannelSelector="B"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-4" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.021" numOctaves="2" seed="71" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="B"></feDisplacementMap>
+        </filter>
+        <filter id="scribble-shape-frame-5" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.013 0.045" numOctaves="2" seed="101" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="B" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+
     <a class="privacy-skip-link" href="#privacy-content">Skip to privacy notice</a>
     <header class="services-nav" aria-label="Primary navigation">
       <a class="services-nav__brand" href="index.html" aria-label="Idio home">
@@ -34,7 +63,7 @@
           <h1 id="privacy-title">your privacy.<br>made <em>clear.</em></h1>
           <p class="privacy-hero__intro">The details behind your visit.<br>What we use, why it’s here, and what you control.</p>
           <p class="privacy-hero__date">Privacy &amp; browser storage notice · Updated October 15, 2026</p>
-          <div class="privacy-hero__seal" aria-hidden="true"><img src="assets/media/brand/idio-icon.svg" width="47" height="33" alt=""><span>less tracking.<br>more creating.</span></div>
+          <span class="privacy-hero__logo" aria-hidden="true"></span>
         </div>
       </section>
       <div class="privacy-overview" aria-label="Privacy at a glance">
@@ -60,7 +89,7 @@
           <section id="who-we-are">
             <p class="privacy-copy__number">01 / who we are</p>
             <h2>Hello. We’re Idio.</h2>
-            <p>Idio Creative, based in North Carolina, United States, is responsible for the information handled through this website. Contact us about privacy at <a href="mailto:idiocreative@outlook.com?subject=Privacy%20request">idiocreative@outlook.com</a>.</p>
+            <p>Idio Creative, based in Virginia, United States, is responsible for the information handled through this website. Contact us about privacy at <a href="mailto:idiocreative@outlook.com?subject=Privacy%20request">idiocreative@outlook.com</a>.</p>
             <p>This notice describes our current development website, including its newsletter signup and browser storage. It does not replace any separate privacy terms provided for client projects or contracts. We do not currently run accounts, online checkout, advertising trackers, or website analytics.</p>
           </section>
           <section id="information">
@@ -97,7 +126,10 @@
             <h2>You’re in control.</h2>
             <p>Accept optional storage, reject it, or save a customized choice. Accept and reject are equally available. Rejecting does not prevent you from browsing or signing up for the newsletter. The intro may play again when memory is off.</p>
             <p data-privacy-summary>Optional intro memory is off unless a valid acceptance was previously saved in this browser.</p>
-            <a class="privacy-button" href="privacy.html#browser-help" data-privacy-settings>Open cookie settings →</a>
+            <a class="privacy-button privacy-button--animated" href="privacy.html#browser-help" data-privacy-settings>
+              <span class="button-fill__label">Open cookie settings →</span>
+              <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
+            </a>
             <p>Closing the first popup with × or Escape rejects optional storage. Closing settings after making a choice keeps the saved choice. You can withdraw acceptance at any time by reopening settings and choosing Reject optional. That removes intro memory in this browser; other open tabs update when the browser delivers the change.</p>
             <p>We ask again after 180 days or if you clear your preference. Choices apply to this site origin, browser, and browser profile—not automatically to other devices. Private browsing may discard them. If saving fails, optional intro memory remains off for the current page and we explain how to continue.</p>
             <p id="browser-help"><strong>Without JavaScript or a supported dialog:</strong> no optional intro memory is written. Use your browser’s site-data controls to remove existing Idio storage. Clearing site data also removes your saved rejection, so the popup can appear again. Contact us if you need help.</p>
@@ -109,6 +141,7 @@
             <p>Our optional newsletter sends Idio news and event emails through Brevo. The signup box is unchecked by default. Submitting with that box checked requests a subscription; accepting browser storage does not subscribe you.</p>
             <p>If Brevo sends a confirmation email, follow its instructions to complete signup. We do not treat our on-page acknowledgment as proof of email ownership. Unsubscribe using the link in a marketing email, or contact <a href="mailto:idiocreative@outlook.com?subject=Unsubscribe">idiocreative@outlook.com</a>.</p>
             <p>Brevo processes signup, delivery, security, and subscription records. Depending on campaign settings, emails may also use open or link measurement; website cookie settings do not control email measurement. You can unsubscribe from those emails or contact us about the current settings. See <a href="https://www.brevo.com/en/legal/privacypolicy/" rel="noopener noreferrer">Brevo’s Privacy Policy</a>.</p>
+            <p>Without JavaScript, the signup form submits directly to Brevo and may take you to its website. That provider’s own cookies, notices, and controls apply there; our website settings do not control another domain.</p>
             <p>Unsubscribing stops marketing but does not necessarily delete your contact record. Request deletion separately if that is what you want. A limited suppression record may be needed to avoid sending further marketing.</p>
           </section>
           <section id="providers">
@@ -145,7 +178,7 @@
             <h2>Keep the conversation open.</h2>
             <p>We update this notice as the website and our practices change and show the revision date at the top. New optional browser purposes require a new choice before activation. For material changes to other processing, we provide any additional notice or consent required by applicable law.</p>
             <p>This development notice describes the features currently implemented. It does not authorize future analytics, advertising, payments, or other collection. Those features need their own review and updated controls before they are enabled.</p>
-            <p><strong>Idio Creative · North Carolina, United States</strong><br><a href="mailto:idiocreative@outlook.com?subject=Privacy%20question">idiocreative@outlook.com</a></p>
+            <p><strong>Idio Creative · Virginia, United States</strong><br><a href="mailto:idiocreative@outlook.com?subject=Privacy%20question">idiocreative@outlook.com</a></p>
           </section>
         </article>
       </div>
@@ -196,13 +229,15 @@
           </section>
         </div>
 
-        <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
+        <div class="site-footer__legal">
+          <nav class="site-footer__privacy-links" aria-label="Privacy links">
+            <a href="privacy.html" aria-current="page">privacy &amp; browser storage</a>
+            <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
+          </nav>
+          <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
+        </div>
       </div>
     </footer>
-    <nav class="privacy-links" aria-label="Privacy links">
-      <a href="privacy.html" aria-current="page">privacy &amp; browser storage</a>
-      <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
-    </nav>
     <script type="module" src="scripts/privacy.js"></script>
   </body>
 </html>

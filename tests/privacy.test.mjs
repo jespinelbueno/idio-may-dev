@@ -11,7 +11,7 @@ const PREF = "idio-privacy-v1";
 const INTRO = "idio-home-loader-v1";
 const saved = (intro, time = NOW) => JSON.stringify({ version: 1, intro, savedAt: time, expiresAt: time + 180 * DAY });
 
-const fixture = (entries = {}, { blocked = false, writeBlocked = false } = {}) => {
+const fixture = (entries = {}, { blocked = false, writeBlocked = false, unsupportedDialog = false } = {}) => {
   const data = new Map(Object.entries(entries));
   const reads = [];
   const writes = [];
@@ -20,6 +20,7 @@ const fixture = (entries = {}, { blocked = false, writeBlocked = false } = {}) =
   const documentHandlers = {};
   let now = NOW;
   const context = {
+    HTMLDialogElement: unsupportedDialog ? undefined : class { showModal() {} },
     Date: { now: () => now },
     CustomEvent: class { constructor(type) { this.type = type; } },
     localStorage: {
@@ -146,12 +147,21 @@ test("blocked storage and quota failure never enable optional memory", () => {
   assert.equal(f.data.has(INTRO), false);
 });
 
+test("browsers without an accessible settings dialog cannot use optional memory", () => {
+  const f = fixture({ [PREF]: saved(true), [INTRO]: String(NOW) }, { unsupportedDialog: true });
+  assert.equal(f.api.allowsIntro(), false);
+  f.api.rememberIntro();
+  assert.equal(f.data.has(INTRO), false);
+  assert.equal(f.reads.includes(INTRO), false);
+});
+
 test("public pages load consent first and provide working non-JavaScript privacy links", () => {
   for (const page of publicPages.filter(page => !page.startsWith("loading-screens/"))) {
     const html = read(page);
     assert.match(html, /href="privacy.html"/);
     assert.match(html, /href="privacy.html#your-choices" data-privacy-settings/);
-    assert.ok(html.indexOf('src="scripts/privacy-bootstrap.js"') < html.indexOf('src="scripts/register-cache.js"'), page);
+    const entry = html.match(/<script type="module" src="([^"]+)"/)[1];
+    assert.ok(read(entry).startsWith('import "./privacy-bootstrap.js";'), page);
   }
   assert.doesNotMatch(read("index.html"), /localStorage/);
   assert.doesNotMatch(read("scripts/features/home-loader.js"), /localStorage/);

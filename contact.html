@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Get in touch with Idio Creative for creative collaboration, partnerships, quotes and more.">
     <title>Contact | Idio</title>
-    <script src="scripts/privacy-bootstrap.js"></script>
     <script defer src="scripts/register-cache.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Teva/Teva-Regular.otf" as="font" type="font/otf" crossorigin>
@@ -18,6 +17,11 @@
     <a class="contact-skip-link" href="#contact-email">Skip to contact details</a>
     <svg class="scribble-frame-filters" aria-hidden="true">
       <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo" result="mix"></feBlend>
+        </filter>
         <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.01 0.034" numOctaves="2" seed="11" result="noise"></feTurbulence>
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
@@ -72,12 +76,12 @@
           <div class="contact-hero__accent contact-hero__accent--right"><div class="contact-hero__accent-turn"><img src="assets/media/contact/accent-right.svg" width="437.689" height="288.2" alt=""></div></div>
           <div class="contact-hero__accent contact-hero__accent--left"><div class="contact-hero__accent-turn"><img src="assets/media/contact/accent-left.svg" width="267.959" height="216.021" alt=""></div></div>
         </div>
+        <nav class="privacy-links" aria-label="Privacy links">
+          <a href="privacy.html">privacy &amp; browser storage</a>
+          <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
+        </nav>
       </section>
     </main>
-    <nav class="privacy-links" aria-label="Privacy links">
-      <a href="privacy.html">privacy &amp; browser storage</a>
-      <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
-    </nav>
 
     <script type="module" src="scripts/contact.js"></script>
   </body>

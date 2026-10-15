@@ -1,4 +1,5 @@
 @media (max-width: 640px) {
+  .not-found { padding-bottom: calc(8rem + env(safe-area-inset-bottom)); }
   .not-found__content { width: 100%; }
   .not-found__intro {
     width: min(100%, 22rem);

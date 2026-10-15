@@ -1,3 +1,4 @@
+import "./privacy-bootstrap.js";
 import { initPrivacyPreferences } from "./features/privacy-preferences.js";
 import { initResponsiveNav } from "./features/responsive-nav.js";
 import { initCustomCursor } from "./features/custom-cursor.js";

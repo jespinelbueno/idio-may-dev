@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Join the Idio community for creative events, good company, and emails worth opening.">
     <title>Idio Events | Idio</title>
-    <script src="scripts/privacy-bootstrap.js"></script>
     <script defer src="scripts/register-cache.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
@@ -131,7 +130,7 @@
             </div>
             <h2 id="services-contact-title">so, wanna work with us?</h2>
             <div class="services-contact__actions">
-              <a class="services-contact__button" href="mailto:hello@idiocreative.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
+              <a class="services-contact__button" href="mailto:idiocreative@outlook.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
                 <span class="button-fill__label">yes</span>
                 <span class="button-fill__inner" aria-hidden="true">
                   <span class="button-fill__blobs">
@@ -142,7 +141,7 @@
                   </span>
                 </span>
               </a>
-              <a class="services-contact__button services-contact__button--outline" href="mailto:hello@idiocreative.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
+              <a class="services-contact__button services-contact__button--outline" href="mailto:idiocreative@outlook.com?subject=Let%E2%80%99s%20work%20together" aria-label="Yes, let’s work together">
                 <span class="button-fill__label services-contact__answer" aria-hidden="true">
                   <span class="services-contact__answer-default">no</span>
                   <span class="services-contact__answer-hover">yes</span>
@@ -208,7 +207,13 @@
           </section>
         </div>
 
-        <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
+        <div class="site-footer__legal">
+          <nav class="site-footer__privacy-links" aria-label="Privacy links">
+            <a href="privacy.html">privacy &amp; browser storage</a>
+            <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
+          </nav>
+          <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
+        </div>
       </div>
     </footer>
 
@@ -222,10 +227,6 @@
       </form>
     </dialog>
 
-    <nav class="privacy-links" aria-label="Privacy links">
-      <a href="privacy.html">privacy &amp; browser storage</a>
-      <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
-    </nav>
 
     <script type="module" src="scripts/events.js"></script>
   </body>

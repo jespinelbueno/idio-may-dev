@@ -150,7 +150,7 @@
   }
 }
 
-/* Draw from the tail, finish the head, hold, then restart like a pen sketch. */
+/* Draw from the tail, finish the head, and hold until the interaction ends. */
 .arrow-draw__stroke {
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
@@ -158,7 +158,7 @@
 
 .values-wheel-arrow.is-active .arrow-draw__stroke,
 .team__member:is(:hover, :focus, :focus-within) .arrow-draw__stroke {
-  animation: arrow-draw-shaft 0.85s linear infinite;
+  animation: arrow-draw-shaft 0.85s linear forwards;
 }
 
 .values-wheel-arrow.is-active .arrow-draw__stroke--head,
@@ -168,27 +168,24 @@
 
 .values-wheel-arrow.is-active .arrow-draw__complete,
 .team__member:is(:hover, :focus, :focus-within) .arrow-draw__complete {
-  animation: arrow-draw-complete 0.85s linear infinite;
+  animation: arrow-draw-complete 0.85s linear forwards;
 }
 
 @keyframes arrow-draw-complete {
   0%, 42% { opacity: 0; }
-  43%, 85% { opacity: 1; }
-  86%, 100% { opacity: 0; }
+  43%, 100% { opacity: 1; }
 }
 
 @keyframes arrow-draw-shaft {
   0%, 5% { stroke-dashoffset: 1; opacity: 0; }
   6% { stroke-dashoffset: 1; opacity: 1; }
-  35%, 85% { stroke-dashoffset: 0; opacity: 1; }
-  86%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  35%, 100% { stroke-dashoffset: 0; opacity: 1; }
 }
 
 @keyframes arrow-draw-head {
   0%, 32% { stroke-dashoffset: 1; opacity: 0; }
   33% { stroke-dashoffset: 1; opacity: 1; }
-  43%, 85% { stroke-dashoffset: 0; opacity: 1; }
-  86%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  43%, 100% { stroke-dashoffset: 0; opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -5,6 +5,7 @@
 }
 
 .not-found {
+  position: relative;
   display: grid;
   place-items: center;
   min-height: max(var(--hero-vh), 34rem);

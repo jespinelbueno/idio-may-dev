@@ -1,4 +1,9 @@
 @media (max-width: 640px) {
+  .coming-soon {
+    /* Leave room for the copy's downward artwork alignment and stacked links. */
+    padding-bottom: calc(12rem + env(safe-area-inset-bottom));
+  }
+
   .coming-soon__image {
     top: 0;
     left: 0;
