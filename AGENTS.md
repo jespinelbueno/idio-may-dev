@@ -10,8 +10,9 @@ This is a static HTML/CSS/JavaScript site with no build step, deployed to Hostin
 - scripts/home.js is the only homepage script entry. Feature modules export an init function, self-guard when their markup is absent, and keep their own event listeners/state.
 - Group feature modules by page under scripts/features/; common features belong in scripts/features/shared/. Keep page script entries directly in scripts/.
 - scripts/features/values-wheel/ separates configuration, geometry helpers, and DOM interaction. Keep the default smoothing factor at 0.075 unless the requested wheel behavior changes.
-- assets/media/ holds canonical active media. tools/asset-aliases.json maps public legacy paths to canonical copies. Update both the map and the source references whenever active media is renamed.
-- Group canonical media by page, with homepage section folders under assets/media/home/. Put reused media in assets/media/shared/, portraits in assets/media/team/home/ or about/, and common logos/footer artwork in brand/ or footer/. Legacy folders outside assets/media/ contain compatibility copies, not editable source media.
+- assets/media/ holds canonical active media; assets/fonts/ holds fonts and their licenses. These are the only asset roots. Use lowercase kebab-case folder names.
+- Group media by page and then section (hero/, story/, cards/, process/, etc.). Keep mobile/ variants inside their owning section, not in a page-wide bucket. Put reused media in assets/media/shared/, portraits in assets/media/team/home/ or about/, and common logos/footer artwork in brand/ or footer/. See docs/asset-organization.md for the ownership map.
+- tools/asset-aliases.json maps retained public URLs directly to canonical files. Compatibility uses host redirects, never duplicate files or legacy asset folders. After renaming media, update source references and the map, then run node tools/asset-routing.mjs to refresh the committed .htaccess and vercel.json rules. There is no deployment build step.
 
 ## Homepage behavior
 

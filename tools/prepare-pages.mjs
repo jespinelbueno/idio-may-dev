@@ -15,8 +15,6 @@ const publicDirectories = new Map([
   ["scripts", new Set([".js"])],
   ["styles", new Set([".css"])],
   ["assets", new Set([".svg", ".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif", ".ico", ".ttf", ".otf", ".woff", ".woff2", ".mp4", ".webm"])],
-  // Active legacy media URLs remain public for compatibility.
-  ["services/assets", new Set([".svg", ".jpg", ".png"])],
 ]);
 
 // Packaging only: source files remain the build-free, canonical site.

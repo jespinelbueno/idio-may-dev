@@ -56,10 +56,10 @@ test("Pages packaging excludes repository internals, unexpected files, and sensi
       writeFileSync(join(source, file), file);
     }
     preparePages(source, output);
-    for (const file of ["index.html", "services.html", "scripts/home.js", "assets/media/brand.svg", "services/assets/legacy.svg", ".htaccess", ".nojekyll"]) {
+    for (const file of ["index.html", "services.html", "scripts/home.js", "assets/media/brand.svg", ".htaccess", ".nojekyll"]) {
       assert.equal(readFileSync(join(output, file), "utf8"), file);
     }
-    for (const file of [".env", "AGENTS.md", "package.json", "tools", "tests", ".git", "assets/.env", "assets/notes.md"]) {
+    for (const file of [".env", "AGENTS.md", "package.json", "tools", "tests", ".git", "assets/.env", "assets/notes.md", "services"]) {
       assert.equal(existsSync(join(output, file)), false, file);
     }
     assert.throws(() => preparePages(source, output), /EEXIST/);

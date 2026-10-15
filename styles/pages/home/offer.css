@@ -637,7 +637,7 @@
     top: 1.7em;
     width: 44%;
     aspect-ratio: 148.527 / 31.2579;
-    background: url("../../../assets/media/home/mobile/offer-underline.svg") center / contain no-repeat;
+    background: url("../../../assets/media/home/offer/mobile/offer-underline.svg") center / contain no-repeat;
     transform: rotate(8.95deg);
   }
   .offer__copy p {
@@ -656,7 +656,7 @@
     top: 3.2rem;
     width: 60px;
     height: 111px;
-    background: url("../../../assets/media/home/mobile/offer-arrow.svg") center / contain no-repeat;
+    background: url("../../../assets/media/home/offer/mobile/offer-arrow.svg") center / contain no-repeat;
     transform: scaleY(-1);
   }
   .offer__collage { display: none; }

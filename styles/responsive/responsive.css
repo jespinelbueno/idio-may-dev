@@ -329,7 +329,7 @@
   .service-card--social { --mobile-stack-position: 0; }
   .service-card--content {
     --mobile-stack-position: 1;
-    background-image: url("../../assets/media/services/mobile/content-card.svg");
+    background-image: url("../../assets/media/services/cards/mobile/content-card.svg");
     background-size: cover;
   }
   .service-card--web { --mobile-stack-position: 2; }
@@ -626,13 +626,13 @@
 
   .services-process__half--top {
     border-radius: 0;
-    background: url("../../assets/media/services/mobile/process-top.svg") center / contain no-repeat;
+    background: url("../../assets/media/services/process/mobile/process-top.svg") center / contain no-repeat;
     transform: rotate(-179.54deg);
   }
 
   .services-process__half--bottom {
     border-radius: 0;
-    background: url("../../assets/media/services/mobile/process-bottom.svg") center / contain no-repeat;
+    background: url("../../assets/media/services/process/mobile/process-bottom.svg") center / contain no-repeat;
     transform: rotate(0.26deg);
   }
 

@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Join the Idio community for creative events, good company, and emails worth opening.">
     <title>Idio Events | Idio</title>
-    <link rel="icon" href="assets/media/brand/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="assets/media/brand/icons/favicon.svg" type="image/svg+xml" sizes="any">
     <script defer src="scripts/register-cache.js"></script>
     <script src="scripts/page-loader-bootstrap.js"></script>
-    <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/dm-sans/dm-sans-variable.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/vollkorn/vollkorn-variable.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="styles/events.css?v=privacy-20261015-short-loader">
   </head>
   <body class="events-page">
@@ -80,21 +80,21 @@
     <main class="events-shell">
       <div class="events-hero-takeover">
       <section class="events-hero" data-takeover-hero aria-labelledby="events-title">
-        <video class="events-hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/media/events/hero.png" aria-hidden="true">
-          <source src="assets/media/events/bgvideo.mp4?v=2" type="video/mp4">
+        <video class="events-hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/media/events/hero/poster.png" aria-hidden="true">
+          <source src="assets/media/events/hero/background.mp4?v=2" type="video/mp4">
         </video>
-        <div class="events-hero__heading"><h1 id="events-title">idio events</h1><img class="events-hero__underline events-scribble" src="assets/media/events/hero-underline.svg?v=2" alt="" aria-hidden="true"></div>
+        <div class="events-hero__heading"><h1 id="events-title">idio events</h1><img class="events-hero__underline events-scribble" src="assets/media/events/hero/hero-underline.svg?v=2" alt="" aria-hidden="true"></div>
       </section>
       <section class="events-community" data-takeover-section id="events-community" aria-labelledby="events-community-title">
         <div class="events-community__background" aria-hidden="true">
-          <img class="events-community__glow events-community__glow--lower" src="assets/media/events/yellow-glow.svg" alt="">
-          <img class="events-community__glow events-community__glow--top" src="assets/media/events/yellow-glow.svg" alt="">
-          <img class="events-community__glow events-community__glow--upper" src="assets/media/events/yellow-glow.svg" alt="">
-          <img class="events-community__glow events-community__glow--middle" src="assets/media/events/yellow-glow.svg" alt="">
-          <img class="events-community__glow events-community__glow--cream" src="assets/media/events/cream-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--lower" src="assets/media/events/backgrounds/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--top" src="assets/media/events/backgrounds/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--upper" src="assets/media/events/backgrounds/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--middle" src="assets/media/events/backgrounds/yellow-glow.svg" alt="">
+          <img class="events-community__glow events-community__glow--cream" src="assets/media/events/backgrounds/cream-glow.svg" alt="">
         </div>
         <div class="events-community__copy">
-          <h2 id="events-community-title"><span class="events-community__circled">emails<img class="events-community__circle events-scribble" src="assets/media/events/email-circle.svg?v=2" alt="" aria-hidden="true"></span> are boring.<br>but we <span class="events-community__underlined">aren’t!<img class="events-community__underline events-scribble" src="assets/media/events/email-underline.svg?v=2" alt="" aria-hidden="true"></span></h2>
+          <h2 id="events-community-title"><span class="events-community__circled">emails<img class="events-community__circle events-scribble" src="assets/media/events/community/email-circle.svg?v=2" alt="" aria-hidden="true"></span> are boring.<br>but we <span class="events-community__underlined">aren’t!<img class="events-community__underline events-scribble" src="assets/media/events/community/email-underline.svg?v=2" alt="" aria-hidden="true"></span></h2>
           <div class="events-community__description"><h3>so wanna join our email list?</h3>
           <p>hello creative entrepreneurs! we promise that our emails will always be cool and fun and happy and that you’ll be grateful that you joined and you’ll never ever be annoyed by how many you receive because we won’t even send that many and we promise that when we do send them they will always be coooool.</p>
           <p>how can you say no to that???</p></div>
@@ -103,8 +103,8 @@
               <label for="community-email">your email</label>
               <div class="events-community__line">
                 <input id="community-email" name="EMAIL" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" spellcheck="false" autocapitalize="none" required maxlength="254" aria-describedby="community-signup-note community-signup-status">
-                <img class="events-scribble" src="assets/media/events/signup-line.svg?v=2" alt="" aria-hidden="true">
-                <img class="events-community__dot" src="assets/media/events/signup-dot.svg" alt="" aria-hidden="true">
+                <img class="events-scribble" src="assets/media/events/community/signup-line.svg?v=2" alt="" aria-hidden="true">
+                <img class="events-community__dot" src="assets/media/events/community/signup-dot.svg" alt="" aria-hidden="true">
               </div>
             </div>
             <input class="events-community__honeypot" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -121,29 +121,29 @@
         <aside class="events-calendar" aria-label="Today: join the community">
           <div class="events-calendar__top">today</div><div class="events-calendar__sheet"><span class="events-calendar__number">01.</span><p>cool events are happening right now and you’re missing them so sign up asap!!!</p></div>
           <span class="events-calendar__strokes" aria-hidden="true">
-            <img class="events-calendar__stroke events-calendar__stroke--left-long events-scribble" src="assets/media/events/calendar-left-long.svg" alt="">
-            <img class="events-calendar__stroke events-calendar__stroke--left-short events-scribble" src="assets/media/events/calendar-left-short.svg" alt="">
-            <img class="events-calendar__stroke events-calendar__stroke--right-long events-scribble" src="assets/media/events/calendar-right-long.svg" alt="">
-            <img class="events-calendar__stroke events-calendar__stroke--right-short events-scribble" src="assets/media/events/calendar-right-short.svg" alt="">
+            <img class="events-calendar__stroke events-calendar__stroke--left-long events-scribble" src="assets/media/events/calendar/calendar-left-long.svg" alt="">
+            <img class="events-calendar__stroke events-calendar__stroke--left-short events-scribble" src="assets/media/events/calendar/calendar-left-short.svg" alt="">
+            <img class="events-calendar__stroke events-calendar__stroke--right-long events-scribble" src="assets/media/events/calendar/calendar-right-long.svg" alt="">
+            <img class="events-calendar__stroke events-calendar__stroke--right-short events-scribble" src="assets/media/events/calendar/calendar-right-short.svg" alt="">
           </span>
         </aside>
       </section>
       </div>
       <section class="events-coming" aria-labelledby="events-coming-title">
-        <img class="events-coming__curve" src="assets/media/events/green-curve.svg" alt="" aria-hidden="true"><img class="events-coming__dot" src="assets/media/events/coming-dot.svg" alt="" aria-hidden="true">
-        <div class="events-coming__card"><div class="events-coming__crop"><img class="events-coming__photo" src="assets/media/events/community.jpg" alt="Friends sharing drinks and conversation at a creative gathering." loading="lazy" decoding="async"></div>
+        <img class="events-coming__curve" src="assets/media/events/coming/green-curve.svg" alt="" aria-hidden="true"><img class="events-coming__dot" src="assets/media/events/coming/coming-dot.svg" alt="" aria-hidden="true">
+        <div class="events-coming__card"><div class="events-coming__crop"><img class="events-coming__photo" src="assets/media/events/coming/community.jpg" alt="Friends sharing drinks and conversation at a creative gathering." loading="lazy" decoding="async"></div>
           <div class="events-coming__copy"><h2 id="events-coming-title">coming soon</h2><p>(some really cool community that you won’t want to miss)</p><a class="events-button" href="#events-community" data-community-signup-link><span class="button-fill__label">ahem, give up that email</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></a></div>
         </div>
-        <img class="events-coming__left events-scribble" src="assets/media/events/coming-left.svg?v=2" alt="" aria-hidden="true"><img class="events-coming__bottom events-scribble" src="assets/media/events/coming-bottom.svg?v=2" alt="" aria-hidden="true">
+        <img class="events-coming__left events-scribble" src="assets/media/events/coming/coming-left.svg?v=2" alt="" aria-hidden="true"><img class="events-coming__bottom events-scribble" src="assets/media/events/coming/coming-bottom.svg?v=2" alt="" aria-hidden="true">
       </section>
       <div class="services-closing">
-        <img class="events-closing__glow" src="assets/media/events/cream-glow.svg" alt="" aria-hidden="true">
+        <img class="events-closing__glow" src="assets/media/events/backgrounds/cream-glow.svg" alt="" aria-hidden="true">
         <section class="services-contact" aria-labelledby="services-contact-title">
           <div class="services-contact__inner">
             <div class="services-contact__visual">
               <img class="services-contact__image" src="assets/media/shared/photos/friends-field.jpg" width="2560" height="1707" alt="Friends running through a sunlit field." loading="lazy" decoding="async">
-              <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/events/contact-yellow.svg?v=2" alt="" aria-hidden="true">
-              <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/events/contact-red.svg?v=2" alt="" aria-hidden="true">
+              <img class="services-contact__scribble services-contact__scribble--green" src="assets/media/events/contact/contact-yellow.svg?v=2" alt="" aria-hidden="true">
+              <img class="services-contact__scribble services-contact__scribble--raspberry" src="assets/media/events/contact/contact-red.svg?v=2" alt="" aria-hidden="true">
             </div>
             <h2 id="services-contact-title">so, wanna work with us?</h2>
             <div class="services-contact__actions">
@@ -180,9 +180,9 @@
 
     <footer class="site-footer" id="site-footer">
       <img class="site-footer__image" src="assets/media/shared/backgrounds/wireframe.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/footer/home-left.svg" alt="" aria-hidden="true">
-      <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/footer/home-upper.svg" alt="" aria-hidden="true">
-      <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/footer/home-lower-right.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--left" src="assets/media/footer/decorations/home-left.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--upper" src="assets/media/footer/decorations/home-upper.svg" alt="" aria-hidden="true">
+      <img class="site-footer__scribble site-footer__scribble--center" src="assets/media/footer/decorations/home-lower-right.svg" alt="" aria-hidden="true">
 
       <div class="site-footer__inner">
         <div class="site-footer__lockup" aria-label="let's make it idio">
@@ -191,16 +191,16 @@
             <span>make</span>
             <span>it</span>
           </span>
-          <img class="site-footer__logo" src="assets/media/brand/footer-wordmark.svg" alt="">
+          <img class="site-footer__logo" src="assets/media/brand/logos/footer-wordmark.svg" alt="">
         </div>
 
         <div class="site-footer__contact">
           <nav class="site-footer__socials" aria-label="Social links">
             <a class="site-footer__social" href="https://www.instagram.com/idio_creative/" aria-label="Instagram">
-              <img src="assets/media/brand/instagram.svg" alt="">
+              <img src="assets/media/brand/social/instagram.svg" alt="">
             </a>
             <a class="site-footer__social" href="https://www.pinterest.com/idiocreative/" aria-label="Pinterest">
-              <img src="assets/media/brand/footer-pinterest.svg" alt="">
+              <img src="assets/media/brand/social/footer-pinterest.svg" alt="">
             </a>
           </nav>
 

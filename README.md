@@ -28,7 +28,7 @@ This is a static HTML/CSS/JavaScript site with no build step, deployed to Hostin
     └── icon-color-loader/     Retained backup loader
 ```
 
-The complete original tree is recorded in [docs/project-tree-before.md](docs/project-tree-before.md). Other asset folders, including `services/assets/`, contain legacy public URLs recorded in `tools/asset-aliases.json`; edit the canonical files under `assets/media/` and update any mapped copies together.
+The complete original tree is recorded in [docs/project-tree-before.md](docs/project-tree-before.md). The current asset ownership map is in [docs/asset-organization.md](docs/asset-organization.md). All media lives in `assets/media/`; fonts and licenses live in `assets/fonts/`. Old URLs use host redirects rather than duplicate files.
 
 ## Owner editing guide
 
@@ -52,19 +52,21 @@ Use `assets/media/` for active images, SVG artwork, and video:
 
 | Folder | Contents |
 | --- | --- |
-| `home/` | Homepage media grouped into `offer/`, `toolkit/`, `case-study/`, `team/`, `values/`, and `mobile/` |
-| `about/`, `services/`, `events/`, `contact/`, `coming-soon/`, `not-found/` | Media belonging to that page; Services portfolio photos live in `services/work/` |
+| `home/` | Homepage media grouped into `hero/`, `offer/`, `toolkit/`, `case-study/`, `team/`, and `values/` |
+| `about/`, `services/`, `events/`, `contact/`, `coming-soon/`, `not-found/` | Page media grouped by section; mobile variants live in the section's own `mobile/` folder |
 | `team/home/`, `team/about/` | Portraits for each page, named after the team member |
-| `brand/`, `footer/` | Logos, social icons, and shared footer artwork |
+| `brand/`, `footer/` | Brand `logos/`, `icons/`, `social/`, and footer `decorations/` |
 | `shared/` | Backgrounds, textures, photos, and shapes reused across pages |
 
-Update HTML, CSS, and JavaScript references when renaming media. The About portrait selector and homepage team arrows also construct filenames dynamically. Retained legacy folders outside `assets/media/` supply the 50 compatibility URLs in `tools/asset-aliases.json`; keep those copies identical to their mapped canonical files. Keep font files and licenses together under `assets/fonts/`.
+Update HTML, CSS, and JavaScript references when renaming media. The About portrait selector and homepage team arrows also construct filenames dynamically. Keep font files and licenses together under `assets/fonts/dm-sans/`, `teva/`, and `vollkorn/`.
+
+Keep old public URLs in `tools/asset-aliases.json`, pointing directly to the final canonical file. Run `node tools/asset-routing.mjs` after editing that map; it updates the committed asset redirects in `.htaccess` and `vercel.json`. This is a maintenance command, not a build step. Do not recreate `services/assets/` or legacy folders under `assets/`.
 
 ## Development checks
 
 The homepage's responsive rules and validation record are documented in [docs/responsive-implementation.md](docs/responsive-implementation.md). Use [docs/responsive-page-template.md](docs/responsive-page-template.md) to plan another page's adoption.
 
-Run npm run check before committing. It resolves local HTML, CSS, and JavaScript references, parses every JavaScript module, and verifies that each legacy asset alias matches its canonical media file.
+Run npm run check before committing. It resolves local HTML (including responsive images and video posters), CSS, and JavaScript references, checks dynamic asset families, parses every JavaScript module, and verifies asset placement and both hosts' compatibility redirects.
 
 ## Deployment
 
@@ -72,7 +74,7 @@ Hostinger deploys the site from GitHub. Deploy the public site files at the doma
 
 For Vercel, import the GitHub repository with the repository root as the project's Root Directory. The root `vercel.json` selects no framework or build command, serves the current directory, enables clean HTML URLs, and removes trailing slashes. Push the configuration and redeploy for it to take effect. Vercel uses this configuration rather than `.htaccess`; the existing root `404.html` supplies its custom missing-page response.
 
-Routes are `/`, `/services`, `/about`, `/events`, `/contact`, `/privacy`, and `/coming-soon`. Old `.html` URLs and trailing-slash page URLs redirect permanently to their clean equivalents, preserving query strings. Unknown paths return the custom `404.html` page with HTTP status 404. Existing asset paths, including `services/assets/`, remain available.
+Routes are `/`, `/services`, `/about`, `/events`, `/contact`, `/privacy`, and `/coming-soon`. Old `.html` URLs and trailing-slash page URLs redirect permanently to their clean equivalents, preserving query strings. Unknown paths return the custom `404.html` page with HTTP status 404. Retained asset URLs, including the old `services/assets/` paths, redirect to canonical media through the host configuration. A plain static file server serves canonical media but does not implement those redirects.
 
 For a public-files-only Hostinger deployment, `node tools/prepare-pages.mjs <fresh-output-directory>` packages the site, including `.htaccess`, without repository internals. The historical script name is retained. Clean routes require the relevant host configuration; a basic static development server will still serve the `.html` files but will not resolve the clean navigation URLs.
 

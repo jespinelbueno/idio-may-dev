@@ -1,8 +1,8 @@
-import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, extname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { apacheAssetAliases, vercelAssetAliases } from "./asset-routing.mjs";
 
 const rootDirectory = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const entryPages = [
@@ -18,6 +18,13 @@ const entryPages = [
 const errors = [];
 const visitedFiles = new Set();
 const discoveredJavaScript = new Set();
+const referencedAssets = new Set();
+
+const listFiles = (directory) => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+  const path = resolve(directory, entry.name);
+  return entry.isDirectory() ? listFiles(path) : entry.isFile() ? [path] : [];
+});
+const assetFiles = listFiles(resolve(rootDirectory, "assets"));
 
 const isExternalReference = (reference) =>
   !reference ||
@@ -59,6 +66,10 @@ const visitReference = (sourceFile, reference, options) => {
     return;
   }
 
+  if (target.startsWith(resolve(rootDirectory, "assets") + "/")) {
+    referencedAssets.add(relative(rootDirectory, target));
+  }
+
   const extension = extname(target).toLowerCase();
 
   if (extension === ".css") visitCss(target);
@@ -70,10 +81,15 @@ const visitHtml = (filePath) => {
   visitedFiles.add(filePath);
 
   const html = readFileSync(filePath, "utf8");
-  const referencePattern = /\b(?:src|href)\s*=\s*["']([^"']+)["']/gi;
+  const referencePattern = /\b(?:src|href|poster)\s*=\s*["']([^"']+)["']/gi;
 
   for (const match of html.matchAll(referencePattern)) {
     visitReference(filePath, match[1], { publicAsset: match[1].startsWith("assets/") });
+  }
+  for (const match of html.matchAll(/\bsrcset\s*=\s*["']([^"']+)["']/gi)) {
+    for (const candidate of match[1].split(",")) {
+      visitReference(filePath, candidate.trim().split(/\s+/)[0]);
+    }
   }
 };
 
@@ -101,39 +117,66 @@ const visitJavaScript = (filePath) => {
 
   const source = readFileSync(filePath, "utf8");
   const moduleImportPattern = /\b(?:import|export)\s+(?:[^"']*?\s+from\s+)?["']([^"']+)["']/g;
-  const publicAssetPattern = /["'](assets\/[^"']+)["']/g;
+  const publicAssetPattern = /["'`](\/?assets\/[^"'`]+)["'`]/g;
 
   for (const match of source.matchAll(moduleImportPattern)) {
     visitReference(filePath, match[1]);
   }
 
   for (const match of source.matchAll(publicAssetPattern)) {
-    visitReference(filePath, match[1], { publicAsset: true });
+    if (!match[1].includes("${")) {
+      visitReference(filePath, match[1], { publicAsset: true });
+      continue;
+    }
+    // The portrait selector and team arrows construct filenames at runtime.
+    const pattern = match[1].replace(/^\//, "").split(/\$\{[^}]+\}/)
+      .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[^/]+");
+    const candidates = assetFiles.filter((path) => new RegExp("^" + pattern + "$").test(relative(rootDirectory, path)));
+    if (!candidates.length) reportMissingReference(filePath, match[1]);
+    candidates.forEach((path) => visitReference(filePath, relative(rootDirectory, path), { publicAsset: true }));
   }
 };
 
-const hashFile = (filePath) =>
-  createHash("sha256").update(readFileSync(filePath)).digest("hex");
-
 const checkAssetAliases = () => {
   const aliases = JSON.parse(readFileSync(resolve(rootDirectory, "tools/asset-aliases.json"), "utf8"));
+  const htaccess = readFileSync(resolve(rootDirectory, ".htaccess"), "utf8");
+  const vercel = JSON.parse(readFileSync(resolve(rootDirectory, "vercel.json"), "utf8"));
+
+  if (!htaccess.includes(apacheAssetAliases(aliases))) {
+    errors.push("Hostinger asset redirects are stale; run node tools/asset-routing.mjs");
+  }
+  for (const redirect of vercelAssetAliases(aliases)) {
+    if (!(vercel.redirects || []).some((entry) => entry.source === redirect.source &&
+      entry.destination === redirect.destination && entry.permanent === true)) {
+      errors.push("Vercel asset redirect is missing or stale: " + redirect.source);
+    }
+  }
 
   for (const [legacyPath, canonicalPath] of Object.entries(aliases)) {
     const legacyFile = resolve(rootDirectory, legacyPath);
     const canonicalFile = resolve(rootDirectory, canonicalPath);
 
-    if (!existsSync(legacyFile)) {
-      errors.push("Asset alias is missing legacy file " + legacyPath);
-      continue;
+    if (existsSync(legacyFile)) {
+      errors.push("Remove compatibility copy; the host redirects this URL: " + legacyPath);
     }
-
-    if (!existsSync(canonicalFile)) {
+    if (!/^assets\/(?:media|fonts)\//.test(canonicalPath) || !existsSync(canonicalFile)) {
       errors.push("Asset alias is missing canonical file " + canonicalPath);
-      continue;
     }
-
-    if (hashFile(legacyFile) !== hashFile(canonicalFile)) {
-      errors.push("Asset alias content differs: " + legacyPath + " !== " + canonicalPath);
+    if (aliases[canonicalPath]) errors.push("Asset aliases must resolve without a chain: " + legacyPath);
+    if (referencedAssets.has(legacyPath)) errors.push("Source must use canonical asset: " + legacyPath);
+  }
+  if (existsSync(resolve(rootDirectory, "services"))) errors.push("Media belongs in assets/media/services/, not services/");
+  for (const file of assetFiles) {
+    const path = relative(rootDirectory, file);
+    if (!/^assets\/(?:media|fonts)\//.test(path)) errors.push("Misplaced asset: " + path);
+    if (path.startsWith("assets/media/") && !referencedAssets.has(path) && !Object.values(aliases).includes(path)) {
+      errors.push("Unreferenced media has no active compatibility alias: " + path);
+    }
+    if (path.startsWith("assets/media/") && path.split("/").length < 5) {
+      errors.push("Group media under its page section or shared role: " + path);
+    }
+    if (path.split("/").slice(0, -1).some((part) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(part))) {
+      errors.push("Asset folders must use lowercase kebab-case: " + path);
     }
   }
 };

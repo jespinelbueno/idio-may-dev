@@ -4,5 +4,767 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/assets/arrows/ourteamarrows/yellow1.svg",
+      "destination": "/assets/media/home/team/arrows/yellow1.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/ourteamarrows/yellow2.svg",
+      "destination": "/assets/media/home/team/arrows/yellow2.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/ourteamarrows/yellow3.svg",
+      "destination": "/assets/media/home/team/arrows/yellow3.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/ourteamarrows/yellow4.svg",
+      "destination": "/assets/media/home/team/arrows/yellow4.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/ourteamarrows/yellow5.svg",
+      "destination": "/assets/media/home/team/arrows/yellow5.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/wheel/green1.svg",
+      "destination": "/assets/media/home/values/arrows/green1.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/wheel/green2.svg",
+      "destination": "/assets/media/home/values/arrows/green2.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/wheel/green3.svg",
+      "destination": "/assets/media/home/values/arrows/green3.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/wheel/green4.svg",
+      "destination": "/assets/media/home/values/arrows/green4.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/wheel/green5.svg",
+      "destination": "/assets/media/home/values/arrows/green5.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/arrows/wheel/green6.svg",
+      "destination": "/assets/media/home/values/arrows/green6.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/backgrounds/landingbg.jpg",
+      "destination": "/assets/media/home/hero/background.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/backgrounds/ourcreativetoolkitbg.png",
+      "destination": "/assets/media/home/toolkit/background.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf",
+      "destination": "/assets/fonts/dm-sans/dm-sans-variable.ttf",
+      "permanent": true
+    },
+    {
+      "source": "/assets/fonts/Teva/Teva-Regular.otf",
+      "destination": "/assets/fonts/teva/regular.otf",
+      "permanent": true
+    },
+    {
+      "source": "/assets/fonts/Teva/Teva-Regular.ttf",
+      "destination": "/assets/fonts/teva/regular.ttf",
+      "permanent": true
+    },
+    {
+      "source": "/assets/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf",
+      "destination": "/assets/fonts/vollkorn/vollkorn-variable.ttf",
+      "permanent": true
+    },
+    {
+      "source": "/assets/gradients/trisection/cream.jpg",
+      "destination": "/assets/media/home/case-study/background-cream.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/hiidio/dekker1.jpg",
+      "destination": "/assets/media/home/offer/collage-dekker.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/hiidio/fruitspirit1.jpg",
+      "destination": "/assets/media/home/offer/collage-fruit-spirit.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/hiidio/leisureevents1.jpg",
+      "destination": "/assets/media/home/offer/collage-leisure-portrait.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/hiidio/leisureevents2.jpg",
+      "destination": "/assets/media/home/offer/collage-leisure-table.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/hiidio/painting1.jpg",
+      "destination": "/assets/media/home/offer/collage-painting.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/icon.svg",
+      "destination": "/assets/media/brand/icons/idio-icon.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/idiologomonochrome.svg",
+      "destination": "/assets/media/brand/logos/idio-wordmark.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/ourteamphotos/anna.png",
+      "destination": "/assets/media/team/home/anna.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/ourteamphotos/jaden.png",
+      "destination": "/assets/media/team/home/jaden.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/ourteamphotos/naomi.png",
+      "destination": "/assets/media/team/home/naomi.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/photos/casestudymain_cropped.jpg",
+      "destination": "/assets/media/home/case-study/leisure-events.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/img/scribbles/scribble1.svg",
+      "destination": "/assets/media/home/offer/title-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/anna-founder.jpg",
+      "destination": "/assets/media/about/story/anna-founder.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/blue-dot.svg",
+      "destination": "/assets/media/about/story/blue-dot.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/collage-scribble.svg",
+      "destination": "/assets/media/about/story/collage-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/contact-banner.jpg",
+      "destination": "/assets/media/about/contact/contact-banner.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/early-days.jpg",
+      "destination": "/assets/media/about/story/early-days.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/friends.jpg",
+      "destination": "/assets/media/about/story/friends.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/green-dot.svg",
+      "destination": "/assets/media/about/next/green-dot.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/hero-underline.svg",
+      "destination": "/assets/media/about/hero/hero-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/lower-cream-glow.svg",
+      "destination": "/assets/media/about/backgrounds/lower-cream-glow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/lower-yellow-glow.svg",
+      "destination": "/assets/media/about/backgrounds/lower-yellow-glow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/next-thread.svg",
+      "destination": "/assets/media/about/next/next-thread.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/olive-curve.svg",
+      "destination": "/assets/media/about/team/olive-curve.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/story-thread.svg",
+      "destination": "/assets/media/about/story/story-thread.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/story-yellow-glow.svg",
+      "destination": "/assets/media/about/backgrounds/story-yellow-glow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/studio-bottom-scribble.svg",
+      "destination": "/assets/media/about/next/studio-bottom-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/studio-group.jpg",
+      "destination": "/assets/media/about/next/studio-group.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/studio-left-scribble.svg",
+      "destination": "/assets/media/about/next/studio-left-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/team-field.jpg",
+      "destination": "/assets/media/about/hero/team-field.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/title-circle.svg",
+      "destination": "/assets/media/about/story/title-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/about/yellow-dot.svg",
+      "destination": "/assets/media/about/story/yellow-dot.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/brand/favicon.svg",
+      "destination": "/assets/media/brand/icons/favicon.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/brand/footer-pinterest.svg",
+      "destination": "/assets/media/brand/social/footer-pinterest.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/brand/footer-wordmark.svg",
+      "destination": "/assets/media/brand/logos/footer-wordmark.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/brand/idio-icon.svg",
+      "destination": "/assets/media/brand/icons/idio-icon.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/brand/idio-wordmark.svg",
+      "destination": "/assets/media/brand/logos/idio-wordmark.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/brand/instagram.svg",
+      "destination": "/assets/media/brand/social/instagram.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/coming-soon/team-field.jpg",
+      "destination": "/assets/media/coming-soon/hero/team-field.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/coming-soon/title-circle.svg",
+      "destination": "/assets/media/coming-soon/hero/title-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/coming-soon/title-underline.svg",
+      "destination": "/assets/media/coming-soon/hero/title-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/contact/accent-left.svg",
+      "destination": "/assets/media/contact/hero/accent-left.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/contact/accent-right.svg",
+      "destination": "/assets/media/contact/hero/accent-right.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/contact/accent-upper-right.svg",
+      "destination": "/assets/media/contact/hero/accent-upper-right.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/contact/social-pinterest.svg",
+      "destination": "/assets/media/contact/social/social-pinterest.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/bgvideo.mp4",
+      "destination": "/assets/media/events/hero/background.mp4",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/calendar-left-long.svg",
+      "destination": "/assets/media/events/calendar/calendar-left-long.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/calendar-left-short.svg",
+      "destination": "/assets/media/events/calendar/calendar-left-short.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/calendar-right-long.svg",
+      "destination": "/assets/media/events/calendar/calendar-right-long.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/calendar-right-short.svg",
+      "destination": "/assets/media/events/calendar/calendar-right-short.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/coming-bottom.svg",
+      "destination": "/assets/media/events/coming/coming-bottom.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/coming-dot.svg",
+      "destination": "/assets/media/events/coming/coming-dot.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/coming-left.svg",
+      "destination": "/assets/media/events/coming/coming-left.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/community.jpg",
+      "destination": "/assets/media/events/coming/community.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/contact-red.svg",
+      "destination": "/assets/media/events/contact/contact-red.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/contact-yellow.svg",
+      "destination": "/assets/media/events/contact/contact-yellow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/cream-glow.svg",
+      "destination": "/assets/media/events/backgrounds/cream-glow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/email-circle.svg",
+      "destination": "/assets/media/events/community/email-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/email-underline.svg",
+      "destination": "/assets/media/events/community/email-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/green-curve.svg",
+      "destination": "/assets/media/events/coming/green-curve.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/hero-underline.svg",
+      "destination": "/assets/media/events/hero/hero-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/hero.png",
+      "destination": "/assets/media/events/hero/poster.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/signup-dot.svg",
+      "destination": "/assets/media/events/community/signup-dot.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/signup-line.svg",
+      "destination": "/assets/media/events/community/signup-line.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/events/yellow-glow.svg",
+      "destination": "/assets/media/events/backgrounds/yellow-glow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/footer/home-left.svg",
+      "destination": "/assets/media/footer/decorations/home-left.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/footer/home-lower-right.svg",
+      "destination": "/assets/media/footer/decorations/home-lower-right.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/footer/home-upper.svg",
+      "destination": "/assets/media/footer/decorations/home-upper.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/footer/link-circle.svg",
+      "destination": "/assets/media/footer/decorations/link-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/hero.jpg",
+      "destination": "/assets/media/home/hero/background.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/collage-portrait-logo.png",
+      "destination": "/assets/media/home/offer/mobile/collage-portrait-logo.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/collage-right-logo.png",
+      "destination": "/assets/media/home/offer/mobile/collage-right-logo.png",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/offer-arrow.svg",
+      "destination": "/assets/media/home/offer/mobile/offer-arrow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/offer-underline.svg",
+      "destination": "/assets/media/home/offer/mobile/offer-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/toolkit-title.svg",
+      "destination": "/assets/media/home/toolkit/mobile/toolkit-title.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/value-underline.svg",
+      "destination": "/assets/media/home/values/mobile/value-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/values-glow-bottom.svg",
+      "destination": "/assets/media/home/values/mobile/values-glow-bottom.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/values-glow-top.svg",
+      "destination": "/assets/media/home/values/mobile/values-glow-top.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/mobile/values-underline.svg",
+      "destination": "/assets/media/home/values/mobile/values-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/home/team/background.svg",
+      "destination": "/assets/media/shared/backgrounds/team-pattern.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/not-found/four-frame-1.svg",
+      "destination": "/assets/media/not-found/digits/four-frame-1.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/not-found/four-frame-2.svg",
+      "destination": "/assets/media/not-found/digits/four-frame-2.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/not-found/zero-frame-1.svg",
+      "destination": "/assets/media/not-found/digits/zero-frame-1.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/not-found/zero-frame-2.svg",
+      "destination": "/assets/media/not-found/digits/zero-frame-2.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/blue-scribble.svg",
+      "destination": "/assets/media/services/cards/blue-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/blue-underline.svg",
+      "destination": "/assets/media/services/cards/blue-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/butter-scribble.svg",
+      "destination": "/assets/media/services/cards/butter-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/cream-underline.svg",
+      "destination": "/assets/media/services/cards/cream-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/green-underline.svg",
+      "destination": "/assets/media/services/cards/green-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/hero-underline.svg",
+      "destination": "/assets/media/services/hero/underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/process-circle.svg",
+      "destination": "/assets/media/services/process/process-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/process-underline.svg",
+      "destination": "/assets/media/services/process/process-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/raspberry-underline.svg",
+      "destination": "/assets/media/services/cards/raspberry-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/work-circle.svg",
+      "destination": "/assets/media/services/work/work-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/work-left.svg",
+      "destination": "/assets/media/services/work/work-left.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/work-middle.svg",
+      "destination": "/assets/media/services/work/work-middle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/work-with-us-green.svg",
+      "destination": "/assets/media/services/contact/work-with-us-green.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/work-with-us-raspberry.svg",
+      "destination": "/assets/media/services/contact/work-with-us-raspberry.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/decorations/work-with-us-yellow.svg",
+      "destination": "/assets/media/services/contact/work-with-us-yellow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/hero.jpg",
+      "destination": "/assets/media/services/hero/background.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/contact-blue.svg",
+      "destination": "/assets/media/services/contact/mobile/contact-blue.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/contact-red.svg",
+      "destination": "/assets/media/services/contact/mobile/contact-red.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/content-card.svg",
+      "destination": "/assets/media/services/cards/mobile/content-card.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/process-bottom.svg",
+      "destination": "/assets/media/services/process/mobile/process-bottom.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/process-circle.svg",
+      "destination": "/assets/media/services/process/mobile/process-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/process-top.svg",
+      "destination": "/assets/media/services/process/mobile/process-top.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/process-underline.svg",
+      "destination": "/assets/media/services/process/mobile/process-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/work-blue.svg",
+      "destination": "/assets/media/services/work/mobile/work-blue.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/work-circle.svg",
+      "destination": "/assets/media/services/work/mobile/work-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/media/services/mobile/work-yellow.svg",
+      "destination": "/assets/media/services/work/mobile/work-yellow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/butenough/blueright.svg",
+      "destination": "/assets/media/home/offer/decorations/collage-blue.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/butenough/greenright1.svg",
+      "destination": "/assets/media/home/offer/decorations/collage-green-1.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/butenough/greenright2.svg",
+      "destination": "/assets/media/home/offer/decorations/collage-green-2.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/butenough/redright.svg",
+      "destination": "/assets/media/home/offer/decorations/collage-red.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/butenough/yellowleft.svg",
+      "destination": "/assets/media/home/offer/decorations/collage-yellow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/greenscribbleright.svg",
+      "destination": "/assets/media/home/offer/decorations/intro-green.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/redscribbleleft1.svg",
+      "destination": "/assets/media/home/offer/decorations/intro-red-main.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/redscribbleleft2.svg",
+      "destination": "/assets/media/home/offer/decorations/intro-red-accent.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/hiidio/yellowscribbleright.svg",
+      "destination": "/assets/media/home/offer/decorations/intro-yellow.svg",
+      "permanent": true
+    },
+    {
+      "source": "/assets/scribbles/toolkit/creativetoolkit.svg",
+      "destination": "/assets/media/home/toolkit/title-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/img/mainbg.jpg",
+      "destination": "/assets/media/services/hero/background.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/img/sowanna:question(\\?|%3[Ff])/bg.jpg",
+      "destination": "/assets/media/about/contact/contact-banner.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/bluescribble.svg",
+      "destination": "/assets/media/services/cards/blue-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/butterscribble.svg",
+      "destination": "/assets/media/services/cards/butter-scribble.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/nomatterwhattheservice/circlescribble.svg",
+      "destination": "/assets/media/services/process/process-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/picsordidnt/greencicrlescribble.svg",
+      "destination": "/assets/media/services/work/work-circle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/picsordidnt/middlegreenscribble.svg",
+      "destination": "/assets/media/services/work/work-middle.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/sowanna:question(\\?|%3[Ff])/greenscribble.svg",
+      "destination": "/assets/media/services/contact/work-with-us-green.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/scribbles/sowanna:question(\\?|%3[Ff])/rapsberryscribble.svg",
+      "destination": "/assets/media/services/contact/work-with-us-raspberry.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/underlines/blueunderline.svg",
+      "destination": "/assets/media/services/cards/blue-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/underlines/creamunderline.svg",
+      "destination": "/assets/media/services/cards/cream-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/underlines/greenunderline.svg",
+      "destination": "/assets/media/services/cards/green-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/underlines/nomatterwheretheservice/greenunderline.svg",
+      "destination": "/assets/media/services/process/process-underline.svg",
+      "permanent": true
+    },
+    {
+      "source": "/services/assets/underlines/raspberryunderline.svg",
+      "destination": "/assets/media/services/cards/raspberry-underline.svg",
+      "permanent": true
+    }
+  ]
 }

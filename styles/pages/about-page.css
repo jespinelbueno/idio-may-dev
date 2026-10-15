@@ -216,9 +216,9 @@
   position: absolute;
   z-index: -1;
   inset: calc(-1 * var(--about-curve-height)) 0 0;
-  background: var(--about-olive) url("../../assets/media/home/team/background.svg") 0 0 / 1920px 1256px repeat;
-  -webkit-mask-image: url("../../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
-  mask-image: url("../../assets/media/about/olive-curve.svg"), linear-gradient(#000, #000);
+  background: var(--about-olive) url("../../assets/media/shared/backgrounds/team-pattern.svg") 0 0 / 1920px 1256px repeat;
+  -webkit-mask-image: url("../../assets/media/about/team/olive-curve.svg"), linear-gradient(#000, #000);
+  mask-image: url("../../assets/media/about/team/olive-curve.svg"), linear-gradient(#000, #000);
   -webkit-mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height) + 3px);
   mask-size: 100% var(--about-curve-height), 100% calc(100% - var(--about-curve-height) + 3px);
   -webkit-mask-position: top left, bottom left;

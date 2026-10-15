@@ -28,7 +28,7 @@
   z-index: -1;
   width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
-  background: #a5ab5f url("../../../assets/media/home/team/background.svg") 0 0 / 1920px 1256px repeat;
+  background: #a5ab5f url("../../../assets/media/shared/backgrounds/team-pattern.svg") 0 0 / 1920px 1256px repeat;
   clip-path: ellipse(200vw var(--team-ellipse-depth) at 50% var(--team-ellipse-depth));
   transform: translateX(50%);
 }
@@ -303,7 +303,7 @@
   z-index: -1;
   width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
-  background: #a5ab5f url("../../../assets/media/home/team/background.svg") 0 0 / 1920px 1256px repeat;
+  background: #a5ab5f url("../../../assets/media/shared/backgrounds/team-pattern.svg") 0 0 / 1920px 1256px repeat;
   transform: translateX(-50%);
 }
 
