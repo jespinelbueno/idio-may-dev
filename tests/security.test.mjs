@@ -70,62 +70,28 @@ test("Pages packaging excludes repository internals, unexpected files, and sensi
   }
 });
 
-const workerFixture = (response = { ok: true, type: "basic", redirected: false, headers: new Headers() }) => {
+test("retirement worker deletes only Idio media caches, claims old clients, and unregisters", async () => {
   const listeners = {};
-  const writes = [];
   const deleted = [];
-  const cache = { match: async () => undefined, put: async (...args) => writes.push(args) };
-  const context = {
-    URL,
-    self: { registration: { scope: "https://site.example/idio/" }, addEventListener: (name, handler) => listeners[name] = handler,
-      skipWaiting() {}, clients: { claim: async () => {} } },
-    caches: { open: async () => cache, keys: async () => ["idio-site-v4", "idio-site-v5", "another-site"], delete: async name => deleted.push(name) },
-    fetch: async () => ({ ...response, clone: () => response }),
-  };
-  vm.runInNewContext(read("service-worker.js"), context);
-  return {
-    writes, deleted,
-    async activate() {
-      const pending = [];
-      listeners.activate({ waitUntil: p => pending.push(p) });
-      await Promise.all(pending);
+  let claimed = false;
+  let unregistered = false;
+  vm.runInNewContext(read("service-worker.js"), {
+    self: {
+      addEventListener: (type, handler) => listeners[type] = handler,
+      skipWaiting() {},
+      clients: { claim: async () => { claimed = true; } },
+      registration: { unregister: async () => { unregistered = true; } },
     },
-    async request(path, options = {}) {
-      const pending = [];
-      let intercepted = false;
-      listeners.fetch({ request: { url: new URL(path, "https://site.example/idio/").href, method: "GET", mode: "cors", headers: new Headers(), ...options },
-        waitUntil: p => pending.push(p), respondWith(p) { intercepted = true; pending.push(p); } });
-      await Promise.all(pending);
-      return intercepted;
+    caches: {
+      keys: async () => ["idio-site-v4", "idio-site-v5", "another-site"],
+      delete: async (key) => deleted.push(key),
     },
-  };
-};
-
-test("service worker removes old executable caches and only intercepts unparameterized public media", async () => {
-  const worker = workerFixture();
-  await worker.activate();
-  assert.deepEqual(worker.deleted, ["idio-site-v4"]);
-  for (const [path, options] of [
-    ["index.html", { mode: "navigate" }], ["scripts/home.js"], ["styles.css"],
-    ["assets/picture.svg", { mode: "navigate" }], ["assets/picture.svg?variant=attacker"],
-    ["assets/picture.svg", { cache: "no-store" }], ["assets/picture.svg", { method: "POST" }],
-    ["assets/picture.svg", { headers: new Headers({ authorization: "Bearer example" }) }],
-    ["assets/picture.svg", { headers: new Headers({ range: "bytes=0-10" }) }],
-    ["../other/assets/picture.svg"], ["https://other.example/assets/picture.svg"],
-  ]) assert.equal(await worker.request(path, options), false, path);
-  assert.equal(await worker.request("assets/picture.svg"), true);
-  assert.equal(worker.writes.length, 1);
-});
-
-test("service worker does not persist private, uncacheable, redirected, opaque, or failed responses", async () => {
-  for (const options of [
-    { headers: new Headers({ "cache-control": "private, max-age=0" }) },
-    { headers: new Headers({ "cache-control": "no-store" }) },
-    { headers: new Headers({ "cache-control": "no-cache" }) },
-    { redirected: true }, { type: "opaque" }, { ok: false },
-  ]) {
-    const worker = workerFixture({ ok: true, type: "basic", redirected: false, headers: new Headers(), ...options });
-    await worker.request("assets/picture.svg");
-    assert.equal(worker.writes.length, 0);
-  }
+  });
+  let pending;
+  listeners.activate({ waitUntil: promise => pending = promise });
+  await pending;
+  assert.deepEqual(deleted, ["idio-site-v4", "idio-site-v5"]);
+  assert.equal(claimed, true);
+  assert.equal(unregistered, true);
+  assert.equal(listeners.fetch, undefined, "retired worker must not intercept or cache any requests");
 });

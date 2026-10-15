@@ -1,3 +1,4 @@
+import { initPrivacyPreferences } from "./features/privacy-preferences.js";
 import { initImageSaveDeterrent } from "./features/image-save-deterrent.js";
 import { initMobileLanding } from "./features/mobile-landing.js";
 import { initArrowDraw } from "./features/arrow-draw.js";
@@ -29,3 +30,5 @@ initTeamCarousel();
 initValuesWheel();
 initMobileLanding();
 initArrowDraw();
+
+initPrivacyPreferences();

@@ -1,0 +1,4 @@
+/* Progressive fallback: the privacy notice and homepage remain reachable. */
+body.is-loading { overflow: visible; }
+body.is-loading .loader { display: none; }
+body.is-loading .hero__image { opacity: 1; transform: none; }

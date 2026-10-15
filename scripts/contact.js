@@ -1,3 +1,4 @@
+import { initPrivacyPreferences } from "./features/privacy-preferences.js";
 import { initImageSaveDeterrent } from "./features/image-save-deterrent.js";
 import { initContactArtwork } from "./features/contact-artwork.js";
 import { initResponsiveNav } from "./features/responsive-nav.js";
@@ -7,3 +8,5 @@ initImageSaveDeterrent();
 initContactArtwork();
 initResponsiveNav({ navSelector: ".services-nav", transitionSelector: ".contact-hero__socials" });
 initCustomCursor();
+
+initPrivacyPreferences();

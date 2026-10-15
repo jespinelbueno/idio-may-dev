@@ -10,7 +10,7 @@ const entryPages = [
   "services.html",
   "about.html",
   "events.html",
-  "contact.html",
+  "contact.html", "privacy.html",
   "coming-soon.html",
   "404.html",
   "loading-screens/icon-color-loader/index.html",

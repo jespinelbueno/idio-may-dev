@@ -34,14 +34,15 @@ export const initHomeLoader = () => {
     document.body.classList.remove("is-loading");
     document.body.classList.add("is-ready");
 
-    if (!recentVisit) {
-      try {
-        localStorage.setItem(document.documentElement.dataset.homeLoaderKey, String(Date.now()));
-      } catch {
-        // The page can still reveal when storage is unavailable.
-      }
-    }
+    if (!recentVisit) window.idioPrivacy?.rememberIntro();
   };
+
+  // Acceptance happens after the first intro; withdrawal immediately disables memory.
+  window.addEventListener("idio:privacy-change", () => {
+    if (!recentVisit && document.body.classList.contains("is-ready")) {
+      window.idioPrivacy?.rememberIntro();
+    }
+  });
 
   const maybeRevealHomePage = () => {
     if (loaderSequenceComplete && loaderPageLoaded) {

@@ -1,0 +1,46 @@
+.privacy-dialog {
+  width: min(34rem, calc(100% - 2rem));
+  max-height: calc(100svh - 2rem);
+  margin: auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--brand-olive);
+  border-radius: 1.5rem;
+  background: var(--paper);
+  color: var(--brand-green);
+  box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 20%);
+  text-align: center;
+}
+.privacy-dialog::backdrop { background: rgb(0 30 10 / 65%); }
+.privacy-dialog__close { position: absolute; top: 0.5rem; right: 0.5rem; min-width: 2.75rem; min-height: 2.75rem; border: 0; background: transparent; color: inherit; font: 2rem/1 sans-serif; }
+.privacy-dialog__eyebrow { margin: 0.25rem 0 1rem; font: 1.1rem/1.4 'Teva', sans-serif; }
+.privacy-dialog h2 { margin: 0 0 1.25rem; font-size: clamp(2.5rem, 7vw, 3.5rem); font-weight: 650; line-height: 0.98; letter-spacing: -0.04em; }
+.privacy-dialog p { line-height: 1.5; }
+.privacy-dialog__note, .privacy-dialog__policy { font-size: 0.875rem; }
+.privacy-dialog__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-block: 1.5rem 0.75rem; }
+.privacy-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; padding: 0.8rem 1.1rem; border: 1px solid var(--brand-green); border-radius: 2rem; background: var(--paper); color: var(--brand-green); font: 600 0.9375rem/1.25 'DM Sans', sans-serif; text-align: center; cursor: pointer; }
+.privacy-button:is(:hover, :focus-visible) { background: var(--brand-green); color: var(--paper); }
+.privacy-dialog :is(button, input, summary, a):focus-visible, .privacy-links a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.privacy-dialog__details { text-align: left; font-size: 0.875rem; }
+.privacy-dialog__details summary { display: list-item; width: fit-content; min-height: 2.75rem; padding-block: 0.7rem; margin-inline: auto; cursor: pointer; font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; }
+.privacy-dialog__details[open] { margin-bottom: 1.5rem; }
+.privacy-dialog__details p { margin: 1rem 0; }
+.privacy-dialog__option { display: flex; align-items: flex-start; gap: 0.8rem; padding: 1rem 0; border-block: 1px solid var(--brand-olive); line-height: 1.5; }
+.privacy-dialog__option input { flex: 0 0 auto; width: 1.3rem; height: 1.3rem; margin: 0.15rem 0 0; accent-color: var(--brand-green); }
+.privacy-dialog__policy { display: inline-block; padding-block: 0.6rem; text-decoration: underline; text-underline-offset: 0.2em; line-height: 1.5; }
+.privacy-dialog__status:empty { display: none; }
+.privacy-dialog__status { font-size: 0.875rem; font-weight: 650; }
+.privacy-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 2rem; padding: 0.8rem var(--page-gutter, 1rem); background: var(--brand-green); color: var(--paper); font-size: 0.875rem; line-height: 1.4; }
+.privacy-links a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-underline-offset: 0.2em; }
+html:has(.privacy-dialog[open]) { overflow: hidden; }
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor:has(.privacy-dialog[open]), html.has-custom-cursor:has(.privacy-dialog[open]) * { cursor: auto !important; }
+  html.has-custom-cursor:has(.privacy-dialog[open]) :is(button, summary, a, input) { cursor: pointer !important; }
+}
+@media (max-width: 360px) {
+  .privacy-dialog__actions { grid-template-columns: 1fr; }
+}
+
+.privacy-dialog [hidden] { display: none; }
+.privacy-dialog__continue { margin-bottom: 0.75rem; }

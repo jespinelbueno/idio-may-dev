@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 export const publicPages = [
-  "index.html", "services.html", "about.html", "events.html", "contact.html",
+  "index.html", "services.html", "about.html", "events.html", "contact.html", "privacy.html",
   "coming-soon.html", "404.html", "loading-screens/icon-color-loader/index.html",
 ];
 

@@ -253,6 +253,9 @@
 
   .services-shell {
     --mobile-unit: calc(min(100vw, 32rem) / 402);
+    --services-glow-width: calc(var(--mobile-unit) * 460);
+    --services-glow-height: calc(var(--mobile-unit) * 280);
+    --services-glow-color: rgb(245 207 104 / 0.38);
     /* Keep horizontal clipping off the sticky hero's containing block. */
     overflow: visible;
   }
@@ -271,7 +274,8 @@
   }
 
   .services-offer {
-    background: var(--paper);
+    /* Keep the section-owned gradient: its lower half meets the work
+       section's upper half at the same origin, size, and colour. */
     transform: none;
   }
 
@@ -369,22 +373,10 @@
 
   .services-work {
     position: relative;
-    /* Its glow extends upward across the offer boundary. */
-    z-index: 2;
     isolation: isolate;
     padding: 0 0 calc(var(--mobile-unit) * 80);
-    background: var(--paper);
-  }
-
-  .services-work::before {
-    position: absolute;
-    inset: calc(var(--mobile-unit) * -210) 0 calc(var(--mobile-unit) * 80);
-    z-index: -1;
-    content: "";
-    background:
-      url("../assets/media/services/mobile/green-glow.svg") calc(50% - var(--mobile-unit) * 315) 0 / calc(var(--mobile-unit) * 698) auto no-repeat,
-      url("../assets/media/services/mobile/yellow-glow.svg") calc(50% - var(--mobile-unit) * 190) calc(var(--mobile-unit) * 60) / calc(var(--mobile-unit) * 698) auto no-repeat;
-    pointer-events: none;
+    /* The base background continues the offer's gradient without an
+       overflowing image or a layer crossing the section boundary. */
   }
 
   .services-work__inner {
@@ -513,8 +505,16 @@
 
   .services-page .services-closing {
     background:
-      url("../assets/media/services/mobile/yellow-glow.svg") calc(50% - var(--mobile-unit) * 50) calc(var(--mobile-unit) * 390) / calc(var(--mobile-unit) * 698) auto no-repeat,
-      url("../assets/media/services/mobile/green-glow.svg") calc(50% + var(--mobile-unit) * 250) calc(var(--mobile-unit) * 260) / calc(var(--mobile-unit) * 698) auto no-repeat,
+      radial-gradient(
+        ellipse calc(var(--mobile-unit) * 349) calc(var(--mobile-unit) * 270)
+          at calc(50% - var(--mobile-unit) * 50) calc(var(--mobile-unit) * 660),
+        rgb(245 207 104 / 0.24), rgb(245 207 104 / 0) 100%
+      ),
+      radial-gradient(
+        ellipse calc(var(--mobile-unit) * 349) calc(var(--mobile-unit) * 270)
+          at calc(50% + var(--mobile-unit) * 250) calc(var(--mobile-unit) * 530),
+        rgb(245 207 104 / 0.24), rgb(245 207 104 / 0) 100%
+      ),
       var(--paper);
   }
 

@@ -1,30 +1,19 @@
 <!doctype html>
-<html lang="en" data-home-loader-key="idio-home-loader-v1">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-bPGCdFJaCxUnh8S1D8rINNM36WW9H7vRQhMiSAK8ugQ='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="EMESTUDIOS SS25 Collection Factory landing page.">
     <title>Idio</title>
-    <script>
-      try {
-        const key = document.documentElement.dataset.homeLoaderKey;
-        const lastShown = Number(localStorage.getItem(key));
-        const age = Date.now() - lastShown;
-
-        if (lastShown > 0 && age >= 0 && age < 7 * 24 * 60 * 60 * 1000) {
-          document.documentElement.classList.add("home-loader-recent");
-        }
-      } catch {
-        // Private browsing or disabled storage still gets the normal loader.
-      }
-    </script>
+    <script src="scripts/privacy-bootstrap.js"></script>
     <script defer src="scripts/register-cache.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/media/home/hero.jpg" as="image">
     <link rel="preload" href="assets/media/brand/idio-wordmark.svg" as="image">
     <link rel="stylesheet" href="styles.css">
+    <noscript><link rel="stylesheet" href="styles/home-no-script.css"></noscript>
   </head>
   <body class="page-home is-loading">
     <svg class="scribble-frame-filters" aria-hidden="true">
@@ -508,6 +497,11 @@
         <p class="site-footer__copyright">&copy; Copyright <span data-copyright-year>2026</span>. Idio Creative. All rights reserved.</p>
       </div>
     </footer>
+
+    <nav class="privacy-links" aria-label="Privacy links">
+      <a href="privacy.html">privacy &amp; browser storage</a>
+      <a href="privacy.html#your-choices" data-privacy-settings>cookie settings</a>
+    </nav>
 
     <script type="module" src="scripts/home.js"></script>
   </body>
