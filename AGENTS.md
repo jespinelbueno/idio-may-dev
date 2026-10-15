@@ -1,6 +1,6 @@
 # Project context
 
-This is a static HTML/CSS/JavaScript site with no build step. Keep index.html and services.html as public entry points and preserve GitHub Pages compatibility.
+This is a static HTML/CSS/JavaScript site with no build step, hosted on Hostinger. Keep index.html and services.html as source entry points. Public links use clean root-relative routes, resolved by the root .htaccess file.
 
 ## Source organization
 
@@ -11,6 +11,7 @@ This is a static HTML/CSS/JavaScript site with no build step. Keep index.html an
 - Group feature modules by page under scripts/features/; common features belong in scripts/features/shared/. Keep page script entries directly in scripts/.
 - scripts/features/values-wheel/ separates configuration, geometry helpers, and DOM interaction. Keep the default smoothing factor at 0.075 unless the requested wheel behavior changes.
 - assets/media/ holds canonical active media. tools/asset-aliases.json maps public legacy paths to canonical copies. Update both the map and the source references whenever active media is renamed.
+- Group canonical media by page, with homepage section folders under assets/media/home/. Put reused media in assets/media/shared/, portraits in assets/media/team/home/ or about/, and common logos/footer artwork in brand/ or footer/. Legacy folders outside assets/media/ contain compatibility copies, not editable source media.
 
 ## Homepage behavior
 
@@ -37,4 +38,4 @@ The loader runs each word for 650 ms, swaps after 120 ms, holds the final lockup
 
 ## Deployment
 
-.github/workflows/pages.yml publishes the repository root to GitHub Pages after the static check succeeds.
+.github/workflows/pages.yml runs static checks only. Hostinger deploys from GitHub; deploy .htaccess beside index.html at the domain root. Do not add GitHub Pages deployment steps.

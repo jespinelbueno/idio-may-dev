@@ -1,6 +1,6 @@
 # Idio Creative static site
 
-This is a static HTML/CSS/JavaScript site with no build step. Serve the repository with any static web server. All public HTML pages stay at the root for GitHub Pages.
+This is a static HTML/CSS/JavaScript site with no build step, hosted on Hostinger. All public HTML source files stay at the root; `.htaccess` serves them through clean URLs.
 
 ## Source map
 
@@ -23,7 +23,7 @@ This is a static HTML/CSS/JavaScript site with no build step. Serve the reposito
 │   └── fonts/                 Local fonts and their licenses
 ├── docs/                      Implementation notes and reviews
 ├── tests/                     Existing automated behavior tests
-├── tools/                     Static checks, asset aliases, and Pages packaging
+├── tools/                     Static checks, asset aliases, and public-file packaging
 └── loading-screens/
     └── icon-color-loader/     Retained backup loader
 ```
@@ -46,6 +46,20 @@ Each page's stylesheet entry in `styles/` lists its imports in cascade order. Ho
 
 Each page's script entry initializes its feature modules. Features keep their own DOM queries, state, and listeners. This organization pass moves files and updates paths; further code refactoring is deferred.
 
+## Editing assets
+
+Use `assets/media/` for active images, SVG artwork, and video:
+
+| Folder | Contents |
+| --- | --- |
+| `home/` | Homepage media grouped into `offer/`, `toolkit/`, `case-study/`, `team/`, `values/`, and `mobile/` |
+| `about/`, `services/`, `events/`, `contact/`, `coming-soon/`, `not-found/` | Media belonging to that page; Services portfolio photos live in `services/work/` |
+| `team/home/`, `team/about/` | Portraits for each page, named after the team member |
+| `brand/`, `footer/` | Logos, social icons, and shared footer artwork |
+| `shared/` | Backgrounds, textures, photos, and shapes reused across pages |
+
+Update HTML, CSS, and JavaScript references when renaming media. The About portrait selector and homepage team arrows also construct filenames dynamically. Retained legacy folders outside `assets/media/` supply the 50 compatibility URLs in `tools/asset-aliases.json`; keep those copies identical to their mapped canonical files. Keep font files and licenses together under `assets/fonts/`.
+
 ## Development checks
 
 The homepage's responsive rules and validation record are documented in [docs/responsive-implementation.md](docs/responsive-implementation.md). Use [docs/responsive-page-template.md](docs/responsive-page-template.md) to plan another page's adoption.
@@ -54,7 +68,11 @@ Run npm run check before committing. It resolves local HTML, CSS, and JavaScript
 
 ## Deployment
 
-Pushes to main run the GitHub Pages workflow. Set the repository Pages source to GitHub Actions if it is not already enabled. The workflow checks the source, packages only public site files with tools/prepare-pages.mjs, and deploys the unchanged HTML, CSS, JavaScript, and media. Pull requests run checks without deployment permissions.
+Hostinger deploys the site from GitHub. Deploy the public site files at the domain root (`public_html`), including the root `.htaccess` file beside `index.html`. Enable `.htaccess` support in hPanel if the hosting plan requires it. `.github/workflows/pages.yml` runs `npm run check` on pushes and pull requests; it does not deploy to GitHub Pages.
+
+Routes are `/`, `/services`, `/about`, `/events`, `/contact`, `/privacy`, and `/coming-soon`. Old `.html` URLs and trailing-slash page URLs redirect permanently to their clean equivalents, preserving query strings. Unknown paths return the custom `404.html` page with HTTP status 404. Existing asset paths, including `services/assets/`, remain available.
+
+For a public-files-only deployment, `node tools/prepare-pages.mjs <fresh-output-directory>` packages the site, including `.htaccess`, without repository internals. The historical script name is retained. Clean routes require an Apache-compatible server with rewriting enabled; a basic static development server will still serve the `.html` files but will not resolve the clean navigation URLs.
 
 See [docs/security-audit.md](docs/security-audit.md) for the security review, implemented protections, and remaining hosting/provider settings.
 

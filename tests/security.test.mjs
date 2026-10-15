@@ -32,7 +32,7 @@ test("every public HTML page restricts code, data destinations, frames, and form
       const hash = `'sha256-${createHash("sha256").update(body).digest("base64")}'`;
       assert.ok(scriptSources.includes(hash), `${page}: inline script needs its exact CSP hash`);
     }
-    assert.deepEqual(policy.get("base-uri"), [page === "404.html" ? "'self'" : "'none'"]);
+    assert.deepEqual(policy.get("base-uri"), ["'none'"]);
     assert.deepEqual(policy.get("connect-src"), page === "events.html"
       ? ["'self'", "https://e0a2c1d4.sibforms.com"] : ["'self'"]);
     assert.deepEqual(policy.get("form-action"), [page === "events.html" ? "https://e0a2c1d4.sibforms.com" : "'none'"]);
@@ -47,7 +47,7 @@ test("Pages packaging excludes repository internals, unexpected files, and sensi
   try {
     const source = join(directory, "source");
     const output = join(directory, "public");
-    const files = [...publicPages, "styles.css", "service-worker.js", ".nojekyll",
+    const files = [...publicPages, "styles.css", "service-worker.js", ".htaccess", ".nojekyll",
       "loading-screens/icon-color-loader/styles.css", "scripts/home.js", "styles/home.css",
       "assets/media/brand.svg", "services/assets/legacy.svg", "assets/.env", "assets/notes.md",
       ".env", "AGENTS.md", "package.json", "tools/check-site.mjs", "tests/example.test.mjs", ".git/config"];
@@ -56,7 +56,7 @@ test("Pages packaging excludes repository internals, unexpected files, and sensi
       writeFileSync(join(source, file), file);
     }
     preparePages(source, output);
-    for (const file of ["index.html", "services.html", "scripts/home.js", "assets/media/brand.svg", "services/assets/legacy.svg", ".nojekyll"]) {
+    for (const file of ["index.html", "services.html", "scripts/home.js", "assets/media/brand.svg", "services/assets/legacy.svg", ".htaccess", ".nojekyll"]) {
       assert.equal(readFileSync(join(output, file), "utf8"), file);
     }
     for (const file of [".env", "AGENTS.md", "package.json", "tools", "tests", ".git", "assets/.env", "assets/notes.md"]) {

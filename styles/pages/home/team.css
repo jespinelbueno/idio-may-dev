@@ -28,7 +28,7 @@
   z-index: -1;
   width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
-  background: #a5ab5f url("../../../assets/media/home/textures/team-olive.svg") 0 0 / 1920px 1256px repeat;
+  background: #a5ab5f url("../../../assets/media/home/team/background.svg") 0 0 / 1920px 1256px repeat;
   clip-path: ellipse(200vw var(--team-ellipse-depth) at 50% var(--team-ellipse-depth));
   transform: translateX(50%);
 }
@@ -126,7 +126,7 @@
 }
 
 .team__member:nth-child(1) {
-  --team-arrow-image: url("../../../assets/media/decorations/arrows/our-team/yellow1.svg");
+  --team-arrow-image: url("../../../assets/media/home/team/arrows/yellow1.svg");
   --team-arrow-width: 40cqw;
   --team-arrow-ratio: 136 / 191;
   --team-arrow-top: 92cqw;
@@ -134,7 +134,7 @@
 }
 
 .team__member:nth-child(2) {
-  --team-arrow-image: url("../../../assets/media/decorations/arrows/our-team/yellow2.svg");
+  --team-arrow-image: url("../../../assets/media/home/team/arrows/yellow2.svg");
   --team-arrow-width: 31cqw;
   --team-arrow-ratio: 107 / 163;
   --team-arrow-top: 105cqw;
@@ -142,7 +142,7 @@
 }
 
 .team__member:nth-child(3) {
-  --team-arrow-image: url("../../../assets/media/decorations/arrows/our-team/yellow3.svg");
+  --team-arrow-image: url("../../../assets/media/home/team/arrows/yellow3.svg");
   --team-arrow-width: 24cqw;
   --team-arrow-ratio: 83 / 153;
   --team-arrow-top: 101cqw;
@@ -150,7 +150,7 @@
 }
 
 .team__member:nth-child(4) {
-  --team-arrow-image: url("../../../assets/media/decorations/arrows/our-team/yellow4.svg");
+  --team-arrow-image: url("../../../assets/media/home/team/arrows/yellow4.svg");
   --team-arrow-width: 23cqw;
   --team-arrow-ratio: 78 / 112;
   --team-arrow-top: 108cqw;
@@ -158,7 +158,7 @@
 }
 
 .team__member:nth-child(5) {
-  --team-arrow-image: url("../../../assets/media/decorations/arrows/our-team/yellow5.svg");
+  --team-arrow-image: url("../../../assets/media/home/team/arrows/yellow5.svg");
   --team-arrow-width: 12cqw;
   --team-arrow-ratio: 42 / 106;
   --team-arrow-top: 108cqw;
@@ -303,7 +303,7 @@
   z-index: -1;
   width: calc(100vw + (var(--team-curve-bleed, 6vw) * 2));
   content: "";
-  background: #a5ab5f url("../../../assets/media/home/textures/team-olive.svg") 0 0 / 1920px 1256px repeat;
+  background: #a5ab5f url("../../../assets/media/home/team/background.svg") 0 0 / 1920px 1256px repeat;
   transform: translateX(-50%);
 }
 

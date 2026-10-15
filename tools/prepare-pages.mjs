@@ -9,7 +9,7 @@ export const publicPages = [
   "coming-soon.html", "404.html", "loading-screens/icon-color-loader/index.html",
 ];
 
-const publicFiles = [...publicPages, "styles.css", "service-worker.js", ".nojekyll",
+const publicFiles = [...publicPages, "styles.css", "service-worker.js", ".htaccess", ".nojekyll",
   "loading-screens/icon-color-loader/styles.css"];
 const publicDirectories = new Map([
   ["scripts", new Set([".js"])],

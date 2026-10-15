@@ -157,14 +157,14 @@ test("browsers without an accessible settings dialog cannot enable the shorter i
 test("public pages load consent first and provide working non-JavaScript privacy links", () => {
   for (const page of publicPages.filter(page => !page.startsWith("loading-screens/"))) {
     const html = read(page);
-    assert.match(html, /href="privacy.html"/);
-    assert.match(html, /href="privacy.html#your-choices" data-privacy-settings/);
+    assert.match(html, /href="\/privacy"/);
+    assert.match(html, /href="\/privacy#your-choices" data-privacy-settings/);
     const entry = html.match(/<script type="module" src="([^"]+)"/)[1];
     assert.ok(read(entry).startsWith('import "./privacy-bootstrap.js";'), page);
   }
   assert.doesNotMatch(read("index.html"), /localStorage/);
   assert.doesNotMatch(read("scripts/features/home/home-loader.js"), /localStorage/);
-  assert.match(read("events.html"), /href="privacy.html#newsletter"/);
+  assert.match(read("events.html"), /href="\/privacy#newsletter"/);
 });
 
 test("cache migration leaves new visitors and unrelated scopes alone", async () => {

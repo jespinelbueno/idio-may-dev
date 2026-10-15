@@ -28,7 +28,7 @@ export const initPrivacyPreferences = () => {
     </details>
     <p class="privacy-dialog__status" role="status" aria-live="polite"></p>
     <button class="privacy-button privacy-button--animated privacy-dialog__continue" type="button" hidden>${buttonLabel("Continue without saving")}</button>
-    <a class="privacy-dialog__policy" href="privacy.html">Read our privacy &amp; browser storage notice →</a>
+    <a class="privacy-dialog__policy" href="/privacy">Read our privacy &amp; browser storage notice →</a>
   `;
   document.body.append(dialog);
   const checkbox = dialog.querySelector("input");

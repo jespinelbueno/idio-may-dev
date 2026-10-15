@@ -75,7 +75,7 @@ export const initArrowDraw = () => {
     const key = `yellow${index + 1}`;
     if (!guides[key]) return;
     try {
-      const svg = await createArrow(`assets/media/decorations/arrows/our-team/${key}.svg`, key, `team-arrow-draw-${index}`);
+      const svg = await createArrow(`assets/media/home/team/arrows/${key}.svg`, key, `team-arrow-draw-${index}`);
       svg.setAttribute("class", "team__arrow arrow-draw");
       member.appendChild(svg);
       member.classList.add("has-drawn-arrow");

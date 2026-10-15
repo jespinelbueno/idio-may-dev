@@ -1,0 +1,34 @@
+# Hostinger: deploy this file beside index.html in the domain's public_html.
+Options -MultiViews -Indexes
+DirectoryIndex index.html
+DirectorySlash Off
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+# Permit /services to resolve before Apache appends the asset folder's slash.
+RewriteOptions AllowNoSlash
+
+# Canonical homepage. THE_REQUEST prevents redirects after internal rewrites.
+RewriteCond %{THE_REQUEST} \s/+index(?:\.html)?/?[?\s] [NC]
+RewriteRule ^index(?:\.html)?/?$ / [R=301,L]
+
+# Redirect old root-level HTML URLs, preserving query strings.
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{THE_REQUEST} \s/+[A-Za-z0-9-]+\.html[?\s] [NC]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^([A-Za-z0-9-]+)\.html$ /$1 [R=301,L]
+
+# Page URLs use no trailing slash; real asset directories are unaffected.
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([A-Za-z0-9-]+)/$ /$1 [R=301,L]
+
+# Keep normal directory URLs for folders that do not also have an HTML page.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{DOCUMENT_ROOT}/$1.html !-f
+RewriteRule ^(.+)$ /$1/ [R=301,L]
+
+# Resolve only existing pages. Do this before directory handling because
+# /services is a page while services/assets/ also contains legacy media.
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([A-Za-z0-9-]+)$ $1.html [END]

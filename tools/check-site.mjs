@@ -31,9 +31,18 @@ const toRepositoryPath = (sourceFile, reference, { publicAsset = false } = {}) =
 
   if (isExternalReference(cleanPath) || !cleanPath) return null;
 
-  return publicAsset || cleanPath.startsWith("assets/")
+  const target = cleanPath.startsWith("/")
+    ? resolve(rootDirectory, "." + cleanPath)
+    : publicAsset || cleanPath.startsWith("assets/")
     ? resolve(rootDirectory, cleanPath)
     : resolve(dirname(sourceFile), cleanPath);
+
+  if (target === rootDirectory) return resolve(rootDirectory, "index.html");
+  if (dirname(target) === rootDirectory && !extname(target) && existsSync(target + ".html")) {
+    return target + ".html";
+  }
+
+  return target;
 };
 
 const reportMissingReference = (sourceFile, reference) => {

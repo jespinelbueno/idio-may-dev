@@ -1,5 +1,5 @@
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-const CIRCLE_SOURCE = "assets/media/decorations/scribbles/footer/link-circle.svg";
+const CIRCLE_SOURCE = "assets/media/footer/link-circle.svg";
 
 export const initFooterLinkCircles = async () => {
   const footer = document.querySelector(".site-footer");

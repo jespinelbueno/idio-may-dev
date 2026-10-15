@@ -62,8 +62,8 @@
   width: 100%;
   height: 100%;
   background: var(--brand-green);
-  -webkit-mask: url("../../../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
-  mask: url("../../../assets/media/decorations/scribbles/scribbleblueourvalues.svg") center / contain no-repeat;
+  -webkit-mask: url("../../../assets/media/home/values/title-scribble.svg") center / contain no-repeat;
+  mask: url("../../../assets/media/home/values/title-scribble.svg") center / contain no-repeat;
 }
 
 .values-wheel {

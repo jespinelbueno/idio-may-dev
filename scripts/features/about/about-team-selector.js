@@ -24,7 +24,7 @@ export const initAboutTeamSelector = async () => {
   try {
     await Promise.all(members.map(async (member) => {
       const image = new Image();
-      image.src = `assets/media/team/${member}2.jpg`;
+      image.src = `assets/media/team/about/${member}.jpg`;
       await image.decode();
     }));
   } catch { return; }
@@ -34,7 +34,7 @@ export const initAboutTeamSelector = async () => {
     card.removeAttribute("id");
     card.classList.remove("about-team__polaroid--front");
     const image = card.querySelector("img");
-    image.src = `assets/media/team/${member}2.jpg`;
+    image.src = `assets/media/team/about/${member}.jpg`;
     image.alt = `${memberNames[member]} in a field.`;
     image.setAttribute("data-member-photo", "");
     image.loading = "eager";

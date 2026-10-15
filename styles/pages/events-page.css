@@ -19,8 +19,8 @@
   overflow: hidden;
   pointer-events: none;
   background: var(--paper);
-  -webkit-mask-image: url('../../assets/media/events/hero-curve.svg'), linear-gradient(#000, #000);
-  mask-image: url('../../assets/media/events/hero-curve.svg'), linear-gradient(#000, #000);
+  -webkit-mask-image: url('../../assets/media/shared/shapes/hero-curve.svg'), linear-gradient(#000, #000);
+  mask-image: url('../../assets/media/shared/shapes/hero-curve.svg'), linear-gradient(#000, #000);
   -webkit-mask-size: 100% var(--curve-height), 100% calc(100% - var(--curve-height) + 2px);
   mask-size: 100% var(--curve-height), 100% calc(100% - var(--curve-height) + 2px);
   -webkit-mask-position: center top, center bottom;

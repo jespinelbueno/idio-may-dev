@@ -5,7 +5,7 @@ export const valuesWheelConfig = [
     label: "Listening",
     title: "listening",
     arrowAsset: "green4",
-    arrowSrc: "assets/arrows/wheel/green4.svg",
+    arrowSrc: "assets/media/home/values/arrows/green4.svg",
     description:
       "Collaboration cannot happen without a listening culture. We make an intentional effort to understand the heartbeat of a brand and add our expertise to fill in the gaps.",
     position: "top",
@@ -30,7 +30,7 @@ export const valuesWheelConfig = [
     label: "Excellence",
     title: "excellence",
     arrowAsset: "green1",
-    arrowSrc: "assets/arrows/wheel/green1.svg",
+    arrowSrc: "assets/media/home/values/arrows/green1.svg",
     description:
       "Excellent results derive from an exceptional work ethic. Idio strives to cultivate a servant culture, delivering exemplary service to both clients and our team.",
     position: "upper-right",
@@ -55,7 +55,7 @@ export const valuesWheelConfig = [
     label: "Creativity",
     title: "creativity",
     arrowAsset: "green6",
-    arrowSrc: "assets/arrows/wheel/green6.svg",
+    arrowSrc: "assets/media/home/values/arrows/green6.svg",
     description:
       "Creativity is the pillar of unforgettable art. Idio believes in artists, creators, and the power of imagination. Without creatives, the world could not function.",
     position: "lower-right",
@@ -80,7 +80,7 @@ export const valuesWheelConfig = [
     label: "Responsibility",
     title: "responsibility",
     arrowAsset: "green3",
-    arrowSrc: "assets/arrows/wheel/green3.svg",
+    arrowSrc: "assets/media/home/values/arrows/green3.svg",
     description:
       "Here at Idio, we believe we have a responsibility to be thorough in service and ethical in behavior, from research all the way to client relationships.",
     position: "bottom",
@@ -105,7 +105,7 @@ export const valuesWheelConfig = [
     label: "Idiosyncrasy",
     title: "idiosyncrasy",
     arrowAsset: "green5",
-    arrowSrc: "assets/arrows/wheel/green5.svg",
+    arrowSrc: "assets/media/home/values/arrows/green5.svg",
     description:
       "We believe good branding never sacrifices personality. The unique traits (idiosyncrasies) of a brand are what take it from great to legendary and unforgettable.",
     position: "lower-left",
@@ -130,7 +130,7 @@ export const valuesWheelConfig = [
     label: "Collaboration",
     title: "collaboration",
     arrowAsset: "green2",
-    arrowSrc: "assets/arrows/wheel/green2.svg",
+    arrowSrc: "assets/media/home/values/arrows/green2.svg",
     description:
       "Idio fosters open dialogue and teamwork, celebrating new ideas and creative directions that communicate who our clients are to the proper audience.",
     position: "upper-left",
