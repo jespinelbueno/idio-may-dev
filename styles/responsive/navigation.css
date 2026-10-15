@@ -49,7 +49,7 @@
   }
 
   :is(.home-nav, .services-nav) {
-    --menu-diameter: 3.5rem;
+    --menu-diameter: 3.25rem;
     --menu-top: max(0.5rem, env(safe-area-inset-top));
   }
 
