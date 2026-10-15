@@ -227,7 +227,7 @@
   mask-repeat: no-repeat;
 }
 .about-photo--studio { grid-area: studio; width: 100%; aspect-ratio: 1047 / 891; overflow: hidden; }
-.about-photo--studio img { position: absolute; width: 125.99%; height: 100%; left: -2.94%; top: 0.02%; max-width: none; object-fit: fill; }
+.about-photo--studio img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 65%; }
 .about-chapter--next { grid-area: chapter; justify-self: center; width: min(100%, 24rem); text-align: center; }
 .about-chapter--next .about-chapter__dot { margin-inline: auto; }
 .about-chapter--next p { color: var(--about-ink); }

@@ -312,21 +312,15 @@
   .what-offer__mobile-background {
     display: block;
     position: absolute;
-    width: max(205.224cqw, 100%);
-    height: 149.5cqw;
-    left: calc(50% - 3.8557cqw);
-    top: 50%;
+    inset: 0;
     overflow: hidden;
-    transform: translate(-50%, -50%) rotate(90deg);
     z-index: -3;
   }
   .what-offer__mobile-background img {
-    position: absolute;
-    width: 176.02%;
-    height: 362.8%;
-    max-width: none;
-    left: -8.68%;
-    top: -207.61%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
   .what-offer__inner { width: min(100%, 40rem); min-height: calc(205.224 * var(--toolkit-unit)); padding: calc(14.18 * var(--toolkit-unit)) calc(7.21 * var(--toolkit-unit)) calc(27.86 * var(--toolkit-unit)); }
   .what-offer__header { position: relative; inset: auto; width: 100%; }
