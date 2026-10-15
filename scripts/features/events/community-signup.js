@@ -2,6 +2,13 @@ import { isValidSignupEmail, sendCommunitySignup } from './community-signup-requ
 
 export const initCommunitySignup = ({ sendSignup = sendCommunitySignup } = {}) => {
   const form = document.querySelector('#community-signup');
+  if (!form) return;
+  // Reopening requires the owner/provider review in docs/privacy-launch-review.md.
+  // Keep synthetic submissions inert as well as the disabled native controls.
+  if (form.hasAttribute('data-signup-paused')) {
+    form.addEventListener('submit', (event) => event.preventDefault());
+    return;
+  }
   const email = form?.querySelector('input[type="email"]');
   const optIn = form?.querySelector('input[name="OPT_IN"]');
   const status = document.getElementById('community-signup-status');

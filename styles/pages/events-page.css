@@ -97,6 +97,7 @@
 .events-community__consent input:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .events-community__note a { text-decoration: underline; text-underline-offset: 0.15em; }
 .events-community__signup button { font-family: inherit; cursor: pointer; }
+.events-community__signup[data-signup-paused] :is(input, button) { cursor: not-allowed; }
 
 /* Brevo’s spam trap must remain empty and outside the visible form layout. */
 .events-community__honeypot { display: none; }

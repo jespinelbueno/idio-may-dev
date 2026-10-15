@@ -33,9 +33,8 @@ test("every public HTML page restricts code, data destinations, frames, and form
       assert.ok(scriptSources.includes(hash), `${page}: inline script needs its exact CSP hash`);
     }
     assert.deepEqual(policy.get("base-uri"), ["'none'"]);
-    assert.deepEqual(policy.get("connect-src"), page === "events.html"
-      ? ["'self'", "https://e0a2c1d4.sibforms.com"] : ["'self'"]);
-    assert.deepEqual(policy.get("form-action"), [page === "events.html" ? "https://e0a2c1d4.sibforms.com" : "'none'"]);
+    assert.deepEqual(policy.get("connect-src"), ["'self'"]);
+    assert.deepEqual(policy.get("form-action"), ["'none'"]);
     assert.match(html, /<meta name="referrer" content="no-referrer">/);
     assert.doesNotMatch(html, /\son[a-z]+\s*=/i);
     assert.doesNotMatch(html, /\b(?:href|src|action)\s*=\s*["']\s*(?:javascript:|http:|\/\/)/i);

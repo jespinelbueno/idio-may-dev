@@ -1,48 +1,51 @@
 # Events email signup
 
-The Events form posts to the public Brevo form endpoint from the latest supplied embed
-(`e0a2c1d4.sibforms.com`), replacing the previous Events campaign.
-With JavaScript, it uses Brevo's `?isAjax=1` contract. Without JavaScript, it retains
-native POST submission to Brevo. No secret API key belongs in this repository.
+## Current state: paused
 
-The confirmation dialog only opens for an HTTP-success JSON response containing
-boolean `success: true`. This confirms receipt of a request, not email ownership
-or membership: a live invalid-value probe returned that acknowledgment too.
-Confirmation-email and list settings are controlled in Brevo.
+As of October 15, 2026, the owner has not yet supplied the full legal operator
+identity, public mailing address or target markets. New website submissions are
+paused pending those details and verification of provider-side controls.
 
-## Protections implemented
+`events.html` has `data-signup-paused`, disabled signup controls, no provider action,
+and CSP with `connect-src 'self'` and `form-action 'none'`. Its initializer cancels
+synthetic submissions before initializing request logic. Without JavaScript the
+native controls and CSP still prevent submission. The displayed note and public
+privacy notice explain the pause.
 
-- Required email format and length validation, plus the Brevo honeypot.
-- An unchecked, required consent checkbox sends `OPT_IN=1` only after the visitor
-  opts in. The request helper also rejects missing consent before any request.
-- The signup note explains Brevo’s role and links to its privacy policy.
-- Fixed HTTPS submission destination, no cookies, no referrer, no redirects.
-- Page CSP limits scripts to local files and connections/forms to this Brevo host.
-- Provider HTML, messages, and redirect URLs are never rendered or followed.
-- A 15-second timeout and no automatic retries for uncertain results.
-- Pending submissions cannot overlap; failures keep the input for correction.
-- A brief retry cooldown (60 seconds for HTTP 429). This is a UI safeguard,
-  not server-enforced rate limiting.
-- Emails are not written to browser storage or logs.
-- Native modal dialog with focus management, Escape dismissal, and labeled copy.
+This is a source change, effective on a deployed copy after publication/loading.
+It does not disable the Brevo-hosted endpoint or an older deployment, stop an
+existing campaign, or remove existing subscriptions. Those require account access.
 
-## Provider-side work still required
+## Retained integration
 
-Enable and verify double opt-in in the Brevo form. Enable a Brevo-supported CAPTCHA
-(Turnstile or reCAPTCHA), then supply the regenerated embed so its public site key,
-required token field, and allowed script/frame hosts can be integrated. Do not add
-CAPTCHA markup without enabling its verification in Brevo. Restrict allowed
-CAPTCHA hostnames to the real site and intended test hosts.
+The dormant request helper retains the last supplied public Brevo form endpoint
+(`e0a2c1d4.sibforms.com`). No secret API key belongs in this repository. Reopening
+must confirm that this is still the intended form and coordinate its HTML action,
+CSP, controls, notice and tests; follow [privacy-launch-review.md](privacy-launch-review.md).
 
-Client-side validation, the honeypot, and cooldowns can be bypassed. They do not
-secure the public endpoint against direct automated requests. Do not describe
-this implementation as fully spam-proof or claim CAPTCHA is already active.
+Protections retained for that future integration:
 
-## Verification
+- Email format/length validation and Brevo's empty honeypot.
+- Explicit boolean opt-in before a request; `OPT_IN=1` only for affirmative consent.
+- Pinned HTTPS destination, no cookies/referrer/redirects or response HTML injection.
+- HTTP-success JSON with boolean `success: true` required for an acknowledgment.
+- 15-second timeout, no automatic retry, pending-request exclusion and cooldown.
+- No email address storage or logging; accessible confirmation dialog.
 
-`npm run check` runs static checks and the signup regression tests. Tests use
-mocked responses and do not subscribe addresses. Desktop and mobile modal QA uses
-an isolated temporary fixture, never a production query parameter or bypass.
-For a live end-to-end test, use an address you control, confirm the email if
-required, and verify membership in the intended Brevo list. This does not deploy
-the local website; the repository's existing Pages workflow remains responsible.
+An acknowledgment proves neither ownership of an address nor confirmed membership.
+Double confirmation, consent evidence, tracking and unsubscribe controls live in
+Brevo. Client validation, a honeypot and cooldown do not secure the public endpoint
+against direct requests. CAPTCHA must be enabled and verified by Brevo before its
+regenerated embed is integrated; do not add a cosmetic client-only CAPTCHA.
+
+## Provider work and verification
+
+[privacy-operations.md](privacy-operations.md) supplies the configuration,
+retention, request-handling and provider-evidence procedures. Items are not marked
+complete without execution and evidence from the authorized account operator.
+
+`npm run check` verifies the current pause, consent and request-helper protections
+using mocks. It makes no real subscriptions. A future provider test needs an
+owner-authorized address and must prove confirmation, permission records, no
+unauthorized tracking and successful unsubscribe/suppression. Publish through the
+existing Hostinger/Vercel setup; GitHub Actions performs static checks only.
