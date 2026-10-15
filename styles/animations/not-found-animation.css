@@ -1,3 +1,5 @@
+@import url("./loader.css");
+
 .not-found__frame--one {
   animation: not-found-frame-one 600ms steps(1, end) infinite;
 }

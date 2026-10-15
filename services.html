@@ -9,12 +9,28 @@
     <title>Services | Idio</title>
     <link rel="icon" href="assets/media/brand/favicon.svg" type="image/svg+xml" sizes="any">
     <script defer src="scripts/register-cache.js"></script>
+    <script src="scripts/page-loader-bootstrap.js"></script>
     <link rel="preload" href="assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/Teva/Teva-Regular.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="assets/media/services/hero.jpg" as="image">
-    <link rel="stylesheet" href="styles/services.css?v=privacy-20261015">
+    <link rel="stylesheet" href="styles/services.css?v=privacy-20261015-short-loader">
   </head>
   <body class="services-page">
+    <div class="loader loader--page" role="status" aria-live="polite" aria-label="Loading">
+      <div class="loader__home" aria-hidden="true">
+        <div class="loader__phrase">
+          <span class="loader__fixed">
+            <span>make</span>
+            <span>it</span>
+            <span class="loader__idio-logo" data-loader-logo hidden></span>
+          </span>
+          <span class="loader__words">
+            <span class="loader__word" data-loader-word>yours</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
     <svg class="scribble-frame-filters" aria-hidden="true">
       <defs>
         <filter id="scribble-shape-frame-1" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">

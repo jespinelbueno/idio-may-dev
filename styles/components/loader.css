@@ -183,6 +183,21 @@
   transition: none;
 }
 
+.loader--page {
+  display: none;
+  z-index: 1000;
+}
+
+html.is-page-loading {
+  overflow: hidden;
+}
+
+.is-page-loading .loader--page,
+.is-page-ready .loader--page {
+  display: grid;
+}
+
+.is-page-ready .loader--page,
 body.is-ready .loader {
   opacity: 0;
   visibility: hidden;
@@ -198,10 +213,10 @@ body.is-ready .hero__image {
 }
 
 @media (max-width: 1100px) {
-  .page-home .loader__home {
+  .loader__home {
     padding: 1rem;
   }
-  .page-home .loader__phrase {
+  .loader__phrase {
     --loader-logo-gap: 0.15em;
     font-size: min(clamp(1.7rem, 7.2vw, 3.2rem), 8.5vw);
   }

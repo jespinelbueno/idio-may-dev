@@ -3,6 +3,7 @@
 @import url("./foundation/foundation.css") layer(foundation);
 @import url("./components/buttons.css?v=2") layer(components);
 @import url("./components/privacy-controls.css?v=2") layer(components);
+@import url("./components/loader.css?v=4") layer(components);
 @import url("./components/navigation-base.css") layer(components);
 @import url("./components/custom-cursor.css") layer(components);
 @import url("./components/carousel-controls.css") layer(components);

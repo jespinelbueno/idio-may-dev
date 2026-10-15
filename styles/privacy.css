@@ -6,6 +6,7 @@
 @import url("./components/footer.css") layer(components);
 @import url("./components/buttons.css?v=2") layer(components);
 @import url("./components/privacy-controls.css?v=2") layer(components);
+@import url("./components/loader.css?v=4") layer(components);
 @import url("./pages/privacy-page.css") layer(pages);
 @import url("./animations/animations.css") layer(effects);
 @import url("./responsive/navigation.css") layer(responsive);
