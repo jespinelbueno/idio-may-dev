@@ -287,6 +287,15 @@
     font-size: calc(var(--mobile-unit) * 32);
   }
 
+  .services-offer__hint {
+    display: block;
+    max-width: 28ch;
+    margin: calc(var(--mobile-unit) * 16) auto 0;
+    color: var(--brand-green);
+    font: 400 1rem/1.4 "Teva", "DM Sans", system-ui, sans-serif;
+    text-align: center;
+  }
+
   .services-cards,
   .services-cards.is-interactive {
     --services-stack-mode: mobile-stack;
@@ -295,7 +304,7 @@
     width: calc(var(--mobile-unit) * 338);
     height: calc(var(--mobile-unit) * 446);
     min-height: 0;
-    margin-top: calc(var(--mobile-unit) * 38);
+    margin-top: calc(var(--mobile-unit) * 24);
   }
 
   .services-cards__stack {

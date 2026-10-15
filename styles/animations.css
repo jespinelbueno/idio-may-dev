@@ -80,12 +80,11 @@
   animation-delay: -420ms;
 }
 
-/* Preserve the mobile artwork without repeatedly rasterizing SVG noise filters. */
+/* Keep larger mobile artwork static while the card underlines animate. */
 @media (max-width: 640px) {
   .services-page :is(
     .services-hero__underline,
     .services-hero__reveal-underline,
-    .service-card__underline,
     .services-cards__scribble,
     .services-work__scribble,
     .services-process__scribble,

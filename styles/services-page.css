@@ -261,6 +261,10 @@
   text-align: center;
 }
 
+.services-offer__hint {
+  display: none;
+}
+
 .services-cards {
   --services-stack-mode: stack;
   position: relative;

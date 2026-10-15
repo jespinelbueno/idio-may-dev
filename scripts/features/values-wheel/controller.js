@@ -361,14 +361,14 @@ export const initValuesWheel = () => {
       .join("");
     const callouts = valuesWheelConfig
       .map(
-        ({ title, description, calloutLines, fill }) => `
+        ({ title, description, fill }) => `
           <article class="values-callout values-callout--${title}" data-value-title="${title}" style="--value-color:${fill};">
             <div class="values-callout-content">
               <div class="values-callout-heading">
                 <span class="values-callout-swatch"></span>
                 <h3>${title}</h3>
               </div>
-              <p>${(calloutLines || [description]).join("<br>")}</p>
+              <p>${description}</p>
             </div>
           </article>
         `

@@ -39,7 +39,7 @@
   .about-chapter--start { grid-area: start; }
   .about-chapter--journey { padding-top: 2rem; border-top: 1px solid rgb(4 60 8 / 18%); }
   .about-chapter__dot, .about-story__thread, .about-next__thread { display: none !important; }
-  .about-chapter::before { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .about-chapter::before { display: block; font: 400 1.1rem/1.4 'Teva', sans-serif; }
   .about-chapter--start::before { content: "01 / our beginning"; color: var(--about-copy); }
   .about-chapter--journey::before { content: "02 / growing together"; color: var(--about-copy); }
   .about-chapter--next::before { content: "03 / why we do it"; }
@@ -57,7 +57,7 @@
   .about-team, .about-team.is-scroll-stack { height: auto; padding: 3.5rem var(--page-gutter) 2.5rem; }
   .about-team__stage { position: relative; padding: 0; height: auto; max-width: 32rem; margin-inline: auto; }
   .about-team__background { inset: -3.5rem auto -2.5rem 50%; width: 100cqw; transform: translateX(-50%); background: radial-gradient(ellipse at 90% 60%, #f5cf6833, transparent 70%), var(--paper); }
-  .about-team__layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "portrait" "caption" "controls"; gap: 1.5rem; }
+  .about-team__layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "portrait" "caption"; gap: 1.5rem; }
   .about-team__intro-block { display: grid; width: 100%; padding: 0; gap: 1rem; }
   .about-team__intro-block > h2 { font-size: clamp(2.4rem, 9vw, 3.5rem); line-height: 1.04; max-width: 12ch; }
   .about-team__intro { width: 100%; font-size: 1rem; line-height: 1.65; }
@@ -71,9 +71,19 @@
   .about-team__caption { display: grid; grid-area: caption; gap: 0.35rem; text-align: center; }
   .about-team__caption h3 { font-size: 1.45rem; line-height: 1.2; }
   .about-team__caption p { color: var(--about-copy); font-size: 0.875rem; line-height: 1.5; }
-  .about-team__controls { display: flex; grid-area: controls; justify-content: center; align-items: center; gap: 1.5rem; }
-  .about-team__controls .team__carousel-button { width: 3rem; border: 1px solid rgb(4 60 8 / 30%); }
-  .about-team__count { min-width: 3rem; text-align: center; font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+  .about-team__controls {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    grid-area: portrait;
+    align-self: center;
+    justify-self: center;
+    justify-content: space-between;
+    width: min(100%, calc(88% + var(--tap-size)), calc(23rem + var(--tap-size)));
+    margin-top: 0.5rem;
+    pointer-events: none;
+  }
+  .about-team__controls .team__carousel-button { width: var(--tap-size); }
   .about-team__stack:focus-visible { outline: 2px solid var(--about-ink); outline-offset: 0.4rem; }
   .about-page .services-contact__image { object-position: 47% center; }
 }

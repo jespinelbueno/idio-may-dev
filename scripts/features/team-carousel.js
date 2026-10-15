@@ -7,7 +7,19 @@ export const initTeamCarousel = () => {
   if (!carousel || !previousButton || !nextButton || !grid) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const touchInteraction = window.matchMedia("(hover: none)");
+  const members = [...grid.querySelectorAll(".team__member")];
   let updateFrame = 0;
+
+  members.forEach((member) => {
+    member.addEventListener("click", () => {
+      if (!touchInteraction.matches) return;
+
+      const activate = !member.classList.contains("is-photo-active");
+      members.forEach((card) => card.classList.remove("is-photo-active"));
+      member.classList.toggle("is-photo-active", activate);
+    });
+  });
 
   const getScrollStep = () => {
     const members = grid.querySelectorAll(".team__member");

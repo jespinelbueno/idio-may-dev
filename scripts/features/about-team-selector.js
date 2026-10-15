@@ -65,14 +65,23 @@ export const initAboutTeamSelector = async () => {
     icon.className = "button-fill__label";
     icon.setAttribute("aria-hidden", "true");
     icon.textContent = arrow;
-    button.append(icon);
+    const fill = document.createElement("span");
+    fill.className = "button-fill__inner";
+    fill.setAttribute("aria-hidden", "true");
+    const blobs = document.createElement("span");
+    blobs.className = "button-fill__blobs";
+    for (let index = 0; index < 4; index++) {
+      const blob = document.createElement("span");
+      blob.className = "button-fill__blob";
+      blobs.append(blob);
+    }
+    fill.append(blobs);
+    button.append(icon, fill);
     return button;
   };
   const previous = makeControl("Previous team member", "←");
   const next = makeControl("Next team member", "→");
-  const count = document.createElement("span");
-  count.className = "about-team__count";
-  controls.append(previous, count, next);
+  controls.append(previous, next);
   section.querySelector(".about-team__layout").append(caption, controls);
   stack.setAttribute("role", "group");
   let selected = 0;
@@ -103,7 +112,6 @@ export const initAboutTeamSelector = async () => {
     });
     name.textContent = buttons[active].textContent;
     role.textContent = roles[active];
-    count.textContent = `${active + 1} / ${members.length}`;
     previous.disabled = active === 0;
     next.disabled = active === members.length - 1;
     if (!mobile.matches && selected !== active) status.textContent = `Showing ${memberNames[members[active]]}.`;

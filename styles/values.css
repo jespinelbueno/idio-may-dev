@@ -79,6 +79,8 @@
   width: 100%;
   height: 100%;
   overflow: visible;
+  /* Slice animation supplies tap feedback instead of the browser's box. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .values-callouts {
@@ -93,7 +95,8 @@
 
 .values-callout {
   position: absolute;
-  width: 18rem;
+  /* Leave room for the wheel and callout offsets on smaller desktops. */
+  width: min(22rem, calc((50vw - 19.5rem) / 1.35));
   visibility: hidden;
   opacity: 0;
   transition:
@@ -142,7 +145,7 @@
   max-width: none;
   margin: 0 0 0 1.08rem;
   color: var(--brand-green);
-  font-size: var(--body-size);
+  font-size: 0.75rem;
   font-weight: 200;
   line-height: var(--body-line);
 }
@@ -286,7 +289,7 @@
   .wheel-slice-group { cursor: pointer; }
 }
 
-.wheel-slice-group:focus-visible {
+.wheel-slice-group:focus {
   outline: none;
 }
 
@@ -620,7 +623,7 @@
     overflow-wrap: anywhere;
     margin: 0 0 0.6rem;
     font: 700 1.5rem/1.375 "Vollkorn", Georgia, serif;
-    text-transform: capitalize;
+    text-transform: lowercase;
     letter-spacing: -0.02em;
 
     font-size: var(--subheading-size);
