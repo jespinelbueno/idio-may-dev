@@ -1,6 +1,6 @@
 # Idio Creative static site
 
-This is a static HTML/CSS/JavaScript site with no build step, hosted on Hostinger. All public HTML source files stay at the root; `.htaccess` serves them through clean URLs.
+This is a static HTML/CSS/JavaScript site with no build step, deployed to Hostinger and Vercel. All public HTML source files stay at the root; `.htaccess` on Hostinger and `vercel.json` on Vercel serve them through clean URLs.
 
 ## Source map
 
@@ -70,9 +70,11 @@ Run npm run check before committing. It resolves local HTML, CSS, and JavaScript
 
 Hostinger deploys the site from GitHub. Deploy the public site files at the domain root (`public_html`), including the root `.htaccess` file beside `index.html`. Enable `.htaccess` support in hPanel if the hosting plan requires it. `.github/workflows/pages.yml` runs `npm run check` on pushes and pull requests; it does not deploy to GitHub Pages.
 
+For Vercel, import the GitHub repository with the repository root as the project's Root Directory. The root `vercel.json` selects no framework or build command, serves the current directory, enables clean HTML URLs, and removes trailing slashes. Push the configuration and redeploy for it to take effect. Vercel uses this configuration rather than `.htaccess`; the existing root `404.html` supplies its custom missing-page response.
+
 Routes are `/`, `/services`, `/about`, `/events`, `/contact`, `/privacy`, and `/coming-soon`. Old `.html` URLs and trailing-slash page URLs redirect permanently to their clean equivalents, preserving query strings. Unknown paths return the custom `404.html` page with HTTP status 404. Existing asset paths, including `services/assets/`, remain available.
 
-For a public-files-only deployment, `node tools/prepare-pages.mjs <fresh-output-directory>` packages the site, including `.htaccess`, without repository internals. The historical script name is retained. Clean routes require an Apache-compatible server with rewriting enabled; a basic static development server will still serve the `.html` files but will not resolve the clean navigation URLs.
+For a public-files-only Hostinger deployment, `node tools/prepare-pages.mjs <fresh-output-directory>` packages the site, including `.htaccess`, without repository internals. The historical script name is retained. Clean routes require the relevant host configuration; a basic static development server will still serve the `.html` files but will not resolve the clean navigation URLs.
 
 See [docs/security-audit.md](docs/security-audit.md) for the security review, implemented protections, and remaining hosting/provider settings.
 

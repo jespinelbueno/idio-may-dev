@@ -1,6 +1,6 @@
 # Project context
 
-This is a static HTML/CSS/JavaScript site with no build step, hosted on Hostinger. Keep index.html and services.html as source entry points. Public links use clean root-relative routes, resolved by the root .htaccess file.
+This is a static HTML/CSS/JavaScript site with no build step, deployed to Hostinger and Vercel. Keep index.html and services.html as source entry points. Public links use clean root-relative routes, resolved by .htaccess on Hostinger and vercel.json on Vercel.
 
 ## Source organization
 
@@ -39,3 +39,5 @@ The loader runs each word for 650 ms, swaps after 120 ms, holds the final lockup
 ## Deployment
 
 .github/workflows/pages.yml runs static checks only. Hostinger deploys from GitHub; deploy .htaccess beside index.html at the domain root. Do not add GitHub Pages deployment steps.
+
+Vercel uses the root vercel.json to serve the repository root without a framework or build step. Keep cleanUrls enabled and trailingSlash disabled. Do not add a catch-all rewrite to index.html: each route serves its own HTML page, and missing routes must return 404.
