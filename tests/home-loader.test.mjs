@@ -9,12 +9,13 @@ const source = sequence + "\n" + readFileSync(new URL("../scripts/features/home/
   .replace(/^import .*;\n/, "")
   .replace("export const initHomeLoader", "const initHomeLoader");
 
-const createLoader = ({ optIn, loaded = true, missingMarkup = false } = {}) => {
+const createLoader = ({ optIn, seen = true, loaded = true, missingMarkup = false } = {}) => {
   let now = 0;
   let nextTimer = 0;
   const timers = new Map();
   const listeners = new Map();
   const screens = [];
+  let remembered = 0;
   const classList = (...initial) => {
     const values = new Set(initial);
     return {
@@ -45,7 +46,10 @@ const createLoader = ({ optIn, loaded = true, missingMarkup = false } = {}) => {
     [".loader__fixed", element()], [".loader__words", element()],
   ]);
   const window = {
-    idioPrivacy: optIn === undefined ? undefined : { allowsIntro: () => optIn },
+    idioPrivacy: optIn === undefined ? undefined : {
+      hasSeenIntro: () => optIn === true && seen,
+      rememberIntroSeen: () => { remembered += 1; },
+    },
     addEventListener: (type, callback) => listeners.set(type, callback),
     setTimeout: (callback, delay) => { timers.set(++nextTimer, { callback, due: now + delay }); return nextTimer; },
     requestAnimationFrame: () => 1,
@@ -60,6 +64,7 @@ const createLoader = ({ optIn, loaded = true, missingMarkup = false } = {}) => {
     isReady: () => body.classList.contains("is-ready"),
     load: () => listeners.get("load")?.(),
     pendingTimers: () => timers.size,
+    remembered: () => remembered,
     advanceTo(target) {
       while (timers.size) {
         const [id, timer] = [...timers].sort((a, b) => a[1].due - b[1].due || a[0] - b[0])[0];
@@ -83,7 +88,7 @@ test("without opt-in the loader plays all eight words and the final Idio lockup"
   assert.equal(loader.pendingTimers(), 0);
 });
 
-test("affirmative opt-in plays only yours and Idio, with the normal colors and final hold", () => {
+test("a remembered visit with affirmative opt-in plays only yours and Idio, with the normal colors and final hold", () => {
   const loader = createLoader({ optIn: true });
   assert.deepEqual(loader.screens, [{ value: "yours", time: 0 }]);
   assert.equal(loader.loader.classList.contains("loader--yours"), true);
@@ -97,6 +102,16 @@ test("affirmative opt-in plays only yours and Idio, with the normal colors and f
   assert.equal(loader.isReady(), false, "final lockup must remain for its full 950 ms");
   loader.advanceTo(1720);
   assert.equal(loader.isReady(), true);
+});
+
+test("accepting on another page still gives the first homepage visit the full intro", () => {
+  const loader = createLoader({ optIn: true, seen: false, loaded: false });
+  loader.advanceTo(6270);
+  assert.equal(loader.screens.length, 9);
+  assert.equal(loader.remembered(), 0, "only a completed, loaded homepage counts as seen");
+  loader.load();
+  assert.equal(loader.isReady(), true);
+  assert.equal(loader.remembered(), 1);
 });
 
 test("rejection and non-boolean permission values keep the full intro", () => {
@@ -132,7 +147,8 @@ test("an early browser load does not cut either animation short", () => {
 });
 
 test("absent loader markup does not schedule an animation", () => {
-  const loader = createLoader({ missingMarkup: true });
+  const loader = createLoader({ optIn: true, missingMarkup: true });
   assert.equal(loader.pendingTimers(), 0);
   assert.deepEqual(loader.screens, []);
+  assert.equal(loader.remembered(), 0);
 });

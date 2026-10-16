@@ -13,7 +13,7 @@ export const initPrivacyPreferences = () => {
     <button class="privacy-dialog__close" type="button" aria-label="Close cookie settings and reject optional storage">×</button>
     <p class="privacy-dialog__eyebrow">a little housekeeping</p>
     <h2 id="privacy-dialog-title" tabindex="-1" autofocus>your browser.<br>your call.</h2>
-    <p id="privacy-dialog-description">We don’t use advertising or analytics trackers on this website. With your permission, we can remember your preference for a shorter homepage intro: “make it yours”, then “make it idio”.</p>
+    <p id="privacy-dialog-description">We don’t use advertising or analytics trackers on this website. With your permission, we can remember that you’ve seen the full homepage intro, then show a shorter version on return visits: “make it yours”, then “make it idio”.</p>
     <p class="privacy-dialog__note">Optional storage stays off until you accept. We save your choice for 180 days. Newsletter signup is a separate choice.</p>
     <div class="privacy-dialog__actions">
       <button class="privacy-button privacy-button--animated" type="button" data-privacy-accept>${buttonLabel("Accept optional")}</button>
@@ -22,7 +22,7 @@ export const initPrivacyPreferences = () => {
     <details class="privacy-dialog__details">
       <summary>Customize my choice</summary>
       <p><strong>Remember this choice · always on</strong><br>A small browser record remembers acceptance or rejection. Normal browser caching also helps deliver the site.</p>
-      <label class="privacy-dialog__option"><input type="checkbox" name="intro-memory"><span><strong>Shorter homepage intro · optional</strong><br>Opt in for “make it yours”, then “make it idio” on future homepage visits. Otherwise, you’ll see the full intro. This choice stays in your browser and isn’t sent to Idio.</span></label>
+      <label class="privacy-dialog__option"><input type="checkbox" name="intro-memory"><span><strong>Shorter homepage intro · optional</strong><br>After your first full intro, opt in for “make it yours”, then “make it idio” on return homepage visits. Otherwise, you’ll see the full intro. This choice stays in your browser and isn’t sent to Idio.</span></label>
       <p>No analytics or advertising categories are available because neither is installed on this website.</p>
       <button class="privacy-button privacy-button--animated" type="button" data-privacy-save>${buttonLabel("Save my selection")}</button>
     </details>

@@ -38,11 +38,14 @@ identity, public mailing address, or countries actively served.
 
 ## Browser controls already implemented
 
-`idio-privacy-v1` stores only a version, intro boolean, saved time, and expiry.
+`idio-privacy-v1` stores a version, intro permission boolean, saved time, and expiry.
+With acceptance, an `introSeen` boolean also remembers a completed homepage intro;
+rejection clears that flag. Completion never extends the consent expiry.
 Both acceptance and rejection last 180 days. No visitor ID or remote consent log
 is created. Optional intro use defaults to off until a valid affirmative choice;
 invalid, expired, future-dated, unsupported, or unavailable storage fails closed.
-The choice selects only the shorter homepage intro. It never enables newsletter
+The first homepage intro is full; acceptance and a remembered completion select
+the shorter intro on return visits. Other pages have no loader. This choice never enables newsletter
 marketing, email measurement, analytics, or a new data-processing purpose.
 
 Legacy `idio-home-loader-v1` timestamps are removed without being used. Withdrawal

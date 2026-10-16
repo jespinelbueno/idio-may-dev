@@ -183,21 +183,6 @@
   transition: none;
 }
 
-.loader--page {
-  display: none;
-  z-index: 1000;
-}
-
-html.is-page-loading {
-  overflow: hidden;
-}
-
-.is-page-loading .loader--page,
-.is-page-ready .loader--page {
-  display: grid;
-}
-
-.is-page-ready .loader--page,
 body.is-ready .loader {
   opacity: 0;
   visibility: hidden;

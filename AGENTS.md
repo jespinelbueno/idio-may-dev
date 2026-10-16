@@ -28,6 +28,8 @@ The production loader sequence is:
 8. yours
 9. final make it + idio wordmark
 
+Only the homepage has a loader. Without storage consent it always uses the full sequence. After a completed homepage intro and valid storage consent, return visits use only “yours” and the final lockup. The consented completion flag does not extend the 180-day preference expiry.
+
 The loader runs each word for 650 ms, swaps after 120 ms, holds the final lockup for 950 ms, and only reveals the page after the browser load event. Loader debug pages, query parameters, and localStorage tuning are intentionally absent.
 
 ## Maintenance rules

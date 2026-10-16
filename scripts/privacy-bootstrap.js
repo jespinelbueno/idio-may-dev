@@ -7,12 +7,14 @@
   const canShowSettings = typeof HTMLDialogElement !== "undefined"
     && typeof HTMLDialogElement.prototype.showModal === "function";
   let preference = null;
+  let introSeenThisPage = false;
 
   const removeLegacyIntro = () => {
     try { localStorage.removeItem(LEGACY_INTRO_KEY); } catch { /* Storage may be blocked. */ }
   };
   const isValid = (value) => value && value.version === 1
     && typeof value.intro === "boolean"
+    && (value.introSeen === undefined || typeof value.introSeen === "boolean")
     && Number.isFinite(value.savedAt) && Number.isFinite(value.expiresAt)
     && value.savedAt <= Date.now() && value.savedAt > 0
     && value.expiresAt === value.savedAt + LIFETIME && value.expiresAt > Date.now();
@@ -27,15 +29,31 @@
   const allowed = () => canShowSettings && isValid(preference) === true && preference.intro;
   const notify = () => window.dispatchEvent(new CustomEvent("idio:privacy-change"));
   preference = read();
-  // The preference alone selects the short intro; visit timestamps are retired.
+  // A consented boolean remembers the intro; visit timestamps remain retired.
   removeLegacyIntro();
 
   window.idioPrivacy = Object.freeze({
     getPreference: () => isValid(preference) ? { ...preference } : null,
     allowsIntro: allowed,
+    hasSeenIntro: () => allowed() === true && preference.introSeen === true,
+    rememberIntroSeen: () => {
+      introSeenThisPage = true;
+      if (!allowed()) return;
+      // Recheck saved permission in case another tab has just withdrawn it.
+      preference = read();
+      if (!allowed() || preference.introSeen === true) return;
+      const next = { ...preference, introSeen: true };
+      try {
+        localStorage.setItem(PREFERENCE_KEY, JSON.stringify(next));
+        preference = localStorage.getItem(PREFERENCE_KEY) === JSON.stringify(next) ? next : null;
+      } catch { preference = null; }
+      // Remembering a visit must never extend the original consent expiry.
+      notify();
+    },
     save: (intro) => {
       const savedAt = Date.now();
-      const next = { version: 1, intro: intro === true, savedAt, expiresAt: savedAt + LIFETIME };
+      const introSeen = intro === true && (introSeenThisPage || (allowed() === true && preference.introSeen === true));
+      const next = { version: 1, intro: intro === true, introSeen, savedAt, expiresAt: savedAt + LIFETIME };
       let persisted = false;
       try {
         localStorage.setItem(PREFERENCE_KEY, JSON.stringify(next));

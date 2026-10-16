@@ -73,6 +73,49 @@ test("only explicit boolean true enables the shorter intro", () => {
   }
 });
 
+test("a completed homepage is remembered only with consent, including consent given after the intro", () => {
+  const f = fixture();
+  f.api.rememberIntroSeen();
+  assert.equal(f.api.hasSeenIntro(), false);
+  assert.equal(f.writes.length, 0);
+  assert.equal(f.api.save(true), true);
+  assert.equal(f.api.hasSeenIntro(), true);
+  assert.equal(f.api.getPreference().introSeen, true);
+  const returning = fixture({ [PREF]: f.data.get(PREF) });
+  assert.equal(returning.api.hasSeenIntro(), true);
+  returning.api.save(false);
+  assert.equal(returning.api.hasSeenIntro(), false);
+  assert.equal(returning.api.getPreference().introSeen, false);
+});
+
+test("consent on another page and old preferences do not count as a completed homepage", () => {
+  const f = fixture();
+  f.api.save(true);
+  assert.equal(f.api.hasSeenIntro(), false);
+  f.advance(1);
+  f.api.rememberIntroSeen();
+  assert.equal(f.api.hasSeenIntro(), true);
+  assert.equal(f.api.getPreference().expiresAt, NOW + 180 * DAY);
+  const old = fixture({ [PREF]: saved(true) });
+  assert.equal(old.api.hasSeenIntro(), false);
+});
+
+test("rejection, expiry, withdrawal in another tab, and storage failure cannot remember an intro", () => {
+  for (const options of [{ blocked: true }, { writeBlocked: true }, { unsupportedDialog: true }]) {
+    const f = fixture({ [PREF]: saved(true) }, options);
+    f.api.rememberIntroSeen();
+    assert.equal(f.api.hasSeenIntro(), false);
+  }
+  for (const rejected of [false, true]) {
+    const f = fixture({ [PREF]: saved(true) });
+    if (rejected) f.data.set(PREF, saved(false));
+    else f.advance(180);
+    f.api.rememberIntroSeen();
+    assert.equal(f.api.hasSeenIntro(), false);
+    assert.equal(f.writes.length, 0);
+  }
+});
+
 test("a valid opt-in selects the shorter intro without a visit timestamp", () => {
   for (const entries of [{ [PREF]: saved(true) }, { [PREF]: saved(true, NOW - 20 * DAY), [INTRO]: String(NOW - DAY) }]) {
     const f = fixture(entries);

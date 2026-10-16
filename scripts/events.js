@@ -1,5 +1,4 @@
 import "./privacy-bootstrap.js";
-import { initPageLoader } from "./features/shared/page-loader.js";
 import { initPrivacyPreferences } from "./features/shared/privacy-preferences.js";
 import { initImageSaveDeterrent } from "./features/shared/image-save-deterrent.js";
 import { initFooterLinkCircles } from "./features/shared/footer-link-circles.js";
@@ -10,7 +9,6 @@ import { initCustomCursor } from "./features/shared/custom-cursor.js";
 import { initCommunitySignup } from "./features/events/community-signup.js";
 import { initEventsHeroVideo } from "./features/events/events-hero-video.js";
 
-initPageLoader();
 initImageSaveDeterrent();
 initCommunitySignup();
 initEventsHeroVideo();
