@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://e0a2c1d4.sibforms.com; form-action https://e0a2c1d4.sibforms.com; base-uri 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Join the Idio community for creative events, good company, and emails worth opening.">
     <title>Idio Events | Idio</title>
@@ -95,31 +95,31 @@
         </div>
         <div class="events-community__copy">
           <h2 id="events-community-title"><span class="events-community__circled">emails<img class="events-community__circle events-scribble" src="assets/media/events/community/email-circle.svg?v=2" alt="" aria-hidden="true"></span> are boring.<br>but we <span class="events-community__underlined">aren’t!<img class="events-community__underline events-scribble" src="assets/media/events/community/email-underline.svg?v=2" alt="" aria-hidden="true"></span></h2>
-          <div class="events-community__description"><h3>our email list is coming soon</h3>
+          <div class="events-community__description"><h3>so wanna join our email list?</h3>
           <p>hello creative entrepreneurs! we promise that our emails will always be cool and fun and happy and that you’ll be grateful that you joined and you’ll never ever be annoyed by how many you receive because we won’t even send that many and we promise that when we do send them they will always be coooool.</p>
-          <p>check back here when signups open!</p></div>
-          <form class="events-community__signup" id="community-signup" method="post" data-signup-paused aria-label="Newsletter signup is currently unavailable" aria-describedby="community-signup-note">
+          <p>how can you say no to that???</p></div>
+          <form class="events-community__signup" id="community-signup" method="post" action="https://e0a2c1d4.sibforms.com/serve/MUIFAADTJr0_nfd4Tqr0DMKfye3XCZunKihJV6WPT_2txzxiwNYykBwzvENOAu66YxsgeeS6ZDOyPWYKM-mhq-NuQHcpxdxR21c5dQyN_sIIHNHKiCR62JF6b3JvmYyKODvbsRALrRgLbRkt5f5MJAOGPJSpHF_lXcJJk7cWVXzUuYlnTz650s7KgacZXaxOy0FIGCnzd7piOfYgDw==" aria-label="Join the Idio email list" aria-describedby="community-signup-note">
             <div class="events-community__field">
               <label for="community-email">your email</label>
               <div class="events-community__line">
-                <input disabled id="community-email" name="EMAIL" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" spellcheck="false" autocapitalize="none" required maxlength="254" aria-describedby="community-signup-note community-signup-status">
+                <input id="community-email" name="EMAIL" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" spellcheck="false" autocapitalize="none" required maxlength="254" aria-describedby="community-signup-note community-signup-status">
                 <img class="events-scribble" src="assets/media/events/community/signup-line.svg?v=2" alt="" aria-hidden="true">
                 <img class="events-community__dot" src="assets/media/events/community/signup-dot.svg" alt="" aria-hidden="true">
               </div>
             </div>
-            <input disabled class="events-community__honeypot" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <input disabled type="hidden" name="locale" value="en">
+            <input class="events-community__honeypot" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="locale" value="en">
             <label class="events-community__consent" for="community-opt-in">
-              <input disabled id="community-opt-in" name="OPT_IN" type="checkbox" value="1" required aria-describedby="community-signup-note">
+              <input id="community-opt-in" name="OPT_IN" type="checkbox" value="1" required aria-describedby="community-signup-note">
               <span>I agree to receive Idio news and event emails. I can unsubscribe anytime.</span>
             </label>
-            <button class="events-button" type="submit" disabled><span class="button-fill__label">signup coming soon</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></button>
+            <button class="events-button" type="submit"><span class="button-fill__label">join the community →</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></button>
           </form>
-          <p class="events-community__note" id="community-signup-note">Newsletter signup is coming soon. We’re not collecting email addresses here yet. See <a href="/privacy#newsletter">our privacy notice</a> for details.</p>
+          <p class="events-community__note" id="community-signup-note">We use Brevo to collect your details and send our emails. Brevo also uses some data to keep its platform secure. See <a href="/privacy#newsletter">Idio’s Privacy Notice</a> and <a href="https://www.brevo.com/en/legal/privacypolicy/" target="_blank" rel="nofollow noopener noreferrer">Brevo’s Privacy Policy</a>. Already subscribed? <a href="/privacy#unsubscribe">Unsubscribe here</a>.</p>
           <p class="events-community__status" id="community-signup-status" role="status" aria-live="polite"></p>
         </div>
-        <aside class="events-calendar" aria-label="Our community is coming soon">
-          <div class="events-calendar__top">today</div><div class="events-calendar__sheet"><span class="events-calendar__number">01.</span><p>cool events are on the way. check back here for community updates!</p></div>
+        <aside class="events-calendar" aria-label="Today: join the community">
+          <div class="events-calendar__top">today</div><div class="events-calendar__sheet"><span class="events-calendar__number">01.</span><p>cool events are happening right now and you’re missing them so sign up asap!!!</p></div>
           <span class="events-calendar__strokes" aria-hidden="true">
             <img class="events-calendar__stroke events-calendar__stroke--left-long events-scribble" src="assets/media/events/calendar/calendar-left-long.svg" alt="">
             <img class="events-calendar__stroke events-calendar__stroke--left-short events-scribble" src="assets/media/events/calendar/calendar-left-short.svg" alt="">
@@ -132,7 +132,7 @@
       <section class="events-coming" aria-labelledby="events-coming-title">
         <img class="events-coming__curve" src="assets/media/events/coming/green-curve.svg" alt="" aria-hidden="true"><img class="events-coming__dot" src="assets/media/events/coming/coming-dot.svg" alt="" aria-hidden="true">
         <div class="events-coming__card"><div class="events-coming__crop"><img class="events-coming__photo" src="assets/media/events/coming/community.webp" alt="Friends sharing drinks and conversation at a creative gathering." loading="lazy" decoding="async" width="1818" height="1228" srcset="assets/media/events/coming/mobile/community.webp 800w, assets/media/events/coming/community.webp 1818w" sizes="100vw"></div>
-          <div class="events-coming__copy"><h2 id="events-coming-title">coming soon</h2><p>(some really cool community that you won’t want to miss)</p><a class="events-button" href="#events-community" data-community-signup-link><span class="button-fill__label">newsletter coming soon</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></a></div>
+          <div class="events-coming__copy"><h2 id="events-coming-title">coming soon</h2><p>(some really cool community that you won’t want to miss)</p><a class="events-button" href="#events-community" data-community-signup-link><span class="button-fill__label">ahem, give up that email</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span></a></div>
         </div>
         <img class="events-coming__left events-scribble" src="assets/media/events/coming/coming-left.svg?v=2" alt="" aria-hidden="true"><img class="events-coming__bottom events-scribble" src="assets/media/events/coming/coming-bottom.svg?v=2" alt="" aria-hidden="true">
       </section>

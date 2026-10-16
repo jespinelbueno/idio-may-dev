@@ -45,7 +45,7 @@ test('network failure and timeout never become success and do not retry', async 
   await assert.rejects(sendCommunitySignup('a@example.com', {optIn: true, timeoutMs: 5, fetchImpl: (_, {signal}) => new Promise((_, reject) => signal.addEventListener('abort', () => reject(new Error('abort'))))}), {code:'timeout'});
 });
 
-const fixture = (sendSignup, { paused = false } = {}) => {
+const fixture = (sendSignup) => {
   const handlers = {};
   const inputHandlers = {};
   const dialogHandlers = {};
@@ -56,7 +56,7 @@ const fixture = (sendSignup, { paused = false } = {}) => {
   const trap = {value:''};
   const status = {textContent:''};
   const dialog = {open:false, addEventListener:(k,v)=>dialogHandlers[k]=v,showModal(){this.open=true;}};
-  const form = {hasAttribute:name=>name==='data-signup-paused' && paused, querySelector:s=>s === 'input[type="email"]'?email:s === 'input[name="OPT_IN"]'?optIn:button, elements:{namedItem:()=>trap}, reportValidity:()=>!email.validity && optIn.checked, addEventListener:(k,v)=>handlers[k]=v,setAttribute(){},removeAttribute(){},reset(){email.value='';optIn.checked=false;}};
+  const form = {querySelector:s=>s === 'input[type="email"]'?email:s === 'input[name="OPT_IN"]'?optIn:button, elements:{namedItem:()=>trap}, reportValidity:()=>!email.validity && optIn.checked, addEventListener:(k,v)=>handlers[k]=v,setAttribute(){},removeAttribute(){},reset(){email.value='';optIn.checked=false;}};
   globalThis.document = {querySelector:()=>form, querySelectorAll:()=>[], getElementById:id=>id==='signup-confirmation'?dialog:status};
   initCommunitySignup({sendSignup});
   return {email, optIn, trap, status, button, dialog, dialogHandlers, submit:()=>{const event={defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}};return Promise.resolve(handlers.submit(event)).then(()=>event.defaultPrevented);}};
@@ -96,36 +96,27 @@ test('invalid email and filled honeypot cannot send; false success cannot open p
   const rejected=fixture(async()=>false); await rejected.submit(); assert.equal(rejected.dialog.open,false);
 });
 
-test('paused signup blocks native submission and provider connections without JavaScript', () => {
+test('active HTML form and restrictive page policy match the pinned request endpoint', () => {
   const html=readFileSync(new URL('../events.html',import.meta.url),'utf8');
   const form = html.match(/<form\b[^>]*id="community-signup"[^>]*>[\s\S]*?<\/form>/)?.[0];
   assert.ok(form);
-  assert.match(form, /\bdata-signup-paused\b/);
-  assert.doesNotMatch(form, /\baction=/);
-  assert.ok(!html.includes(COMMUNITY_SIGNUP_ENDPOINT));
+  assert.doesNotMatch(form, /\bdata-signup-paused\b/);
+  assert.ok(form.includes(`method="post" action="${COMMUNITY_SIGNUP_ENDPOINT}"`));
   const controls = [...form.matchAll(/<(?:input|button)\b[^>]*>/g)];
   assert.ok(controls.length > 0);
-  for (const [control] of controls) assert.match(control, /\bdisabled\b/);
+  for (const [control] of controls) assert.doesNotMatch(control, /\bdisabled\b/);
   const connectSources = html.match(/\bconnect-src ([^;]+);/)?.[1].split(/\s+/);
-  // Local footer artwork still loads; the paused form has no provider permission.
-  assert.deepEqual(connectSources, ["'self'"]);
+  // Footer artwork loads locally; signup connects only to the pinned provider.
+  assert.deepEqual(connectSources, ["'self'", new URL(COMMUNITY_SIGNUP_ENDPOINT).origin]);
   const consent = html.match(/<input\b[^>]*name="OPT_IN"[^>]*>/)?.[0];
   assert.ok(consent);
   assert.match(consent, /type="checkbox"/);
   assert.match(consent, /value="1"/);
   assert.match(consent, /\brequired\b/);
   assert.doesNotMatch(consent, /\bchecked\b/);
-  assert.deepEqual(html.match(/\bform-action ([^;]+);/)?.[1].split(/\s+/), ["'none'"]);
+  assert.deepEqual(html.match(/\bform-action ([^;]+);/)?.[1].split(/\s+/), [new URL(COMMUNITY_SIGNUP_ENDPOINT).origin]);
   assert.ok(html.includes("script-src 'self';"));
   assert.ok(html.includes('id="signup-confirmation" aria-labelledby='));
-});
-
-test('paused signup cancels synthetic submits without invoking the request helper', async () => {
-  const ui = fixture(() => assert.fail('paused signup must not send'), { paused: true });
-  assert.equal(await ui.submit(), true, 'cancel native navigation for synthetic submits');
-  assert.equal(ui.dialog.open, false);
-  assert.equal(ui.email.value, 'person@example.com');
-  assert.equal(ui.status.textContent, '');
 });
 
 test('signup initializer self-guards when the form is absent', () => {

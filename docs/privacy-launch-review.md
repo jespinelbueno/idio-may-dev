@@ -1,6 +1,6 @@
 # Privacy implementation and launch review
 
-Reviewed October 15, 2026. This is an implementation record, not a worldwide
+Implementation updated October 16, 2026. This is an implementation record, not a worldwide
 compliance certification. The owner has not yet supplied the full legal operator
 identity, public mailing address, or countries actively served.
 
@@ -14,17 +14,27 @@ identity, public mailing address, or countries actively served.
   retention criteria, objections, appeals, regulator contacts, and how to request
   transfer-safeguard information. Links to provider DPAs describe published terms,
   not evidence that Idio's account arrangements have been verified.
-- New Events newsletter submissions are paused. All signup inputs and the submit
-  button are disabled, the form has no provider action, its initializer cancels
-  synthetic submissions, and CSP permits only same-origin connections and no form
-  submissions. The notice and Events calls to action reflect this state.
-- This pause takes effect on a deployed copy after these files are published and
-  loaded. It does not disable Brevo's hosted endpoint, stop existing campaigns,
-  remove existing contacts, or change older deployed copies.
-- The retained request helper and success UI are dormant. They remain available
-  for a coordinated reopening after the requirements below are evidenced.
-- No provider account, existing contact record, campaign, or subscription was
-  changed. No real signup, email, or deployment was sent from this review.
+- The owner explicitly requested restoration of the Brevo form on October 16.
+  New Events newsletter submissions are enabled again with the existing endpoint,
+  unchecked required opt-in, request protections and native POST fallback. CSP
+  permits signup connections on Events. The notice and signup copy match this state.
+- `/privacy#unsubscribe` now contains only a compact button linking directly to
+  Brevo's hosted unsubscribe form, as requested by the owner. The hosted URL was
+  browser-verified to show the email field and Unsubscribe button. No local email
+  collection, unsubscribe handler, request or success UI remains. Privacy-page CSP
+  permits only same-origin connections and no form submissions. The Events note
+  links to the button's section.
+- Earlier live tests confirmed email blocklisting through an owner-supplied CRM
+  screenshot. The native POST path showed misleading feedback; Brevo's embed and
+  the intermediate local AJAX version showed success. Those local modules were
+  removed when the owner requested a direct hosted-form link. No further contact
+  was submitted while verifying that link. All-campaign suppression remains untested.
+- Restoration is a local source change and does not establish that the outstanding
+  account/business checks below have been completed. No pause flag remains in the
+  form or initializer; pending operational review is not a code gate.
+- Live unsubscribe tests used only the owner-authorized contact, including
+  retries after its confirmed blocklisting. The contact was not resubscribed. No
+  account settings, campaigns, signup or deployment were changed during testing.
 
 ## Browser controls already implemented
 
@@ -45,9 +55,9 @@ No analytics scripts, advertising pixels, profiling, or social embeds are instal
 The custom service-worker cache is retired; migration deletes only `idio-site-*`
 caches and unregisters the old worker when the browser receives the update.
 Ordinary HTTP caching remains. Without JavaScript, privacy links work and the
-paused newsletter cannot submit.
+newsletter form submits directly to Brevo.
 
-## Evidence needed before reopening the newsletter
+## Outstanding operational evidence
 
 Store account evidence in restricted business storage, not this repository. Each
 item needs its verifier, date, and evidence reference. An unchecked item is open;
@@ -59,42 +69,32 @@ writing a policy or finding a vendor help article does not close it.
 | Market scope | Countries actively targeted, services offered, applicable thresholds/exemptions, language needs, and any required representative or privacy officer. | Waiting for owner / jurisdiction review |
 | Email permission | Brevo form uses Double confirmation; an unconfirmed address cannot enter marketing sends or automations. Preserve exact consent text/version, source, submission and confirmation dates, and withdrawal history. | Account access needed |
 | Tracking | Disable individual open/click tracking across campaigns, automation, transactional and confirmation messages. If supported, enable per-contact consent with unknown contacts excluded; test the actual message HTML and links. Anonymization alone is not proof that no tracking occurs. | Account access needed |
-| Unsubscribe | Clear sender identity, valid mailing address, working no-login unsubscribe, and suppression from all marketing paths; prove the result with an owner-controlled test address. | Owner details and account access needed |
-| Existing records | Inventory existing contacts and campaigns; verify permission, suppression and retention before future sends. Pausing the website does not pause them. | Account access needed |
+| Unsubscribe | Clear sender identity, valid mailing address, working no-login unsubscribe, and suppression from all marketing paths. | Tested contact email-blocklisted, confirmed by owner screenshot October 16; hosted form link verified; sender details and all-send suppression checks remain open |
+| Existing records | Inventory existing contacts and campaigns; verify permission, suppression and retention before future sends. Restoring the website does not verify them. | Account access needed |
 | Retention | Run the inventory and review procedure in privacy-operations.md, apply deletion/restriction rules in Brevo and email, and document backup expiry and justified exceptions. | Operator action needed |
 | Providers/transfers | Record actual host/domain mapping, contracting entities, processing countries, subprocessors, applicable DPA and transfer mechanism, and any necessary transfer assessment. Include Brevo and Microsoft. | Account access / jurisdiction review needed |
 | Request handling | Assign a monitored mailbox owner and backup, verify access, and run a mock request through the procedure without collecting extra personal data. | Owner assignment needed |
 | Security | Verify provider MFA/access, HTTPS, response cookies/headers, log retention and incident contacts on the real domains. | Production details / access needed |
 
-## Reopening procedure
+## Follow-up verification
 
-1. Complete the evidence table and update the public notice to match actual,
-   verified practices. Do not replace missing facts with generic assurances.
-2. In Brevo, retire or disable obsolete hosted forms. Confirm that the intended
-   form enforces Double confirmation and the required consent and abuse controls
-   server-side; browser validation is bypassable. Do not add CAPTCHA unless Brevo
-   verifies its token and provides the updated embed/public site key.
-3. Confirm the retained `COMMUNITY_SIGNUP_ENDPOINT` is still the intended form.
-   Update it if needed, restore that same action on `events.html`, remove
-   `data-signup-paused` and disabled attributes from its signup controls, and
-   restore accurate signup copy. Restore only the required provider origin in
-   `connect-src` and `form-action`. Preserve the privacy links and unchecked,
-   required newsletter choice. Any CAPTCHA requires a separate CSP review.
-4. Update pause-specific tests as a coordinated change while preserving consent,
-   response validation, timeout, cooldown, destination and request-isolation tests.
-   Run `npm run check`.
-5. Perform a controlled provider test using an address the owner authorizes. It
-   must demonstrate confirmation, recorded permission, absence of unauthorized
-   tracking, successful unsubscribe and suppression. Do not import subscribers
-   or send a campaign as a test.
-6. Publish through the existing Hostinger/Vercel workflow and verify the actual
-   domain, both with and without JavaScript. CI performs checks only; it does not
-   deploy GitHub Pages. Confirm old profiles receive the retired-worker update.
+1. Complete the evidence table and align the notice with verified business and
+   provider practices. The form restoration does not mark pending items complete.
+2. In Brevo, verify Double confirmation, consent records, suppression and actual
+   tracking behavior. Retire obsolete hosted forms where appropriate. Browser
+   validation is bypassable; CAPTCHA requires provider-side verification and an
+   updated embed before integration.
+3. Use an owner-authorized address for any future controlled provider test. Check
+   confirmation, recorded permission, outgoing content, unsubscribe and suppression.
+   Do not import subscribers or send a campaign as a test.
+4. Publish through the existing Hostinger/Vercel setup and verify the real domain,
+   with and without JavaScript. CI performs checks only and does not deploy GitHub
+   Pages. Confirm existing browser profiles receive the retired-worker update.
 
 ## Verification
 
 `npm run check` covers linked source files, asset aliases, JavaScript syntax,
-privacy preference behavior, paused native and synthetic signup, request helper
+privacy preference behavior, active form configuration, request helper
 protections, CSP and cache migration. These checks do not inspect provider
 accounts, deployed response headers, consent evidence, or legal applicability.
 

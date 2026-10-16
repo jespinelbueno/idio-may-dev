@@ -167,6 +167,18 @@ test("public pages load consent first and provide working non-JavaScript privacy
   assert.match(read("events.html"), /href="\/privacy#newsletter"/);
 });
 
+test("unsubscribe button links directly to the hosted Brevo form without collecting an email", () => {
+  const html = read("privacy.html");
+  const panel = html.match(/<div\b[^>]*id="unsubscribe"[^>]*>[\s\S]*?<\/div>/)?.[0];
+  assert.ok(panel);
+  const endpoint = panel.match(/<a\b[^>]*href="([^"]+)"/)[1];
+  assert.equal(endpoint, "https://e0a2c1d4.sibforms.com/serve/MUIFAGHVBRvLNXa0u_71-q0reNDLbQp-pu1zNLov52GlKKF_3hzX9UJ8slevHjDtnEsEyVRrXcrJnPU4AmIO9-qTlv1TMFx618nmfBoFHxrotXTNOpr3mH8NLwuxew3Uke3HFpqVBD5RxrX7jiM99m6thjBbDVfjniI7Tnm8PR2FD72vBbCfaS22AdrScvLNwziOtMZVUnqDJcGGAQ==");
+  assert.match(panel, /class="privacy-button privacy-button--animated"/);
+  assert.match(panel, /rel="noopener noreferrer"/);
+  assert.doesNotMatch(panel, /<form\b|<input\b|unsubscribe-status/);
+  assert.match(read("events.html"), /href="\/privacy#unsubscribe"/);
+});
+
 test("cache migration leaves new visitors and unrelated scopes alone", async () => {
   for (const kind of ["none", "other-scope", "other-worker", "idio"]) {
     const calls = [];

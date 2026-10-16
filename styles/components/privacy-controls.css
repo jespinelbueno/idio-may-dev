@@ -17,6 +17,7 @@
 .privacy-dialog__close { position: absolute; top: 0.5rem; right: 0.5rem; min-width: 2.75rem; min-height: 2.75rem; border: 0; background: transparent; color: inherit; font: 2rem/1 sans-serif; }
 .privacy-dialog__eyebrow { margin: 0.25rem 0 1rem; font: 1.1rem/1.4 'Teva', sans-serif; }
 .privacy-dialog h2 { margin: 0 0 1.25rem; font-size: clamp(2.5rem, 7vw, 3.5rem); font-weight: 650; line-height: 0.98; letter-spacing: -0.04em; }
+.privacy-dialog h2:focus { outline: none; }
 .privacy-dialog p { line-height: 1.5; }
 .privacy-dialog__note, .privacy-dialog__policy { font-size: 0.875rem; }
 .privacy-dialog__actions .privacy-button { width: 100%; min-width: 0; }

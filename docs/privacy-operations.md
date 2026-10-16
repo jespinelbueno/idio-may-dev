@@ -7,8 +7,8 @@ unverified until an authorized operator completes the launch evidence table.
 
 ## Responsibilities and private records
 
-Assign a primary owner and backup for idiocreative@outlook.com before collecting
-new newsletter subscriptions. Check requests each business day. Keep the request
+Assign a primary owner and backup for idiocreative@outlook.com for handling
+newsletter subscriptions and privacy requests. Check requests each business day. Keep the request
 register, consent evidence, deletion records, contracts and incident evidence in
 restricted business storage with appropriate MFA and access controls. Never put
 email addresses, subscriber exports, request contents, credentials, identification
@@ -65,10 +65,10 @@ These are drafts, not messages sent to anyone.
 
 ## Retention review and disposal
 
-Perform an initial inventory before newsletter reopening, then a monthly review.
+Perform an initial inventory of newsletter records, then a monthly review.
 The monthly cadence is an internal review target; withdrawal and mandatory
 legal deadlines must be handled sooner. First determine what already exists;
-do not assume there are no subscribers because new website collection is paused.
+the form was restored on October 16, 2026; this does not verify existing records.
 
 | Record | Review trigger and action |
 | --- | --- |

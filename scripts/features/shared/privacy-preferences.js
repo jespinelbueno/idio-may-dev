@@ -10,9 +10,9 @@ export const initPrivacyPreferences = () => {
   const buttonLabel = (label) => `<span class="button-fill__label">${label}</span><span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>`;
   // Fixed local labels only; no visitor, URL, or provider content is interpolated.
   dialog.innerHTML = `
-    <button class="privacy-dialog__close" type="button" aria-label="Close cookie settings and reject optional storage" autofocus>×</button>
+    <button class="privacy-dialog__close" type="button" aria-label="Close cookie settings and reject optional storage">×</button>
     <p class="privacy-dialog__eyebrow">a little housekeeping</p>
-    <h2 id="privacy-dialog-title">your browser.<br>your call.</h2>
+    <h2 id="privacy-dialog-title" tabindex="-1" autofocus>your browser.<br>your call.</h2>
     <p id="privacy-dialog-description">We don’t use advertising or analytics trackers on this website. With your permission, we can remember your preference for a shorter homepage intro: “make it yours”, then “make it idio”.</p>
     <p class="privacy-dialog__note">Optional storage stays off until you accept. We save your choice for 180 days. Newsletter signup is a separate choice.</p>
     <div class="privacy-dialog__actions">
