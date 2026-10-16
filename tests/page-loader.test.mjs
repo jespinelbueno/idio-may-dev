@@ -209,22 +209,25 @@ test("the initializer self-guards when loader markup is absent", () => {
   assert.deepEqual(f.content.map(element => element.inert), [false, true]);
 });
 
-test("all secondary pages wire the shared loader with a non-JavaScript fallback", () => {
-  const pages = { services: "services", about: "about", events: "events", contact: "contact-page",
-    privacy: "privacy", "coming-soon": "coming-soon", "404": "not-found" };
+test("secondary pages wire the shared loader except coming-soon, privacy, and 404", () => {
+  const pages = { services: "services", about: "about", events: "events", contact: "contact-page" };
   for (const [page, style] of Object.entries(pages)) {
     const html = read(`${page}.html`);
-    const prefix = page === "404" ? "/" : "";
-    assert.ok(html.includes(`<script src="${prefix}scripts/page-loader-bootstrap.js"></script>`), page);
+    assert.ok(html.includes(`<script src="scripts/page-loader-bootstrap.js"></script>`), page);
     assert.ok(html.indexOf("page-loader-bootstrap.js") < html.indexOf('rel="stylesheet"'), page);
     assert.match(html, /class="loader loader--page"/);
     assert.match(html, /data-loader-word>yours<\/span>/);
     assert.match(html, /data-loader-logo hidden/);
     assert.doesNotMatch(html.match(/<body[^>]*>/)[0], /is-loading/);
     assert.match(read(`styles/${style}.css`), /components\/loader\.css/);
-    const script = read(`scripts/${page === "404" ? "not-found" : page}.js`);
+    const script = read(`scripts/${page}.js`);
     assert.match(script, /features\/shared\/page-loader\.js/);
     assert.ok(script.indexOf("initPageLoader();") < script.indexOf("initPrivacyPreferences();"), page);
+  }
+  for (const [page, entry] of [["coming-soon", "coming-soon"], ["privacy", "privacy"], ["404", "not-found"]]) {
+    assert.doesNotMatch(read(`${page}.html`), /page-loader-bootstrap|loader--page|data-loader-word|data-loader-logo/);
+    assert.doesNotMatch(read(`scripts/${entry}.js`), /page-loader\.js|initPageLoader/);
+    assert.doesNotMatch(read(`styles/${entry}.css`), /components\/loader\.css/);
   }
   assert.match(read("styles/components/loader.css"), /\.loader--page\s*\{\s*display: none;/);
   assert.doesNotMatch(read("index.html"), /page-loader-bootstrap|loader--page/);

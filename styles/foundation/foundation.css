@@ -46,6 +46,8 @@
 
 * {
   box-sizing: border-box;
+  /* Remove browser tap flashes while preserving keyboard focus indicators. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {

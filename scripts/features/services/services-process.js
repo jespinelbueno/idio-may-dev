@@ -6,7 +6,6 @@ export function initServicesProcess() {
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const phoneLayout = window.matchMedia("(max-width: 1100px)");
-  const mobileGrid = window.matchMedia("(max-width: 640px)");
   const clamp = (value) => Math.min(Math.max(value, 0), 1);
   const phase = (progress, start, end) => clamp((progress - start) / (end - start));
   const ease = (value) => value * value * (3 - 2 * value);
@@ -44,7 +43,7 @@ export function initServicesProcess() {
   };
 
   const requestUpdate = () => {
-    const animate = !reducedMotion.matches && !mobileGrid.matches;
+    const animate = !reducedMotion.matches;
     diagram.classList.toggle("is-scroll-driven", animate);
     if (!animate) {
       window.cancelAnimationFrame(animationFrame);

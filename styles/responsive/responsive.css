@@ -636,6 +636,15 @@
     transform: rotate(0.26deg);
   }
 
+  .services-process__diagram.is-scroll-driven .services-process__half--top {
+    transform: translateY(var(--process-offset, 0px)) rotate(-179.54deg);
+    opacity: var(--process-top-fill, 1);
+  }
+
+  .services-process__diagram.is-scroll-driven .services-process__half--bottom {
+    transform: translateY(calc(-1 * var(--process-bottom-offset, 0px))) rotate(0.26deg);
+  }
+
   :is(.services-page, .about-page, .events-page) .services-contact {
     --mobile-unit: calc(min(100vw, 32rem) / 402);
     padding: calc(var(--mobile-unit) * 68) 0 calc(var(--mobile-unit) * 64);

@@ -62,13 +62,13 @@
   .about-team__intro-block { display: grid; width: 100%; padding: 0; gap: 1rem; }
   .about-team__intro-block > h2 { font-size: clamp(2.4rem, 9vw, 3.5rem); line-height: 1.04; max-width: 12ch; }
   .about-team__intro { width: 100%; font-size: 1rem; line-height: 1.65; }
-  .about-team.is-mobile-carousel .about-team__members { display: none; }
-  .about-team:not(.is-mobile-carousel) .about-team__layout { grid-template-areas: "intro" "names" "portrait"; }
+  .about-team.is-card-stack .about-team__members { display: none; }
+  .about-team:not(.is-card-stack) .about-team__layout { grid-template-areas: "intro" "names" "portrait"; }
   .about-team__polaroid { width: min(88%, 23rem); margin: 0.5rem auto; }
-  .about-team.is-mobile-carousel .about-team__stack { display: block; grid-area: portrait; position: relative; justify-self: center; width: min(88%, 23rem); aspect-ratio: 4 / 5; margin: 0.5rem 0 0; perspective: none; touch-action: pan-y pinch-zoom; }
-  .about-team.is-mobile-carousel .about-team__polaroid { inset: 0; width: 100%; height: 100%; margin: 0; will-change: auto; }
-  .about-team.is-mobile-carousel .about-team__polaroid[aria-hidden="true"] { visibility: hidden; }
-  .about-team.is-mobile-carousel .about-team__photo { inset: 0.65rem 0.65rem 1.8rem; width: auto; height: auto; }
+  .about-team.is-card-stack .about-team__stack { display: block; grid-area: portrait; position: relative; justify-self: center; width: min(88%, 23rem); aspect-ratio: 4 / 5; margin: 0.5rem 0 0; perspective: none; touch-action: pan-y pinch-zoom; }
+  .about-team.is-card-stack .about-team__polaroid { inset: 0; width: 100%; height: 100%; margin: 0; transform: none; will-change: auto; }
+  .about-team.is-card-stack .about-team__polaroid[aria-hidden="true"] { visibility: hidden; }
+  .about-team.is-card-stack .about-team__photo { inset: 0.65rem 0.65rem 1.8rem; width: auto; height: auto; }
   .about-team__caption { display: grid; grid-area: caption; gap: 0.35rem; text-align: center; }
   .about-team__caption h3 { font-size: 1.45rem; line-height: 1.2; }
   .about-team__caption p { color: var(--about-copy); font-size: 0.875rem; line-height: 1.5; }

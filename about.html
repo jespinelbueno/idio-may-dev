@@ -127,7 +127,7 @@
         </article>
         </div>
       </section>
-      <section class="about-team" aria-labelledby="about-team-title">
+      <section class="about-team is-card-stack" aria-labelledby="about-team-title">
         <div class="about-team__stage">
         <div class="about-team__background" aria-hidden="true">
         <div class="about-background__glow about-background__glow--cream"><img src="assets/media/about/backgrounds/lower-cream-glow.svg" alt=""></div>
@@ -139,16 +139,31 @@
           <p class="about-team__intro">hey! we’re a couple of unhinged creatives. we formed by almost accident because we were all friends, but realized we actually loved working together. even though we all have different interests, we’re brought together by our love for creativity and beauty. whether it’s TV shows, books, podcasts, or some other medium, we’re always on the lookout for the next novelty. we’re constantly inspired by deeply original content and businesses, and we can’t wait to hear about yours!</p>
         </div>
         <dl class="about-team__members" aria-label="Choose a team member">
-          <div><dt><button type="button" data-about-member="anna" aria-pressed="false" aria-controls="about-team-portrait">anna moore</button></dt><dd>founder | creative director</dd></div>
+          <div class="is-featured"><dt><button type="button" data-about-member="anna" aria-pressed="true" aria-controls="about-team-portrait">anna moore</button></dt><dd>founder | creative director</dd></div>
           <div><dt><button type="button" data-about-member="jaden" aria-pressed="false" aria-controls="about-team-portrait">jaden anderson</button></dt><dd>market researcher | operations</dd></div>
-          <div class="is-featured"><dt><button type="button" data-about-member="raquel" aria-pressed="true" aria-controls="about-team-portrait">raquel bowles</button></dt><dd>graphic designer | creative</dd></div>
+          <div><dt><button type="button" data-about-member="raquel" aria-pressed="false" aria-controls="about-team-portrait">raquel bowles</button></dt><dd>graphic designer | creative</dd></div>
           <div><dt><button type="button" data-about-member="naomi" aria-pressed="false" aria-controls="about-team-portrait">naomi moore</button></dt><dd>copywriter | strategy</dd></div>
           <div><dt><button type="button" data-about-member="gretel" aria-pressed="false" aria-controls="about-team-portrait">gretel lam</button></dt><dd>social media | operations</dd></div>
         </dl>
-        <div class="about-team__stack" id="about-team-portrait">
-        <figure class="about-team__polaroid about-team__polaroid--back" aria-hidden="true"><div class="about-team__photo"><img src="assets/media/team/about/raquel.webp" width="2560" height="1707" alt="" loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/raquel.webp 800w, assets/media/team/about/raquel.webp 2560w" sizes="100vw"></div></figure>
-        <figure class="about-team__polaroid about-team__polaroid--front"><div class="about-team__photo"><img src="assets/media/team/about/raquel.webp" width="2560" height="1707" alt="Raquel sitting in a field, holding up two peace signs." loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/raquel.webp 800w, assets/media/team/about/raquel.webp 2560w" sizes="100vw"></div></figure>
+        <div class="about-team__stack" id="about-team-portrait" role="group" tabindex="0" aria-label="Team portraits. Swipe or use the arrow keys and buttons to meet everyone.">
+          <figure class="about-team__polaroid about-team__polaroid--front" data-about-card="anna" aria-hidden="false"><div class="about-team__photo"><img data-member-photo src="assets/media/team/about/anna.webp" width="2560" height="1707" alt="Anna Moore in a field." loading="eager" fetchpriority="low" decoding="async" srcset="assets/media/team/about/mobile/anna.webp 800w, assets/media/team/about/anna.webp 2560w" sizes="(max-width: 760px) 77vw, (max-width: 1100px) 36vw, 24vw"></div></figure>
+          <figure class="about-team__polaroid" data-about-card="jaden" aria-hidden="true"><div class="about-team__photo"><img data-member-photo src="assets/media/team/about/jaden.webp" width="2560" height="1707" alt="Jaden Anderson in a field." loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/jaden.webp 800w, assets/media/team/about/jaden.webp 2560w" sizes="(max-width: 760px) 77vw, (max-width: 1100px) 36vw, 24vw"></div></figure>
+          <figure class="about-team__polaroid" data-about-card="raquel" aria-hidden="true"><div class="about-team__photo"><img data-member-photo src="assets/media/team/about/raquel.webp" width="2560" height="1707" alt="Raquel Bowles in a field." loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/raquel.webp 800w, assets/media/team/about/raquel.webp 2560w" sizes="(max-width: 760px) 77vw, (max-width: 1100px) 36vw, 24vw"></div></figure>
+          <figure class="about-team__polaroid" data-about-card="naomi" aria-hidden="true"><div class="about-team__photo"><img data-member-photo src="assets/media/team/about/naomi.webp" width="2560" height="1707" alt="Naomi Moore in a field." loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/naomi.webp 800w, assets/media/team/about/naomi.webp 2560w" sizes="(max-width: 760px) 77vw, (max-width: 1100px) 36vw, 24vw"></div></figure>
+          <figure class="about-team__polaroid" data-about-card="gretel" aria-hidden="true"><div class="about-team__photo"><img data-member-photo src="assets/media/team/about/gretel.webp" width="2560" height="1707" alt="Gretel Lam in a field." loading="lazy" decoding="async" srcset="assets/media/team/about/mobile/gretel.webp 800w, assets/media/team/about/gretel.webp 2560w" sizes="(max-width: 760px) 77vw, (max-width: 1100px) 36vw, 24vw"></div></figure>
         </div>
+        <div class="about-team__caption" role="status" aria-atomic="true"><h3>anna moore</h3><p>founder | creative director</p></div>
+        <div class="about-team__controls" aria-label="Team carousel controls">
+          <button class="team__carousel-button" type="button" aria-label="Previous team member" aria-controls="about-team-portrait" data-about-previous disabled>
+            <span class="button-fill__label" aria-hidden="true">←</span>
+            <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
+          </button>
+          <button class="team__carousel-button" type="button" aria-label="Next team member" aria-controls="about-team-portrait" data-about-next>
+            <span class="button-fill__label" aria-hidden="true">→</span>
+            <span class="button-fill__inner" aria-hidden="true"><span class="button-fill__blobs"><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span><span class="button-fill__blob"></span></span></span>
+          </button>
+        </div>
+        <p class="about-team__photo-status" role="status"></p>
         </div>
         </div>
       </section>

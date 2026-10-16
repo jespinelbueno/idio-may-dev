@@ -1,3 +1,5 @@
+import { initTeamPortraits } from "../shared/team-portraits.js";
+
 export const initTeamCarousel = () => {
   const carousel = document.querySelector("[data-team-carousel]");
   const previousButton = document.querySelector("[data-team-carousel-previous]");
@@ -5,6 +7,7 @@ export const initTeamCarousel = () => {
   const grid = carousel?.querySelector(".team__grid");
 
   if (!carousel || !previousButton || !nextButton || !grid) return;
+  initTeamPortraits(carousel);
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const touchInteraction = window.matchMedia("(hover: none)");
@@ -58,5 +61,10 @@ export const initTeamCarousel = () => {
   carousel.addEventListener("scroll", requestButtonUpdate, { passive: true });
   window.addEventListener("resize", requestButtonUpdate);
 
-  updateButtons();
+  const resetToFirst = () => {
+    carousel.scrollTo({ left: 0, behavior: "instant" });
+    updateButtons();
+  };
+  window.addEventListener("pageshow", resetToFirst);
+  resetToFirst();
 };

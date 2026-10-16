@@ -1,4 +1,5 @@
 import { getTeamScrollProgress, getTeamCardTransform, getTeamShuffleFrames } from "./about-team-scroll-progress.js";
+import { initTeamPortraits } from "../shared/team-portraits.js";
 
 const memberNames = {
   anna: "Anna Moore", jaden: "Jaden Anderson", raquel: "Raquel Bowles",
@@ -9,78 +10,26 @@ export const initAboutTeamSelector = () => {
   const section = document.querySelector(".about-team");
   const list = section?.querySelector(".about-team__members");
   const stack = section?.querySelector(".about-team__stack");
-  const template = stack?.querySelector(".about-team__polaroid--front");
-  if (!section || !list || !stack || !template) return;
+  const cards = [...(stack?.querySelectorAll("[data-about-card]") ?? [])];
+  const caption = section?.querySelector(".about-team__caption");
+  const controls = section?.querySelector(".about-team__controls");
+  const status = section?.querySelector(".about-team__photo-status");
+  const name = caption?.querySelector("h3");
+  const role = caption?.querySelector("p");
+  const previous = controls?.querySelector("[data-about-previous]");
+  const next = controls?.querySelector("[data-about-next]");
+  if (!section || !list || !stack || !cards.length || !name || !role || !status || !previous || !next) return;
   const buttons = [...list.querySelectorAll("button[data-about-member]")];
   const members = buttons.map((button) => button.dataset.aboutMember);
+  if (members.length !== cards.length || cards.some((card, index) => card.dataset.aboutCard !== members[index])) return;
+  initTeamPortraits(stack);
   const mobile = window.matchMedia("(max-width: 760px), (max-width: 1024px) and (max-height: 500px) and (pointer: coarse)");
   const roles = buttons.map((button) => button.closest("dl > div").querySelector("dd").textContent);
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const status = document.createElement("p");
-  status.className = "about-team__photo-status";
-  status.setAttribute("role", "status");
-  section.querySelector(".about-team__layout").append(status);
-
-  const cards = members.map((member) => {
-    const card = template.cloneNode(true);
-    card.removeAttribute("id");
-    card.classList.remove("about-team__polaroid--front");
-    const image = card.querySelector("img");
-    const imagePath = `assets/media/team/about/${member}.webp`;
-    const mobilePath = `assets/media/team/about/mobile/${member}.webp`;
-    image.loading = "lazy";
-    image.decoding = "async";
-    image.sizes = "(max-width: 760px) 85vw, 32rem";
-    image.srcset = `${mobilePath} 800w, ${imagePath} 2560w`;
-    image.src = imagePath;
-    image.alt = `${memberNames[member]} in a field.`;
-    image.setAttribute("data-member-photo", "");
-    return card;
-  });
-  stack.replaceChildren(...cards);
-  section.classList.add("is-card-stack");
   const prelude = section.querySelector(".about-team__intro-block").cloneNode(true);
   prelude.className = "about-team__mobile-intro";
   prelude.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
   section.prepend(prelude);
-  const caption = document.createElement("div");
-  caption.className = "about-team__caption";
-  caption.setAttribute("role", "status");
-  caption.setAttribute("aria-atomic", "true");
-  const name = document.createElement("h3");
-  const role = document.createElement("p");
-  caption.append(name, role);
-  const controls = document.createElement("div");
-  controls.className = "about-team__controls";
-  const makeControl = (label, arrow) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "team__carousel-button";
-    button.setAttribute("aria-label", label);
-    button.setAttribute("aria-controls", stack.id);
-    const icon = document.createElement("span");
-    icon.className = "button-fill__label";
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = arrow;
-    const fill = document.createElement("span");
-    fill.className = "button-fill__inner";
-    fill.setAttribute("aria-hidden", "true");
-    const blobs = document.createElement("span");
-    blobs.className = "button-fill__blobs";
-    for (let index = 0; index < 4; index++) {
-      const blob = document.createElement("span");
-      blob.className = "button-fill__blob";
-      blobs.append(blob);
-    }
-    fill.append(blobs);
-    button.append(icon, fill);
-    return button;
-  };
-  const previous = makeControl("Previous team member", "←");
-  const next = makeControl("Next team member", "→");
-  controls.append(previous, next);
-  section.querySelector(".about-team__layout").append(caption, controls);
-  stack.setAttribute("role", "group");
   let selected = 0;
   let order = [...cards];
   let initialized = false;
