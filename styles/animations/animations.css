@@ -70,22 +70,6 @@
   animation-delay: -420ms;
 }
 
-/* Keep larger mobile artwork static while the card underlines animate. */
-@media (max-width: 640px) {
-  .services-page :is(
-    .services-hero__underline,
-    .services-hero__reveal-underline,
-    .services-cards__scribble,
-    .services-work__scribble,
-    .services-process__scribble,
-    .services-contact__scribble,
-    .site-footer__scribble
-  ) {
-    animation: none;
-    filter: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .services-page :is(.services-hero__underline, .services-hero__reveal-underline, .service-card__underline) {
     animation: none;
